@@ -1,0 +1,18 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Refactoring this code would involve breaking down the code into manageable methods. Comments should also be used sparingly. Instead of commenting on what the code is doing, make the code self explanatory. This results in a clean, much more understandable code.
+
+Here is the refactored version of the above code:
+
+```python
+def getExpenseLimit(self):
+    if self.hasExpenseLimit():
+        return self.expenseLimit
+
+    return self.primaryProject.getMemberExpenseLimit()
+
+def hasExpenseLimit(self):
+    return self.expenseLimit != NULL_EXPENSE
+```
+
+Now, the `getExpenseLimit` method directly returns the variable if it's available. If not, it delegates the responsibility to the primary project which returns the member expense limit. There's an additional method `hasExpenseLimit()`, improving the readability and maintainability. This way, even if the business logic around determining if a self has an expense limit changes, we only need to modify the `hasExpenseLimit` method.

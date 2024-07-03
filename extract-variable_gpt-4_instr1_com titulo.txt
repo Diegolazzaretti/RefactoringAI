@@ -1,0 +1,23 @@
+gpt-4 - Instrução 1 com titulo:
+
+Sure, we can refactor the code as follows:
+
+```python
+def isPlatformMac(self):
+    return "MAC" in self.platform.upper()
+
+def isBrowserIE(self):
+    return "IE" in self.browser.upper()
+
+def isResized(self):
+    return self.resize > 0
+
+def renderBanner(self):
+    if self.isPlatformMac() and \
+       self.isBrowserIE() and \
+       self.wasInitialized() and \
+       self.isResized():
+        # do something
+```
+
+In this refactoring, we've introduced three helper methods to check if the platform is Mac, if the browser is IE, and if it's resized. Now, it's easier to understand what conditions lead to the "do something" part. Furthermore, if the conditions for those checks ever change, you'll only have to update those checks in one place (inside their relevant methods).

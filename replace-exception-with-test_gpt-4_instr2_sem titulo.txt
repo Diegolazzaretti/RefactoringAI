@@ -1,0 +1,23 @@
+gpt-4 - Instrução 2 sem titulo:
+
+The provided code is already quite concise, efficient and adheres to many best practices of software development. However, we can tweak a few things for further improvement.
+
+Firstly, the naming of the function and the arguments could be more descriptive to give a better sense of what purpose they serve. Secondly, it might be a better idea to have the list of values as an argument to the function rather than a globally accessed object which can improve modularity.
+
+Here is the refactored version:
+
+```python
+def get_period_value(period_numbers, values):
+    try:
+        return values[period_numbers]
+    except IndexError:
+        return 0
+```
+
+In the refactored code, `get_period_value` is a more descriptive name compared to `getValueForPeriod`. It indicates clearly that the function is intended to fetch the value for the given period from the provided list of values.
+
+Rather than accessing `values`, a global variable directly, the refactored function takes it as a parameter. This increases the modularity of the function as it becomes agnostic to the context and can simply focus on its logic i.e., to fetch the corresponding value for the period. It contributes to easier maintenance as the function can work with any list passed and is not dependent on a particular list (`values`) being present. 
+
+This code improvement is based on the principle of dependency injection which solves the problem of hard coding dependencies. The resulting code is more flexible and reusable. 
+
+The exception handling remains the same. The function tries to access and return the value at the index specified by the provided period_number within the values list. If the provided index does not exist within the list (causing an IndexError), it simply returns 0. This is a reasonable behavior and doesn't need to be changed during the refactoring.

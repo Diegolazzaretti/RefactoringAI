@@ -1,0 +1,12 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+26. substitute-algorithm
+def foundPerson(people):
+    for person in people:
+        if person in ["Don", "John", "Kent"]:
+            return person
+    return ""
+
+#Changed for loop range with for each loop
+#Used the 'in' operator to check if a person is in the list of names to find
+#Reduced the number of if statements and removed code repetition.

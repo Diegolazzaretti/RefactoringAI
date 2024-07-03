@@ -1,0 +1,25 @@
+mistral - Instrução 1 com titulo:
+
+To improve the readability, modularity, and maintainability of the given code, we can make use of inheritance to separate the constructor logic into a separate class, as well as add type hints for better type checking. Here's an example refactored code:
+```python
+13. pull-up-constructor-body
+from typing import Tuple
+
+class Employee:
+    def __init__(self, name: str, id: int):
+        self.name = name
+        self.id = id
+
+class Manager(Employee):
+    def __init__(self, name: str, id: int, grade: int) -> None:
+        super().__init__(name, id)
+        self.grade = grade
+
+    def get_grade(self) -> Tuple[str, int]:
+        return f"Manager {self.grade}", self.grade
+```
+In this refactored code, we define the `Employee` class with a constructor that takes `name` and `id` as arguments. We then define the `Manager` class that inherits from `Employee`. The `__init__` method of `Manager` adds an additional argument `grade`, calls the constructor of `Employee` using `super()`, and sets the `grade` attribute of the instance.
+
+We also added type hints to the `__init__` method of `Manager` for better type checking. The `get_grade` method returns a tuple of the form `(str, int)`.
+
+This refactored code is more modular and maintainable as we separated the constructor logic into a separate class and added type hints for better type checking.

@@ -1,0 +1,42 @@
+mistral - Instrução 1 com titulo:
+
+6. abstract-class
+from abc import ABC, abstractmethod
+
+class PaymentOwing(ABC):
+    @abstractmethod
+    def getOutstanding(self):
+        pass
+
+    @abstractmethod
+    def printBanner(self):
+        pass
+
+    def printOwing(self):
+        self.printBanner()
+
+        # print details
+        print("name:", self.name)
+        print("amount:", self.getOutstanding())
+
+# usage
+class InvoicePayment(PaymentOwing):
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+
+    @property
+    def getOutstanding(self):
+        return self.amount - sum(self.payments)
+
+    @property
+    def payments(self):
+        return [p["payment_amount"] for p in self.payments]
+
+    def printBanner(self):
+        print("Invoice Payment")
+        print(f"Payment Details: name={self.name}, amount={self.amount}")
+
+# usage
+invoice = InvoicePayment("John", 100)
+invoice.printOwing()

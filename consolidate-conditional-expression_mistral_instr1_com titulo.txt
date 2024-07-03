@@ -1,0 +1,18 @@
+mistral - Instrução 1 com titulo:
+
+```python
+def disability_amount(seniority, months_disabled, is_part_time):
+    """Calculate the amount of disability benefits based on input parameters."""
+    
+    if seniority < 2:
+        return 0
+    
+    if months_disabled > 12:
+        return 0
+    
+    if is_part_time:
+        return 0
+    
+    # Compute the disability amount.
+    # ...
+```

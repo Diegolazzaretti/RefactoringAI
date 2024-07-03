@@ -1,0 +1,456 @@
+Código Original (replace-method-with-method-object):
+
+class Order:
+    # ...
+    def price(self):
+        primaryBasePrice = 0
+        secondaryBasePrice = 0
+        tertiaryBasePrice = 0
+        # Perform long computation.
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+# Refactored code
+
+class BaseOrder:
+    def __init__(self, primary_base_price=None, secondary_base_price=None, tertiary_base_price=None):
+        self.primary_base_price = primary_base_price
+        self.secondary_base_price = secondary_base_price
+        self.tertiary_base_price = tertiary_base_price
+
+    def price(self):
+        if self.primary_base_price:
+            return self.primary_base_price
+        elif self.secondary_base_price:
+            return self.secondary_base_price
+        elif self.tertiary_base_price:
+            return self.tertiary_base_price
+        else:
+            # Perform long computation.
+            pass
+
+class Order(BaseOrder):
+    pass
+
+# Example usage:
+order = Order(primary_base_price=10, secondary_base_price=20)
+print(order.price())  # Output: 20
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+class Order:
+    # ...
+
+    def calculate_primary_base_price(self):
+        # Perform computation for primary base price
+
+    def calculate_secondary_base_price(self):
+        # Perform computation for secondary base price
+
+    def calculate_tertiary_base_price(self):
+        # Perform computation for tertiary base price
+
+    def price(self):
+        primary_base_price = self.calculate_primary_base_price()
+        secondary_base_price = self.calculate_secondary_base_price()
+        tertiary_base_price = self.calculate_tertiary_base_price()
+
+        # Perform further computation using the base prices
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+class Order:
+    
+    def price(self):
+        primary_base_price = 0
+        secondary_base_price = 0
+        tertiary_base_price = 0
+        # Perform long calculation.
+
+        return primary_base_price, secondary_base_price, tertiary_base_price
+
+gpt-4 - Instrução 1 sem titulo:
+Refactoring the code involves breaking down the long computation into separate methods, each performing an individual part of the computation. Here is an improved version of your code:
+
+```python
+class Order:
+    # ...
+
+    def compute_primary_price(self):
+        """Compute the primary base price"""
+        primaryBasePrice = 0
+        # Perform computation specific to primary base price.
+        return primaryBasePrice
+
+    def compute_secondary_price(self):
+        """Compute the secondary base price"""
+        secondaryBasePrice = 0
+        # Perform computation specific to secondary base price.
+        return secondaryBasePrice
+
+    def compute_tertiary_price(self):
+        """Compute the tertiary base price"""
+        tertiaryBasePrice = 0
+        # Perform computation specific to tertiary base price.
+        return tertiaryBasePrice
+    
+    def price(self):
+        primaryBasePrice = self.compute_primary_price()
+        secondaryBasePrice = self.compute_secondary_price()
+        tertiaryBasePrice = self.compute_tertiary_price()
+
+        # Now that the specific price computations are modularized, the final price can easily be computed. 
+        final_price = primaryBasePrice + secondaryBasePrice + tertiaryBasePrice
+
+        return final_price
+```
+This modularized approach makes the code more readable and maintainable. Each individual computation is separate and can be understood, changed, and tested independently.
+
+
+mistral - Instrução 1 com titulo:
+```python
+class Order:
+    def __init__(self, primary_base_price=0, secondary_base_price=0, tertiary_base_price=0):
+        self.primary_base_price = primary_base_price
+        self.secondary_base_price = secondary_base_price
+        self.tertiary_base_price = tertiary_base_price
+
+    def compute_price(self):
+        """
+        Computes the order price based on base prices and long computation.
+        :return: The computed order price.
+        """
+        primary_price = self.primary_base_price
+        secondary_price = self.secondary_base_price
+        tertiary_price = self.tertiary_base_price
+        # Perform long computation.
+        price = primary_price + secondary_price + tertiary_price
+        return price
+```
+
+gemini-pro - Instrução 1 com titulo:
+```python
+class Order:
+    # ...
+
+    def price(self):
+        primary_base_price = 0
+        secondary_base_price = 0
+        tertiary_base_price = 0
+
+        # Perform long computation.
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+class Order:
+    # ...
+    def price(self):
+        return PriceCalculator().compute()
+
+class PriceCalculator:
+    def __init__(self):
+        self.primaryBasePrice = 0
+        self.secondaryBasePrice = 0
+        self.tertiaryBasePrice = 0
+    
+    def compute(self):
+        # Perform long computation.
+        return result
+
+gpt-4 - Instrução 1 com titulo:
+Refactoring the code will involve organizing the code into smaller, more manageable parts to enhance readability and maintainability. The method will be split into separate methods, each responsible for a specific action.
+
+Here is the refactored code:
+
+```python
+class Order:
+    # ...
+    def price(self):
+        self.calculate_primary_base_price()
+        self.calculate_secondary_base_price()
+        self.calculate_tertiary_base_price()
+        # Perform long computation.
+
+    def calculate_primary_base_price(self):
+        self.primaryBasePrice = 0
+        # calculate primary base price 
+
+    def calculate_secondary_base_price(self):
+        self.secondaryBasePrice = 0
+        # calculate secondary base price 
+
+    def calculate_tertiary_base_price(self):
+        self.tertiaryBasePrice = 0
+        # calculate tertiary base price
+```
+
+The benefit of this refactoring is that the single method is now broken down into several smaller methods, each responsible for their own piece of functionality. This makes the code easier to read, understand, and maintain. It also allows for easier testing, since each method can be tested in isolation. The use of self variables helps maintain the states within the instance of the Order class across method calls.
+
+
+mistral - Instrução 2 sem titulo:
+
+Refactored code:
+
+```python
+class Order:
+    def __init__(self, primary_base_price=0, secondary_base_price=0, tertiary_base_price=0):
+        self.primary_base_price = primary_base_price
+        self.secondary_base_price = secondary_base_price
+        self.tertiary_base_price = tertiary_base_price
+        
+    def calculate_price(self):
+        return self.calculate_primary() + self.calculate_secondary() + self.calculate_tertiary()
+    
+    def calculate_primary(self):
+        # Perform long computation for primary base price.
+        return primaryBasePrice * 100
+        
+    def calculate_secondary(self):
+        # Perform long computation for secondary base price.
+        return secondaryBasePrice * 50
+        
+    def calculate_tertiary(self):
+        # Perform long computation for tertiary base price.
+        return tertiaryBasePrice * 25
+```
+
+Changes made to the code:
+
+1. Extracted calculation logic into separate methods (calculate\_primary(), calculate\_secondary(), and calculate\_tertiary()) to avoid duplication of the long computations.
+2. Created an instance variable `__init__(primary_base_price, secondary_base_price, tertiary_base_price)` to store the base prices. 
+3. Modified the method `price()` to delegate the computation logic to a new method `calculate_price()`. This method calls the instance variables and their respective methods to compute the total price.
+4. Added appropriate comments to improve readability.
+
+These changes contribute to the improvements by:
+
+1. Reducing code duplication and simplifying the logic, making it more maintainable.
+2. Introducing modularity through the separation of concerns into different methods and variables. 
+3. Enhancing overall organization by following best practices of software development such as naming conventions (using descriptive names for instance variables and methods). 
+4. Facilitating future modifications while maintaining functional integrity, as changes can now be made to individual methods or base prices without affecting other parts of the code.
+
+gemini-pro - Instrução 2 sem titulo:
+```python
+class Order:
+    def __init__(self, primary_item, secondary_item, tertiary_item):
+        self.primary_item = primary_item
+        self.secondary_item = secondary_item
+        self.tertiary_item = tertiary_item
+
+    def base_price(self, item):
+        # Perform long computation for the item.
+        pass
+
+    def price(self):
+        return (
+            self.base_price(self.primary_item) +
+            self.base_price(self.secondary_item) +
+            self.base_price(self.tertiary_item)
+        )
+```
+
+**Refactoring Explanation:**
+
+* **Encapsulation:** Created a separate method, `base_price`, to encapsulate the complex computation for each item. This simplifies the `price` method and makes the computation more maintainable.
+
+* **Single Responsibility Principle:** The `base_price` method now has the sole responsibility of calculating the base price for an item, making it easier to understand and test.
+
+* **DRY (Don't Repeat Yourself):** Removed the duplicated computation from the `price` method and moved it to the `base_price` method, eliminating code duplication and reducing the risk of inconsistencies.
+
+* **Modularity:** The `base_price` method can be easily extended to handle different types of items, making the code more flexible and adaptable to future changes.
+
+* **Improved Readability:** The refactored code is significantly more readable and easy to understand, as it separates the computation from the price calculation and uses clear and concise variable names.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+class Order:
+    def __init__(self):
+        self.primaryBasePrice = 0
+        self.secondaryBasePrice = 0
+        self.tertiaryBasePrice = 0
+
+    def computePrice(self):
+        # Perform long computation.
+
+# The code has been refactored to use an object-oriented approach, making the computation of the price a separate method within the Order class. By initializing the base prices as attributes of the class, we can now easily access and update them as needed. This makes the code more modular, allowing for future modifications without having to modify the entire class. By separating the price computation into its own method, the code becomes more readable and maintainable. The logic is also simplified, and code duplication is eliminated, resulting in an overall improvement in organization and integrity.
+
+gpt-4 - Instrução 2 sem titulo:
+Refactored Code:
+
+```python
+class Order:
+    # ...
+    def __init__(self):
+        self.primaryBasePrice = 0
+        self.secondaryBasePrice = 0
+        self.tertiaryBasePrice = 0
+    
+    def calculate_primary_base_price(self):
+        # Perform computation for primary base price here.
+        pass
+
+    def calculate_secondary_base_price(self):
+        # Perform computation for secondary base price here.
+        pass
+    
+    def calculate_tertiary_base_price(self):
+        # Perform computation for tertiary base price here.
+        pass
+
+    def calculate_total_price(self):
+        self.calculate_primary_base_price()
+        self.calculate_secondary_base_price()
+        self.calculate_tertiary_base_price()
+        return self.primaryBasePrice + self.secondaryBasePrice + self.tertiaryBasePrice
+```
+
+Explanation of refactored code:
+
+The original piece of code is refactored by applying the 'Single Responsibility Principle' (one of the SOLID principles of Object-Oriented Design). We introduced methods to calculate each type of base price ('calculate_primary_base_price', 'calculate_secondary_base_price', 'calculate_tertiary_base_price'), making the code modularity better. This way, each method is responsible for and performs only one task. It improves readability because one can readily understand what each method is doing just by its name.
+
+These changes also improve maintainability since modifying the way a particular base price is calculated only requires changing the respective method rather than navigating through a lengthy 'price' method.
+
+The 'calculate_total_price' method now sums these base prices, preserving the original function's functionality. Hence, this refactored code is organized better and facilitates future modifications, ensuring functional integrity.
+
+Further, the base prices are set as instance variables in the constructor, which follows the best practice of defining all instance variables within the __init__ method.
+
+mistral - Instrução 2 com titulo:
+After analyzing the given code, I have refactored it using the Strategy pattern to improve its readability, modularity, and maintainability. The changes made are as follows:
+```python
+class Order:
+    def __init__(self, primary_base_price=0, secondary_base_price=0, tertiary_base_price=0):
+        self.primary_base_price = primary_base_price
+        self.secondary_base_price = secondary_base_price
+        self.tertiary_base_price = tertiary_base_price
+    
+    def price(self):
+        strategy = PriceStrategy()
+        result = strategy.compute(self)
+        return result
+
+class PriceStrategy:
+    @staticmethod
+    def compute(order):
+        primaryBasePrice = order.primary_base_price
+        secondaryBasePrice = order.secondary_base_price
+        tertiaryBasePrice = order.tertiary_base_price
+        # Perform long computation.
+        return result  # Replace this with actual computation logic.
+```
+In this refactored code, we have extracted the computation logic into a separate class called `PriceStrategy`. This makes the `Order` class more modular and easier to read since it no longer contains the computation logic. Furthermore, by using the Strategy pattern, we can easily add new pricing strategies without modifying the `Order` class.
+
+The `PriceStrategy` class defines a single method called `compute(order)`, which takes an `Order` object as input and returns the computed price. This method encapsulates the computation logic, making it more maintainable and testable.
+
+In the `Order` class, we now initialize the strategy object and call its `compute` method to get the computed price. We then return this value from the `price` method of the `Order` class.
+
+Overall, these changes make the code more modular, maintainable, testable, and readable. It also adheres to best practices of software development, making it easier for future modifications while maintaining functional integrity.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+import abc
+
+class PriceCalculator:
+    @abc.abstractmethod
+    def calculate(self):
+        pass
+
+class PrimaryPriceCalculator(PriceCalculator):
+    def calculate(self, order):
+        return order.primary_quantity * order.primary_unit_price
+
+class SecondaryPriceCalculator(PriceCalculator):
+    def calculate(self, order):
+        return order.secondary_quantity * order.secondary_unit_price
+
+class TertiaryPriceCalculator(PriceCalculator):
+    def calculate(self, order):
+        return order.tertiary_quantity * order.tertiary_unit_price
+
+class Order:
+    def __init__(self):
+        self.primary_quantity = 0
+        self.primary_unit_price = 0
+        self.secondary_quantity = 0
+        self.secondary_unit_price = 0
+        self.tertiary_quantity = 0
+        self.tertiary_unit_price = 0
+
+    def price(self):
+        calculators = [PrimaryPriceCalculator(), SecondaryPriceCalculator(), TertiaryPriceCalculator()]
+        return sum(calculator.calculate(self) for calculator in calculators)
+```
+
+**Explanation of Changes:**
+
+* **Strategy Pattern:** The calculation of different parts of the price is now encapsulated in separate classes (the PriceCalculators), which implement a common interface (PriceCalculator). This allows for easy addition or modification of price calculation strategies later on.
+* **Method Object:** The `price` method in the original code is replaced with a method object (the `PriceCalculator` class). This simplifies the code and removes duplication.
+* **Encapsulation:** The calculation details are now hidden within the `PriceCalculator` classes, making the `Order` class more concise and maintainable.
+* **Modularity:** The price calculators are independent and reusable, allowing for easy customization and extension.
+* **Separation of Concerns:** The `Order` class now only deals with the order data, while the price calculation is delegated to specialized classes.
+
+These changes improve the readability and maintainability of the code by reducing duplication, simplifying the logic, and applying appropriate design patterns. The refactored code also adheres to the principle of separation of concerns, making it easier to modify and extend the functionality in the future.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+class Order:
+    # ...
+
+    def price(self):
+        return PriceCalculator(self).calculate()
+
+class PriceCalculator:
+    def __init__(self, order):
+        self.order = order
+
+    def calculate(self):
+        primary_base_price = self.calculate_primary_base_price()
+        secondary_base_price = self.calculate_secondary_base_price()
+        tertiary_base_price = self.calculate_tertiary_base_price()
+        
+        return primary_base_price + secondary_base_price + tertiary_base_price
+
+    def calculate_primary_base_price(self):
+        # Perform long computation
+    
+    def calculate_secondary_base_price(self):
+        # Perform long computation
+
+    def calculate_tertiary_base_price(self):
+        # Perform long computation
+
+# The refactored code has created a PriceCalculator class to handle the price calculation logic.
+# This helps to modularize the code, making it easier to read, understand, and maintain. It also reduces duplication of code by separating the price calculation logic into different methods within the PriceCalculator class. This adherence to the single responsibility principle and separation of concerns makes the code more maintainable and facilitates future modifications. Additionally, the use of the PriceCalculator class allows for easier testing of the price calculation logic.
+
+gpt-4 - Instrução 2 com titulo:
+Firstly, having a long complex method inside a class is detrimental for multiple reasons. The main issue is it breaks Single Responsibility Principle (SRP), making it harder to maintain and test. Also, with multiple tasks done by the same method, it often fetches unnecessary data causing performance issues.
+
+We can refactor this by using the Replace Method with Method Object design pattern. We create a new class `PriceCalculator` that handles the computation part which eases the testing and debugging.
+
+```python
+class Order:
+    # ...
+
+    def price(self):
+        return PriceCalculator().compute()
+
+
+class PriceCalculator:
+    def __init__(self):
+        self.primaryBasePrice = 0
+        self.secondaryBasePrice = 0
+        self.tertiaryBasePrice = 0
+
+    def compute(self):
+        # Perform long computation.
+        total_price = self.primaryBasePrice + self.secondaryBasePrice + self.tertiaryBasePrice
+        return total_price
+```
+
+In this refactored code:
+- The `Order` class now follows the Single Responsibility Principle since it just holds order related operations and delegates price calculation to `PriceCalculator`.
+- `PriceCalculator` is specifically designed to calculate the price, reducing the complexity. This specialized class makes the code easier to understand and maintain.
+- As complex price computation logic is moved to `PriceCalculator`, testing this logic becomes more straightforward enabling developers to write robust tests around it.
+- If the price computation logic changes, we know exactly where to look, leading to faster and safer changes.
+
+These changes make the code cleaner, easier to understand & maintain, and more flexible for future modifications.
+

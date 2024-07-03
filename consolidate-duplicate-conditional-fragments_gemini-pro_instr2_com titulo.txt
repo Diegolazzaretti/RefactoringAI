@@ -1,0 +1,51 @@
+gemini-pro - Instrução 2 com titulo:
+
+**Refactored Code:**
+
+```python
+def calculate_total(price, is_special_deal):
+    multiplier = 0.95 if is_special_deal else 0.98
+    total = price * multiplier
+    return total
+
+def send_total(total):
+    send(total)
+
+def main():
+    price = get_price()
+    is_special_deal = check_special_deal()
+    total = calculate_total(price, is_special_deal)
+    send_total(total)
+
+if __name__ == "__main__":
+    main()
+```
+
+**Enhancements:**
+
+**1. Separation of Concerns:**
+
+* The `main()` function is now responsible for orchestrating the flow of the program, while the `calculate_total()` and `send_total()` functions are dedicated to their specific tasks.
+
+**2. Modularity:**
+
+* The `calculate_total()` function can be easily reused in other parts of the program where total calculation is needed.
+
+**3. Reduced Code Duplication:**
+
+* The conditional fragments for calculating `total` are consolidated into a single function, eliminating duplication.
+
+**4. Improved Readability:**
+
+* The code is now organized into logical blocks, with each function performing a well-defined task. This makes it easier to understand the program flow.
+
+**5. Maintainability:**
+
+* Any future changes to the discount rates or the logic for calculating the total can be made in the `calculate_total()` function, without affecting the rest of the program.
+
+**Explanation of Changes:**
+
+* The `if-else` statement for calculating `total` is moved to a separate function `calculate_total()`, which takes `price` and `is_special_deal` as arguments.
+* A new function `send_total()` is created to send the calculated `total`.
+* The `main()` function is introduced to orchestrate the program flow, calling the `calculate_total()` and `send_total()` functions.
+* The program is wrapped in a conditional to ensure it only runs as a standalone script (not as an imported module).

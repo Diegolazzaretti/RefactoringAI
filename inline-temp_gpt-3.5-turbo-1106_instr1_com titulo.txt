@@ -1,0 +1,4 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+def has_discount(order):
+    return order.base_price() > 1000

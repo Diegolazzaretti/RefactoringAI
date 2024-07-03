@@ -1,0 +1,25 @@
+gpt-4 - Instrução 2 com titulo:
+
+The code given is quite straightforward where it is trying to return a value at a specific index from a list called `values`. Should that index not exist within the list, it is designed to return 0. This uses a try-except block to manage exception handling. 
+
+However, a better approach, promoting clarity and readability would be to use an `if` statement to perform a simple check on the length of the list instead of using exception handling for control flow. This is more in the direction of EAFP (Easier to Ask for Forgiveness than Permission) approach, which is generally recommended in Python.
+
+Here is how the refactored code looks:
+
+```python
+def getValueForPeriod(periodNumber, values):
+    if periodNumber < len(values):
+        return values[periodNumber]
+    else:
+        return 0
+```
+
+Explanation of the changes:
+
+1. Our refactored function takes an extra parameter `values`. This was done to increase the modularity of the function, now it's no longer dependent on an external data source `values`.
+
+2. The `try-except` block has been replaced with an `if-else` statement which checks if `periodNumber` is within the valid range for `values` list indexes. This is more explicit and makes it easier to understand the function's behavior. The readability of the code is improved as it's now clear what condition we're checking and how we're handling the potential issue.
+
+3. This change also enhances maintainability, as it's now easier to modify the function's behavior when the period number is out of range. Instead of having to delve into exception handling, a developer can simply adjust the `else` clause.
+
+Remember, using exceptions for controlling program flow is considered a bad approach when the same result can be achieved with a simple control structure like `if-else`. Exceptions should only be used for handling unexpected or erroneous situations that the program cannot deal with normally.

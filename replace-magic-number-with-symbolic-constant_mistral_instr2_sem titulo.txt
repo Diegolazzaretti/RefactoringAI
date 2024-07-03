@@ -1,0 +1,65 @@
+mistral - Instrução 2 sem titulo:
+
+The current implementation of the function `potentialEnergy` calculates the potential energy of an object based on its mass and the height it has fallen from. However, this code can be improved in terms of modularity, maintainability, and readability by using a design pattern such as the Singleton pattern.
+
+The Singleton pattern ensures that a class has only one instance and provides a global point of access to it. This allows for better control over the state of the object and helps to reduce code duplication.
+
+To implement the Singleton pattern in this scenario, we can create a separate module called `physics` with a file named `constants.py`. This module will contain all the constants used throughout the application. Within this module, we can define a class called `PhysicsConstants` that inherits from the `metaclass.Singleton` class.
+
+Here's an example implementation of the refactored code:
+```python
+from typing import Optional
+import metaclasses
+
+class SingletonMetaclass(metaclasses.Meta):
+    _instances = {}
+    
+    def __call__(cls, *args, **kwargs):
+        instance = cls._instances.get(cls)
+        if instance is None:
+            instance = super().__call__(cls)
+            cls._instances[cls] = instance
+        return instance
+
+class PhysicsConstants(SingletonMetaclass):
+    @staticmethod
+    def get_instance() -> "PhysicsConstants":
+        """
+        Returns an instance of PhysicsConstants.
+        """
+        return SingletonMetaclass.__get_instance__("PhysicsConstants")
+    
+    def __init__(self, *args, **kwargs):
+        """
+        Initializes the instance variables for PhysicsConstants.
+        """
+        self._gravity = 9.81
+
+    @property
+    def gravity(self) -> float:
+        """
+        Returns the value of gravity constant.
+        """
+        return self._gravity
+
+def potential_energy(mass: Optional[float] = None, height: Optional[float] = None) -> Optional[float]:
+    """
+    Calculates the potential energy of an object based on its mass and height it has fallen from.
+    
+    :param mass: The mass of the object in kilograms. Defaults to None.
+    :param height: The height the object has fallen from in meters. Defaults to None.
+    :return: The potential energy in joules or None if any of the inputs is missing.
+    """
+    if not (mass and height):
+        return None
+    
+    physics_constants = PhysicsConstants.get_instance()
+    return mass * height * physics_constants.gravity
+```
+In this refactored code, we have defined a new `PhysicsConstants` class that inherits from the `SingletonMetaclass` class. This class contains all the constants used in the calculation of potential energy. We have also added some type hints to indicate the types of inputs and outputs for the functions.
+
+We have defined two properties, `gravity` and `get_instance`, in the `PhysicsConstants` class. The `gravity` property returns the value of the gravity constant, while the `get_instance` method returns an instance of the `PhysicsConstants` class.
+
+The `potential_energy` function takes two optional parameters, `mass` and `height`, which represent the mass of the object and the height it has fallen from, respectively. It first checks if both inputs are provided, otherwise it returns None. Then, it calculates the potential energy using the values of these inputs and the gravity constant obtained from the instance of `PhysicsConstants`.
+
+In this refactored code, we have separated the calculation logic for the potential energy from the constants used in the calculation, making it more modular and maintainable. Additionally, we have used the Singleton pattern to ensure that there is only one instance of the `PhysicsConstants` class, which simplifies the creation and management of the constant object.

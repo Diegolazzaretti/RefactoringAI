@@ -1,0 +1,37 @@
+gpt-4 - Instrução 2 sem titulo:
+
+The given code snippet applies a discount to an `inputVal` based on the value of `quantity`. However, it only demonstrates one condition and doesn't provide a complete overview of all scenarios, and there is no return statement visible. So, my refactor will be based on some assumptions.
+
+Here's the refactored code:
+
+```python
+class DiscountCalculator:
+
+    DISCOUNT_THRESHOLD = 50
+    DISCOUNT_VALUE = 2
+
+    def __init__(self, input_val, quantity):
+        self.input_val = input_val
+        self.quantity = quantity
+
+    def calculate_discount(self):
+        if self.quantity > self.DISCOUNT_THRESHOLD:
+            self.input_val -= self.DISCOUNT_VALUE
+        return self.input_val
+
+# Usage:
+calculator = DiscountCalculator(100, 55)
+discounted_value = calculator.calculate_discount()
+```
+
+Explanation of changes:
+
+1. Encapsulation: Wrapped the code into a class `DiscountCalculator`, making all related functionality and data stored together. The class can be instantiated repeatedly for different input values and quantities, promoting reusability and modularity.
+
+2. Use of Constants: Extracted the discount threshold and value as class level constants. This would make it easier to update these values in the future, enhancing maintainability.
+
+3. Self-documenting code: `calculate_discount` is more descriptive than `discount`. Function names should ideally reflect the operation they are performing. Also, used clear and full variable names, which help in understanding the code better.
+
+4. Return value: The refactored function now returns the updated input value after applying discounts.
+
+Remember, this refactoring is based on the assumption that the given discount rule is the only one, and the returned value from the function should be the discounted `inputVal`. For more complex discount rules, a different design pattern like Strategy or Factory may be more appropriate.

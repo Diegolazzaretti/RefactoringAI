@@ -1,0 +1,30 @@
+gemini-pro - Instrução 2 com titulo:
+
+**Refactored Code:**
+
+```python
+def calculate_disability_amount():
+    if not is_eligible():
+        return 0
+
+    # Compute the disability amount.
+    # ...
+```
+
+**Explanation of Changes:**
+
+**1. Consolidation of Conditional Expressions:**
+
+* The original code contained multiple conditional expressions that checked for different conditions to determine eligibility for disability. These expressions have been consolidated into a single `is_eligible()` function.
+
+**2. Introduction of a Boolean Function:**
+
+* The `is_eligible()` function returns a boolean value indicating whether the employee is eligible for disability benefits. This simplifies the logic and makes it easier to understand the conditions for eligibility.
+
+**3. Improved Readability and Maintainability:**
+
+* The refactored code is more readable and maintainable because it uses clearer variable names and separates the eligibility check from the calculation of the disability amount. This makes it easier to modify the code in the future without introducing errors.
+
+**4. Enhanced Testability:**
+
+* By isolating the eligibility check into a separate function, it becomes easier to test the logic for determining eligibility independently from the calculation of the disability amount. This improves the overall testability of the code.

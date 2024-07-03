@@ -1,0 +1,23 @@
+mistral - Instrução 1 com titulo:
+
+```python
+class Output:
+    def __init__(self, name):
+        self.name = name
+    
+    def print_banner(self):
+        # Print the banner.
+        pass
+    
+    def print_info(self):
+        # Print the info.
+        pass
+    
+    def output(self, type):
+        if self.name == "banner":
+            self.print_banner()
+        elif self.name == "info":
+            self.print_info()
+        else:
+            raise ValueError("Invalid output type")
+```

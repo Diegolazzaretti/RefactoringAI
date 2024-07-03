@@ -1,0 +1,45 @@
+gemini-pro - Instrução 2 sem titulo:
+
+**Refactored Code**
+
+```python
+# Define a function to calculate the perimeter of a rectangle
+def calculate_perimeter(height, width):
+    perimeter = 2 * (height + width)
+    return perimeter
+
+# Define a function to calculate the area of a rectangle
+def calculate_area(height, width):
+    area = height * width
+    return area
+
+# Get the height and width of the rectangle from the user
+height = int(input("Enter the height of the rectangle: "))
+width = int(input("Enter the width of the rectangle: "))
+
+# Calculate the perimeter and area of the rectangle
+perimeter = calculate_perimeter(height, width)
+area = calculate_area(height, width)
+
+# Print the perimeter and area of the rectangle
+print("Perimeter:", perimeter)
+print("Area:", area)
+```
+
+**Explanation**
+
+The original code is not very readable, modular, or maintainable. It calculates the perimeter and area of a rectangle in the same function, making it difficult to understand and modify. The refactored code addresses these issues by applying the following improvements:
+
+- **Function Decomposition**: The calculation of perimeter and area is separated into two distinct functions, `calculate_perimeter` and `calculate_area`. This makes the code more modular and easier to understand.
+- **Variable Scope**: The `temp` variable is replaced with local variables within the functions to avoid naming conflicts and improve code clarity.
+- **Input Handling**: The user is prompted to enter the height and width of the rectangle separately, making it easier to understand and avoid potential errors.
+- **Meaningful Variable Names**: The variable names are changed to more meaningful ones, such as `perimeter` and `area`.
+- **Consistent Formatting**: The code is formatted in a consistent style, making it easier to read and understand.
+
+These changes contribute to the following improvements:
+
+- **Readability**: The refactored code is much easier to read and understand, as the logic is simplified and organized into meaningful functions.
+- **Modularity**: The functions can be reused in other parts of the code, making it more flexible and maintainable.
+- **Maintainability**: The code is easier to modify and extend, as the functions can be updated independently.
+
+Overall, the refactored code adheres to the best practices of software development and provides a more robust and maintainable solution.

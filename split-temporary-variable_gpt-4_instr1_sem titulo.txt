@@ -1,0 +1,21 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here is the simplified and more readable version of the code:
+
+```python
+def calculate_perimeter(height, width):
+    return 2 * (height + width)
+
+def calculate_area(height, width):
+    return height * width
+
+height = 10
+width = 5
+
+perimeter = calculate_perimeter(height, width)
+area = calculate_area(height, width)
+
+print(perimeter)
+print(area)
+```
+Now the code has clear function names that describe their purposes. This improves modularity because these functions can be reused in other parts of the same script or in another script. It's also easier to maintain because if you need to change the way you calculate area or perimeter later, you only need to modify the appropriate function.

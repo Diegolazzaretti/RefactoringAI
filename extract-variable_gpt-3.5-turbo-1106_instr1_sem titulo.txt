@@ -1,0 +1,12 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+Updated refactor the given code:
+```python
+def render_banner(self):
+    mac_platform = "MAC"
+    ie_browser = "IE"
+    platform = self.platform
+    browser = self.browser
+    if (mac_platform in platform.upper()) and (ie_browser in browser.upper()) and self.was_initialized() and (self.resize > 0):
+        # do something
+```

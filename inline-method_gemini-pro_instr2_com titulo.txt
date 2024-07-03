@@ -1,0 +1,31 @@
+gemini-pro - Instrução 2 com titulo:
+
+To enhance the readability, modularity, and maintainability of the code, the following design patterns were applied:
+
+1. Extract Method: The `moreThanFiveLateDeliveries` method was extracted from `getRating` to eliminate code duplication.
+
+2. Inline Method: The extracted `moreThanFiveLateDeliveries` method was inlined back into `getRating` as it was a simple calculation.
+
+Refactored Code:
+
+```python
+class PizzaDelivery:
+    # ...
+
+    def getRating(self):
+        return 2 if self.numberOfLateDeliveries > 5 else 1
+```
+
+Changes Made:
+
+1. Extraction: The `moreThanFiveLateDeliveries` method was extracted to improve readability and reduce code duplication.
+
+2. Inlining: The extracted method was inlined back into `getRating` because it was a trivial calculation, eliminating the need for an additional method call and further simplifying the code.
+
+These changes contribute to the following improvements:
+
+1. Readability: The code is now more concise and easier to understand by removing unnecessary method calls and duplication.
+
+2. Modularity: The extraction of the `moreThanFiveLateDeliveries` method allows it to be reused if needed in the future, enhancing maintainability.
+
+3. Maintainability: The refactored code has reduced complexity, making it easier to modify and maintain.

@@ -1,0 +1,13 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+if isSpecialDeal():
+    total = calculateSpecialDealPrice()
+else:
+    total = calculateRegularPrice()
+send()
+
+def calculateSpecialDealPrice():
+    return price * 0.95
+
+def calculateRegularPrice():
+    return price * 0.98

@@ -1,0 +1,12 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+class Soldier:
+    health = 0
+    damage = 0
+    weapon_status = 0
+
+    def get_damage(self):
+        # ...
+
+    def attack(self):
+        # ...

@@ -1,0 +1,366 @@
+Código Original (introduce-null-object):
+
+if customer is None:
+    plan = BillingPlan.basic()
+else:
+    plan = customer.getPlan()
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+The code provided checks if a `customer` object is `None`, and if it is, it creates a new instance of the `BillingPlan` class using the `basic()` method. If the `customer` object is not `None`, then it calls the `getPlan()` method on the `customer` object to retrieve its current plan.
+
+Here's a refactored version of the code that uses a ternary operator and makes the logic more modular and maintainable:
+```python
+from billing import BillingPlan
+
+def get_plan(customer):
+    return customer.getPlan() if customer else BillingPlan.basic()
+
+plan = get_plan(customer)
+```
+In this refactored version, we define a new function `get_plan()` that takes in the `customer` object as an argument and returns the customer's plan or the basic plan if the customer is `None`. We use a ternary operator to check if the `customer` object is `None`, and if it is, then we return the basic plan using the `BillingPlan.basic()` method. Otherwise, we call the `getPlan()` method on the `customer` object to retrieve its current plan.
+
+We then pass in the `customer` object as an argument to the `get_plan()` function and assign the returned value to the `plan` variable. This makes the code more modular and maintainable, as we separate out the logic for retrieving the customer's plan into its own function, which can be easily reused and modified in the future if needed.
+
+gemini-pro - Instrução 1 sem titulo:
+**Refactored Code:**
+
+```python
+def get_billing_plan(customer):
+    """Returns the billing plan for the specified customer.
+
+    Args:
+        customer: The customer object.
+
+    Returns:
+        The billing plan for the customer.
+    """
+
+    if customer is None:
+        return _get_basic_plan()
+    else:
+        return customer.get_plan()
+
+
+def _get_basic_plan():
+    """Returns the basic billing plan."""
+
+    return BillingPlan.basic()
+```
+
+**Enhancements:**
+
+* **Readability:** The code is now more readable due to the use of descriptive function names and comments.
+* **Modularity:** The code is now more modularized by extracting the logic for getting the basic plan into a separate function.
+* **Maintainability:** The code is now more maintainable by providing a clear separation of concerns between the main function and the helper function.
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def get_billing_plan(customer):
+    if customer is None:
+        plan = BillingPlan.basic()
+    else:
+        plan = customer.getPlan()
+    return plan
+
+gpt-4 - Instrução 1 sem titulo:
+Refactoring the code to improve readability, modularity and maintainability you should implement a function where you encapsulate the logic of getting the billing plan for a customer. Here's one way to do it:
+
+```python
+def get_customer_billing_plan(customer):
+    if customer is None:
+        return BillingPlan.basic()
+    else:
+        return customer.getPlan()
+```  
+
+And use it as:
+
+```python
+plan = get_customer_billing_plan(customer)
+```  
+
+This way, if the logic of getting a billing plan changes later it will be easier to maintain as changes will be required in only one place, i.e., inside the function.
+
+mistral - Instrução 1 com titulo:
+
+To enhance readability, modularity, and maintainability, we can refactor the given code as follows:
+
+1. Create a function named `get_plan` that accepts an argument `customer` and returns the billing plan for the customer.
+2. Within the `get_plan` function, use an if-else statement to check whether the customer is None. If the customer is None, then return the basic billing plan using the `BillingPlan.basic()` method. Otherwise, call the `getPlan()` method on the customer object and return it.
+3. Use the function to get the billing plan for a given customer by passing the customer object as an argument.
+```python
+from billing_plans import BillingPlan
+
+def get_plan(customer):
+    if customer is None:
+        plan = BillingPlan.basic()
+    else:
+        plan = customer.getPlan()
+    return plan
+
+# Example usage:
+plan = get_plan(my_customer)  # Assuming my_customer is an instance of the Customer class
+```
+By refactoring the code in this way, we have improved its modularity and readability while maintaining the same functionality. The `get_plan()` function can be easily extended or modified if needed, making it more maintainable over time.
+
+gemini-pro - Instrução 1 com titulo:
+```python
+from abc import ABC, abstractmethod
+
+class BillingPlan(ABC):
+
+    @abstractmethod
+    def get_monthly_fee(self):
+        pass
+
+class BasicBillingPlan(BillingPlan):
+
+    def get_monthly_fee(self):
+        return 10.0
+
+class PremiumBillingPlan(BillingPlan):
+
+    def get_monthly_fee(self):
+        return 20.0
+
+class Customer:
+
+    def __init__(self, billing_plan: BillingPlan = None):
+        self._billing_plan = billing_plan or BasicBillingPlan()
+
+    def get_billing_plan(self) -> BillingPlan:
+        return self._billing_plan
+
+def calculate_monthly_fee(customer: Customer) -> float:
+    return customer.get_billing_plan().get_monthly_fee()
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+def get_billing_plan(customer):
+    if customer is None:
+        return BillingPlan.basic()
+    else:
+        return customer.getPlan()
+
+gpt-4 - Instrução 1 com titulo:
+```python
+def get_customer_plan(customer):
+    return BillingPlan.basic() if customer is None else customer.getPlan()
+    
+plan = get_customer_plan(customer)
+```
+In this refactored code, I introduced a function that encapsulates the logic of getting a customer's plan. This improves the readability and modularity of the code because the logic on determining the plan is now separated from the rest of the code. It's now more maintainable because if there's a change on how to get a customer's plan, we just need to update the function and it will be reflected everywhere it's used.
+
+mistral - Instrução 2 sem titulo:
+```python
+class BillingPlan:
+    def __init__(self, name):
+        self.name = name
+
+    @staticmethod
+    def basic():
+        return BasicBillingPlan()
+        
+
+class Customer:
+    def getPlan(self):
+        # implementation
+        pass
+        
+
+customer = SomeCustomerInstance()
+if customer is None:
+    plan = BillingPlan.basic()
+else:
+    plan = customer.getPlan()
+```
+
+Changes made to the code:
+- Created an abstract base class `BillingPlan` with a static method `basic()`. This allows for better modularity and reduces duplication by providing a common interface for all plans.
+- Created a concrete subclass `BasicBillingPlan` that inherits from `BillingPlan` and implements the logic for the basic plan. This makes it easier to add additional plans in the future without having to duplicate code.
+- Removed the conditional check on `customer` and moved it into an instance variable. This makes the code more readable and maintainable by separating concerns.
+- Changed the return type of `BillingPlan.basic()` to `BasicBillingPlan`. This ensures that the return value is always a concrete subclass of `BillingPlan`, making the code safer and easier to reason about.
+
+gemini-pro - Instrução 2 sem titulo:
+**Refactored Code:**
+
+```
+class Customer:
+    def __init__(self, plan=None):
+        self.plan = plan or BillingPlan.basic()
+
+    def getPlan(self):
+        return self.plan
+
+
+class BillingPlan:
+    @classmethod
+    def basic(cls):
+        return cls("Basic")
+```
+
+**Changes Made:**
+
+* **Use of the Builder Pattern:** The `Customer` class is now responsible for creating and managing its own billing plan. The `BillingPlan` class provides a builder method `basic()` to create a basic plan.
+
+* **Factory Method Pattern:** The `getPlan()` method in the `Customer` class uses the factory method pattern to delegate the instantiation of the billing plan to the `BillingPlan` class. This decoupling allows for easy modification or extension of the billing plan implementation in the future.
+
+* **Null Object Pattern:** The `customer` is initialized with a default billing plan if it's None, ensuring that there's always a valid plan available.
+
+**Improvements:**
+
+* **Modularity:** The code is now divided into smaller, cohesive classes, making it easier to understand and maintain.
+* **Readability:** The use of builder and factory methods improves the readability of the code by separating the creation and retrieval of the billing plan logic.
+* **Maintainability:** The use of design patterns promotes loose coupling and reduces code duplication, making it easier to make changes in the future without affecting other parts of the system.
+* **Functional Integrity:** The refactored code maintains the same functionality as the original code and handles the case of a None customer correctly.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+The refactored code uses the Factory Method design pattern to create a BillingPlan object, simplifying the logic and improving the overall organization. It also includes a guard clause to handle the case when the customer is None.
+
+```python
+if customer is None:
+    plan = BillingPlanFactory.create_basic_plan()
+else:
+    plan = customer.get_plan()
+```
+
+The BillingPlanFactory class is responsible for creating the BillingPlan objects. This design pattern helps to encapsulate the creation logic in a separate class, reducing code duplication and improving modularity. Additionally, the guard clause makes the code more readable and handles the case when the customer is None. This refactoring enhances the readability, modularity, and maintainability of the code, ultimately adhering to best practices of software development.
+
+gpt-4 - Instrução 2 sem titulo:
+Refactoring the code may not significantly change how it looks in this scenario, but it will introduce more clarity and facilitate future modifications without major upheavals in the code structure. Here's how I'd refactor the provided code:
+
+```python
+def get_billing_plan(customer=None):
+    return BillingPlan.basic() if customer is None else customer.getPlan()
+```
+
+Changes made and their benefits:
+
+1. Enclosed the logic inside a function: Increase the modularity of your code by adopting a functional paradigm. This promotes reusability and keeps the code organized.
+
+2. Used the ternary operator: This simplifies the logic and enhances the code readability. It's a more concise way to handle simple condition checks like this one.
+
+3. Introduced a default parameter into the function: Setting `customer` as an optional argument allows the function to be called with or without input parameters, making the function more flexible for use in various situations.
+
+This refactored code is concise, unambiguous, and hence, easier to read and understand, effectively reducing the complexity and improving the maintainability of the code.
+
+mistral - Instrução 2 com titulo:
+The given code checks whether `customer` is `None` and initializes the `plan` to the basic plan of the `BillingPlan` class, otherwise it calls the `getPlan()` method on the `customer` object to get its specific plan. This code can be refactored using the Null Object Design Pattern to eliminate the need for null checks and make the code more modular and maintainable.
+
+Here's the refactored code:
+
+```python
+from billing_plan import BillingPlan, BasicPlan
+
+class NullBillingPlan(BillingPlan):
+    def getPlanName(self):
+        return "Null Plan"
+
+def introduce_null_object():
+    plan = customer.getPlan() if customer else NullBillingPlan()
+    print("Introducing plan:", plan.getName())
+```
+
+In the refactored code, we have created a new class `NullBillingPlan` that extends the `BillingPlan` class and implements its `getName()` method to return "Null Plan". The `introduce_null_object()` function takes care of checking whether `customer` is `None` or not using an if-else statement. If `customer` is `None`, it creates an instance of the `NullBillingPlan` class, otherwise it calls the `getPlan()` method on the `customer` object to get its specific plan.
+
+We have also defined a new method `getName()` in the `BillingPlan` class that returns the name of the plan. This makes the code more modular and maintainable by separating out the common functionality of getting the plan name into a separate method.
+
+Overall, these changes make the code more readable, modular, and maintainable while still achieving the same result. The use of the Null Object Design Pattern helps to eliminate null checks and simplify the logic, making it easier to understand and modify in the future.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+from abc import ABC, abstractmethod
+
+class Plan(ABC):
+    @abstractmethod
+    def get_details(self):
+        pass
+
+class NullPlan(Plan):
+    def get_details(self):
+        return "Basic Plan"
+
+class BillingPlan(Plan):
+    def __init__(self, plan_type):
+        self.plan_type = plan_type
+
+    def get_details(self):
+        if self.plan_type == "basic":
+            return "Basic Plan"
+        elif self.plan_type == "premium":
+            return "Premium Plan"
+
+def get_plan(customer):
+    if customer is None:
+        return NullPlan()
+    else:
+        return customer.getPlan()
+```
+
+**Changes Made:**
+
+* **Introduced a Null Object Pattern:** The `NullPlan` class serves as a placeholder for a customer without a specific plan. This avoids conditional checks for `None` and simplifies the logic.
+* **Created a Factory Method:** The `get_plan` function provides a centralized way to create either a `NullPlan` or a `BillingPlan` based on the customer's existence. This allows for easy addition of new plan types in the future.
+* **Extracted Plan Details:** The `get_details` method is now responsible for returning the plan details. This separates the logic for determining the plan type from the logic for retrieving its details.
+* **Simplified Conditional Statement:** The conditional statement in the `get_plan` function is now more concise and clear, focusing solely on the presence of the customer.
+
+**Improvements:**
+
+* **Enhanced Readability:** The refactored code is easier to read and understand, with clear separation of responsibilities.
+* **Improved Modularity:** The use of a Null Object Pattern and a factory method enhances modularity, making it easier to add new types of plans or replace existing plans.
+* **Increased Maintainability:** The logical separation of plan determination from plan details retrieval facilitates future modifications without affecting other parts of the code.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+Introduce a Null Object:
+
+class NullCustomer:
+    def getPlan(self):
+        return BillingPlan.basic()
+
+# Usage
+customer = getCustomerDetails()
+plan = customer.getPlan()
+
+- Created a separate class called NullCustomer to introduce a null object pattern. This null object can be used when the customer is None, eliminating the need for an if-else condition.
+- Removed the if-else condition and replaced it with a call to the customer's getPlan method directly. This simplifies the logic and improves code readability by encapsulating the logic of handling a null customer inside the NullCustomer class.
+- Created a method getCustomerDetails to get customer details, and the plan is retrieved directly using the null object pattern. This approach separates concerns and allows for easier future modifications and extensions to the code.
+
+gpt-4 - Instrução 2 com titulo:
+The Null Object design pattern could greatly enhance the code. We can use it to represent the absence of an object by providing surrogate that will perform nothing. Therefore, instead of using a condition to check for "None" object, the None checking code can be moved into the NullObject class.
+
+The refactored code might look like this:
+
+```python
+class NullCustomer:
+    def get_plan(self):
+        return BillingPlan.basic()
+
+class Customer:
+    def get_plan(self):
+        # return the plan for the customer.
+        pass
+
+class CustomerFactory:
+    @staticmethod
+    def create(value):
+        if value is None:
+            return NullCustomer()
+        else:
+            return Customer(value)
+
+customer = CustomerFactory.create(customer)
+plan = customer.get_plan()
+```
+
+Explaining the changes made:
+
+- A `NullCustomer` class is created, which is a null object class. The `get_plan()` method of this class returns the basic plan, thus 'hiding' the handling of None customers inside this class.
+- The `Customer` class represents a regular customer and it's `get_plan()` method should return the actual customer's plan.
+- The `CustomerFactory` class is responsible for creating customers. If the input value is None, it creates a `NullCustomer`, otherwise, it creates a `Customer`.
+- Lastly, we create a customer using the factory class and ask the customer to get the plan. Here, we don't need to worry if the customer is None or not. The customer itself handles this logic now, making our main code cleaner and more readable.
+
+Overall, by implementing the Null Object pattern, our code is not only more readable, but also more maintainable, because it adheres to the Single Responsibility Principle: each class does only one thing. Future modifications can be done by just tweaking respective classes, without touching the main code using it.
+

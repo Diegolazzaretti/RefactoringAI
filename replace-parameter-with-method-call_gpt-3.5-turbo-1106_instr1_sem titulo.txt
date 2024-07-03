@@ -1,0 +1,29 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+class PriceCalculator:
+    def __init__(self, quantity, itemPrice):
+        self.quantity = quantity
+        self.itemPrice = itemPrice
+
+    def calculate_base_price(self):
+        return self.quantity * self.itemPrice
+
+    def get_seasonal_discount(self):
+        # implementation to get seasonal discount
+        return seasonal_discount
+
+    def get_fees(self):
+        # implementation to get fees
+        return fees
+
+    def calculate_final_price(self):
+        base_price = self.calculate_base_price()
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        return self.discounted_price(base_price, seasonal_discount, fees)
+
+    def discounted_price(self, base_price, seasonal_discount, fees):
+        # implementation to calculate final price
+        return final_price
+price_calculator = PriceCalculator(quantity, itemPrice)
+final_price = price_calculator.calculate_final_price()

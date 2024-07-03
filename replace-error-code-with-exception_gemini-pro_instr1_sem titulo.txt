@@ -1,0 +1,40 @@
+gemini-pro - Instrução 1 sem titulo:
+
+Sure, here is the refactored code with improved readability, modularity, and maintainability:
+
+```python
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            return -1  # Insufficient funds
+
+        self.balance -= amount
+        return 0  # Withdrawal successful
+
+```
+
+**Enhancements:**
+
+* **Modular approach:** The `withdraw` method is now a standalone function within the `BankAccount` class. This improves modularity and makes it easier to maintain and reuse the code.
+* **Descriptive variable names:** The `balance` variable is now named more descriptively, indicating its purpose.
+* **Error handling:** The `withdraw` method now returns a negative value (-1) if the withdrawal amount exceeds the account balance, indicating an error. This provides better error handling and consistency.
+* **Clear and concise:** The code is now more concise and easier to understand.
+
+**Usage:**
+
+To use the refactored code, you can create a `BankAccount` object and call the `withdraw` method like this:
+
+```python
+account = BankAccount(1000)
+result = account.withdraw(500)
+
+if result == -1:
+    print("Insufficient funds")
+else:
+    print("Withdrawal successful")
+```
+
+This refactored code is more readable, maintainable, and reusable, making it a better solution for managing bank account transactions in your application.

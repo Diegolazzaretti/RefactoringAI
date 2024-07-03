@@ -1,0 +1,14 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def calculate_total():
+    base_price = get_base_price()
+    return calculate_discount(base_price)
+
+def get_base_price():
+    return quantity * item_price
+
+def calculate_discount(basePrice):
+    if base_price > 1000:
+        return base_price * 0.95
+    else:
+        return base_price * 0.98

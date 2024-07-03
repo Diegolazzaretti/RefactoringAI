@@ -1,0 +1,39 @@
+mistral - Instrução 2 sem titulo:
+
+
+After analyzing the code, the following design patterns were identified as suitable for refactoring:
+
+1. Strategy Pattern: This pattern can be used to decouple an algorithm from the objects that use it. Here, we have a situation where the `expenseLimit` and `primaryProject` objects are dependent on each other, and their properties should not change the behavior of the function. By applying this pattern, we can modify one object without affecting the other.
+2. Dependency Inversion Principle (DIP): This principle states that high-level modules should not depend on low-level modules. Both should depend on abstractions. Here, by decoupling the `expenseLimit` and `primaryProject` objects using the Strategy Pattern, we can apply the DIP to avoid any direct dependencies between them.
+3. Single Responsibility Principle (SRP): This principle states that a class should have only one reason to change. Here, by separating the `expenseLimit` and `primaryProject` properties into separate classes, we can adhere to this principle and make the code more maintainable.
+
+After applying these patterns, the refactored code would look like this:
+
+```python
+class ExpenseLimitStrategy:
+    def __init__(self, expense_limit=NULL_EXPENSE):
+        self.expense_limit = expense_limit
+
+    def get_expense_limit(self):
+        return self.expense_limit
+
+class PrimaryProjectStrategy(ExpenseLimitStrategy):
+    def __init__(self, primary_project):
+        super().__init__(primary_project.getMemberExpenseLimit())
+        self.primary_project = primary_project
+
+    def get_expense_limit(self):
+        return super().get_expense_limit() + self.primary_project.get_member_expense_limit()
+
+class Project:
+    def __init__(self, expense_limit=NULL_EXPENSE, primary_project):
+        self.expense_limit = ExpenseLimitStrategy(expense_limit)
+        self.primary_project = PrimaryProjectStrategy(primary_project)
+
+    def get_expense_limit(self):
+        return self.primary_project.get_expense_limit()
+```
+
+In this refactored code, we have separated the `expenseLimit` and `primaryProject` properties into separate classes to adhere to SRP. We then applied the Strategy Pattern to decouple these objects from each other, making it possible to change either object's behavior without affecting the other. Finally, we ensured that the `Project` class has only one reason to change by applying the DIP.
+
+This refactored code is more modular and maintainable. It follows best practices in software development, making it easier to modify or extend the code in the future while maintaining its functional integrity.

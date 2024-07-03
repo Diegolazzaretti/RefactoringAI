@@ -1,0 +1,19 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+Code refactored using an "extract method" design pattern:
+
+def renderBanner(self):
+    if self.isMacOs() and \
+       self.isInternetExplorer() and \
+       self.wasInitialized() and self.wasResized():
+        # do something
+
+def isMacOs(self):
+    return self.platform.toUpperCase().indexOf("MAC") > -1
+
+def isInternetExplorer(self):
+    return self.browser.toUpperCase().indexOf("IE") > -1
+
+def wasResized(self):
+    return self.resize > 0
+This refactored code enhances readability by breaking down `renderBanner` into smaller, descriptive methods. It also adheres to the Single Responsibility Principle since each method represents a single functionality. The `extract method` pattern is used to solve code duplication, simplify the logic, and improve overall organization. These changes significantly facilitate future modifications while maintaining functional integrity, making the code much easier to maintain.

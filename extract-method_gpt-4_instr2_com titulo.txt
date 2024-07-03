@@ -1,0 +1,42 @@
+gpt-4 - Instrução 2 com titulo:
+
+Refactored code:
+
+```python
+class Invoice:
+    def __init__(self, name, outstanding_amount):
+        self.name = name
+        self.outstanding_amount = outstanding_amount
+
+    def print_banner(self):
+        print("***************")
+        print("*** Invoice ***")
+        print("***************")
+
+    def print_details(self):
+        print("Name:", self.name)
+        print("Amount:", self.get_outstanding_amount())
+
+    def print_owing(self):
+        self.print_banner()
+        self.print_details()
+
+    def get_outstanding_amount(self):
+        return self.outstanding_amount
+```
+
+Explanation:
+
+Primarily, the problem with the existing code is that it seems to have come from a class (as we can infer from the 'self' keyword) but it's not presented within a class structure. Hence, I've conducted the refactoring assuming the code was originally part of a class.
+
+1. Class Creation: Created a class named 'Invoice'. This class accepts 'name' and 'outstanding_amount' as initialization parameters.
+
+2. Method Extraction: Moved everything related to printing into separate methods (print_banner and print_details) inside the class to make the code more modular. print_banner prints a decorative banner. print_details is responsible for printing the user name and outstanding amount. This contributes to the separation of concerns, enhances code readability, and helps reduce code duplication in case these pieces need to be invoked elsewhere in the program.
+
+3. Naming Conventions: Function names in Python should be snake_case as per Python's PEP8 style guide. So, changed 'printOwing' to 'print_owing' and 'printBanner' to 'print_banner'.
+
+4. Encapsulation: Encapsulated data by making name and outstanding_amount properties of instances of the class. Made a method 'get_outstanding_amount' to ensure that our outstanding_amount is accessed in a consistent manner. It enhances code maintainability, simplifies modification in case computations are added to get outstanding_amount.
+
+5. printOwing Method: The print_owing method now calls the print_banner and print_details methods. This improves the readability of the code and centralizes the control of the 'print' operations in one method.
+
+Remember that this refactoring assumes that the original code was part of a class definition. If it wasn't, the context would be different and the refactored code would look drastically different from this.

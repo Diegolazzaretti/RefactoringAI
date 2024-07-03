@@ -1,0 +1,25 @@
+gpt-4 - Instrução 2 com titulo:
+
+Before I refactor the code, I'll explain what issues are present in the above code: 
+
+1. The 'send()' method is duplicated in the 'if' and 'else'. Duplicate code is one of the primary elements of poor quality code, it's harder to modify the program because you'd have to make each fix, enhancement, or addition in many places.
+
+Here is the refactored code:
+
+```python
+discount = 0.95 if isSpecialDeal() else 0.98
+total = price * discount
+send()
+```
+
+During the refactoring following changes were made:
+
+1. The `send()` function is moved out of the conditional block as it was repeated in both `if` and `else` statements.
+
+2. Code duplication was removed by adding a specific value to `discount` based on the value of `isSpecialDeal()`. This helps to better organize the code, as it separates the logic for calculating the discount and the action to be performed afterward. Moreover, it simplifies the code's logic and reduces the number of lines.
+
+3. A ternary statement is used for the `discount` calculation. This reduces several lines of code into one and makes the code simpler and easier to read.
+
+This refactoring improves the maintainability of the code because it separates the logic for the discount calculation and the sending process. It's considered good practice to follow the Single Responsibility Principle, where a block of code should have only a single responsibility. This refactoring is a step towards that, as we have now separated the responsibilities into different parts of the code.
+
+This refactoring also improves the readability of the code. The code is much more understandable because the logic for deciding the discount is clearly separated from the action of sending. Any changes to the way the discount is calculated can now be made in a single line, without having to modify the `send()` part.

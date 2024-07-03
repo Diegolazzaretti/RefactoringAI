@@ -1,0 +1,35 @@
+gemini-pro - Instrução 2 sem titulo:
+
+Certainly! Here's a refactored version of the provided code, along with an explanation of the changes and their contributions to code quality:
+
+```python
+from datetime import date
+import constants
+
+def calculate_charge(date: date, quantity: int) -> float:
+    """Calculates the charge for a given date and quantity.
+
+    Args:
+        date (date): The date for which the charge is being calculated.
+        quantity (int): The quantity of items for which the charge is being calculated.
+
+    Returns:
+        float: The total charge.
+    """
+
+    if date < constants.SUMMER_START or date > constants.SUMMER_END:
+        charge = quantity * constants.WINTER_RATE + constants.WINTER_SERVICE_CHARGE
+    else:
+        charge = quantity * constants.SUMMER_RATE
+
+    return charge
+```
+
+Here are the changes made and their contributions to improved code quality:
+
+- **Modularity through function extraction**: The code has been refactored into a function called `calculate_charge`, which is responsible for calculating the charge. This improves modularity and enhances the code's reusability.
+- **Constants for rates and charges**: The constants for the summer rate, winter rate, and winter service charge have been moved to a separate module named `constants`. This improves readability by separating data from code logic and enhances maintainability by centralizing values that may need to be updated in the future.
+- **Descriptive variable names**: The variable names have been made more descriptive to convey their purpose clearly. For example, `date` has been used instead of `d` and `quantity` instead of `q`.
+- **Type hinting**: Type hints have been added to the function parameters and return value to enhance code readability and promote static type checking.
+
+Overall, these changes adhere to best practices of software development by enhancing readability, modularity, maintainability, and adherence to DRY (Don't Repeat Yourself) principles. The refactored code is now more organized, easier to understand, and less prone to errors and code duplication.

@@ -1,0 +1,22 @@
+gemini-pro - Instrução 2 com titulo:
+
+```python
+class TeamRow:
+    def __init__(self, team_name, points):
+        self.team_name = team_name
+        self.points = points
+
+row = TeamRow("Liverpool", 15)
+```
+
+**Changes Made:**
+
+* Introduced a `TeamRow` class to represent a row of team data, encapsulating the team name and points.
+* Created a new instance of `TeamRow` to replace the list-based row.
+
+**Improvements:**
+
+* **Enhanced Readability and Modularity:** The use of a class makes the code more structured and easier to understand. It separates the data structure (row) from the operations performed on it.
+* **Simplified Logic:** The constructor of `TeamRow` initializes the row with the given values, eliminating the need for explicit assignment as in the original code.
+* **Improved Maintainability:** Any future modifications to the row structure or operations can be easily done within the `TeamRow` class, without affecting other parts of the code.
+* **Adherence to Best Practices:** The use of a class follows object-oriented programming principles and promotes data encapsulation and code reuse.

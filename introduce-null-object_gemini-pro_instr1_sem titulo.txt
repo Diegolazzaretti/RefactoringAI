@@ -1,0 +1,32 @@
+gemini-pro - Instrução 1 sem titulo:
+
+**Refactored Code:**
+
+```python
+def get_billing_plan(customer):
+    """Returns the billing plan for the specified customer.
+
+    Args:
+        customer: The customer object.
+
+    Returns:
+        The billing plan for the customer.
+    """
+
+    if customer is None:
+        return _get_basic_plan()
+    else:
+        return customer.get_plan()
+
+
+def _get_basic_plan():
+    """Returns the basic billing plan."""
+
+    return BillingPlan.basic()
+```
+
+**Enhancements:**
+
+* **Readability:** The code is now more readable due to the use of descriptive function names and comments.
+* **Modularity:** The code is now more modularized by extracting the logic for getting the basic plan into a separate function.
+* **Maintainability:** The code is now more maintainable by providing a clear separation of concerns between the main function and the helper function.

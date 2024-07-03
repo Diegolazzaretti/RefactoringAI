@@ -1,0 +1,23 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here is the refactored code:
+
+```python
+def foundPerson(people):
+    target_people = ["Don", "John", "Kent"]
+    
+    for person in people:
+        if person in target_people:
+            return person
+    return ""
+```
+
+In the refactored code:
+
+- We've removed the manual looping over indices (`for i in range(len(people))`). This is replaced with a for-each loop (`for person in people`) which is easier to understand and less error-prone.
+
+- We created a `target_people` list to store the people we are interested in finding. This makes the code more flexible. If we need to search for additional people in the future, we just need to update this list, not the entire function.
+
+- The set of if conditions `if people[i] == ...` is replaced with a single condition `if person in target_people`. This simplifies the code and reduces duplication.
+
+- Always remember, code is read more often than it is written. So take time to make it readable.

@@ -1,0 +1,22 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+from typing import Tuple
+
+def calculate_final_price(quantity: int, item_price: float) -> float:
+    
+    base_price = quantity * item_price
+    seasonal_discount = get_seasonal_discount()
+    fees = get_fees()
+    return final_price(base_price, seasonal_discount, fees)
+
+def get_seasonal_discount() -> float:
+    return 0.1
+
+def get_fees() -> Tuple[float]:
+    return 0.0, 0.0
+
+def final_price(base_price: float, seasonal_discount: float, fees: Tuple[float]) -> float:
+    discounted_price = base_price * (1 - seasonal_discount)
+    return discounted_price + fees[0] - fees[1]
+```

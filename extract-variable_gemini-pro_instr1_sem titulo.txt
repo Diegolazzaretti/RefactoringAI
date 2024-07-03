@@ -1,0 +1,20 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+def render_banner(self):
+    """Renders a banner based on platform, browser, and initialization status."""
+
+    is_mac = "MAC" in self.platform.upper()
+    is_ie = "IE" in self.browser.upper()
+    is_initialized = self.was_initialized()
+    resize_count = self.resize
+
+    if is_mac and is_ie and is_initialized and resize_count > 0:
+        # do something
+```
+
+The refactored code is highly readable, modular, and maintainable due to the following enhancements:
+
+- **Readability:** The conditions are now stored in separate variables with descriptive names, making it easier to understand the logic.
+- **Modularity:** The boolean variables `is_mac`, `is_ie`, `is_initialized`, and `resize_count` can be reused in other parts of the code if needed.
+- **Maintainability:** The code is now more structured and easier to modify or extend in the future.

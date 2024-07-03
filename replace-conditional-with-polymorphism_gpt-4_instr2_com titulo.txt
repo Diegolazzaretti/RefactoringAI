@@ -1,0 +1,69 @@
+gpt-4 - Instrução 2 com titulo:
+
+Let's refactor the code applying the Strategy design pattern. The Strategy pattern is a behavioral design pattern that lets you define a family of algorithms, put each one of them into a separate class, and make the objects of these classes interchangeable. Therefore, we create the Bird class and multiple classes for different types of Birds having their specific getSpeed() method implementations.
+
+```python
+from abc import ABC, abstractmethod
+
+class Bird(ABC):
+    @abstractmethod
+    def getSpeed(self):
+        pass
+
+class EuropeanBird(Bird):
+    def getBaseSpeed(self):
+        # Implementation of base speed for European bird
+        pass
+
+    def getSpeed(self):
+        return self.getBaseSpeed()
+
+class AfricanBird(Bird):
+    def __init__(self, numberOfCoconuts):
+        self.numberOfCoconuts = numberOfCoconuts
+
+    def getBaseSpeed(self):
+        # Implementation of base speed for African bird
+        pass
+
+    def getLoadFactor(self):
+        # Implementation of the load factor for African bird
+        pass
+
+    def getSpeed(self):
+        return self.getBaseSpeed() - self.getLoadFactor() * self.numberOfCoconuts
+
+class NorwegianBlueBird(Bird):
+    def __init__(self, isNailed, voltage):
+        self.isNailed = isNailed
+        self.voltage = voltage
+
+    def getBaseSpeed(self):
+        # Implementation of base speed for Norwegian Blue bird
+        pass
+
+    def getSpeed(self):
+        return 0 if self.isNailed else self.getBaseSpeed(self.voltage)
+```
+
+Changes made:
+
+1. The original Bird class has been turned into an Abstract Base Class (ABC) with the `@abstractmethod` `getSpeed()` which requires all subclasses to provide their implementation.
+
+2. Created separate classes for EuropeanBird, AfricanBird, and NorwegianBlueBird. Each class represents a specific type of bird and its specific `getSpeed()` implementation.
+
+3. Data like `isNailed` and `voltage` specific to types of birds have been made instance variables in their respective classes.
+
+4. Applied the replace-conditional-with-polymorphism refactoring technique to remove the complexity of deciding the bird type to call the appropriate `getSpeed()` method.
+
+5. Each class now handles its own logic and has a clear responsibility within the system, this increases the overall modularity.
+
+Benefits:
+
+1. Improves readability and understandability of code by removing complex and nested conditionals.
+
+2. Easier to extend: when we need to add any new bird type in the system, we simply need to create a new class for that bird.
+
+3. Decreases the chances of error: changes in one bird class are less likely to affect the other bird classes, making the code more maintainable.
+
+4. It is easier to test the functionality of each bird type separately.

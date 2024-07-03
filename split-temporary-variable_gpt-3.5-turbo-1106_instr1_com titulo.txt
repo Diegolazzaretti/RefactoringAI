@@ -1,0 +1,9 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+def calculate_perimeter(height, width):
+    perimeter = 2 * (height + width)
+    print(perimeter)
+
+def calculate_area(height, width):
+    area = height * width
+    print(area)

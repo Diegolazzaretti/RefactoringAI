@@ -1,0 +1,28 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Here's how I would refactor this class using Python's built-in features and adhering to the principles of Object-Oriented Programming (OOP). 
+
+Refactored Code:
+```
+class Employee:
+    def __init__(self, name, id):
+        self.name = name
+        self.id = id
+
+class Manager(Employee):
+    def __init__(self, name, id, grade):
+        super().__init__(name, id)
+        self.grade = grade
+```
+
+Changes Made and Their Contributions:
+
+1. Added a new class, `Employee`. This class acts as a base class. The base class idea is important in OOP because it promotes the DRY (Don't Repeat Yourself) best practice. By placing common attributes and functionalities for employees in this base class, we can reuse them in any other employee type classes (like `Manager`) through inheritance, reducing code duplication.
+
+2. Introduced the `super()` function in the `Manager` class. `super()` is a built-in Python function used in the context of inheritance. It temporarily allows referring to the base class (`Employee`) from the derived class (`Manager`). Here, it's used to call the `__init__()` method of `Employee` class, reducing redundancy of initializing `name` and `id` again in `Manager` and enhancing modularity.
+
+3. Removed the comments `# ...` in the `Manager` class. Comments that do not provide additional value or clarification about the code should be removed to promote readability.
+
+4. Adhered to the naming conventions in Python. Python's PEP 8 guidelines recommend using `CapitalizedWords` for class names, and `lowercase` with underscores for variable and function names. I noted that these naming conventions are followed correctly in the given code, so no changes were made in this aspect.
+
+This refactored code now adheres to important software design principles such as inheritance and DRY principle, enhancing readability, modularity and maintainability. The refactor does not alter the code's functionality but greatly enhances its structure and organization, setting up a robust foundation for future modifications and growth.

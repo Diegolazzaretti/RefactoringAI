@@ -1,0 +1,36 @@
+gpt-4 - Instrução 2 com titulo:
+
+Refactored Code:
+```python
+class PriceCalculator:
+    def __init__(self, quantity, item_price):
+        self.quantity = quantity
+        self.item_price = item_price
+
+    def _base_price(self):
+        return self.quantity * self.item_price
+
+    def calculate_total(self):
+        if self._base_price() > 1000:
+            return self._base_price() * 0.95
+        else:
+            return self._base_price() * 0.98
+```
+
+Explanation of changes:
+1. Wrapping the code inside a class: The function `calculateTotal` is now part of the class `PriceCalculator`. This helps enhance the modularity of the code. Functions that pertain to a related set of operations can be logically grouped into classes, representing the core action of calculating the total price.
+   
+2. Parameter passing: The `quantity` and `item_price` are now passed as parameters during object creation. This is more flexible as it allows us to get the total for different quantities and item prices without having to modify global or class variables.
+
+3. Use of private method `_base_price`: To eliminate duplicates, the calculation of the `base_price` is moved into its own method. This follows the 'Don't Repeat Yourself' (DRY) principle making the code cleaner and easier to manage. It's easier to change the formula for `base_price` in one place rather than in multiple places if it would have been repeated.
+
+4. The `_base_price` is made a private method: By convention, method names with a preceding underscore are used to denote a method as "private", implying that it's an implementation detail that should not be accessed directly. This makes it clear to other developers working with the code which methods are intended to be used by external code and which are only to be used internally within the class itself. Therefore, signifiers like these enhance the readability and maintainability of the code.
+
+To use this code you would do something like this:
+
+```python
+price_calculator = PriceCalculator(10, 150)
+total = price_calculator.calculate_total()
+```
+
+Now `total` contains the total price for 10 items at a price of $150 each.

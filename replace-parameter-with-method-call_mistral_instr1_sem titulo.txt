@@ -1,0 +1,30 @@
+mistral - Instrução 1 sem titulo:
+
+```python
+def calculate_price():
+    base_price = get_item_price() * get_quantity()
+    seasonal_discount = get_seasonal_discount()
+    fees = get_fees()
+    final_price = discounted_price(base_price, seasonal_discount, fees)
+    return final_price
+
+def get_item_price():
+    # code to get item price from database or API
+    pass
+
+def get_quantity():
+    # code to get quantity from user input
+    pass
+
+def get_seasonal_discount():
+    # code to calculate seasonal discount
+    pass
+
+def get_fees():
+    # code to get fees from database or API
+    pass
+
+def discounted_price(base_price, seasonal_discount, fees):
+    # code to calculate discounted price with fees
+    pass
+```

@@ -1,0 +1,40 @@
+gemini-pro - Instrução 1 com titulo:
+
+To enhance the readability, modularity, and maintainability of the provided code, we can refactor it as follows:
+
+```
+class Item:
+    def __init__(self, quantity, item_price):
+        self.quantity = quantity
+        self.item_price = item_price
+
+    def get_base_price(self):
+        return self.quantity * self.item_price
+
+    def get_seasonal_discount(self):
+        pass
+
+    def get_fees(self):
+        pass
+
+    def get_final_price(self):
+        base_price = self.get_base_price()
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        return discounted_price(base_price, seasonal_discount, fees)
+
+def discounted_price(base_price, seasonal_discount, fees):
+    return base_price - seasonal_discount + fees
+```
+
+This refactoring introduces the following improvements:
+
+1. **Class-based Approach**: The code is encapsulated within a class named `Item`, which better represents the real-world entity it models.
+
+2. **Method-based Calculation**: Instead of ad-hoc calculations, the `get_base_price`, `get_seasonal_discount`, and `get_fees` methods are defined within the `Item` class to calculate the respective values.
+
+3. **Modular Design**: The calculation of the final price is moved to a separate `get_final_price` method, making the code more modular and easier to update if the pricing rules change.
+
+4. **Clearer Function Signature**: The `discounted_price` function now has a clear signature that specifies its input parameters.
+
+5. **Separation of Concerns**: The code is separated into distinct concerns: `Item` handles item-related calculations, while `discounted_price` handles price calculations.

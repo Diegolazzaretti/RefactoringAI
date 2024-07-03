@@ -1,0 +1,16 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here's how it can be refactored to increase its readability, modularity and maintainability:
+
+```python
+def is_eligible_for_discount(order):
+    MINIMUM_PRICE_FOR_DISCOUNT = 1000
+    base_price = order.get_base_price()
+    
+    return base_price > MINIMUM_PRICE_FOR_DISCOUNT
+```
+
+- The function name `is_eligible_for_discount` clearly indicates the purpose of the function.
+- The constant `MINIMUM_PRICE_FOR_DISCOUNT` is properly named and shows its intent.
+- Modularity is enhanced by having the order's base price calculation in a separate method (assuming `get_base_price` does that), which can also increase maintainability.
+- Constants, such as the minimum price to get a discount, are easy to update as they are defined at the top of the function.

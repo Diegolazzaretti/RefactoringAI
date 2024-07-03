@@ -1,0 +1,14 @@
+mistral - Instrução 1 com titulo:
+
+```python
+from typing import Tuple
+
+def within_plan_range(plan: "Plan", low: float, high: float) -> bool:
+    """Check if a given plan is within a specific temperature range."""
+    return plan.within_range(low, high)
+
+def preserve_whole_object(days_temp_range: Tuple[float, float], plan: "Plan") -> bool:
+    """Check if a given days temperature range preserves the whole object."""
+    low, high = days_temp_range
+    return within_plan_range(plan, low, high)
+```

@@ -1,0 +1,33 @@
+gpt-4 - Instrução 2 com titulo:
+
+Refactored Code:
+
+```python
+def calculate_discount(inputVal, quantity):
+    limit_for_discount = 50
+    discount_amount = 2
+    
+    if is_eligible_for_discount(quantity, limit_for_discount):
+        return apply_discount(inputVal, discount_amount)
+    return inputVal
+
+def is_eligible_for_discount(quantity, limit_for_discount):
+    return quantity > limit_for_discount
+
+def apply_discount(inputVal, discount_amount):
+    return inputVal - discount_amount
+```
+
+Explanation:
+
+1. Renamed `discount` function to `calculate_discount` to make it more indicative of what the function does.
+   
+2. Created a constant, `limit_for_discount = 50`, to replace the literal '50' in the `if` condition to make it more readable. Now, without diving into the actual logic, one can understand what that '50' denotes. This also allows for easier modification of this threshold. 
+
+3. Similarly, I replaced the literal '2' with a variable `discount_amount` to enhance readability. 
+
+4. Instead of assigning the result of the discount application back onto `inputVal`, I directly return it. This is in accordance with the principle of not modifying the method parameters— a good practice to avoid side effects and enhance testability.
+
+5. Separated out the discount eligibility check and the actual applying of the discount into separate functions `is_eligible_for_discount` and `apply_discount`. This enhances modularity, testability, and readability of the code. Each function now adheres to the Single Responsibility Principle, having just one job to do.
+
+Following software development best practices, this code is much more maintainable, readable and ready for future modifications. Moreover, the logic is simplified, eliminating mutation of input parameters.

@@ -1,0 +1,22 @@
+gemini-pro - Instrução 2 com titulo:
+
+**Refactored Code:**
+
+```python
+def hasDiscount(order):
+    return order.basePrice() > 1000
+```
+
+**Changes and Improvements:**
+
+1. **Inline Temporary Variable:** The variable `basePrice` is only used once, so it can be eliminated by inlining it. This reduces clutter and improves readability.
+
+2. **Simplified Logic:** The if-else statement is unnecessary since the calculation directly returns the desired result.
+
+**Benefits of Refactoring:**
+
+* **Enhanced Readability:** The code is now more concise and easier to understand.
+* **Reduced Code Duplication:** The temporary variable is no longer defined twice.
+* **Simplified Logic:** The if-else statement is eliminated, making the code more straightforward.
+* **Improved Maintainability:** The refactored code is easier to modify in the future, as there are fewer lines of code to change.
+* **Adherence to Best Practices:** The refactored code follows the "Inline Temporary Variable" refactoring technique, which is a common practice in software development to enhance code quality.

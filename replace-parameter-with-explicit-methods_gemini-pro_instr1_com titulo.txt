@@ -1,0 +1,15 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+def print_banner(self):
+    # Print the banner.
+
+def print_info(self):
+    # Print the info.
+
+def output(self, type):
+    if type == "banner":
+        self.print_banner()
+    elif type == "info":
+        self.print_info()
+```

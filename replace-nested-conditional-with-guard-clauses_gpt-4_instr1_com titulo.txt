@@ -1,0 +1,16 @@
+gpt-4 - Instrução 1 com titulo:
+
+Below is the refactored code:
+
+```python
+def getPayAmount(self):
+    if self.isDead:
+        return deadAmount()
+    if self.isSeparated:
+        return separatedAmount()
+    if self.isRetired:
+        return retiredAmount()
+    return normalPayAmount()
+```
+
+In the refactored code, I've used guard clauses, which are a set of conditional statements that checks for a condition and return immediately if the condition is satisfied. This eliminates unnecessary nesting and makes the code easier to read and understand. In addition, it modularizes the function since each condition and return now behaves kind of individually, making it easier to maintain and enhance if needed.

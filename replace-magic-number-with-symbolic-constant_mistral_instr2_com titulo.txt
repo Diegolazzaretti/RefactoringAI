@@ -1,0 +1,11 @@
+mistral - Instrução 2 com titulo:
+
+```python
+# Define a constant for the acceleration due to gravity
+GRAVITY_ACCELERATION = 9.81
+
+# Define a function to calculate potential energy based on the given mass and height
+def potentialEnergy(mass, height):
+    """Calculate the potential energy of an object at the given height."""
+    return mass * GRAVITY_ACCELERATION * height
+```

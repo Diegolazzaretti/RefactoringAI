@@ -1,0 +1,15 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+def calculateTotal(quantity, itemPrice):
+    basePrice = calculateBasePrice(quantity, itemPrice)
+    
+    if basePrice > 1000:
+        return applyDiscount(basePrice, 0.95)
+    
+    return applyDiscount(basePrice, 0.98)
+
+def calculateBasePrice(quantity, itemPrice):
+    return quantity * itemPrice
+
+def applyDiscount(amount, rate):
+    return amount * rate

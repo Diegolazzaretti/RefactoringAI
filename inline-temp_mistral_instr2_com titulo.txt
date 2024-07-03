@@ -1,0 +1,9 @@
+mistral - Instrução 2 com titulo:
+
+
+The given code checks whether a given order has a discount or not by checking if the base price of the order is greater than 1000. This check can be made more modular and maintainable by extracting it into a separate function, as shown below:
+
+def hasDiscount(order):
+    return order.basePrice() > 1000
+
+This code adheres to the single responsibility principle (SRP), which states that each class or function should have only one reason to change. By extracting this functionality into a separate function, we can avoid duplicating this check in other parts of our code and make it easier to modify in the future if needed. Additionally, by using an appropriate design pattern such as encapsulation, we can hide the implementation details of the `order.basePrice()` method and only expose a public interface for interacting with it.

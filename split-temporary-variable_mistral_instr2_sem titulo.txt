@@ -1,0 +1,29 @@
+mistral - Instrução 2 sem titulo:
+
+
+The given code calculates the area of a rectangle by multiplying its length and width twice. Here's how we can refactor it using object-oriented programming (OOP) principles:
+
+```python
+class Rectangle:
+    def __init__(self, height, width):
+        self.height = height
+        self.width = width
+    
+    def area(self):
+        return 2 * (self.height + self.width)
+    
+    def perimeter(self):
+        return 2 * (self.height + self.width)
+        
+rectangle = Rectangle(5, 6)
+print(rectangle.area())
+print(rectangle.perimeter())
+```
+
+In this refactored code, we've created a class `Rectangle` to encapsulate the height and width of a rectangle as attributes. We've also defined two methods `area()` and `perimeter()` to calculate the area and perimeter of a rectangle respectively. This makes the code more modular and reusable.
+
+In the original code, we were calculating the area of a rectangle by multiplying its length and width twice. In this refactored code, we've defined a method `area()` that calculates the area of a rectangle in the same way. However, since the perimeter of a rectangle is simply the sum of its length and width, we can define another method `perimeter()` to calculate it.
+
+We've created an instance of the `Rectangle` class with height 5 and width 6, and called its methods `area()` and `perimeter()` to print their values. Since both methods return the same result (2 * (height + width)), we could have easily defined a single method that does both calculations, but we've kept them separate for clarity and readability.
+
+In summary, we've refactored the given code by encapsulating it within a class `Rectangle`, which makes it more modular and reusable. We've also defined two methods to calculate the area and perimeter of a rectangle respectively, reducing duplication and simplifying the logic.

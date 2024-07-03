@@ -1,0 +1,18 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+class Employee:
+    def __init__(self, name, id):
+        self.name = name
+        self.id = id
+
+class Manager(Employee):
+    def __init__(self, name, id, grade):
+        super().__init__(name, id)
+        self.grade = grade
+# ...
+
+Explanation:
+1. Created an Employee class to handle the common attributes of all employees, such as name and id.
+2. Refactored the Manager class to inherit from the Employee class, allowing it to reuse the name and id attributes. 
+3. Used super() to call the constructor of the Employee class from the Manager class, initializing the name and id attributes. 
+4. This approach enhances readability, modularity, and maintainability by promoting code reusability, reducing duplication, and simplifying the logic. It also follows the best practice of using inheritance to model the "is-a" relationship between the Manager and the Employee.

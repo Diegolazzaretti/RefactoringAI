@@ -1,0 +1,51 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Here's the refactored code:
+
+```python
+from abc import ABC, abstractmethod
+
+class Bird(ABC):
+    @abstractmethod
+    def get_speed(self):
+        pass
+
+
+class EuropeanBird(Bird):
+    def get_speed(self):
+        return self.get_base_speed()
+
+
+class AfricanBird(Bird):
+    def __init__(self, number_of_coconuts):
+        self.number_of_coconuts = number_of_coconuts
+ 
+    def get_speed(self):
+        return self.get_base_speed() - self.get_load_factor() * self.number_of_coconuts
+
+
+class NorwegianBlueBird(Bird):
+    def __init__(self, is_nailed, voltage):
+        self.is_nailed = is_nailed
+        self.voltage = voltage
+
+    def get_speed(self):
+        return 0 if self.is_nailed else self.get_base_speed(self.voltage)
+
+```
+
+Explanation:
+
+1. I've introduced an abstract class 'Bird', which has an abstract method 'get_speed'. This allows the definition of a common interface for all bird types.
+
+2. Each bird type is now a separate class extending from the abstract class Bird. This promotes code modularity and organizes the specific functionalities of each bird type into its own class (following the single responsibility principle).
+
+3. The logic to calculate the speed of each bird type is now encapsulated within the corresponding Bird type's class. This applies encapsulation, increasing readability and maintainability.
+
+4. For AfricanBird and NorwegianBlueBird, I've added the constructor methods (__init__) to handle their specific attributes (number_of_coconuts and is_nailed/voltage respectively). This refactoring practice, known as 'Pull Up Field', helps to avoid errors due to the unavailability of some properties in certain subclasses.
+
+5. Adhering to Python's standard naming conventions, I've renamed all methods to lowercase, separated by underscores.
+
+6. The Exception statement has been removed as each bird type is now a separate class and it's unlikely that a scenario will occur where an undefined bird type would call the get_speed method.
+
+By implementing this object-oriented design, we make the code more extensible (additional bird types can be easily added as new classes), maintainable, and readable. It also reduces code duplication and simplifies the logic.

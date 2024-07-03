@@ -1,0 +1,14 @@
+mistral - Instrução 1 com titulo:
+
+
+First, let's create a new function called `getBasePrice` to handle the calculation of the base price:
+```python
+8. inline-temp
+def getBasePrice(order):
+    return order.basePrice()
+
+def hasDiscount(order):
+    basePrice = getBasePrice(order)
+    return basePrice > 1000
+```
+This makes the code more modular and easier to read, as we're separating out the logic for calculating the base price into its own function. We've also made it clearer that `hasDiscount` depends on `getBasePrice`.

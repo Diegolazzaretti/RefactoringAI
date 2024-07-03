@@ -1,0 +1,50 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+# Refactored code using Strategy pattern
+
+class TemperatureRange:
+    def __init__(self, low, high):
+        self.low = low
+        self.high = high
+
+class Plan:
+    def withinRange(self, low, high):
+        pass
+
+class BasicPlan(Plan):
+    def withinRange(self, low, high):
+        return low >= 0 and high <= 40
+
+class PremiumPlan(Plan):
+    def withinRange(self, low, high):
+        return low >= -10 and high <= 45
+
+class TemperatureController:
+    def __init__(self, daysTempRange, plan):
+        self.daysTempRange = daysTempRange
+        self.plan = plan
+
+    def calculateWithinRange(self):
+        low = self.daysTempRange.low
+        high = self.daysTempRange.high
+        return self.plan.withinRange(low, high)
+
+# Usage
+daysTempRange = TemperatureRange(20, 30)
+basicPlan = BasicPlan()
+premiumPlan = PremiumPlan()
+
+basicController = TemperatureController(daysTempRange, basicPlan)
+premiumController = TemperatureController(daysTempRange, premiumPlan)
+
+print(basicController.calculateWithinRange())
+print(premiumController.calculateWithinRange())
+```
+
+In the refactored code, I used the Strategy pattern to decouple the temperature range checking logic from the plan implementation. This allows for easy extension if new plans need to be added in the future.
+
+I created a `TemperatureRange` class to encapsulate the low and high temperature values. Then, I defined an abstract `Plan` class with a `withinRange` method. Two concrete plan classes, `BasicPlan` and `PremiumPlan`, implement the `withinRange` method with their specific temperature range criteria.
+
+The `TemperatureController` class now takes `daysTempRange` and `plan` as parameters in its constructor, decoupling the temperature checking logic from the plan. It defines a method `calculateWithinRange()` to calculate whether the temperature range is within the plan's criteria.
+
+Overall, these changes enhance the readability, modularity, and maintainability of the code by separating concerns and allowing easy extension of the temperature range checking logic or plan criteria. Additionally, the use of appropriate design patterns reduces code duplication and simplifies the logic, contributing to overall organization and future modifications while maintaining functional integrity.

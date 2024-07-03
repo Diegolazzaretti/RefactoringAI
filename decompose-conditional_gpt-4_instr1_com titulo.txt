@@ -1,0 +1,22 @@
+gpt-4 - Instrução 1 com titulo:
+
+After the suggested refactoring, the code could look as follows:
+
+```python
+def calculate_charge(date, quantity):
+    if is_summer(date):
+        return summer_charge(quantity)
+    else:
+        return winter_charge(quantity)
+
+def is_summer(date):
+    return date.after(SUMMER_START) and date.before(SUMMER_END)
+
+def summer_charge(quantity):
+    return quantity * summerRate
+
+def winter_charge(quantity):
+    return quantity * winterRate + winterServiceCharge
+```
+
+In this code, calculations for summer and winter charges are encapsulated into their own functions, summer_charge and winter_charge, improving readability. The time of year check is abstracted to the is_summer function which improves modularity and makes the calculation of the charge clearer. The main function to calculate the charge, calculate_charge, becomes cleaner and easier to maintain.

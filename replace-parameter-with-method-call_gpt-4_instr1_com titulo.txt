@@ -1,0 +1,16 @@
+gpt-4 - Instrução 1 com titulo:
+
+Refactored Code:
+
+```
+def calculate_base_price(quantity, item_price):
+    return quantity * item_price
+
+def calculate_final_price(quantity, item_price):
+    base_price = calculate_base_price(quantity, item_price)
+    seasonal_discount = self.get_seasonal_discount()
+    fees = self.get_fees()
+
+    return discounted_price(base_price, seasonal_discount, fees)
+```
+As mentioned, we improved the readability and modularity by breaking down the code into small, more manageable methods. We also added method names that clearly indicate what each method does, which in turn makes code maintenance easier.

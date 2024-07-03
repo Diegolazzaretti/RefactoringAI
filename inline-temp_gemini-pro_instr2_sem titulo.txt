@@ -1,0 +1,48 @@
+gemini-pro - Instrução 2 sem titulo:
+
+**Refactored Code:**
+
+```python
+from abc import ABC, abstractmethod
+
+class DiscountPolicy(ABC):
+
+    @abstractmethod
+    def is_applicable(self, order) -> bool:
+        pass
+
+class BasePriceDiscountPolicy(DiscountPolicy):
+
+    def __init__(self, minimum_base_price):
+        self.minimum_base_price = minimum_base_price
+
+    def is_applicable(self, order) -> bool:
+        base_price = order.base_price()
+        return base_price > self.minimum_base_price
+
+def apply_discounts(order):
+    discount_policies = [
+        BasePriceDiscountPolicy(minimum_base_price=1000),
+    ]
+
+    for policy in discount_policies:
+        if policy.is_applicable(order):
+            return True
+
+    return False
+```
+
+**Changes Made:**
+
+* **Introduced Abstraction:** Created an abstract base class `DiscountPolicy` to define the contract for discount policies.
+* **Modularity with Strategy Pattern:** Implemented a specific discount policy, `BasePriceDiscountPolicy`, which checks if the order's base price exceeds a threshold.
+* **Centralized Discount Policies:** Moved the definition of discount policies to a separate function, `apply_discounts`, for centralized management.
+* **Simplified Logic:** Refactored the discount logic into smaller, reusable methods that can be easily modified.
+* **Encapsulation:** Encapsulated the logic for determining if a discount is applicable within the `DiscountPolicy` class.
+
+**Benefits of the Refactoring:**
+
+* **Improved Readability:** The refactored code is more organized and easier to understand.
+* **Modularity:** Discount policies can be added or removed without affecting the core logic.
+* **Maintainability:** The centralized management of discount policies simplifies future modifications.
+* **Extensibility:** The Strategy pattern allows for easy addition of new discount policies in the future.

@@ -1,0 +1,36 @@
+gemini-pro - Instrução 2 com titulo:
+
+**Refactored Code:**
+
+```python
+class Person:
+    def __init__(self, name, id):
+        self.name = name
+        self.id = id
+
+class Employee(Person):
+    def __init__(self, name, id, grade):
+        super().__init__(name, id)
+        self.grade = grade
+
+class Manager(Employee):
+    pass
+```
+
+**Explanation of Changes:**
+
+* **Pull-up Constructor Body:** The constructor body from the `Manager` class is pulled up to the `Employee` class. This reduces code duplication and allows for the reuse of initialization logic in both `Employee` and `Manager`.
+
+* **Super Constructor Call:** In the `Employee` constructor, we call `super().__init__(name, id)` to initialize the inherited attributes from the `Person` class.
+
+* **Modularized Inheritance:** The inheritance hierarchy is simplified by defining `Person` as the base class and `Employee` as an intermediate class inheriting from both `Person` and `Manager`. This modularization allows for clear separation of concerns and future extensibility.
+
+**Benefits of Refactoring:**
+
+* **Reduced Code Duplication:** The pull-up constructor body eliminates duplicate initialization code, improving code maintainability and reducing the risk of errors.
+
+* **Simplified Logic:** The use of super constructor call makes the initialization logic concise and straightforward, enhancing code readability.
+
+* **Improved Organization:** Modularizing the inheritance hierarchy clarifies the relationships between classes, fostering better understanding and flexibility for future modifications.
+
+* **Adherence to Best Practices:** The refactored code adheres to the principle of avoiding duplicate code and leveraging inheritance effectively, resulting in a more robust and maintainable design.

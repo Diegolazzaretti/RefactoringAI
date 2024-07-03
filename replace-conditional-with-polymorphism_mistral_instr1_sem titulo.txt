@@ -1,0 +1,35 @@
+mistral - Instrução 1 sem titulo:
+
+The code can be refactored into a more modular and readable way using the following approach:
+
+class Bird:
+    # ...
+    
+    def __init__(self, type):
+        self.type = type
+    
+    def getBaseSpeed(self, voltage=None):
+        if self.type == NORWEGIAN_BLUE:
+            return 0 if self.isNailed else voltage
+        else:
+            raise Exception("Should be unreachable")
+    
+    def getSpeed(self):
+        if self.type == EUROPEAN:
+            return self.getBaseSpeed()
+        elif self.type == AFRICAN:
+            return self.getBaseSpeed() - self.getLoadFactor() * self.numberOfCoconuts
+        elif self.type == NORWEGIAN_BLUE:
+            return self.getBaseSpeed(self.voltage)
+        else:
+            raise Exception("Should be unreachable")
+    
+    def getLoadFactor(self):
+        # implementation of load factor calculation goes here
+        pass
+    
+    def isNailed(self):
+        # implementation of nailing check goes here
+        pass
+    
+By separating the base speed calculation into a separate method and providing default values for voltage, we can make the code more readable and maintainable. Additionally, by moving the load factor and nailing checks into their own methods, we can further enhance modularity and reusability of the code.

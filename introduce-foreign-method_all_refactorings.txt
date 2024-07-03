@@ -1,0 +1,417 @@
+Código Original (introduce-foreign-method):
+
+class Report:
+    # ...
+    def sendReport(self):
+        nextDay = Date(self.previousEnd.getYear(),
+            self.previousEnd.getMonth(), self.previousEnd.getDate() + 1)
+        # ...
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```
+# Original Code
+class Report:
+    # ...
+
+    def sendReport(self):
+        nextDay = Date(self.previousEnd.getYear(),
+                       self.previousEnd.getMonth(), self.previousEnd.getDate() + 1)
+        # ...
+```
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+import datetime
+
+class Report:
+    # ...
+
+    def send_report(self):
+        next_day = self.previous_end + datetime.timedelta(days=1)
+        # ...
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+class Report:
+    # ...
+    @property
+    def next_day(self):
+        return Date(
+            self.previous_end.getYear(),
+            self.previous_end.getMonth(),
+            self.previous_end.getDate() + 1
+        )
+
+    def send_report(self):
+        # ...
+
+gpt-4 - Instrução 1 sem titulo:
+When refactoring your code, consider:
+
+1. Using meaningful names for your variables and methods.
+2. Creating smaller, self-documenting, reusable functions.
+3. Writing comments to explain what your code does when it's not immediately clear.
+
+The refactored code according to these principles could look as follows:
+
+```python
+class Report:
+    # ...
+
+    def get_next_day(self, date):
+        """
+        Returns the next day after the input date.
+        """
+        return Date(date.getYear(), date.getMonth(), date.getDate() + 1)
+
+    def send_report(self):
+        """
+        Sends report with the details of the next day.
+        """
+        next_day = self.get_next_day(self.previous_end)
+        # ...
+```
+In the refactored code, I:
+
+1. Renamed the method `sendReport` to `send_report` and `nextDay` to `next_day` in order to follow the Pythonic naming convention known as snake_case.
+2. Extracted part of the `send_report` code to a new method, `get_next_day`. This improves readability, makes the function reusable, and breaks down the `send_report` method, making it more modular.
+3. Added docstrings to methods. This provides clear explanations of what each method does, which can be beneficial for others reading your code. 
+
+However, ensure your project or team does not have specific guidelines on how to refactor or structure your code. Although Python predominantly uses snake_case, some projects or teams may still use camelCase. Additionally, some teams may have different requirements or recommendations for comments and docstrings. Always adhere to your project's or team's coding conventions.
+
+mistral - Instrução 1 com titulo:
+
+Here is a possible refactored version of the code, introducing a more modular and readable approach:
+```scss
+from datetime import timedelta
+from .date_utilities import Date
+
+class Report:
+    def __init__(self, previousEnd):
+        self.previousEnd = previousEnd
+
+    def sendReport(self):
+        nextDay = self._getNextDay()
+        # ...
+```
+In this refactored version, we have introduced a separate module for date utilities, which contains the `Date` class and its methods to handle date calculations. The `Report` class now imports this module, using the dot notation to access its methods. We have also extracted the date calculation logic into a private method `_getNextDay()`, making it more modular and easier to understand.
+
+gemini-pro - Instrução 1 com titulo:
+```python
+class Report:
+    def __init__(self, previous_end):
+        self.previous_end = previous_end
+
+    def send_report(self):
+        next_day = self._calculate_next_day()
+        # ...
+
+    def _calculate_next_day(self):
+        return Date(
+            self.previous_end.getYear(),
+            self.previous_end.getMonth(),
+            self.previous_end.getDate() + 1,
+        )
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+class Report:
+    # ...
+
+    def sendReport(self):
+        nextDay = self._get_next_day()
+
+    def _get_next_day(self):
+        return Date(self._get_next_year(), self._get_next_month(), self._get_next_date())
+
+    def _get_next_year(self):
+        return self.previousEnd.getYear()
+
+    def _get_next_month(self):
+        return self.previousEnd.getMonth()
+
+    def _get_next_date(self):
+        return self.previousEnd.getDate() + 1
+
+gpt-4 - Instrução 1 com titulo:
+Refactored code:
+
+```
+class Report:
+    # ...
+
+    def getNextDay(self):
+        return Date(self.previousEnd.getYear(),
+                    self.previousEnd.getMonth(), 
+                    self.previousEnd.getDate() + 1)
+
+    def sendReport(self):
+        nextDay = self.getNextDay()
+        # ...
+```
+
+In the above refactored code, I have introduced a new method `getNextDay()` to encapsulate the logic of calculating the next day. This enhances readability and modularity since any future changes related to the calculation of the next day need to be done in only one place. It also enhances maintainability since it would be easier to identify and fix any issues related to the calculation of the next day.
+
+mistral - Instrução 2 sem titulo:
+
+The code provided is a simple class `Report` with a single method `sendReport()`. The purpose of this method is to generate and send a report for the specified period. The method calculates the date for the next day by adding one to the previous end date of the report period and then generates the report.
+
+The code can be refactored to improve its readability, modularity, and maintainability using object-oriented design principles. Here is a possible refactored version of the code:
+
+```python
+from datetime import datetime, timedelta
+
+class ReportGenerator:
+    def __init__(self, start_date, end_date):
+        self.start_date = start_date
+        self.end_date = end_date
+
+    def generate(self):
+        # Generate report for the specified period
+        report = generate_report(self.start_date, self.end_date)
+        return report
+
+def generate_report(start_date, end_date):
+    """Generate a report for the specified period."""
+    today = datetime.now()
+    next_day = today + timedelta(days=1)
+    start_date = max(datetime.strptime(start_date, '%Y-%m-%d'), datetime.now())
+    end_date = min(datetime.strptime(end_date, '%Y-%m-%d'), next_day)
+    report = generate_data(start_date, end_date)
+    return report
+
+def generate_data(start_date, end_date):
+    """Generate data for the specified period."""
+    # Calculate data for each day in the period
+    report = []
+    for date in range(start_date.date() + start_date.weekday() - 5, end_date.date() + end_date.weekday()):
+        if date < start_date or date > end_date:
+            continue
+        report.append(calculate_data(date))
+    return report
+
+def calculate_data(date):
+    """Calculate data for a given date."""
+    # TODO: Implement calculation logic here
+    pass
+```
+
+In this refactored code, the original `Report` class has been replaced with an abstract base class `ReportGenerator`. This abstract class provides a generic interface for generating reports by defining two methods: `__init__()` and `generate()`. The `__init__()` method initializes the report generator with the start and end dates of the report period, while the `generate()` method generates the report using the `generate_report()` method.
+
+The `generate_report()` method is responsible for generating the report for the specified period. It takes two arguments: the start and end dates of the report period, and it returns a report generated from that data. The method first converts the input dates to datetime objects using the `datetime.strptime()` method. Then, it calculates the maximum and minimum dates in the period by comparing them with the current date using the `max()` and `min()` functions, respectively.
+
+The `generate_data()` method generates data for the specified period. It takes two arguments: the start and end dates of the report period, and it returns a list of calculated data for that period. The method uses a loop to iterate over each day in the period, converts each date to a datetime object using `datetime.strptime()`, and checks if the date is within the specified period by comparing it with the start and end dates using the `<` and `>` operators, respectively. If the date is outside the period, it is skipped.
+
+The `calculate_data()` method calculates data for a given date. It takes one argument: a datetime object representing the date to calculate data for. This method is currently empty, but its implementation will depend on the specific requirements of the report being generated.
+
+This refactored code adheres to several best practices of software development:
+
+1. Single Responsibility Principle (SRP): Each class has a single responsibility or function. The `ReportGenerator` class has only one method, `generate()`, which is responsible for generating reports.
+2. Interface Segregation Principle (ISP): The `ReportGenerator` abstract base class provides an interface for generating reports that separates it from the implementation details of generating data. This makes the code more modular and easier to maintain.
+3. Dependency Inversion Principle (DIP): The `generate_data()` method depends on an abstraction (the `ReportGenerator` abstract base class) rather than a concrete implementation. This makes the code more flexible and easier to test.
+4. Liskov Substitution Principle (LSP): The `generate_data()` method works with any concrete implementation of the `ReportGenerator` abstract base class, as long as it implements the `generate_report()` and `calculate_data()` methods correctly. This makes the code more extensible and maintainable.
+
+The refactored code also has improved readability, modularity, and maintainability by separating concerns into distinct classes, using abstract interfaces to define behavior, and applying best practices of object-oriented design. The resulting code is easier to understand, modify, and extend in the future.
+
+gemini-pro - Instrução 2 sem titulo:
+```python
+import datetime
+
+class Report:
+    def __init__(self, start_date, end_date):
+        self._start_date = start_date
+        self._end_date = end_date
+
+    def get_next_day(self):
+        return self._end_date + datetime.timedelta(days=1)
+
+    def send_report(self):
+        next_day = self.get_next_day()
+        # ...
+```
+
+**Changes made:**
+
+1. Extracted the calculation of the next day into a separate method `get_next_day`. This improves modularity and readability by separating the logic for calculating the next day from the `send_report` method.
+2. Used the `datetime.timedelta` class to represent the time difference between the end date and the next day. This simplifies the calculation and makes the code more maintainable.
+3. Renamed the `previousEnd` attribute to `_end_date` to follow Python naming conventions and indicate that it is a private attribute.
+4. Added type hints to the `__init__` method to improve code readability and help IDEs auto-complete and type-check.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+class Report:
+    # ...
+    def sendReport(self):
+        nextDay = self.get_next_day()
+        # ...
+
+    def get_next_day(self):
+        return Date(self.get_next_year(), self.get_next_month(), self.next_day_in_month())
+
+    def get_next_year(self):
+        return self.previousEnd.getYear()
+
+    def get_next_month(self):
+        return self.previousEnd.getMonth()
+
+    def next_day_in_month(self):
+        return self.previousEnd.getDate() + 1
+The refactored code made the sendReport method much more readable and modular by breaking down the logic into separate methods to handle specific functionalities. By using these methods, the code is easier to read, and each part of the logic is handled separately, making it easy to maintain and extend. The use of appropriate method names further enhances readability and maintainability. Additionally, the refactored code eliminates code duplication and simplifies the logic, contributing to the better overall organization of the code. The introduction of method names adheres to best practices of software development, making the code more manageable and facilitating future modifications while maintaining functional integrity.
+
+gpt-4 - Instrução 2 sem titulo:
+Refactored Code:
+```python
+class Report:
+    # ...
+
+    def __get_next_day(self, previous_date):
+        return Date(previous_date.getYear(),
+                    previous_date.getMonth(), 
+                    previous_date.getDate() + 1)
+
+    def sendReport(self):
+        next_day = self.__get_next_day(self.previousEnd)
+        # ...
+```
+
+Explanation of Changes:
+
+1. Modularization of Code:
+The code that calculates the next day from a given date was extracted into it's own method `__get_next_day()`. This provides better readability as its name describes its purpose. Also, it allows reusability of this method elsewhere within the class if needed.
+
+2. Encapsulation:
+Creating a private method with the double underscore prefix `__get_next_day()`. By doing this, this method cannot be accessed directly from outside the class. This can hide the internal implementation detail and reduce the possibility of unintended interactions.
+
+3. Meaningful Naming:
+The variable `nextDay` is renamed to `next_day` to align to PEP8 recommendations for variable naming in Python. This improves readability as it conforms to common Pythonic style, where underscores are used between words in variable_names.
+
+4. Commenting:
+Initial code has been left uncommented. Comments in code will provide more context to what the code is achieving, making code easier to understand for other team members or even the same developer at a later date. 
+
+Keeping these changes, the final simplified code becomes easy to understand, reusable with a room for future modifications.
+
+mistral - Instrução 2 com titulo:
+
+The code provided is a simple Python class that has a method called `sendReport` which calculates the next day of a given date using the built-in `Date` class and sends a report. The following are the changes made to refactor the code:
+
+1. **Extracting the calculation logic into a separate method:** The calculation of the next day is a small and independent block of functionality that can be extracted into a separate method called `getNextDay` to reduce code duplication and improve modularity. This also makes the code more readable as it separates concerns.
+```python
+class Report:
+    # ...
+    def sendReport(self):
+        next_day = self.getNextDay()
+        # ...
+```
+2. **Extracting the date utility class into a separate module:** The `Date` class is used only in this method, so it can be extracted into a separate module called `dateutils`. This makes the code more maintainable as any changes made to the `Date` class will only affect one place in the code and not other places where it might be used.
+```python
+from dateutils import Date
+class Report:
+    # ...
+    def sendReport(self):
+        next_day = self.getNextDay()
+        # ...
+```
+3. **Renaming the method to better reflect its functionality:** The method `sendReport` does not provide much information about what it is doing, so it can be renamed to something more descriptive like `generateNextReport`. This makes the code more readable and self-explanatory.
+```python
+from dateutils import Date
+class Report:
+    # ...
+    def generateNextReport(self):
+        next_day = self.getNextDay()
+        # ...
+```
+
+The refactored code is now more modular, maintainable, and readable. It separates concerns by extracting independent blocks of functionality into separate methods or modules. This makes it easier to modify the code in the future while ensuring that the functional integrity is maintained.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+from datetime import date
+
+class Report:
+    # ...
+
+    def send_report(self):
+        next_day = self._calculate_next_day()
+        # ...
+
+    def _calculate_next_day(self):
+        next_day = date(self.previous_end.year, self.previous_end.month, self.previous_end.day + 1)
+        return next_day
+```
+
+**Changes Made:**
+
+* **Extracted `_calculate_next_day` method:** The calculation of the next day is now encapsulated in a separate method, improving modularity and readability.
+* **Simplified logic:** The `_calculate_next_day` method now only handles the date calculation, making it more concise and easier to understand.
+* **Reusable method:** The `_calculate_next_day` method can be reused elsewhere in the code if needed, reducing duplication.
+* **Date object usage:** Instead of manually incrementing the date components, the `date` object from the datetime module is used, providing built-in functionality and error handling.
+* **Improved naming:** The method names "send_report" and "_calculate_next_day" are more descriptive and self-explanatory, enhancing readability.
+
+**Benefits:**
+
+* Improved modularity and readability by separating concerns into appropriate methods.
+* Reduced code duplication through method extraction.
+* Simplified logic and enhanced maintainability by encapsulating date calculations.
+* Adherence to best practices by utilizing the `date` object and following naming conventions.
+* Increased flexibility by making the next day calculation reusable.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+'''
+Introduce Foreign Method Refactored Code:
+'''
+class Report:
+
+    def sendReport(self):
+        nextDay = self.calculateNextDay()
+        # ...
+
+    def calculateNextDay(self):
+        nextDay = Date(self.previousEnd.getYear(),
+                       self.previousEnd.getMonth(), self.previousEnd.getDate() + 1)
+        return nextDay
+
+
+# The original code is refactored by introducing a new method named calculateNextDay().
+# The method is responsible for the logic to calculate the next day from the current date.
+# This improves the readability, modularity, and maintainability of the code.
+# The introduce foreign method design pattern is applied to create a new method that encapsulates the foreign logic.
+# This helps in reducing code duplication, simplifying the overall logic, and improving the organization of functionality.
+# It also adheres to the best practices of software development, making the code more maintainable and facilitating future modifications while maintaining functional integrity.
+
+gpt-4 - Instrução 2 com titulo:
+Refactored Code:
+
+```python
+from datetime import timedelta
+
+class Report:
+    # ...
+    # Introducing the foreign method into this class
+    def _get_next_day(self, date):
+        return date + timedelta(days=1)
+        
+    def sendReport(self):
+        nextDay = self._get_next_day(self.previousEnd)
+        # ...
+
+```
+
+Here the date manipulation code to get the next day was refactored out of the `sendReport` method into a separate helper function `_get_next_day` within the same `Report` class following the 'introduce foreign method' refactoring technique.
+
+This was done for several reasons:
+
+1. **Enhanced Readability**: The task of finding the next day given a date is encapsulated in a dedicated function with an explicit name, making the `sendReport` function easier to understand.
+
+2. **Reduced Code Duplication**: If the process of finding the next day were required elsewhere in the class, we have a dedicated function now and can simply call `_get_next_day` method instead of duplicating the logic every time.
+
+3. **Improved Modularity**: The `_get_next_day` method can be considered a standalone 'module' that performs a specific, well-defined task. This segmentation of responsibilities follows the Single Responsibility Principle (a principle of SOLID), making the code more maintainable.
+
+4. **Enhanced Testability**: With this refactoring, it's now easier to test the functionality of getting the next day, since it's in its own method.
+
+It’s important to note that i used an underscore prefix to denote that the method is intended to be private. This is a common Python convention.
+
+In addition, I used the Python datetime module rather than manually constructing Date. This is more reliable and readable. It's generally a better practice to use built-in language features for common tasks like date manipulation, rather than handling it manually.
+

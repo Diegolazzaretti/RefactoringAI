@@ -1,0 +1,6 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def calculate_discounted_price(original_price, quantity):
+    if quantity > 50:
+        original_price -= 2
+    return original_price

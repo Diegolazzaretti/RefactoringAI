@@ -1,0 +1,385 @@
+Código Original (replace-magic-number-with-symbolic-constant):
+
+def potentialEnergy(mass, height):
+    return mass * height * 9.81
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+# Calculate the potential energy of an object
+def potential_energy(mass: float, height: float) -> float:
+    """Calculates the potential energy of an object given its mass and height."""
+    # Constants
+    GRAVITY_ACCELERATION = 9.81
+    
+    # Calculation
+    return mass * GRAVITY_ACCELERATION * height
+
+gemini-pro - Instrução 1 sem titulo:
+**Original code:**
+
+```python
+def potentialEnergy(mass, height):
+    return mass * height * 9.81
+```
+
+**Refactored code:**
+
+**1. Introducing a helper function for calculating the gravitational acceleration:**
+
+```python
+def gravitational_acceleration():
+    return 9.81
+```
+
+**2. Using the helper function in the `potentialEnergy` function:**
+
+```python
+def potentialEnergy(mass, height):
+    return mass * height * gravitational_acceleration()
+```
+
+**3. Explicitly naming the constants:**
+
+```python
+MASS_CONSTANT = 9.81
+
+def potentialEnergy(mass, height):
+    return mass * height * MASS_CONSTANT
+```
+
+**4. Adding type hints:**
+
+```python
+from typing import Union, Tuple
+
+MASS_CONSTANT = 9.81
+
+def potentialEnergy(mass: Union[int, float], height: Union[int, float]) -> Union[int, float]:
+    return mass * height * MASS_CONSTANT
+```
+
+**5. Adding a docstring:**
+
+```python
+from typing import Union, Tuple
+
+MASS_CONSTANT = 9.81
+
+def potentialEnergy(mass: Union[int, float], height: Union[int, float]) -> Union[int, float]:
+    """Calculates the potential energy of a body with mass `mass` and height `height`.
+
+    Args:
+        mass (Union[int, float]): Mass of the body (kg)
+        height (Union[int, float]): Height of the body (m)
+
+    Returns:
+        Union[int, float]: Potential energy (J)
+    """
+
+    return mass * height * MASS_CONSTANT
+```
+
+**Explanation:**
+
+* The original code was not modular, as it combined the calculation of gravitational acceleration with the calculation of potential energy. By introducing a helper function for gravitational acceleration, we make the code more modular and extensible.
+* Explicitly naming the constants and adding type hints enhances the readability and maintainability of the code.
+* Adding a docstring provides documentation for the function, making it easier for other developers to understand its usage.
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def calculate_potential_energy(mass, height):
+    gravity = 9.81
+    return mass * height * gravity
+
+gpt-4 - Instrução 1 sem titulo:
+The given code is already quite readable and modular. It defines a function to calculate the potential energy, a typical formula in Physics. The code is simple, and it does a single, clear task, and the variable names are clear and intuitive. Therefore, it does not require much refactoring. However, we could add docstrings to enhance the readability further:
+
+```python
+def potential_energy(mass: float, height: float) -> float:
+    """
+    This function calculates the potential energy of an object of a given mass and at a certain height.
+    
+    Parameters:
+    mass (float): The mass of the object in kilograms.
+    height (float): The height of the object in m.
+    
+    Returns:
+    float: The potential energy of an object in Joules.
+    """
+    GRAVITY = 9.81  # Acceleration due to gravity in m/s^2
+    return mass * height * GRAVITY
+```
+
+This refactoring includes:
+- Renaming the function and parameters to follow Python's PEP 8 naming conventions
+- Adding a docstring to explain what the function does, its parameters, and return value
+- Defining a constant for gravity to increase readability and maintainability
+
+mistral - Instrução 1 com titulo:
+
+To enhance the readability, modularity, and maintainability of the code, we can make use of symbolic constants to replace hardcoded values. Here's one way we could refactor the code:
+
+```python
+import math
+
+# Define a constant for acceleration due to gravity
+GRAVITY_ACCELERATION = 9.81
+
+def potentialEnergy(mass, height):
+    return mass * height * GRAVITY_ACCELERATION
+```
+
+In this refactored code, we've defined a constant `GRAVITY_ACCELERATION` and assigned it the value of `9.81`. This makes the code more modular and maintainable by separating concerns and encapsulating the constant in its own variable. The function `potentialEnergy()` can now be easily modified to use a different value for acceleration due to gravity without having to change multiple lines of code. Additionally, using symbolic constants improves the readability of the code by making it clear what the constant represents.
+
+gemini-pro - Instrução 1 com titulo:
+```python
+import constants
+
+def potential_energy(mass: float, height: float) -> float:
+    """
+    Calculates the potential energy of an object given its mass and height.
+
+    Args:
+        mass: The mass of the object in kilograms.
+        height: The height of the object above the ground in meters.
+
+    Returns:
+        The potential energy of the object in joules.
+    """
+    return mass * height * constants.GRAVITATIONAL_CONSTANT
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+POTENTIAL_ENERGY_CONSTANT = 9.81
+
+def potential_energy(mass, height):
+    return mass * height * POTENTIAL_ENERGY_CONSTANT
+
+gpt-4 - Instrução 1 com titulo:
+Here, we will replace the magic number 9.81 with a constant that explains its purpose:
+```python
+GRAVITATIONAL_CONSTANT = 9.81
+
+def calculate_potential_energy(mass, height):
+    return mass * height * GRAVITATIONAL_CONSTANT
+```
+In this refactored code, we replaced the magic number 9.81 with a symbolic constant GRAVITATIONAL_CONSTANT. Moreover, renamed the function from 'potentialEnergy' to 'calculate_potential_energy' for clarity purpose. This enhances readability since someone reading the code can easily understand what the magic number was used for. It also improves modularity as the symbolic constant can be changed to a different value in one place if needed, without having to scan through the entire code base for all instances of 9.81. Finally, maintainability is improved as it will be easier to understand and change the code in future.
+
+mistral - Instrução 2 sem titulo:
+The current implementation of the function `potentialEnergy` calculates the potential energy of an object based on its mass and the height it has fallen from. However, this code can be improved in terms of modularity, maintainability, and readability by using a design pattern such as the Singleton pattern.
+
+The Singleton pattern ensures that a class has only one instance and provides a global point of access to it. This allows for better control over the state of the object and helps to reduce code duplication.
+
+To implement the Singleton pattern in this scenario, we can create a separate module called `physics` with a file named `constants.py`. This module will contain all the constants used throughout the application. Within this module, we can define a class called `PhysicsConstants` that inherits from the `metaclass.Singleton` class.
+
+Here's an example implementation of the refactored code:
+```python
+from typing import Optional
+import metaclasses
+
+class SingletonMetaclass(metaclasses.Meta):
+    _instances = {}
+    
+    def __call__(cls, *args, **kwargs):
+        instance = cls._instances.get(cls)
+        if instance is None:
+            instance = super().__call__(cls)
+            cls._instances[cls] = instance
+        return instance
+
+class PhysicsConstants(SingletonMetaclass):
+    @staticmethod
+    def get_instance() -> "PhysicsConstants":
+        """
+        Returns an instance of PhysicsConstants.
+        """
+        return SingletonMetaclass.__get_instance__("PhysicsConstants")
+    
+    def __init__(self, *args, **kwargs):
+        """
+        Initializes the instance variables for PhysicsConstants.
+        """
+        self._gravity = 9.81
+
+    @property
+    def gravity(self) -> float:
+        """
+        Returns the value of gravity constant.
+        """
+        return self._gravity
+
+def potential_energy(mass: Optional[float] = None, height: Optional[float] = None) -> Optional[float]:
+    """
+    Calculates the potential energy of an object based on its mass and height it has fallen from.
+    
+    :param mass: The mass of the object in kilograms. Defaults to None.
+    :param height: The height the object has fallen from in meters. Defaults to None.
+    :return: The potential energy in joules or None if any of the inputs is missing.
+    """
+    if not (mass and height):
+        return None
+    
+    physics_constants = PhysicsConstants.get_instance()
+    return mass * height * physics_constants.gravity
+```
+In this refactored code, we have defined a new `PhysicsConstants` class that inherits from the `SingletonMetaclass` class. This class contains all the constants used in the calculation of potential energy. We have also added some type hints to indicate the types of inputs and outputs for the functions.
+
+We have defined two properties, `gravity` and `get_instance`, in the `PhysicsConstants` class. The `gravity` property returns the value of the gravity constant, while the `get_instance` method returns an instance of the `PhysicsConstants` class.
+
+The `potential_energy` function takes two optional parameters, `mass` and `height`, which represent the mass of the object and the height it has fallen from, respectively. It first checks if both inputs are provided, otherwise it returns None. Then, it calculates the potential energy using the values of these inputs and the gravity constant obtained from the instance of `PhysicsConstants`.
+
+In this refactored code, we have separated the calculation logic for the potential energy from the constants used in the calculation, making it more modular and maintainable. Additionally, we have used the Singleton pattern to ensure that there is only one instance of the `PhysicsConstants` class, which simplifies the creation and management of the constant object.
+
+gemini-pro - Instrução 2 sem titulo:
+```python
+def calculate_potential_energy(mass: float, height: float) -> float:
+    """Calculates the potential energy of an object.
+
+    Args:
+        mass (float): The mass of the object in kilograms.
+        height (float): The height of the object above a reference point in meters.
+
+    Returns:
+        float: The potential energy of the object in joules.
+    """
+
+    gravitational_acceleration = 9.81  # m/s²
+
+    return mass * height * gravitational_acceleration
+```
+
+**Refactoring Explanation:**
+
+1. **Improved Readability:** Renamed the function to `calculate_potential_energy` to accurately reflect its purpose.
+
+2. **Modularity:** Extracted the gravitational acceleration constant into a variable to enhance readability and maintainability.
+
+3. **Data Validation:** Added type annotations to the function parameters and return value to ensure type safety and early error detection.
+
+4. **Improved Organization:** Separated the calculation logic from the function definition for better code organization and readability.
+
+These changes enhance the code's readability, modularity, maintainability, and organization, making it easier to understand, modify, and maintain in the future.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+class PotentialEnergyCalculator:
+    GRAVITY = 9.81
+
+    def calculate(self, mass, height):
+        return mass * height * self.GRAVITY
+
+gpt-4 - Instrução 2 sem titulo:
+The provided code is actually quite simple and does not present any significant issues that would need refactoring. It already adheres to the basic principles of software development - simplicity, readability, and maintainability.
+
+However, we can still make a few refinements, one of which could be the introduction of named constants, especially if these are values that have a specific meaning and won't change throughout the application:
+
+```python
+GRAVITY = 9.81
+
+def potential_energy(mass, height):
+    return mass * height * GRAVITY
+```
+
+Changes Made:
+
+1. Created a constant GRAVITY and replaced the magic number 9.81 with it. This makes it easier to understand and follow what the code is doing.
+
+2. Renamed `potentialEnergy` to `potential_energy` following the Python's naming conventions. Python follows snake case (_lowercase_with_underscores_) naming conventions for function names.
+
+3. Added a docstring for the function to provide a high-level understanding of the function’s purpose, its arguments, and return type. 
+
+Here's how the final code could look like:
+
+```python
+"""Module for calculating physical quantities."""
+
+GRAVITY = 9.81
+
+def potential_energy(mass: float, height: float) -> float:
+    """Calculate the potential energy of an object.
+
+    Args:
+        mass: mass of the object in kilograms.
+        height: height of the object in meters from the ground level.
+
+    Returns:
+        The potential energy of the object in joules.
+    """
+    return mass * height * GRAVITY
+
+```
+
+mistral - Instrução 2 com titulo:
+```python
+# Define a constant for the acceleration due to gravity
+GRAVITY_ACCELERATION = 9.81
+
+# Define a function to calculate potential energy based on the given mass and height
+def potentialEnergy(mass, height):
+    """Calculate the potential energy of an object at the given height."""
+    return mass * GRAVITY_ACCELERATION * height
+```
+
+gemini-pro - Instrução 2 com titulo:
+```python
+import math
+
+def potential_energy(mass: float, height: float) -> float:
+    """
+    Calculates the potential energy of an object given its mass and height.
+
+    Args:
+        mass (float): Mass of the object in kilograms.
+        height (float): Height of the object above a reference point in meters.
+
+    Returns:
+        float: Potential energy in Joules.
+    """
+
+    # Gravitational acceleration (m/s^2)
+    GRAVITATIONAL_ACCELERATION = 9.81
+
+    return mass * height * GRAVITATIONAL_ACCELERATION
+```
+
+**Refactoring Summary:**
+
+* **Refactored the code to use a symbolic constant for the gravitational acceleration.** This eliminates the "magic number" 9.81 and makes the code more readable and maintainable.
+* **Modularized the calculation by creating a separate function.** This makes it easier to reuse the potential energy calculation in other parts of the codebase.
+* **Added type annotations to the function arguments and return value.** This helps improve code readability and facilitate static type checking.
+* **Updated the function docstring to better describe its purpose and inputs/outputs.** This provides more information to the user and improves the code's documentation.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+Replace magic number with symbolic constant
+GRAVITATIONAL_CONSTANT = 9.81
+
+def potential_energy(mass, height):
+    return mass * height * GRAVITATIONAL_CONSTANT
+
+gpt-4 - Instrução 2 com titulo:
+Refactored code:
+
+```Python
+GRAVITY_CONSTANT = 9.81
+
+def calculate_potential_energy(mass: float, height: float) -> float:
+    """
+    Calculate the potential energy of an object given its mass and height
+    :param mass: Mass of the object in kg
+    :param height: Height of the object in m
+    :return: Potential energy of the object in Joules
+    """
+    return mass * height * GRAVITY_CONSTANT
+```
+
+Explanation of Changes:
+
+1. Replaced the magic number (9.81) with a symbolic constant (GRAVITY_CONSTANT) – This makes the code more understandable and maintainable because the constant's name gives the context. If this particular constant is used in multiple places, updating its value becomes easier.
+
+2. Changed the function's name from potentialEnergy to calculate_potential_energy to conform to Python's naming convention, that is, lowercase with words separated by underscores. Descriptive function names add to the readability of the code.
+
+3. Adopted Python's type hinting for the function parameters mass and height, making the expected data types explicit. The function's return type is also made explicit. This enhances code readability and is helpful in large codebases for maintaining type integrity.
+
+4. Added a docstring to describe the function's purpose, parameters, and return value for enhanced documentation. This makes the code more understandable for other developers or even your future self when they try to figure out what the method is supposed to do.
+
+By following these small but significant steps, we can significantly improve code maintainability, readability, and reduce potential bugs in the future. For example, when another developer steps in to work on this code, they would be immediately aware of the purpose of the function, what parameters it needs, the type of those parameters, and what it returns. So, we are promoting a less error-prone environment.
+

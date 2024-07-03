@@ -1,0 +1,25 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Refactored Code:
+
+```python
+def withdraw(self, amount):
+    if self.has_sufficient_funds(amount):
+        self.subtract_from_balance(amount)
+        return 0
+    else:
+        return -1
+
+def has_sufficient_funds(self, amount):
+    return amount <= self.balance
+
+def subtract_from_balance(self, amount):
+    self.balance -= amount
+```
+
+Here's what I have done:
+
+- I introduced the `has_sufficient_funds` method for checking if the account balance is sufficient. This can be used elsewhere and it makes the intent of the check much clearer.
+- The operation to subtract the amount from `self.balance` is extracted to `subtract_from_balance` method. If needed elsewhere, reusability and remodelation become efficient. 
+- It's not directly related to modularity, but also note that I used `<=` in the conditional. This way, if the withdrawal amount is exactly equal to the balance, it's still considered to be sufficient. Based on your need, If the withdrawal amount should be strictly less than the balance, you could use `<` instead.
+- Having these separations increase maintainability where each method does a single responsibility and makes the code easier to understand and maintain.

@@ -1,0 +1,29 @@
+mistral - Instrução 2 sem titulo:
+
+
+# Extract the validation logic into a separate function
+def validate_withdrawal(amount):
+    if amount > balance:
+        return -1
+    else:
+        return 0
+
+# Extract the update logic into a separate function
+def update_balance(amount):
+    balance -= amount
+
+# Use a lambda function to apply the validation and update logic in a single line of code
+def withdraw(self, amount):
+    result = validate_withdrawal(amount)
+    if result != 0:
+        return result
+    else:
+        update_balance(amount)
+        return 0
+
+# Initialize the balance to zero
+balance = 0
+
+# Perform a withdrawal of $50
+result = withdraw(balance, 50)
+print(result) # should output -1

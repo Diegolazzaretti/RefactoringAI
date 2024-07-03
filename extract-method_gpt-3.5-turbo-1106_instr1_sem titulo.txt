@@ -1,0 +1,9 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def print_owing(self):
+    self.print_banner()
+    self.print_details(self.name, self.get_outstanding())
+
+def print_details(self, name, amount):
+    print("name:", name)
+    print("amount:", amount)

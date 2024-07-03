@@ -1,0 +1,29 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class Soldier:
+    def __init__(self, health, damage, weaponStatus):
+        self.health = health
+        self.damage = damage
+        self.weaponStatus = weaponStatus
+
+    def getDamage(self):
+        return self.damage
+
+    def isWeaponReady(self):
+        return self.weaponStatus > 0
+
+    def reduceWeaponStatus(self):
+        self.weaponStatus -= 1
+
+    def isAlive(self):
+        return self.health > 0
+
+    def takeDamage(self, damage):
+        self.health -= damage
+
+    def attack(self, enemy):
+        if self.isWeaponReady():
+            enemy.takeDamage(self.damage)
+            self.reduceWeaponStatus()
+
+# By refactoring this code, we have focused on creating a well-defined and cohesive class with a single responsibility, making it easier to read, understand, and maintain. We have also defined all required methods within the class, encapsulating the logic and optimizing the implementation. We have made the code more modular and reusable by factoring out the logic related to weapon status and damage. We have also applied the Single Responsibility Principle and the Separation of Concerns design principles to create a cleaner and more cohesive design.

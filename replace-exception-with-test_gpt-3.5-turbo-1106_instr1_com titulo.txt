@@ -1,0 +1,7 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+def get_value_for_period(period_number):
+    try:
+        return values[period_number]
+    except IndexError:
+        return 0

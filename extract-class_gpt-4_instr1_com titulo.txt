@@ -1,0 +1,46 @@
+gpt-4 - Instrução 1 com titulo:
+
+Here is the refactored version. The health, damage and weapon status are encapsulated in their own classes to create a more modular design and promote readability and maintainability.
+
+```python
+class Health:
+    def __init__(self):
+        self._health = 0
+
+    def get_health(self):
+        return self._health
+
+    def set_health(self, amount):
+        self._health = amount
+
+
+class Weapon:
+    def __init__(self):
+        self._damage = 0
+        self._status = 0
+
+    def get_status(self):
+        return self._status
+
+    def set_status(self, status):
+        self._status = status
+
+    def get_damage(self):
+        return self._damage
+
+    def set_damage(self, damage):
+        self._damage = damage
+
+
+class Soldier:
+    def __init__(self):
+        self._health = Health()
+        self._weapon = Weapon()
+        
+    def get_damage(self):
+        return self._weapon.get_damage()
+
+    def attack(self):
+        # Insert code here.
+```
+This refactoring allows more granular control and modification of the components (Health and Weapon) of a Soldier. It is also easy to understand as the responsibilities of Soldier, Health, and Weapon are clearly separated. This code is also more maintainable as each class can be updated and modified independently.

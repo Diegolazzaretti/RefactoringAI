@@ -1,0 +1,14 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class Employee:
+    def __init__(self, name, employee_id):
+        self.name = name
+        self.employee_id = employee_id
+
+class Manager(Employee):
+    def __init__(self, name, employee_id, grade):
+        super().__init__(name, employee_id)
+        self.grade = grade
+    # ...
+
+The refactored code improves readability, modularity, and maintainability by creating a separate Employee class and using inheritance to create the Manager class. This reduces code duplication and simplifies the logic by separating the common attributes and behaviors of all employees into the Employee class, and the specific attributes and behaviors of managers into the Manager class. This design pattern also ensures that future modifications can be made easily, as changes to the Employee class will automatically apply to the Manager class. Finally, the refactored code adheres to the best practices of software development by clearly organizing the classes and their attributes, facilitating future modifications while maintaining functional integrity.

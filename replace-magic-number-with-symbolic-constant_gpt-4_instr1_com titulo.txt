@@ -1,0 +1,10 @@
+gpt-4 - Instrução 1 com titulo:
+
+Here, we will replace the magic number 9.81 with a constant that explains its purpose:
+```python
+GRAVITATIONAL_CONSTANT = 9.81
+
+def calculate_potential_energy(mass, height):
+    return mass * height * GRAVITATIONAL_CONSTANT
+```
+In this refactored code, we replaced the magic number 9.81 with a symbolic constant GRAVITATIONAL_CONSTANT. Moreover, renamed the function from 'potentialEnergy' to 'calculate_potential_energy' for clarity purpose. This enhances readability since someone reading the code can easily understand what the magic number was used for. It also improves modularity as the symbolic constant can be changed to a different value in one place if needed, without having to scan through the entire code base for all instances of 9.81. Finally, maintainability is improved as it will be easier to understand and change the code in future.

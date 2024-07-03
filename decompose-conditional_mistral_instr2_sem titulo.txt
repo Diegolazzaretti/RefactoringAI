@@ -1,0 +1,27 @@
+mistral - Instrução 2 sem titulo:
+
+The code provided checks the season and calculates the corresponding rate for a given quantity. The logic of the code can be simplified by creating two separate functions to calculate charges based on winter and summer rates respectively. This approach reduces code duplication and improves modularity by breaking down a complex logic into smaller, more manageable units.
+
+Here's the refactored code:
+
+```python
+def calculate_winter_charge(quantity):
+    return quantity * winterRate + winterServiceCharge
+
+def calculate_summer_charge(quantity):
+    return quantity * summerRate
+
+def calculate_charge(date, quantity):
+    if date.before(SUMMER_START) or date.after(SUMMER_END):
+        return calculate_winter_charge(quantity)
+    else:
+        return calculate_summer_charge(quantity)
+```
+
+The changes made to the code are as follows:
+
+1. A separate function `calculate_winter_charge()` has been created to calculate charges based on winter rates, and a similar function `calculate_summer_charge()` has been created to handle summer rates.
+2. The original `if-else` statement has been removed, and the `calculate_charge()` function now takes in two arguments: date and quantity. 
+3. Inside the `calculate_charge()` function, a check is performed on the date to determine whether it falls within winter or summer season using the `if-else` block. The appropriate function (i.e., `calculate_winter_charge()` or `calculate_summer_charge()`) is then called based on the result of this check and the calculated charge is returned.
+
+These changes improve the code by breaking it down into smaller, more manageable functions that are easier to read and understand. It also removes duplication and makes the code more modular and maintainable.

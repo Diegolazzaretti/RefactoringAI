@@ -1,0 +1,22 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+class Order:
+    # ...
+
+    def calculate_primary_base_price(self):
+        # Perform computation for primary base price
+
+    def calculate_secondary_base_price(self):
+        # Perform computation for secondary base price
+
+    def calculate_tertiary_base_price(self):
+        # Perform computation for tertiary base price
+
+    def price(self):
+        primary_base_price = self.calculate_primary_base_price()
+        secondary_base_price = self.calculate_secondary_base_price()
+        tertiary_base_price = self.calculate_tertiary_base_price()
+
+        # Perform further computation using the base prices
+```

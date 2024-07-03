@@ -1,0 +1,29 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here's the refactored code using polymorphism. I've placed each bird type in its own subclass with its own getSpeed() method. It's more readable because each bird type's speed calculation logic is separated into its own class. It's modular because you can add, remove, or modify bird types without changing the others. It's maintainable because each bird type's speed calculation logic is in one place, so it's easy to find and fix if there's a bug.
+
+```python
+class Bird:
+    # ...
+    def getSpeed(self):
+        raise NotImplementedError("This method needs to be defined in a subclass.")
+
+class EuropeanBird(Bird):
+    def getSpeed(self):
+        return self.getBaseSpeed()
+        
+class AfricanBird(Bird):
+    def getSpeed(self):
+        return self.getBaseSpeed() - self.getLoadFactor() * self.numberOfCoconuts
+
+class NorwegianBlueBird(Bird):
+    def getSpeed(self):
+        return 0 if self.isNailed else self.getBaseSpeed(self.voltage)
+
+def getBirdSpeed(bird):
+    return bird.getSpeed()
+```
+
+Now, you may add as many variations of Bird as you need, and simply implement the appropriate getSpeed() function. The code becomes easier to develop as you never have to touch existing, working code.
+
+Also, any other code only needs to call the getBirdSpeed() function, and as a result it doesn't need to worry about the implementation details of determining the speed of each bird. It only needs to know that it will get the speed of given bird. This is an example of encapsulation, as the inner workings of each bird's speed are hidden from the rest of the code.

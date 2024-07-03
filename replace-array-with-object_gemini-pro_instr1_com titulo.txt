@@ -1,0 +1,12 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+# Define a class to represent a row of data
+class Row:
+    def __init__(self, team, points):
+        self.team = team
+        self.points = points
+
+# Create a new row object
+row = Row("Liverpool", 15)
+```

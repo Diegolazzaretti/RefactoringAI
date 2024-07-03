@@ -1,0 +1,9 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+class PizzaDelivery:
+    # ...
+    def get_rating(self):
+        return 2 if self.more_than_five_late_deliveries() else 1
+
+    def more_than_five_late_deliveries(self):
+        return self.number_of_late_deliveries > 5

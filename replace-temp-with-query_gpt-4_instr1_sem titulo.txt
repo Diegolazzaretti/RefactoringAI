@@ -1,0 +1,24 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Below is the refactored version of the provided code. The function is now divided into smaller sub-functions that solely focus on calculating the discount and the final price based on the quantity, item's price, and the base price.
+
+```python
+def calculate_discount(base_price):
+    discount_rate = 0.05 if base_price > 1000 else 0.02
+    return base_price * discount_rate
+
+def calculate_base_price(quantity, item_price):
+    return quantity * item_price
+
+def calculate_total(quantity, item_price):
+    base_price = calculate_base_price(quantity, item_price)
+    discount = calculate_discount(base_price)
+    return base_price - discount
+```
+In the refactored code:
+
+- The `calculate_base_price` function is responsible for calculating the base price.
+- The `calculate_discount` function calculates the discount rate based on the base price condition.
+- The `calculate_total` function is responsible for the total price after the discount. 
+
+This improves code readability, modularity, and simplifies future modifications since each function now has a single responsibility.

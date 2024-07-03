@@ -1,0 +1,21 @@
+mistral - Instrução 1 com titulo:
+
+# One way to refactor the given code is to move the condition inside an if statement and break it into smaller functions with clear parameters and return values for better modularity and readability.
+def apply_discount(inputVal, quantity):
+    """Applies discount based on quantity"""
+    if quantity > 50:
+        inputVal -= 2
+    return inputVal
+
+def is_quantity_eligible_for_discount(quantity):
+    """Returns True if the quantity is greater than or equal to 50, else False"""
+    return quantity >= 50
+
+def discounted_price(inputVal, quantity):
+    """Calculates the discounted price based on inputVal and quantity"""
+    if is_quantity_eligible_for_discount(quantity):
+        return apply_discount(inputVal, quantity)
+    else:
+        return inputVal
+
+# Usage: discounted_price(inputVal, quantity)

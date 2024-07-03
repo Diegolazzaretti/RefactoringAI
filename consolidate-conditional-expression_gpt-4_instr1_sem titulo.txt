@@ -1,0 +1,26 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here is a refactored version of the code. I extracted the condition checks into separate functions with descriptive names.
+
+```python
+def isEligibleForDisability(seniority, monthsDisabled, isPartTime):
+    return hasRequiredSeniority(seniority) and not isExcessivelyDisabled(monthsDisabled) and not isPartTimeWorker(isPartTime)
+
+def hasRequiredSeniority(seniority):
+    return seniority >= 2
+
+def isExcessivelyDisabled(monthsDisabled):
+    return monthsDisabled > 12
+
+def isPartTimeWorker(isPartTime):
+    return isPartTime
+
+def computeDisabilityAmount():
+    if isEligibleForDisability():
+        # Compute the disability amount.
+        # ...
+    else:
+        return 0
+``` 
+
+Please note, to successfully run this new refactored code, you'll need to properly pass the parameters (`seniority`, `monthsDisabled`, `isPartTime`) to the `isEligibleForDisability()` function call, and to the `computeDisabilityAmount()` function itself if needed based on the desired use in project.

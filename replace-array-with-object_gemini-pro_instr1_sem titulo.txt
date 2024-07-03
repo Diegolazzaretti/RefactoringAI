@@ -1,0 +1,32 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+def create_row():
+    """
+    Creates a row with two elements set to None.
+
+    Returns:
+        list: A row with two elements set to None.
+    """
+    return [None] * 2
+
+
+def set_row_values(row, team_name, points):
+    """
+    Sets the values of a row.
+
+    Args:
+        row (list): The row to set the values for.
+        team_name (str): The name of the team.
+        points (str): The number of points the team has.
+    """
+    row[0] = team_name
+    row[1] = points
+
+
+# Create a row
+row = create_row()
+
+# Set the values of the row
+set_row_values(row, "Liverpool", "15")
+```

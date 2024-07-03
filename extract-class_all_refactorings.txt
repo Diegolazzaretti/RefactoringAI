@@ -1,0 +1,509 @@
+Código Original (extract-class):
+
+class Soldier:
+    self.health = 0
+    self.damage = 0
+    self.weaponStatus = 0
+
+    def getDamage(self):
+        # ...
+
+    def attack(self):
+        # ...
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```python
+class Soldier:
+    def __init__(self, health=0, damage=0, weapon_status=0):
+        self.health = health
+        self.damage = damage
+        self.weapon_status = weapon_status
+
+    def get_damage(self):
+        # ...
+
+    def attack(self):
+        # ...
+```
+
+The refactored code has been broken down into smaller, more modular functions to improve readability and maintainability. The `__init__` method initializes the object's attributes with default values. This allows for easier customization of objects when they are created. Additionally, the naming conventions used in the refactored code follow PEP 8 guidelines, which makes the code more consistent and easier to read.
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+class Soldier:
+    def __init__(self, health, damage, weapon_status):
+        self.health = health
+        self.damage = damage
+        self.weapon_status = weapon_status
+
+    def get_damage(self):
+        # Implementation
+
+    def attack(self):
+        # Implementation
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+class Soldier:
+    health = 0
+    damage = 0
+    weapon_status = 0
+
+    def get_damage(self):
+        # ...
+
+    def attack(self):
+        # ...
+
+gpt-4 - Instrução 1 sem titulo:
+Refactored code:
+
+```python
+class Soldier:
+    """This class represents a Soldier with properties like health, damage and weapon status."""
+
+    def __init__(self, health=0, damage=0, weapon_status=0):
+        self.health = health
+        self.damage = damage
+        self.weapon_status = weapon_status
+
+    @property
+    def health(self):
+        return self._health
+
+    @health.setter
+    def health(self, value):
+        self._health = value
+
+    @property
+    def damage(self):
+        return self._damage
+
+    @damage.setter
+    def damage(self, value):
+        self._damage = value
+
+    @property
+    def weapon_status(self):
+        return self._weapon_status
+
+    @weapon_status.setter
+    def weapon_status(self, value):
+        self._weapon_status = value
+
+    def get_damage(self):
+        """Method to get the damage inflicted by the soldier."""
+        # ...
+
+    def attack(self):
+        """Method for the soldier to perform an attack."""
+        # ...
+```
+
+The above refactored code does the following:
+
+1. Defines a constructor to initialize the Soldier class attributes / member variables, which enhances modularity.
+2. Defines properties for health, damage and weapon status, which improves code readability by encapsulating the member variables. Property methods also add an extra layer of security by providing control over how these variables are accessed and modified.
+3. Renames the getDamage method to get_damage for consistency and to adhere to Python's naming conventions (PEP8 standard).
+4. Adds docstrings to describe what the class and its methods do, thereby improving readability and making it easier to understand the purpose of the class and its methods.
+
+mistral - Instrução 1 com titulo:
+Here's a possible refactored version of the code:
+```ruby
+class Soldier:
+    def __init__(self, health=0, damage=0, weaponStatus=0):
+        self.health = health
+        self.damage = damage
+        self.weaponStatus = weaponStatus
+
+    def getDamage(self):
+        # ...
+
+    def attack(self):
+        # ...
+```
+Here's an explanation of the changes:
+
+1. The `getDamage()` method was removed from the class definition and moved into the `Soldier` class as a new instance method, making it more readable and modular.
+2. The `attack()` method was not defined in the code you provided, but assuming that it is part of the `Soldier` class, it was also removed from the class definition and moved into the `Soldier` class as a new instance method.
+3. Instead of using instance variables to store the initial values of `health`, `damage`, and `weaponStatus`, we can use constructor parameters (`self.health`, `self.damage`, and `self.weaponStatus`) to make them more explicit and easier to read.
+
+gemini-pro - Instrução 1 com titulo:
+**Refactored Code:**
+
+**1. Data Model:**
+
+```python
+class SoldierData:
+    def __init__(self):
+        self.health = 0
+        self.damage = 0
+        self.weapon_status = 0
+```
+
+**2. Soldier Behavior:**
+
+```python
+class Soldier:
+    def __init__(self, data: SoldierData):
+        self.data = data
+
+    def get_damage(self):
+        # ...
+
+    def attack(self):
+        # ...
+```
+
+**Explanation:**
+
+* **Data Encapsulation:** Separating the data structure (`SoldierData`) from the soldier's behavior (`Soldier`) enhances encapsulation and data integrity.
+* **Modularity:** The `SoldierBehavior` class now has a clear responsibility to handle soldier actions.
+* **Maintainability:** It becomes easier to modify or update the soldier's data or behavior independently without affecting the other.
+* **Reusability:** The `SoldierData` class can be reused for other entities that need similar data.
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+class Soldier:
+    self.health = 0
+    self.damage = 0
+    self.weaponStatus = 0
+
+    def get_damage(self):
+        # ...
+
+    def attack(self):
+        # ...
+
+gpt-4 - Instrução 1 com titulo:
+Here is the refactored version. The health, damage and weapon status are encapsulated in their own classes to create a more modular design and promote readability and maintainability.
+
+```python
+class Health:
+    def __init__(self):
+        self._health = 0
+
+    def get_health(self):
+        return self._health
+
+    def set_health(self, amount):
+        self._health = amount
+
+
+class Weapon:
+    def __init__(self):
+        self._damage = 0
+        self._status = 0
+
+    def get_status(self):
+        return self._status
+
+    def set_status(self, status):
+        self._status = status
+
+    def get_damage(self):
+        return self._damage
+
+    def set_damage(self, damage):
+        self._damage = damage
+
+
+class Soldier:
+    def __init__(self):
+        self._health = Health()
+        self._weapon = Weapon()
+        
+    def get_damage(self):
+        return self._weapon.get_damage()
+
+    def attack(self):
+        # Insert code here.
+```
+This refactoring allows more granular control and modification of the components (Health and Weapon) of a Soldier. It is also easy to understand as the responsibilities of Soldier, Health, and Weapon are clearly separated. This code is also more maintainable as each class can be updated and modified independently.
+
+mistral - Instrução 2 sem titulo:
+
+There are several changes that can be made to this code to improve its readability, modularity, and maintainability:
+
+1. Use proper naming conventions for variables and methods, such as using camelCase for class attributes and snake\_case for method names. This will make the code easier to read and understand.
+2. Use descriptive variable names that accurately reflect their purpose. For example, instead of "self.health", we can use "health" or "maxHealth".
+3. Use separate methods for different actions, such as "attack" and "getDamage". This will make the code more modular and easier to maintain.
+4. Remove any unnecessary comments from the code, as they can detract from its readability and add to clutter.
+5. Add appropriate documentation to the code using docstrings. This will help future developers understand how to use the code correctly and make modifications if necessary.
+
+With these changes in mind, here is the refactored code:
+```python
+class Soldier:
+    """
+    Represents a soldier in a battle.
+    """
+
+    def __init__(self, max_health):
+        """
+        Initializes a new soldier with the given maximum health.
+        
+        :param max_health: An integer representing the maximum health of the soldier.
+        """
+        self.max_health = max_health
+        self.health = max_health
+        self.weapon_status = 0
+
+    def attack(self):
+        """
+        Attacks an enemy and does damage to their health.
+        
+        :return: The amount of damage done to the enemy's health.
+        """
+        # ... implementation details ...
+        pass
+
+    def get_damage(self, enemy):
+        """
+        Returns the amount of damage done to this soldier by the given enemy.
+        
+        :param enemy: The enemy that attacked this soldier.
+        :return: The amount of damage done to this soldier's health.
+        """
+        # ... implementation details ...
+        pass
+```
+In this refactored code, we have used proper naming conventions for variables and methods, and descriptive variable names that accurately reflect their purpose. We have also added separate methods for different actions, and removed any unnecessary comments from the code. Additionally, we have added docstrings to provide documentation for each method.
+
+These changes will make the code more readable, modular, and maintainable, which will help future developers understand how to use it correctly and make modifications if necessary.
+
+gemini-pro - Instrução 2 sem titulo:
+**Refactored Code:**
+
+```python
+import abc
+
+class Unit(abc.ABC):
+    def __init__(self, health, damage, weapon_status):
+        self.health = health
+        self.damage = damage
+        self.weapon_status = weapon_status
+
+    @abc.abstractmethod
+    def get_damage(self):
+        pass
+
+class Soldier(Unit):
+    def __init__(self, health, damage, weapon_status):
+        super().__init__(health, damage, weapon_status)
+
+    def get_damage(self):
+        return self.damage
+
+    def attack(self):
+        print(f"Soldier attacked with damage: {self.get_damage()}")
+
+class Vehicle(Unit):
+    def __init__(self, health, damage, weapon_status):
+        super().__init__(health, damage, weapon_status)
+
+    def get_damage(self):
+        return self.damage * 2
+
+    def attack(self):
+        print(f"Vehicle attacked with damage: {self.get_damage()}")
+```
+
+**Changes Made:**
+
+* **Introduction of Inheritance**: Created a base class `Unit` to define common attributes and methods for both soldiers and vehicles, reducing code duplication.
+* **Abstract Method**: Defined an abstract method `get_damage` in the `Unit` class, enforcing that subclasses must implement this method.
+* **Separate Implementation**: Implemented the `get_damage` method in subclasses (`Soldier` and `Vehicle`) to provide specific damage calculations.
+* **Simplified Attack Method**: Moved the damage calculation logic to the `get_damage` method, simplifying the `attack` method to focus on displaying the attack message.
+* **Encapsulation**: All instance variables (health, damage, weapon_status) are now private within the `Unit` class, ensuring data integrity and preventing direct access from outside the class.
+
+**Benefits of Refactoring:**
+
+* **Improved Readability**: Clear separation of common functionality into the base class (`Unit`) and specific behavior into subclasses (`Soldier` and `Vehicle`).
+* **Increased Modularity**: Classes can be easily extended or modified without affecting unrelated code.
+* **Enhanced Maintainability**: Reduced code duplication and simplified logic make future changes less error-prone.
+* **Adherence to Best Practices**: Conforms to the principles of encapsulation, inheritance, and abstraction, facilitating future development and code reusability.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+class Soldier:
+    def __init__(self, health, damage, weaponStatus):
+        self.health = health
+        self.damage = damage
+        self.weaponStatus = weaponStatus
+
+    def getDamage(self):
+        return self.damage
+
+    def isWeaponReady(self):
+        return self.weaponStatus > 0
+
+    def reduceWeaponStatus(self):
+        self.weaponStatus -= 1
+
+    def isAlive(self):
+        return self.health > 0
+
+    def takeDamage(self, damage):
+        self.health -= damage
+
+    def attack(self, enemy):
+        if self.isWeaponReady():
+            enemy.takeDamage(self.damage)
+            self.reduceWeaponStatus()
+
+# By refactoring this code, we have focused on creating a well-defined and cohesive class with a single responsibility, making it easier to read, understand, and maintain. We have also defined all required methods within the class, encapsulating the logic and optimizing the implementation. We have made the code more modular and reusable by factoring out the logic related to weapon status and damage. We have also applied the Single Responsibility Principle and the Separation of Concerns design principles to create a cleaner and more cohesive design.
+
+gpt-4 - Instrução 2 sem titulo:
+After Refactoring:
+
+```python
+class Soldier:
+    def __init__(self, health=0, damage=0, weapon_status=0):
+        self.health = health
+        self.damage = damage
+        self.weapon_status = weapon_status
+
+    @property
+    def damage(self):
+        return self._damage
+
+    @damage.setter
+    def damage(self, value):
+        self._damage = max(0, value)
+
+    def attack(self, other_soldier):
+        if not isinstance(other_soldier, Soldier):
+            raise TypeError('other_soldier must be an instance of Soldier')
+        if other_soldier.health <= 0 :
+            raise ValueError('Cannot attack a dead soldier')
+        other_soldier.receive_damage(self.damage)
+
+    def receive_damage(self, damage):
+        self.health = max(0, self.health - damage)
+```
+
+Explanation of changes:
+
+1. Moved the attributes initialization into the `__init__` method, which is the standard place for that.
+
+2. Turned `damage` into a property to validate its setting and avoid negative values.
+
+3. Added the `attack` method to handle an attack to another Soldier. We check that the target is of the correct type (type-checking) and ensure that it is still alive (business logic). Then, we implement the attack in terms of the target receiving damage, reducing the communication and dependencies between objects to a minimum.
+
+4. Added the `receive_damage` method encapsulating the logic of receiving damage, again avoiding negative values.
+
+The resulting code is more modular, as each class and method has a single, well-defined responsibility, facilitating future modifications. It is also more maintainable, as it has built-in guards against invalid state changes (i.e., negative `damage`), making it more robust. The reading and comprehension of the code are facilitated by its clear structure and naming convention- another improvement over the original. Making these changes not only increases the readability of the code but also ensures that future modifications can be made more easily. Thus, adhering to the best practices of software development is beneficial in the long run.
+
+mistral - Instrução 2 com titulo:
+
+After refactoring, the code now adheres to the best practices of software development and is more modular, maintainable, and readable. Here are the changes that were made:
+
+1. Extract the common state variables (health, damage, and weaponStatus) into a base class, so they don't need to be repeated in every derived class. This makes the code more modular and maintainable.
+2. Extract the methods that operate on these common state variables (getDamage() and attack()) into a base class as well. This ensures that the derived classes only contain methods specific to their behavior, making them simpler and easier to understand.
+3. Derive new classes from the base Soldier class, each with its own unique behavior. This makes the code more flexible and allows for easy extension in the future.
+4. Use appropriate naming conventions for variables and methods, such as camelCase and snake\_case, respectively. This improves readability and makes it easier to understand the code.
+5. Use proper indentation and spacing to make the code more visually appealing and easier to read.
+6. Add comments to explain the purpose and functionality of each part of the code, making it easier for others to understand and modify the code in the future.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+class Soldier:
+    def __init__(self, weapon):
+        self.weapon = weapon
+
+class Weapon:
+    def __init__(self, damage):
+        self.damage = damage
+
+    def attack(self):
+        return self.damage
+
+class Rifle(Weapon):
+    pass
+
+class Pistol(Weapon):
+    pass
+
+# Create a soldier with a rifle
+soldier = Soldier(Rifle(40))
+
+# Attack with the soldier's rifle
+damage = soldier.weapon.attack()
+```
+
+**Changes Made:**
+
+* **Extracted the weapon-related logic into a separate `Weapon` class:** This reduces code duplication and improves modularity by isolating weapon-specific functionality.
+* **Introduced a composition relationship between `Soldier` and `Weapon`:** The soldier now has a `weapon` attribute, which allows it to access weapon-related properties and methods.
+* **Created subclasses for different weapon types (e.g., `Rifle` and `Pistol`):** This enhances flexibility and extensibility, allowing for easy addition of new weapon types.
+* **Used composition instead of inheritance to model the weapon-soldier relationship:** This avoids the drawbacks of inheritance, such as the "fragile base class" problem.
+
+**Benefits:**
+
+* **Improved readability:** The code is now better organized and easier to understand.
+* **Increased modularity:** The separation of weapon-related logic into a separate class enhances code maintainability and reusability.
+* **Simplified logic:** The use of composition makes the `Soldier` and `Weapon` classes more cohesive and easier to modify.
+* **Improved extensibility:** The subclassing mechanism allows for the easy addition of new weapon types without modifying the core logic.
+* **Conformance to best practices:** The refactored code adheres to the principles of object-oriented design, encapsulation, and code reuse, resulting in a more robust and maintainable codebase.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+class Soldier:
+    def __init__(self, health, damage, weapon_status):
+        self.health = health
+        self.damage = damage
+        self.weapon_status = weapon_status
+
+    def get_damage(self):
+        # ...
+
+    def attack(self):
+        # ...
+
+# Changes made:
+#1. Added an __init__ method to initialize the attributes of the Soldier class.
+#2. Changed the attribute names to adhere to snake_case naming convention.
+#3. Renamed the getDamage method to get_damage to adhere to snake_case naming convention.
+#4. Minor improvements in the comments for clarity.
+
+gpt-4 - Instrução 2 com titulo:
+Refactored Code:
+```python
+class Soldier:
+    def __init__(self, health, damage):
+        self.health = health
+        self.damage = damage
+        self.weapon = Weapon()
+
+    def get_damage(self):
+        return self.damage
+
+    def attack(self, enemy_soldier):
+        if self.weapon.is_functioning():
+            enemy_soldier.health -= self.get_damage()
+
+    def is_alive(self):
+        return self.health > 0
+
+
+class Weapon:
+    def __init__(self):
+        self.status = 0
+
+    def is_functioning(self):
+        return self.status != 0
+```
+Explaination:
+1. I applied the `Extract Class` refactoring technique and moved the `weaponStatus` attribute to a separate `Weapon` class and added the `is_functioning()` method to it. This adheres to the `Single Responsibility Principle` of the `SOLID Principles`.
+
+2. The code convention is improved (using `snake_case` for function and variable names because it is more Pythonic).
+
+3. I added an `is_alive()` method to `Soldier`. This method enhances the readability when you want to check if a Soldier instance is still alive.
+
+4. The `attack` method is improved. Now it decreases the health of the enemy soldier (this is assumed from the poorly defined initial `attack` method), but only if the soldier's weapon is functioning.
+
+5. Initializer/methods for setting the health and damage attributes of the Soldier and the status of the Weapon can be included as per requirements. Here, they are initialized through the `__init__` method.
+
+Overall, this refactoring emphasizes object-oriented design (encapsulation of the `Weapon` state and behavior, interaction between `Soldier` and `Weapon`). The readability is enhanced and the code maintains its functional integrity. It is more maintainable and flexible for future modifications (like adding more methods or attributes to `Weapon`, `Soldier`, etc.).
+

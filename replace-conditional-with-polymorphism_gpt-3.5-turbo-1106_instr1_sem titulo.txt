@@ -1,0 +1,26 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+class Bird:
+    
+    def getSpeed(self):
+        if self.type == EUROPEAN:
+            return self.europeanSpeed()
+        elif self.type == AFRICAN:
+            return self.africanSpeed()
+        elif self.type == NORWEGIAN_BLUE:
+            return self.norwegianSpeed()
+        else:
+            raise Exception("Should be unreachable")
+
+    def europeanSpeed(self):
+        return self.getBaseSpeed()
+    
+    def africanSpeed(self):
+        load_factor = self.getLoadFactor()
+        return self.getBaseSpeed() - load_factor * self.numberOfCoconuts
+    
+    def norwegianSpeed(self):
+        if self.isNailed:
+            return 0
+        else:
+            return self.getBaseSpeed(self.voltage)

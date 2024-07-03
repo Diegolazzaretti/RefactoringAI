@@ -1,0 +1,29 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class Payment:
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+
+    def print_owing(self):
+        self.print_banner()
+        self.print_details()
+
+    def print_banner(self):
+        # Print banner details
+        pass
+
+    def print_details(self):
+        # Print details
+        print("name:", self.name)
+        print("amount:", self.get_outstanding())
+
+    def get_outstanding(self):
+        # Calculate and return outstanding amount
+        return self.amount
+
+# Changes made:
+# 1. Created a Payment class with __init__ method to initialize the name and amount attributes.
+# 2. The print_owing method now calls print_banner and print_details methods for enhanced modularity and readability.
+# 3. Separated the logic for printing the banner and details into their respective methods to improve organization and maintainability.
+# 4. Created a get_outstanding method to calculate and return the outstanding amount, reducing code duplication and simplifying logic.

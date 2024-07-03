@@ -1,0 +1,21 @@
+mistral - Instrução 2 com titulo:
+
+
+Here's a refactored version of the code that follows best practices of software development to improve readability, modularity, and maintainability:
+```python
+class BankAccount:
+    def __init__(self, balance=0):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise ValueError("Insufficient funds")
+        else:
+            self.balance -= amount
+        return 0
+```
+In this refactored code, we've created a class `BankAccount` that encapsulates the balance and the logic for withdrawing money. The `withdraw()` method now raises a `ValueError` exception if there are insufficient funds, instead of returning -1. This makes the code more readable and expressive, as it clearly communicates what went wrong in case of an error.
+
+We've also removed the duplication of logic that checked if the amount to withdraw was greater than the balance, since this check is now encapsulated within the `BankAccount` class. This makes the code more modular and easier to maintain, as any changes to the logic or behavior of the class can be made in one place.
+
+Overall, this refactored code adheres to best practices by following the Single Responsibility Principle (SRP) and encapsulating related functionality within a single class. This makes it easier to understand and modify the code in the future.

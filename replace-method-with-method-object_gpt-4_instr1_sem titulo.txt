@@ -1,0 +1,38 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Refactoring the code involves breaking down the long computation into separate methods, each performing an individual part of the computation. Here is an improved version of your code:
+
+```python
+class Order:
+    # ...
+
+    def compute_primary_price(self):
+        """Compute the primary base price"""
+        primaryBasePrice = 0
+        # Perform computation specific to primary base price.
+        return primaryBasePrice
+
+    def compute_secondary_price(self):
+        """Compute the secondary base price"""
+        secondaryBasePrice = 0
+        # Perform computation specific to secondary base price.
+        return secondaryBasePrice
+
+    def compute_tertiary_price(self):
+        """Compute the tertiary base price"""
+        tertiaryBasePrice = 0
+        # Perform computation specific to tertiary base price.
+        return tertiaryBasePrice
+    
+    def price(self):
+        primaryBasePrice = self.compute_primary_price()
+        secondaryBasePrice = self.compute_secondary_price()
+        tertiaryBasePrice = self.compute_tertiary_price()
+
+        # Now that the specific price computations are modularized, the final price can easily be computed. 
+        final_price = primaryBasePrice + secondaryBasePrice + tertiaryBasePrice
+
+        return final_price
+```
+This modularized approach makes the code more readable and maintainable. Each individual computation is separate and can be understood, changed, and tested independently.
+

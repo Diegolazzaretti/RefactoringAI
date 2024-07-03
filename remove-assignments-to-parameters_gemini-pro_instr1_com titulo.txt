@@ -1,0 +1,19 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+def calculate_discount(input_val, quantity):
+    """Calculates the discount based on the quantity.
+
+    Args:
+        input_val (int): The input value.
+        quantity (int): The quantity.
+
+    Returns:
+        int: The discounted value.
+    """
+    discount = 0
+    if quantity > 50:
+        discount = 2
+
+    return input_val - discount
+```

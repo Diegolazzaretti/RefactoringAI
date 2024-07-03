@@ -1,0 +1,21 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here's the refactored Python code:
+
+```python
+def is_platform_mac(self):
+    return "MAC" in self.platform.upper()
+
+def is_browser_ie(self):
+    return "IE" in self.browser.upper()
+
+def render_banner(self):
+    if self.is_platform_mac() and self.is_browser_ie() and self.was_initialized() and self.resize > 0:
+        # do something
+```
+
+In this refactor, we've moved the checks for "Mac" and "IE" into their own methods (`is_platform_mac` and `is_browser_ie`), which makes it easier to decipher what those specific checks are doing. This also allows those functions to be tested separately and reused elsewhere in the code if needed.
+ 
+Additionally, Python has a built-in string method `in` which works well for checking if one string is in another, so we used that instead of `indexOf`. This method returns `True` if it finds a string within a string else `False`, making the code easier to read. 
+
+Also, to keep all functions pythonic, `renderBanner` should be in snake_case, which is to say, `render_banner`.

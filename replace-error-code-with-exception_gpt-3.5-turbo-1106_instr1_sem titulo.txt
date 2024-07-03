@@ -1,0 +1,11 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def withdraw(self, amount):
+    if amount > self.balance:
+        return -1
+    else:
+        self._decrease_balance(amount)
+    return 0
+
+def _decrease_balance(self, amount):
+    self.balance -= amount

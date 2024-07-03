@@ -1,0 +1,30 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+class Bird:
+
+    def __init__(self, type, base_speed, load_factor, number_of_coconuts, voltage, is_nailed):
+        self.type = type
+        self.base_speed = base_speed
+        self.load_factor = load_factor
+        self.number_of_coconuts = number_of_coconuts
+        self.voltage = voltage
+        self.is_nailed = is_nailed
+
+    def get_speed(self):
+        if self.type == EUROPEAN or self.type == AFRICAN:
+            return self.get_base_speed()
+        elif self.type == NORWEGIAN_BLUE:
+            return self.get_norwegian_blue_speed()
+        else:
+            raise Exception("Invalid bird type")
+
+    def get_base_speed(self):
+        return self.base_speed
+
+    def get_norwegian_blue_speed(self):
+        return 0 if self.is_nailed else self.get_base_speed(self.voltage)
+
+    def get_load_factor(self):
+        return self.load_factor * self.number_of_coconuts
+```

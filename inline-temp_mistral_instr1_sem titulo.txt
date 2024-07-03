@@ -1,0 +1,10 @@
+mistral - Instrução 1 sem titulo:
+
+```python
+def has_discount(order):
+    # Calculate the base price of the order
+    base_price = order.base_price()
+    
+    # Return True if the base price is greater than 1000, otherwise return False
+    return base_price > 1000
+```

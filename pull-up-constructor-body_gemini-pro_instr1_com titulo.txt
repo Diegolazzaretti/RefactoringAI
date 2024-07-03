@@ -1,0 +1,17 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+# Define the base class Employee
+class Employee:
+    def __init__(self, name, id):
+        self.name = name
+        self.id = id
+
+# Define the Manager class that inherits from Employee
+class Manager(Employee):
+    def __init__(self, name, id, grade):
+        # Call the constructor of the base class to initialize the common attributes
+        super().__init__(name, id)
+        # Initialize the grade-specific attribute
+        self.grade = grade
+```

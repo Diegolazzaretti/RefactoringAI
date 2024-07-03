@@ -1,0 +1,33 @@
+gpt-4 - Instrução 2 sem titulo:
+
+The original function is quite simple, but let's assume we are working on a larger project where we want to maintain good practices for readability, modularity, and maintainability. Here's how this function could look after refactoring:
+
+```python
+class Order:
+    def __init__(self, base_price):
+        self.base_price = base_price
+
+    def has_discount(self):
+        return self._is_base_price_over_threshold(1000)
+
+    def _is_base_price_over_threshold(self, threshold):
+        return self.base_price > threshold
+```
+
+Explanations:
+
+1. Encapsulating specific Information (base price of order) into a Class:
+  - The Order class was created to encapsulate the base price of the order. Now, the information about an order is stored within an instance of the Order class, promoting high cohesion.
+  - We've also prefixed the function with an underscore (_) to indicate that this method is intended to be private or protected and shouldn't be accessed directly outside the class.
+
+2. Maintenance of the Base Price Threshold:
+  - Instead of hardcoding the threshold value of "1000" for the base price to decide the availability of discount, a new method called "_is_base_price_over_threshold" is provided that accepts a threshold parameter. This fosters code reuse as different modules requiring different thresholds can use this method directly instead of replicating its logic.
+
+3. Naming conventions:
+  - For python language, PEP 8 style guide is the key resource for styling your code. As per its recommendations,
+    - Variables and function names should be lower case with words separated by underscores as necessary to improve readability (snake_case).
+    - Function names should be lowercase, with words separated by underscores as necessary to improve readability.
+    - There shouldn't be any space around function argument assignment.
+So, `order.basePrice() --> order.base_price` and `hasDiscount() --> has_discount`
+
+Additional mods can be made as per project requirements. For example, if we are dealing with multiple such thresholds (like one for discounts, one for tax slabs etc.), we can introduce a class `Thresholds` and store them over there, thus centralizing all thresholds to one place. In case any change is required, it will need to be made at one place, thus reducing maintenance cost.

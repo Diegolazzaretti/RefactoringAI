@@ -1,0 +1,31 @@
+gemini-pro - Instrução 2 sem titulo:
+
+```python
+from abc import ABC, abstractmethod
+
+class Bird(ABC):
+    @abstractmethod
+    def getSpeed(self):
+        pass
+
+class EuropeanBird(Bird):
+    def getSpeed(self):
+        return self.getBaseSpeed()
+
+class AfricanBird(Bird):
+    def getSpeed(self):
+        return self.getBaseSpeed() - self.getLoadFactor() * self.numberOfCoconuts
+
+class NorwegianBlueBird(Bird):
+    def getSpeed(self):
+        return 0 if self.isNailed else self.getBaseSpeed()
+```
+
+**Changes**:
+
+* **Encapsulation**: The `Bird` class now defines only the basic interface and defers the implementation to its subclasses.
+* **Polymorphism**: Each subclass provides its own implementation of the `getSpeed()` method.
+* **Modularity**: The code is more modular and easier to maintain as the different bird types are separated into their own classes.
+* **Code Duplication**: The code duplication in the original `getSpeed()` method is eliminated.
+* **Readability**: The refactored code is more readable and easier to understand.
+* **Maintainability**: The refactored code is more maintainable and easier to modify in the future if changes are needed.

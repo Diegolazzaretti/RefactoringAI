@@ -1,0 +1,14 @@
+mistral - Instrução 1 sem titulo:
+
+
+One way to improve the readability, modularity and maintainability of this code is by creating a separate function for each amount type (dead, separated, retired, normal) and calling them as needed. Here's an example refactored code:
+
+def getPayAmount(self):
+    if self.isDead:
+        return deadAmount()
+    elif self.isSeparated:
+        return separatedAmount()
+    elif self.isRetired:
+        return retiredAmount()
+    else:  # self.isDead or self.isSeparated or self.isRetired is False
+        return normalPayAmount()

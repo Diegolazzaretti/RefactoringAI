@@ -1,0 +1,20 @@
+mistral - Instrução 1 sem titulo:
+
+
+Here is a possible refactored version of the code that improves its readability, modularity and maintainability:
+
+```python
+def find_person(people):
+    for name in people:
+        if name == "Don":
+            return "Don"
+        elif name == "John":
+            return "John"
+        elif name == "Kent":
+            return "Kent"
+    return "" 
+
+# Usage example
+people = ["Don", "John", "Kent", "Bob"]
+print(find_person(people)) # Output: Don
+```

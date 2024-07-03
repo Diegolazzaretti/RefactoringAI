@@ -1,0 +1,33 @@
+mistral - Instrução 2 sem titulo:
+
+
+Here are some ways that this code could be refactored for improved readability, modularity, and maintainability:
+
+Option 1 - Minimizing code duplication and simplifying logic using a ternary operator:
+
+```python
+def hasDiscount(order):
+    basePrice = order.basePrice()
+    return basePrice > 1000 if order.discount else None
+```
+
+Explanation: The ternary operator is used to check if the `discount` attribute of the `order` object is set, and returns `None` otherwise. This reduces code duplication by combining two separate checks into one line of code. 
+
+Option 2 - Using a separate function for base price calculation and separating logic into multiple methods:
+
+```python
+def hasDiscount(order):
+    def calculateBasePrice(order):
+        return order.basePrice()
+    
+    def checkDiscount(order):
+        basePrice = calculateBasePrice(order)
+        discount = order.discount()
+        if discount:
+            basePrice -= discount
+        return basePrice > 1000
+    
+    return checkDiscount(order)
+```
+
+Explanation: The logic is separated into two separate methods - `calculateBasePrice` and `checkDiscount`. This makes the code more modular and easier to understand. The `calculateBasePrice` method calculates the base price of an order, while the `checkDiscount` method applies any discount to the base price before checking if it's above a certain threshold. This approach also allows for easy modification or addition of different discount types in the future without having to change the `hasDiscount` function itself.

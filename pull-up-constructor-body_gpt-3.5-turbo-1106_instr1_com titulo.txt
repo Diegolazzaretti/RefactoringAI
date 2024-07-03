@@ -1,0 +1,7 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+class Manager(Employee):
+    def __init__(self, name, id, grade):
+        super().__init__(name, id)
+        self.grade = grade
+    # ...

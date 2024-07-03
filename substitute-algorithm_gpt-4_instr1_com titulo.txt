@@ -1,0 +1,19 @@
+gpt-4 - Instrução 1 com titulo:
+
+Here's the refactored code:
+
+```python
+def found_person(people):
+    target_people = ['Don', 'John', 'Kent']
+    
+    for person in people:
+        if person in target_people:
+            return person
+            
+    return ""
+```
+
+Changes made:
+1. Renamed the `foundPerson` function and `people` argument to `found_person` and `people` respectively, following Python's naming convention that favors lowercase letters and underscores.
+2. A list `target_people` was created to hold all the target strings. By doing this, the hard-coded if statements have been eliminated, making the code easier to read and maintain. Further, it allows easy addition or removal of target persons.
+3. Changed the for loop so that it directly iterates over elements in `people`, instead of indices. This is more pythonic and makes code shorter and easier to read.

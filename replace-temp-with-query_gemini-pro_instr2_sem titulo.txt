@@ -1,0 +1,45 @@
+gemini-pro - Instrução 2 sem titulo:
+
+```python
+import enum
+
+
+class DiscountRate(enum.Enum):
+    LOW_VOLUME = 0.98
+    HIGH_VOLUME = 0.95
+
+
+def calculate_total(quantity: int, item_price: int) -> float:
+    """Calculates the total price of an item based on quantity and price.
+
+    Applies a discount based on the volume of the order.
+
+    Args:
+        quantity: The number of items purchased.
+        item_price: The price of each item.
+
+    Returns:
+        The total price of the order, after applying any discounts.
+    """
+    base_price = quantity * item_price
+
+    if base_price > 1000:
+        discount_rate = DiscountRate.HIGH_VOLUME
+    else:
+        discount_rate = DiscountRate.LOW_VOLUME
+
+    return base_price * discount_rate
+```
+
+**Changes made to the code:**
+
+* **Moved the discount logic into an enum class:** This makes it easier to manage and maintain the different discount rates.
+* **Created a separate function to calculate the total:** This improves modularity and makes the code easier to read and understand.
+* **Added type hints to the function parameters and return value:** This provides better documentation and helps to prevent errors.
+* **Renamed the `basePrice` variable to `base_price`:** This follows Python naming conventions and improves readability.
+
+**How these changes contribute to the improvements:**
+
+* **Readability:** The code is now more organized and easier to read. The use of an enum class for the discount rates makes it clear how the discounts are applied.
+* **Modularity:** The code is now more modular, with the discount logic separated into a separate function. This makes it easier to modify the discount rates in the future.
+* **Maintainability:** The code is now more maintainable, with the use of type hints and a consistent naming convention. This makes it easier to make changes to the code in the future without introducing errors.

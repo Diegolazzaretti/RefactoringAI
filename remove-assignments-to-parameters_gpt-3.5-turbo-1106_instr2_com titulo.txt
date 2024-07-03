@@ -1,0 +1,40 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+The original code can be refactored using the Strategy design pattern to improve modularity and readability. The refactored code separates the discount calculation logic from the input values calculation logic, making it easier to modify or extend the discount calculation process in the future. Additionally, the refactored code improves the modularity by following the Single Responsibility Principle (SRP) by enforcing separate responsibilities in distinct strategy objects. This also makes the code easier to extend and maintain.
+
+Here's an example of how the code can be refactored:
+
+```python
+class DiscountStrategy:
+    def apply_discount(self, inputVal, quantity):
+        pass
+
+class QuantityDiscount(DiscountStrategy):
+    def apply_discount(self, inputVal):
+        if quantity > 50:
+            return inputVal - 2
+        return inputVal
+
+class NoDiscount(DiscountStrategy):
+    def apply_discount(self, inputVal):
+        return inputVal
+```
+
+In the refactored code, the `DiscountStrategy` is created as an abstract class, which defines the interface for applying discounts. It contains an abstract method named `apply_discount`. Then, the `QuantityDiscount` and `NoDiscount` classes extend the `DiscountStrategy` and implement the `apply_discount` method according to their specific discount calculation logic.
+
+The `discount` function can then be refactored to use the `DiscountStrategy` and apply the appropriate discount based on the input values:
+
+```python
+def apply_discount(inputVal, quantity, discount_strategy):
+    return discount_strategy.apply_discount(inputVal, quantity)
+
+# Example usage
+inputVal = 100
+quantity = 60
+quantity_discount_strategy = QuantityDiscount()
+
+discounted_price = apply_discount(inputVal, quantity, quantity_discount_strategy)
+print(discounted_price)
+```
+
+By refactoring the code in this way, it becomes more modular, reusable, and maintainable. The distinct strategies make it easy to add new discount calculation logic without altering the existing code, and the `apply_discount` function becomes a clean composition point for applying different discount strategies. The resulting code also adheres to the best practices, utilizing appropriate design patterns to promote maintainable and understandable code.

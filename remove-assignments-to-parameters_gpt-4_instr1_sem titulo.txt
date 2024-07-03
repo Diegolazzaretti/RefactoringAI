@@ -1,0 +1,27 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here is a refactoring of the code:
+
+```python
+def apply_discount(input_val, quantity):
+    DISCOUNT_QUANTITY_THRESHOLD = 50
+    DISCOUNT_VALUE = 2
+
+    if is_eligible_for_discount(quantity, DISCOUNT_QUANTITY_THRESHOLD):
+        input_val = apply_discount_value(input_val, DISCOUNT_VALUE)
+    
+    return input_val
+
+def is_eligible_for_discount(quantity, threshold):
+    return quantity > threshold
+
+def apply_discount_value(value, discount_value):
+    return value - discount_value
+
+# Usage:
+#
+# discounted_value = apply_discount(input_val, quantity)
+# print(discounted_value)
+```
+
+In the refactored code, the function and variable names are more descriptive. The threshold for the discount and the discount value have been abstracted out into their own variables and could be easily modified if any changes are required. The condition to check for discount eligibility and application of the discount has also been moved into their own helper functions further improving the readability and maintainability.

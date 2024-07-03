@@ -1,0 +1,17 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+def calculate_total(price: float, is_special_deal: bool) -> float:
+    """Calculates the total price of an item based on whether it is a special deal or not.
+
+    Args:
+        price (float): The original price of the item.
+        is_special_deal (bool): True if the item is a special deal, False otherwise.
+
+    Returns:
+        float: The total price of the item.
+    """
+
+    discount_rate = 0.05 if is_special_deal else 0.02
+    return price * (1 - discount_rate)
+```

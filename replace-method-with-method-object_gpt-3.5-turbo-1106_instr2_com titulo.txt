@@ -1,0 +1,30 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+class Order:
+    # ...
+
+    def price(self):
+        return PriceCalculator(self).calculate()
+
+class PriceCalculator:
+    def __init__(self, order):
+        self.order = order
+
+    def calculate(self):
+        primary_base_price = self.calculate_primary_base_price()
+        secondary_base_price = self.calculate_secondary_base_price()
+        tertiary_base_price = self.calculate_tertiary_base_price()
+        
+        return primary_base_price + secondary_base_price + tertiary_base_price
+
+    def calculate_primary_base_price(self):
+        # Perform long computation
+    
+    def calculate_secondary_base_price(self):
+        # Perform long computation
+
+    def calculate_tertiary_base_price(self):
+        # Perform long computation
+
+# The refactored code has created a PriceCalculator class to handle the price calculation logic.
+# This helps to modularize the code, making it easier to read, understand, and maintain. It also reduces duplication of code by separating the price calculation logic into different methods within the PriceCalculator class. This adherence to the single responsibility principle and separation of concerns makes the code more maintainable and facilitates future modifications. Additionally, the use of the PriceCalculator class allows for easier testing of the price calculation logic.

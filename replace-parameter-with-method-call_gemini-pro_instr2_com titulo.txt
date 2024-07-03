@@ -1,0 +1,63 @@
+gemini-pro - Instrução 2 com titulo:
+
+The provided code can be refactored into a more modular and reusable form by using the Strategy design pattern to encapsulate the calculation of the discounted price. This pattern allows for easy addition of new pricing strategies in the future without modifying the existing code.
+
+Here is the refactored code:
+
+```python
+class Order:
+  def __init__(self, quantity, itemPrice):
+    self.quantity = quantity
+    self.itemPrice = itemPrice
+
+  def getBasePrice(self):
+    return self.quantity * self.itemPrice
+
+  def getDiscountStrategy(self):
+    # Seasonal discounts can be implemented here
+    return SeasonalDiscountStrategy()
+
+  def getFees(self):
+    # Calculation of fees can be implemented here
+    return 10
+
+  def getFinalPrice(self):
+    basePrice = self.getBasePrice()
+    discountStrategy = self.getDiscountStrategy()
+    seasonalDiscount = discountStrategy.calculateDiscount(basePrice)
+    fees = self.getFees()
+    return discountedPrice(basePrice, seasonalDiscount, fees)
+
+
+class DiscountStrategy:
+  def calculateDiscount(self, basePrice):
+    raise NotImplementedError()
+
+
+class SeasonalDiscountStrategy(DiscountStrategy):
+  def calculateDiscount(self, basePrice):
+    return basePrice * 0.1
+
+def discountedPrice(basePrice, seasonalDiscount, fees):
+  return basePrice - seasonalDiscount + fees
+
+order = Order(10, 10)
+finalPrice = order.getFinalPrice()
+print(finalPrice)
+```
+
+The changes from the original code to the refactored code are:
+
+1. The `seasonalDiscount` and `fees` calculations are moved to separate methods, `getDiscountStrategy()` and `getFees()`, respectively.
+
+2. The `finalPrice` calculation is moved to a separate function, `discountedPrice()`, which takes the `basePrice`, `seasonalDiscount`, and `fees` as arguments.
+
+3. The `getDiscountStrategy()` method is made abstract by raising a `NotImplementedError`, and a concrete implementation, `SeasonalDiscountStrategy`, is provided.
+
+4. The `discountedPrice()` function is made generic so that it can be reused for different pricing strategies.
+
+These changes improve the readability, modularity, and maintainability of the code by:
+
+- Separating the concerns of pricing strategy and order calculation.
+- Encapsulating the pricing strategy into a separate class, allowing for easy addition of new strategies.
+- Making the `discountedPrice()` function generic, allowing for reuse in different contexts.

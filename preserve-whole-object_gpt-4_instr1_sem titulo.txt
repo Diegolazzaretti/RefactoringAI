@@ -1,0 +1,14 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Refactored code:
+
+```python
+def calculate_within_plan(days_temp_range, plan):
+    low_temperature = days_temp_range.getLow()
+    high_temperature = days_temp_range.getHigh()
+    return plan.withinRange(low_temperature, high_temperature)
+
+within_plan = calculate_within_plan(daysTempRange, plan)
+```
+
+This refactoring encapsulates the original action into a function, enhancing the code's readability and modularity. Additionally, it provides clearer naming to support maintainability. The function can be reused elsewhere, avoiding code duplication. Also, by naming the variables more descriptively, it becomes clear that they represent low and high temperatures.

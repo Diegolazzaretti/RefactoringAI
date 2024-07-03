@@ -1,0 +1,328 @@
+Código Original (replace-exception-with-test):
+
+def getValueForPeriod(periodNumber):
+    try:
+        return values[periodNumber]
+    except IndexError:
+        return 0
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```python
+def get_value_for_period(period_number):
+    """Return the value for a given period number."""
+    
+    if period_number in values:
+        return values[period_number]
+    else:
+        return 0
+```
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+def get_value_for_period(period_number):
+    """
+    Retrieve the value for the specified period number.
+
+    If the period number is invalid, returns 0.
+
+    Args:
+        period_number (int): The period number for which to retrieve the value.
+
+    Returns:
+        int: The value for the specified period number, or 0 if the period number is invalid.
+    """
+
+    try:
+        return values[period_number]
+    except IndexError:
+        return 0
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def get_value_for_period(period_number):
+    default_value = 0
+    try:
+        return values[period_number]
+    except IndexError:
+        return default_value
+
+gpt-4 - Instrução 1 sem titulo:
+Here is the refactored version of the code:
+
+```python
+def get_value_for_period(period_number, values):
+    """
+    Returns the value for a given period number from a list of values.
+    If the period number is out of the list's range, it will return 0.
+
+    :param period_number: The period number to get the value.
+    :type: int
+    :param values: List of values.
+    :type: list
+    :return: Value for the period number or 0 if it's out of range.
+    :rtype: int or float
+    """
+    if period_number < len(values):
+        return values[period_number]
+    else:
+        return 0
+```
+
+Explanation:
+
+1. We moved the `values` list as a parameter of the function. This improves modularity because the function doesn't rely on external variables anymore.
+
+2. We replaced `try/except` statement with an `if/else` statement. It is usually better to prevent exceptions rather than catching them. In this case, we can easily check if the index is out of bounds.
+
+3. We added a function docstring. This improves readability because it explains what the function is doing and what each parameter is.
+
+4. We renamed the function and its parameters to follow [PEP 8 style guidelines](https://www.python.org/dev/peps/pep-0008/#function-and-variable-names) (use of underscores instead of camelCase). Use one style and be consistent through your code. 
+
+5. We indicated the types of the parameters and the return type in the docstring, enhancing the readability and understanding of function usage.
+
+Note that catching `IndexError` as was done in the original function might be more suitable in certain situations, especially when dealing with multi-threading or when the list can be modified externally while the function is running. In these scenarios, it's impossible to prevent IndexError 100% of the time, so we need to catch it. However, in most common situations, it's better to make sure the index is within bounds beforehand, as we did in the refactored function.
+
+mistral - Instrução 1 com titulo:
+```python
+def get_value_for_period(period_number):
+    if period_number in values:
+        return values[period_number]
+    else:
+        return 0
+```
+
+gemini-pro - Instrução 1 com titulo:
+```python
+def get_value_for_period(period_number):
+    """Gets the value for the given period number, or returns 0 if the period number is out of range.
+
+    Args:
+        period_number (int): The period number for which to get the value.
+
+    Returns:
+        int: The value for the given period number, or 0 if the period number is out of range.
+    """
+
+    if period_number < 0 or period_number >= len(values):
+        return 0
+    else:
+        return values[period_number]
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+def get_value_for_period(period_number):
+    try:
+        return values[period_number]
+    except IndexError:
+        return 0
+
+gpt-4 - Instrução 1 com titulo:
+Refactoring code:
+
+```python
+def get_value_for_period(period_number, values):
+    """Returns the value for a given period number."""
+    if period_number >= len(values):
+        return 0
+    return values[period_number]
+```
+This refactored code is more modular as it now takes value array as an input argument and therefore can be used with any list. It is also more maintainable as it avoids using exceptions to control flow of the program. It enhances readability by replacing CamelCase with snake_case which is the recommended python coding style, and providing a docstring to explain what the function does.
+
+mistral - Instrução 2 sem titulo:
+
+The above code retrieves a value for a given period number from a dictionary named 'values'. If the period number is not present in the dictionary, it returns 0. However, this code lacks modularity and has limited maintainability as the values are hard-coded in the function itself. Below is the refactored version of the code that utilizes a Singleton design pattern to improve its readability and maintainability.
+
+class ValueStore:
+    def __init__(self):
+        self.values = {}
+
+    @staticmethod
+    def getInstance():
+        if not hasattr(ValueStore, 'instance'):
+            ValueStore.instance = ValueStore()
+        return ValueStore.instance
+
+    def addValue(self, periodNumber, value):
+        self.values[periodNumber] = value
+
+    def getValueForPeriod(self, periodNumber):
+        try:
+            return self.values[periodNumber]
+        except IndexError:
+            return 0
+
+With the above refactored code, we can create a single instance of ValueStore and access its methods throughout the application without having to worry about creating new instances every time we need to use it. The addValue method allows us to add new values to the dictionary without modifying the getValueForPeriod method directly, which enhances the maintainability of the code. Additionally, using a Singleton design pattern ensures that only one instance of ValueStore exists throughout the application's lifetime, reducing resource usage and preventing potential race conditions that could arise from multiple instances accessing the same shared state concurrently.
+
+gemini-pro - Instrução 2 sem titulo:
+To enhance the code's readability, modularity, and maintainability, the code can be refactored as follows:
+
+```python
+class ValueProvider:
+
+    def __init__(self, values):
+        self.values = values
+
+    def get_value(self, period_number):
+        try:
+            return self.values[period_number]
+        except IndexError:
+            return 0
+```
+
+The following changes were made to the code:
+
+* The code was refactored to use a class, which makes it more modular and easier to maintain.
+* The exception handling was moved to the `get_value()` method, which makes the code more concise and easier to read.
+* The name of the function was changed to `get_value()` to make it more descriptive.
+* The name of the variable `values` was changed to `self.values` to make it more clear that it is a member variable of the class.
+
+These changes contribute to the improvements by:
+
+* Reducing code duplication: The exception handling code was moved to the `get_value()` method, which eliminates the need to repeat the same code in multiple places.
+* Simplifying the logic: The code was simplified by moving the exception handling to the `get_value()` method, which makes the code easier to read and understand.
+* Improving overall organization: The code was organized into a class, which makes it more modular and easier to maintain.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+The code can be enhanced by introducing a separate class to keep track of specific period values. The Singleton design pattern will be applied to ensure only one instance of the class is created. The refactored code follows:
+
+```python
+class PeriodValues:
+    _instance = None
+
+    def __init__(self):
+        if not PeriodValues._instance:
+            self.values = []
+
+    @classmethod
+    def get_instance(cls):
+        if not cls._instance:
+            cls._instance = PeriodValues()
+        return cls._instance
+
+    def get_value_for_period(self, period_number):
+        try:
+            return self.values[period_number]
+        except IndexError:
+            return 0
+```
+
+The refactored code adheres to best practices by separating the period values management into a designated class. The Singleton pattern ensures only one instance of the class exists, making it easy to maintain and safely accessible across the application.
+
+The refactored code enhances modularity and readability, improving the maintainability by encapsulating period value handling. Additionally, error handling is centralized in the `get_value_for_period` method, simplifying the logic and reducing code duplication. The overall organization is more structured, allowing for future modifications to be easily implemented with minimal impact on the remaining code.
+
+gpt-4 - Instrução 2 sem titulo:
+The provided code is already quite concise, efficient and adheres to many best practices of software development. However, we can tweak a few things for further improvement.
+
+Firstly, the naming of the function and the arguments could be more descriptive to give a better sense of what purpose they serve. Secondly, it might be a better idea to have the list of values as an argument to the function rather than a globally accessed object which can improve modularity.
+
+Here is the refactored version:
+
+```python
+def get_period_value(period_numbers, values):
+    try:
+        return values[period_numbers]
+    except IndexError:
+        return 0
+```
+
+In the refactored code, `get_period_value` is a more descriptive name compared to `getValueForPeriod`. It indicates clearly that the function is intended to fetch the value for the given period from the provided list of values.
+
+Rather than accessing `values`, a global variable directly, the refactored function takes it as a parameter. This increases the modularity of the function as it becomes agnostic to the context and can simply focus on its logic i.e., to fetch the corresponding value for the period. It contributes to easier maintenance as the function can work with any list passed and is not dependent on a particular list (`values`) being present. 
+
+This code improvement is based on the principle of dependency injection which solves the problem of hard coding dependencies. The resulting code is more flexible and reusable. 
+
+The exception handling remains the same. The function tries to access and return the value at the index specified by the provided period_number within the values list. If the provided index does not exist within the list (causing an IndexError), it simply returns 0. This is a reasonable behavior and doesn't need to be changed during the refactoring.
+
+mistral - Instrução 2 com titulo:
+```
+# Explanation of changes made:
+
+# Initialization of default value to zero is moved out of the try-except block
+default_value = 0
+
+# Dictionary lookup is moved inside the try-except block
+try:
+    result = values[periodNumber]
+except IndexError:
+    result = default_value
+    
+# Assignment of default value is simplified to be inline with ternary operator
+result = values.get(periodNumber, default_value)
+
+# The try-except block is replaced with a single line using the get method of dictionary
+result = values.get(periodNumber, default_value)
+```
+
+The refactored code follows several best practices:
+
+1. Single Responsibility Principle (SRP): The function now has a single responsibility - to retrieve a value from a dictionary or return the default value if it doesn't exist in the dictionary. This makes the code more modular and easier to maintain.
+
+2. Dependency Injection: The default value is now initialized outside of the try-except block, reducing coupling between the two parts of the code.
+
+3. Early Exit: The function now returns early with the result of the dictionary lookup or the default value, avoiding any further processing if a KeyError occurs. This improves performance and readability.
+
+4. Simplification: The refactored code is more concise and easier to understand, as the logic for handling exceptions and default values has been simplified.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+class PeriodNotFoundException(Exception):
+    pass
+
+def get_value_for_period(period_number):
+    if period_number >= len(values):
+        raise PeriodNotFoundException
+    return values[period_number]
+```
+
+**Changes Made and Improvements:**
+
+* **Exception Handling:** The try/except block has been replaced with a custom exception (`PeriodNotFoundException`) for clearer exception handling.
+* **Error Message:** The exception message is now customizable and provides more context to the caller.
+* **Clean Separation:** The error handling logic is isolated from the main functionality, making the code more modular and easier to maintain.
+* **Maintainability:** The code is now easier to modify in the future, as any changes to error handling can be made in a centralized location (the custom exception class).
+* **Error Detection:** If the period number is invalid, a specific exception is raised, allowing callers to handle the error gracefully and provide a more meaningful error message to the user.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+The refactored code utilizes the if-else conditional statement to check for the presence of the periodNumber in the values array and return the value or 0 accordingly.
+
+def getValueForPeriod(periodNumber):
+    if periodNumber < len(values):
+        return values[periodNumber]
+    else:
+        return 0
+
+Refactoring Changes:
+1. Replaced the try-except block with an if-else conditional statement to check for the existence of the periodNumber within the values array.
+2. By using an if-else statement, we eliminate the need for an exception to handle a missing index, making the logic more explicit and easier to understand.
+3. The refactored code improves readability and maintainability by clearly stating the logic for handling missing index values.
+4. The refactored code allows for easier future modifications by simplifying the exception handling logic, making it less error-prone and more reusable in different scenarios.
+
+gpt-4 - Instrução 2 com titulo:
+The code given is quite straightforward where it is trying to return a value at a specific index from a list called `values`. Should that index not exist within the list, it is designed to return 0. This uses a try-except block to manage exception handling. 
+
+However, a better approach, promoting clarity and readability would be to use an `if` statement to perform a simple check on the length of the list instead of using exception handling for control flow. This is more in the direction of EAFP (Easier to Ask for Forgiveness than Permission) approach, which is generally recommended in Python.
+
+Here is how the refactored code looks:
+
+```python
+def getValueForPeriod(periodNumber, values):
+    if periodNumber < len(values):
+        return values[periodNumber]
+    else:
+        return 0
+```
+
+Explanation of the changes:
+
+1. Our refactored function takes an extra parameter `values`. This was done to increase the modularity of the function, now it's no longer dependent on an external data source `values`.
+
+2. The `try-except` block has been replaced with an `if-else` statement which checks if `periodNumber` is within the valid range for `values` list indexes. This is more explicit and makes it easier to understand the function's behavior. The readability of the code is improved as it's now clear what condition we're checking and how we're handling the potential issue.
+
+3. This change also enhances maintainability, as it's now easier to modify the function's behavior when the period number is out of range. Instead of having to delve into exception handling, a developer can simply adjust the `else` clause.
+
+Remember, using exceptions for controlling program flow is considered a bad approach when the same result can be achieved with a simple control structure like `if-else`. Exceptions should only be used for handling unexpected or erroneous situations that the program cannot deal with normally.
+

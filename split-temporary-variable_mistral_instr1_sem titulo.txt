@@ -1,0 +1,16 @@
+mistral - Instrução 1 sem titulo:
+
+```python
+def calculate_area(height: float, width: float) -> float:
+    """
+    Calculate the area of a rectangle given its height and width.
+    """
+    temp = 2 * (height + width)
+    temp = height * width
+    return temp
+
+height = float(input("Enter the height: "))
+width = float(input("Enter the width: "))
+
+print(calculate_area(height, width))
+```

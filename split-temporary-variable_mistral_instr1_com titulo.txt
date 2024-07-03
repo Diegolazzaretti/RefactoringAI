@@ -1,0 +1,18 @@
+mistral - Instrução 1 com titulo:
+
+Here's one way to refactor the code:
+```python
+def calculate_temp(height, width):
+    temp1 = 2 * (height + width)
+    temp2 = height * width
+    return temp1, temp2
+
+# Example usage
+height, width = 5, 6
+temp1, temp2 = calculate_temp(height, width)
+print(f"temp1: {temp1}")
+print(f"temp2: {temp2}")
+```
+This code creates a function called `calculate_temp` that takes in two arguments (`height` and `width`) and calculates two temporary variables (`temp1` and `temp2`). The function returns both of these values. 
+
+In the example usage, we call `calculate_temp` with some sample values for height and width and print out the calculated temp1 and temp2 using f-strings.

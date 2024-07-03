@@ -1,0 +1,11 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+class PizzaDelivery:
+    # ...
+    def get_rating(self):
+        return 2 if self._more_than_five_late_deliveries() else 1
+
+    def _more_than_five_late_deliveries(self):
+        return self.number_of_late_deliveries > 5
+
+The refactored code follows the Python naming convention for function and variable names. The function names are now in lowercase and separated by underscores, improving readability. Additionally, by prefixing the `more_than_five_late_deliveries` method with an underscore, it indicates that it is intended for internal use only and not meant to be accessed directly outside of the class. This encapsulation improves modularity and maintainability.

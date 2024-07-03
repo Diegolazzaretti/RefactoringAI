@@ -1,0 +1,12 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+The refactored code uses the Factory Method design pattern to create a BillingPlan object, simplifying the logic and improving the overall organization. It also includes a guard clause to handle the case when the customer is None.
+
+```python
+if customer is None:
+    plan = BillingPlanFactory.create_basic_plan()
+else:
+    plan = customer.get_plan()
+```
+
+The BillingPlanFactory class is responsible for creating the BillingPlan objects. This design pattern helps to encapsulate the creation logic in a separate class, reducing code duplication and improving modularity. Additionally, the guard clause makes the code more readable and handles the case when the customer is None. This refactoring enhances the readability, modularity, and maintainability of the code, ultimately adhering to best practices of software development.

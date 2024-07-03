@@ -1,0 +1,30 @@
+gpt-4 - Instrução 1 sem titulo:
+
+The provided code has some minor issues. The "type" parameter is not used while "name" variable is not declared. Comparisons in "if" statements lack equality operator "==".
+
+The refactored version of the provided code could look something like this:
+
+```python
+def print_banner(self):
+    # Print the banner
+    # ...
+
+def print_info(self):
+    # Print the info
+    # ...
+
+def output(self, type):
+    if type == "banner":
+        self.print_banner()
+    elif type == "info":
+        self.print_info()
+    else:
+        print("Invalid type")
+```
+The refactored code:
+
+- Fixes the bug with the "type" variable that wasn't used.
+- Adds the "Invalid type" message to handle cases when type doesn't match "banner" or "info".
+- Extracts the code for printing banner and info into separate methods to enhance modularity, readability and maintainability.
+
+This not only improves the readability, but also makes the code more maintainable, because if anything needs to be changed about how the banner or info is printed, you only need to modify these separate methods.

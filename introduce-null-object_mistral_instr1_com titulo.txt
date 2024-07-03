@@ -1,0 +1,22 @@
+mistral - Instrução 1 com titulo:
+
+
+To enhance readability, modularity, and maintainability, we can refactor the given code as follows:
+
+1. Create a function named `get_plan` that accepts an argument `customer` and returns the billing plan for the customer.
+2. Within the `get_plan` function, use an if-else statement to check whether the customer is None. If the customer is None, then return the basic billing plan using the `BillingPlan.basic()` method. Otherwise, call the `getPlan()` method on the customer object and return it.
+3. Use the function to get the billing plan for a given customer by passing the customer object as an argument.
+```python
+from billing_plans import BillingPlan
+
+def get_plan(customer):
+    if customer is None:
+        plan = BillingPlan.basic()
+    else:
+        plan = customer.getPlan()
+    return plan
+
+# Example usage:
+plan = get_plan(my_customer)  # Assuming my_customer is an instance of the Customer class
+```
+By refactoring the code in this way, we have improved its modularity and readability while maintaining the same functionality. The `get_plan()` function can be easily extended or modified if needed, making it more maintainable over time.

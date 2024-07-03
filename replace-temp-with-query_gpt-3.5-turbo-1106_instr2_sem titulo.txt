@@ -1,0 +1,20 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class TotalCalculator:
+    def __init__(self, quantity, itemPrice):
+        self.quantity = quantity
+        self.itemPrice = itemPrice
+
+    def calculateTotal(self):
+        basePrice = self.quantity * self.itemPrice
+        discount_rate = 0.98 if basePrice <= 1000 else 0.95
+        return basePrice * discount_rate
+
+# Changes Made:
+# Created a TotalCalculator class to encapsulate the functionality of calculating the total
+# Encapsulated quantity and itemPrice as instance variables of the TotalCalculator class
+# Added a constructor to initialize the instance variables
+# Moved the total calculation logic to a method called calculateTotal
+# Introduced a discount_rate local variable to hold the values 0.98 and 0.95 based on the basePrice
+# Using a single return statement to return the total calculation result, based on the discount_rate
+# Improved readability, maintainability, and modularity by separating concerns and encapsulating related functionality within the TotalCalculator class.

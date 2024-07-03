@@ -1,0 +1,30 @@
+gpt-4 - Instrução 1 com titulo:
+
+Refactoring the code will involve organizing the code into smaller, more manageable parts to enhance readability and maintainability. The method will be split into separate methods, each responsible for a specific action.
+
+Here is the refactored code:
+
+```python
+class Order:
+    # ...
+    def price(self):
+        self.calculate_primary_base_price()
+        self.calculate_secondary_base_price()
+        self.calculate_tertiary_base_price()
+        # Perform long computation.
+
+    def calculate_primary_base_price(self):
+        self.primaryBasePrice = 0
+        # calculate primary base price 
+
+    def calculate_secondary_base_price(self):
+        self.secondaryBasePrice = 0
+        # calculate secondary base price 
+
+    def calculate_tertiary_base_price(self):
+        self.tertiaryBasePrice = 0
+        # calculate tertiary base price
+```
+
+The benefit of this refactoring is that the single method is now broken down into several smaller methods, each responsible for their own piece of functionality. This makes the code easier to read, understand, and maintain. It also allows for easier testing, since each method can be tested in isolation. The use of self variables helps maintain the states within the instance of the Order class across method calls.
+

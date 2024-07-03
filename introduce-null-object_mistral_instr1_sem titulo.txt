@@ -1,0 +1,16 @@
+mistral - Instrução 1 sem titulo:
+
+The code provided checks if a `customer` object is `None`, and if it is, it creates a new instance of the `BillingPlan` class using the `basic()` method. If the `customer` object is not `None`, then it calls the `getPlan()` method on the `customer` object to retrieve its current plan.
+
+Here's a refactored version of the code that uses a ternary operator and makes the logic more modular and maintainable:
+```python
+from billing import BillingPlan
+
+def get_plan(customer):
+    return customer.getPlan() if customer else BillingPlan.basic()
+
+plan = get_plan(customer)
+```
+In this refactored version, we define a new function `get_plan()` that takes in the `customer` object as an argument and returns the customer's plan or the basic plan if the customer is `None`. We use a ternary operator to check if the `customer` object is `None`, and if it is, then we return the basic plan using the `BillingPlan.basic()` method. Otherwise, we call the `getPlan()` method on the `customer` object to retrieve its current plan.
+
+We then pass in the `customer` object as an argument to the `get_plan()` function and assign the returned value to the `plan` variable. This makes the code more modular and maintainable, as we separate out the logic for retrieving the customer's plan into its own function, which can be easily reused and modified in the future if needed.

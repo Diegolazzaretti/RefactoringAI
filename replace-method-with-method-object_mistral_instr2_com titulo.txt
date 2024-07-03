@@ -1,0 +1,31 @@
+mistral - Instrução 2 com titulo:
+
+After analyzing the given code, I have refactored it using the Strategy pattern to improve its readability, modularity, and maintainability. The changes made are as follows:
+```python
+class Order:
+    def __init__(self, primary_base_price=0, secondary_base_price=0, tertiary_base_price=0):
+        self.primary_base_price = primary_base_price
+        self.secondary_base_price = secondary_base_price
+        self.tertiary_base_price = tertiary_base_price
+    
+    def price(self):
+        strategy = PriceStrategy()
+        result = strategy.compute(self)
+        return result
+
+class PriceStrategy:
+    @staticmethod
+    def compute(order):
+        primaryBasePrice = order.primary_base_price
+        secondaryBasePrice = order.secondary_base_price
+        tertiaryBasePrice = order.tertiary_base_price
+        # Perform long computation.
+        return result  # Replace this with actual computation logic.
+```
+In this refactored code, we have extracted the computation logic into a separate class called `PriceStrategy`. This makes the `Order` class more modular and easier to read since it no longer contains the computation logic. Furthermore, by using the Strategy pattern, we can easily add new pricing strategies without modifying the `Order` class.
+
+The `PriceStrategy` class defines a single method called `compute(order)`, which takes an `Order` object as input and returns the computed price. This method encapsulates the computation logic, making it more maintainable and testable.
+
+In the `Order` class, we now initialize the strategy object and call its `compute` method to get the computed price. We then return this value from the `price` method of the `Order` class.
+
+Overall, these changes make the code more modular, maintainable, testable, and readable. It also adheres to best practices of software development, making it easier for future modifications while maintaining functional integrity.

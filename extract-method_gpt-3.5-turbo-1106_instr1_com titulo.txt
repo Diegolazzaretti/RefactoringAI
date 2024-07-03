@@ -1,0 +1,25 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+class Printer:
+    def print_details(self, name, amount):
+        print("name:", name)
+        print("amount:", amount)
+
+    def print_banner(self):
+        pass
+
+class Invoice:
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+
+class Payment:
+    def __init__(self, invoices):
+        self.invoices = invoices
+
+    def print_owing(self):
+        printer = Printer()
+        printer.print_banner()
+        printer.print_details(self.invoices.name, self.invoices.amount)
+
+#  Extracted the print_details and print_banner functions into the Printer class to improve readability and modularity. The Invoice and Payment classes have been added to better organize the data. The logic for printing the details has been separated into its own function to enhance maintainability. The use of a separate Printer class adheres to best practices by encapsulating the logic for printing details. This makes the code more modular and reusable.

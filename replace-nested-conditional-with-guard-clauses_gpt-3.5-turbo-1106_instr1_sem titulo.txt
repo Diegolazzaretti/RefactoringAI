@@ -1,0 +1,11 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def getPayAmount(self):
+    if self.isDead:
+        return deadAmount()
+    elif self.isSeparated:
+        return separatedAmount()
+    elif self.isRetired:
+        return retiredAmount()
+    else:
+        return normalPayAmount()

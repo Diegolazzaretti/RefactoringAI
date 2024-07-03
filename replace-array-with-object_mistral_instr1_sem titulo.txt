@@ -1,0 +1,9 @@
+mistral - Instrução 1 sem titulo:
+
+
+# One way to refactor the given code is to make it more modular and readable by using a dictionary to store the values of each column, and then accessing those values when needed. Here's one possible refactored version:
+
+columns = {"Team": None, "Score": None}
+row = {key: value for key, value in columns.items()}
+row["Team"] = "Liverpool"
+row["Score"] = "15"

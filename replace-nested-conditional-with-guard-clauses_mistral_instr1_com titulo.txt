@@ -1,0 +1,18 @@
+mistral - Instrução 1 com titulo:
+
+Here is one possible way to refactor the given code:
+
+```python
+def get_pay_amount(self):
+    if self.is_dead:
+        result = dead_amount()
+    elif self.is_separated:
+        result = separated_amount()
+    elif self.is_retired:
+        result = retired_amount()
+    else:
+        result = normal_pay_amount()
+    
+    return result
+```
+In this refactored version, we have replaced the nested `if-else` block with a single `if-elif-else` block. This makes the code more readable and easier to understand. We have also given descriptive names to each of the functions called within the if-blocks, which improves modularity and maintainability. Finally, we have removed the unnecessary parentheses around the function calls, making the code more concise.

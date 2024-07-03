@@ -1,0 +1,25 @@
+mistral - Instrução 1 com titulo:
+
+```python
+class DiscountCalculator:
+    def __init__(self):
+        self.fees = None
+    
+    def calculate_price(self, base_price, item_price, discount=None):
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        final_price = 0
+        
+        if discount:
+            final_price = base_price * (1 - discount)
+        else:
+            final_price = base_price - seasonal_discount + fees
+            
+        return final_price
+```
+Usage:
+```python
+dc = DiscountCalculator()
+dc.fees = 50
+dc.calculate_price(10, 20)  # returns final price with discounts and fees included
+```

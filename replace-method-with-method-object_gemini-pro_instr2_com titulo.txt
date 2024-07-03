@@ -1,0 +1,47 @@
+gemini-pro - Instrução 2 com titulo:
+
+**Refactored Code:**
+
+```python
+import abc
+
+class PriceCalculator:
+    @abc.abstractmethod
+    def calculate(self):
+        pass
+
+class PrimaryPriceCalculator(PriceCalculator):
+    def calculate(self, order):
+        return order.primary_quantity * order.primary_unit_price
+
+class SecondaryPriceCalculator(PriceCalculator):
+    def calculate(self, order):
+        return order.secondary_quantity * order.secondary_unit_price
+
+class TertiaryPriceCalculator(PriceCalculator):
+    def calculate(self, order):
+        return order.tertiary_quantity * order.tertiary_unit_price
+
+class Order:
+    def __init__(self):
+        self.primary_quantity = 0
+        self.primary_unit_price = 0
+        self.secondary_quantity = 0
+        self.secondary_unit_price = 0
+        self.tertiary_quantity = 0
+        self.tertiary_unit_price = 0
+
+    def price(self):
+        calculators = [PrimaryPriceCalculator(), SecondaryPriceCalculator(), TertiaryPriceCalculator()]
+        return sum(calculator.calculate(self) for calculator in calculators)
+```
+
+**Explanation of Changes:**
+
+* **Strategy Pattern:** The calculation of different parts of the price is now encapsulated in separate classes (the PriceCalculators), which implement a common interface (PriceCalculator). This allows for easy addition or modification of price calculation strategies later on.
+* **Method Object:** The `price` method in the original code is replaced with a method object (the `PriceCalculator` class). This simplifies the code and removes duplication.
+* **Encapsulation:** The calculation details are now hidden within the `PriceCalculator` classes, making the `Order` class more concise and maintainable.
+* **Modularity:** The price calculators are independent and reusable, allowing for easy customization and extension.
+* **Separation of Concerns:** The `Order` class now only deals with the order data, while the price calculation is delegated to specialized classes.
+
+These changes improve the readability and maintainability of the code by reducing duplication, simplifying the logic, and applying appropriate design patterns. The refactored code also adheres to the principle of separation of concerns, making it easier to modify and extend the functionality in the future.

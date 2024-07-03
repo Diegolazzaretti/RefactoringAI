@@ -1,0 +1,32 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Refactored Code:
+```python
+class Report:
+    # ...
+
+    def __get_next_day(self, previous_date):
+        return Date(previous_date.getYear(),
+                    previous_date.getMonth(), 
+                    previous_date.getDate() + 1)
+
+    def sendReport(self):
+        next_day = self.__get_next_day(self.previousEnd)
+        # ...
+```
+
+Explanation of Changes:
+
+1. Modularization of Code:
+The code that calculates the next day from a given date was extracted into it's own method `__get_next_day()`. This provides better readability as its name describes its purpose. Also, it allows reusability of this method elsewhere within the class if needed.
+
+2. Encapsulation:
+Creating a private method with the double underscore prefix `__get_next_day()`. By doing this, this method cannot be accessed directly from outside the class. This can hide the internal implementation detail and reduce the possibility of unintended interactions.
+
+3. Meaningful Naming:
+The variable `nextDay` is renamed to `next_day` to align to PEP8 recommendations for variable naming in Python. This improves readability as it conforms to common Pythonic style, where underscores are used between words in variable_names.
+
+4. Commenting:
+Initial code has been left uncommented. Comments in code will provide more context to what the code is achieving, making code easier to understand for other team members or even the same developer at a later date. 
+
+Keeping these changes, the final simplified code becomes easy to understand, reusable with a room for future modifications.

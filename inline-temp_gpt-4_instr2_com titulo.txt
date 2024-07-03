@@ -1,0 +1,20 @@
+gpt-4 - Instrução 2 com titulo:
+
+After refactoring
+
+```python
+class Order:
+    def __init__(self, base_price):
+        self.base_price = base_price
+
+    def hase_discount(self):
+        return self.base_price > 1000
+```
+
+Explanation
+
+1. Encapsulation: Instead of having a standalone function to determine if an order has discount, I have created a class called `Order` which encapsulates the properties (base_price) and behaviors (has_discount) of an order. This makes the code more maintainable and readable since the relevant properties and behaviors are categorized under this class.
+
+2. Readability: The spelling of the function `has_discount` is changed from camel case to snake case, which is more Pythonic and widely accepted as per PEP8 style guide.
+
+3. Summary: The refactored code moves the has_discount method inside an Order class which would be more appropriate and preserves the context of order, contributing towards improved readability. Also, all the attributes related to the order are kept under one roof (under class Order) leading towards better organization of code. Also, should there be other attributes or methods for an Order, they can all be placed within this Order class, thereby increasing the modularity of the code. This leads to better and easier maintenance of the code in the long run, as changes to any aspect of Order only needs to be made in one place.

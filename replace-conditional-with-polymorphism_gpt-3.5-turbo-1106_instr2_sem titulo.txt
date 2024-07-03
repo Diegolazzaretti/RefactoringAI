@@ -1,0 +1,48 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class Bird:
+  # constructor
+  def __init__(self, type):
+      self.type = type
+
+  # abstract method
+  def getBaseSpeed(self):
+      pass
+
+class EuropeanBird(Bird):
+  def getSpeed(self):
+      return self.getBaseSpeed()
+
+class AfricanBird(Bird):
+  def __init__(self, type, numberOfCoconuts):
+      super().__init__(type)
+      self.numberOfCoconuts = numberOfCoconuts
+
+  def getSpeed(self):
+      return self.getBaseSpeed() - self.getLoadFactor() * self.numberOfCoconuts
+
+  def getLoadFactor(self):
+      return 4
+
+class NorwegianBlueBird(Bird):
+  def __init__(self, type, voltage):
+      super().__init__(type)
+      self.voltage = voltage
+      self.isNailed = False
+
+  def getSpeed(self):
+      return 0 if self.isNailed else self.getBaseSpeed(self.voltage)
+
+  def getBaseSpeed(self, voltage):
+      return self.calculateBaseSpeed(voltage)
+
+  def calculateBaseSpeed(self, voltage):
+      return voltage
+
+#Usage:
+# european_bird = EuropeanBird(EUROPEAN)
+# speed = european_bird.getSpeed()
+# african_bird = AfricanBird(AFRICAN, 5)
+# speed = african_bird.getSpeed()
+# norwegian_blue_bird = NorwegianBlueBird(NORWEGIAN_BLUE, 100)
+# speed = norwegian_blue_bird.getSpeed()

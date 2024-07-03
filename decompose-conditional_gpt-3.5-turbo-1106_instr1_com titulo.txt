@@ -1,0 +1,20 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+def calculate_charge(quantity, date, summer_start, summer_end, summer_rate, winter_rate, winter_service_charge):
+    if is_not_summer(date, summer_start, summer_end):
+        charge = calculate_winter_charge(quantity, winter_rate, winter_service_charge)
+    else:
+        charge = calculate_summer_charge(quantity, summer_rate)
+    return charge
+
+
+def is_not_summer(date, summer_start, summer_end):
+    return date.before(summer_start) or date.after(summer_end)
+
+
+def calculate_winter_charge(quantity, winter_rate, winter_service_charge):
+    return quantity * winter_rate + winter_service_charge
+
+
+def calculate_summer_charge(quantity, summer_rate):
+    return quantity * summer_rate

@@ -1,0 +1,12 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class PizzaDelivery:
+    def __init__(self, numberOfLateDeliveries):
+        self.numberOfLateDeliveries = numberOfLateDeliveries
+        
+    def getRating(self):
+        return 2 if self.isLateDelivery() else 1
+    
+    def isLateDelivery(self):
+        return self.numberOfLateDeliveries > 5
+Refactored the code to use a constructor to initialize the `numberOfLateDeliveries` attribute within the `PizzaDelivery` class. This enhances readability and modularity by encapsulating the state of the object. The `moreThanFiveLateDeliveries` method is renamed to `isLateDelivery` to better convey its purpose and semantics. This improves code readability and maintainability.

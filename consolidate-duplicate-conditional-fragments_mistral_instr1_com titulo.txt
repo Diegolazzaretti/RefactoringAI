@@ -1,0 +1,14 @@
+mistral - Instrução 1 com titulo:
+
+```
+# Consolidate duplicate conditional fragments
+if isSpecialDeal():
+    total = calculateTotal(price, 0.95)
+else:
+    total = calculateTotal(price, 0.98)
+
+send(total)
+
+def calculateTotal(price, discount):
+    return price * (1 - discount)
+```

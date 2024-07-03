@@ -1,0 +1,32 @@
+gemini-pro - Instrução 2 sem titulo:
+
+```python
+class Order:
+    def __init__(self, primary_item, secondary_item, tertiary_item):
+        self.primary_item = primary_item
+        self.secondary_item = secondary_item
+        self.tertiary_item = tertiary_item
+
+    def base_price(self, item):
+        # Perform long computation for the item.
+        pass
+
+    def price(self):
+        return (
+            self.base_price(self.primary_item) +
+            self.base_price(self.secondary_item) +
+            self.base_price(self.tertiary_item)
+        )
+```
+
+**Refactoring Explanation:**
+
+* **Encapsulation:** Created a separate method, `base_price`, to encapsulate the complex computation for each item. This simplifies the `price` method and makes the computation more maintainable.
+
+* **Single Responsibility Principle:** The `base_price` method now has the sole responsibility of calculating the base price for an item, making it easier to understand and test.
+
+* **DRY (Don't Repeat Yourself):** Removed the duplicated computation from the `price` method and moved it to the `base_price` method, eliminating code duplication and reducing the risk of inconsistencies.
+
+* **Modularity:** The `base_price` method can be easily extended to handle different types of items, making the code more flexible and adaptable to future changes.
+
+* **Improved Readability:** The refactored code is significantly more readable and easy to understand, as it separates the computation from the price calculation and uses clear and concise variable names.

@@ -1,0 +1,10 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+def getExpenseLimit(self):
+    # Should have either expense limit or
+    # a primary project.
+    if self.expenseLimit is not None:
+        return self.expenseLimit
+    return self.primaryProject.getMemberExpenseLimit()
+```

@@ -1,0 +1,37 @@
+gemini-pro - Instrução 1 com titulo:
+
+**Refactored Code:**
+
+**1. Extract the calculation logic into a separate method:**
+
+```python
+class PizzaDelivery:
+    def __init__(self):
+        # ...
+
+    def getRating(self):
+        return self._calculateRating()
+
+    def _calculateRating(self):
+        return 2 if self.numberOfLateDeliveries > 5 else 1
+```
+
+**2. Use a lambda expression to simplify the condition:**
+
+```python
+def _calculateRating(self):
+    return 2 if self.numberOfLateDeliveries > 5 else 1
+```
+
+**3. Rename the method for clarity:**
+
+```python
+def calculateRating(self):
+    return 2 if self.numberOfLateDeliveries > 5 else 1
+```
+
+**Benefits of the refactor:**
+
+* **Enhanced readability:** The code is now more concise and easier to understand.
+* **Improved modularity:** The rating calculation logic is now encapsulated in a separate method.
+* **Increased maintainability:** Changes to the rating calculation can be easily made by modifying the `calculateRating` method.

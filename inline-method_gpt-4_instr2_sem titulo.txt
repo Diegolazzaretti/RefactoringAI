@@ -1,0 +1,27 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Refactored Code:
+
+```python
+class PizzaDelivery:
+    RATING = {True: 2, False: 1}
+    LATE_DELIVERY_THRESHOLD = 5
+    # ...
+    def getRating(self):
+        return self.RATING[self._isLateDeliveryOverThreshold()]   
+  
+    def _isLateDeliveryOverThreshold(self):
+        return self.numberOfLateDeliveries > self.LATE_DELIVERY_THRESHOLD
+```
+
+Explanation:
+
+1. Magic numbers: Magic numbers are generally considered bad practice due to a lack of context or meaning. The number 5 in `moreThanFiveLateDeliveries` and 1, 2 in `getRating` are magic numbers. I replaced them with named constants: `LATE_DELIVERY_THRESHOLD` and `RATING`. This allows common adjustments to occur in a single place and enhances readability by giving the number a meaningful name.
+
+2. Private method: We can specify that the method is intended to be private by changing `moreThanFiveLateDeliveries` to `_isLateDeliveryOverThreshold`. An underscore prefix in Python is a convention to denote that a variable or a method is intended for internal use.
+
+3. Method naming: Method names should clearly reflect what they do. The method name `moreThanFiveLateDeliveries` should reflect that it returns a boolean value based on a certain condition, so changing it to `_isLateDeliveryOverThreshold` makes it clearer. "Threshold" is used instead of the quantity "five" because the quantity is defined as a constant and may change, the importance here is the threshold concept.
+
+4. Dictionary for conditions: Dictionaries can be a very effective tool for replacing switch or complex conditional cases. It permits a reduction in complexity by removing the if-else condition in `getRating`.
+
+These changes are aimed at increasing code readability and flexibility. Any changes to the rating values or late delivery threshold can now be done in one place eliminating hard to maintain code.

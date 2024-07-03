@@ -1,0 +1,19 @@
+mistral - Instrução 1 com titulo:
+
+
+18. extract-amount-validation-logic
+def validate_amount(amount):
+    if amount > 0:
+        return True
+    else:
+        raise ValueError("Amount must be positive")
+
+
+19. separate-withdrawal-and-amount-validation-logic
+def withdraw(self, amount):
+    validated_amount = validate_amount(amount)
+    if validated_amount > self.balance:
+        return -1
+    else:
+        self.balance -= amount
+    return 0

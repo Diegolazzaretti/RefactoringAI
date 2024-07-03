@@ -1,0 +1,16 @@
+gpt-4 - Instrução 1 com titulo:
+
+You can combine the conditions using logical AND operator to make the code more concise and readable. Also, instead of writing the conditions directly in the function, you can isolate them into a separate function for better modularity and readability. Here is the refactored code:
+
+```python
+def eligibilityCriteria(seniority, monthsDisabled, isPartTime):
+    return seniority >= 2 and monthsDisabled <= 12 and not isPartTime
+
+def disabilityAmount(seniority, monthsDisabled, isPartTime):
+    if not eligibilityCriteria(seniority, monthsDisabled, isPartTime):
+        return 0
+    # Compute the disability amount.
+    # ...
+```
+
+In the refactored code, we have isolated the eligibility criteria into a separate function (`eligibilityCriteria`). This makes the code more modular (functions have a single responsibility) and enhances readability (easier to understand what each function does). It also enhances maintainability, as changes to the eligibility criteria only need to be made in one place.

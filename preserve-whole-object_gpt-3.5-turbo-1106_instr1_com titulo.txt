@@ -1,0 +1,19 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+```python
+# preserve-whole-object
+
+# Get high and low temperature from daysTempRange
+def get_temperatures(daysTempRange):
+    low = daysTempRange.getLow()
+    high = daysTempRange.getHigh()
+    return low, high
+
+# Check if temperatures are within the plan range
+def within_plan(low, high, plan):
+    return plan.withinRange(low, high)
+
+# Example usage
+low, high = get_temperatures(daysTempRange)
+withinPlan = within_plan(low, high, plan)
+```

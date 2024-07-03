@@ -1,0 +1,33 @@
+gemini-pro - Instrução 1 sem titulo:
+
+**Enhanced Code:**
+
+```python
+from typing import Dict
+
+CUSTOMER_DISCOUNT_THRESHOLD = 1000
+
+def get_base_price(order: Dict) -> float:
+    """Returns the base price of the order."""
+    return order["base_price"]
+
+def has_discount(order: Dict) -> bool:
+    """Determines if the order has a discount based on base price.
+
+    Args:
+        order (Dict): The order information.
+
+    Returns:
+        bool: True if there is a discount, False otherwise.
+    """
+    base_price = get_base_price(order)
+    return base_price > CUSTOMER_DISCOUNT_THRESHOLD
+```
+
+**Refactoring Details:**
+
+* **Use meaningful variables:** Renamed `basePrice` to `base_price` for clarity.
+* **Use constants:** Introduced a constant `CUSTOMER_DISCOUNT_THRESHOLD` to define the discount threshold.
+* **Modularize base price calculation:** Created a separate function `get_base_price` to extract the base price calculation logic from the main function.
+* **Add type hints:** Annotated the function parameters and return values with type hints for improved code readability and self-documentation.
+* **Improve naming:** Renamed the main function to `has_discount` to better reflect its purpose.

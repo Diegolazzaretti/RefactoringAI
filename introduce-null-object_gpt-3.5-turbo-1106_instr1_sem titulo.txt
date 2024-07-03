@@ -1,0 +1,8 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def get_billing_plan(customer):
+    if customer is None:
+        plan = BillingPlan.basic()
+    else:
+        plan = customer.getPlan()
+    return plan

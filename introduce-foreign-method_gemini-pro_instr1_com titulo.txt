@@ -1,0 +1,18 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+class Report:
+    def __init__(self, previous_end):
+        self.previous_end = previous_end
+
+    def send_report(self):
+        next_day = self._calculate_next_day()
+        # ...
+
+    def _calculate_next_day(self):
+        return Date(
+            self.previous_end.getYear(),
+            self.previous_end.getMonth(),
+            self.previous_end.getDate() + 1,
+        )
+```

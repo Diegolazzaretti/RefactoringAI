@@ -1,0 +1,28 @@
+mistral - Instrução 2 com titulo:
+
+Here's the refactored code using the `strategy` design pattern to improve modularity and reduce code duplication:
+```python
+class AbstractExpenseLimitStrategy:
+    def getExpenseLimit(self):
+        pass
+
+class ExpenseLimitStrategy(AbstractExpenseLimitStrategy):
+    def __init__(self, expense_limit=None):
+        self.expense_limit = expense_limit
+
+    def getExpenseLimit(self):
+        return self.expense_limit if self.expense_limit != None else None
+
+class PrimaryProjectStrategy(AbstractExpenseLimitStrategy):
+    def __init__(self, primary_project):
+        self.primary_project = primary_project
+
+    def getExpenseLimit(self):
+        return self.primary_project.getMemberExpenseLimit()
+```
+Explanation of changes:
+- The `AbstractExpenseLimitStrategy` class is the base class for all expense limit strategies. It has an abstract method `getExpenseLimit()`.
+- The `ExpenseLimitStrategy` class implements the `AbstractExpenseLimitStrategy` and sets an initial expense limit value in its constructor. If the expense limit is not set, it returns `None`.
+- The `PrimaryProjectStrategy` class implements the `AbstractExpenseLimitStrategy` and sets a primary project instance in its constructor. It overrides the `getExpenseLimit()` method to get the member expense limit of the primary project.
+
+Using this strategy pattern, we can now switch between different expense limit strategies easily by changing the type of object used to implement the `AbstractExpenseLimitStrategy`. This improves modularity and reduces code duplication, making the code more maintainable and easier to modify in the future.

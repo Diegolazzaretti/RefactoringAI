@@ -1,0 +1,437 @@
+Código Original (split-temporary-variable):
+
+temp = 2 * (height + width)
+print(temp)
+temp = height * width
+print(temp)
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```python
+def calculate_area(height: float, width: float) -> float:
+    """
+    Calculate the area of a rectangle given its height and width.
+    """
+    temp = 2 * (height + width)
+    temp = height * width
+    return temp
+
+height = float(input("Enter the height: "))
+width = float(input("Enter the width: "))
+
+print(calculate_area(height, width))
+```
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+def calculate_perimeter(height, width):
+    """
+    Calculates the perimeter of a rectangle given its height and width.
+
+    Args:
+        height (int): The height of the rectangle.
+        width (int): The width of the rectangle.
+
+    Returns:
+        int: The perimeter of the rectangle.
+    """
+    return 2 * (height + width)
+
+
+def calculate_area(height, width):
+    """
+    Calculates the area of a rectangle given its height and width.
+
+    Args:
+        height (int): The height of the rectangle.
+        width (int): The width of the rectangle.
+
+    Returns:
+        int: The area of the rectangle.
+    """
+    return height * width
+
+
+if __name__ == "__main__":
+    height = int(input("Enter the height of the rectangle: "))
+    width = int(input("Enter the width of the rectangle: "))
+
+    perimeter = calculate_perimeter(height, width)
+    print(f"The perimeter of the rectangle is: {perimeter}")
+
+    area = calculate_area(height, width)
+    print(f"The area of the rectangle is: {area}")
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def calculate_perimeter(height, width):
+    perimeter = 2 * (height + width)
+    return perimeter
+
+def calculate_area(height, width):
+    area = height * width
+    return area
+
+height = 5
+width = 10
+
+perimeter = calculate_perimeter(height, width)
+print(perimeter)
+
+area = calculate_area(height, width)
+print(area)
+
+gpt-4 - Instrução 1 sem titulo:
+Here is the simplified and more readable version of the code:
+
+```python
+def calculate_perimeter(height, width):
+    return 2 * (height + width)
+
+def calculate_area(height, width):
+    return height * width
+
+height = 10
+width = 5
+
+perimeter = calculate_perimeter(height, width)
+area = calculate_area(height, width)
+
+print(perimeter)
+print(area)
+```
+Now the code has clear function names that describe their purposes. This improves modularity because these functions can be reused in other parts of the same script or in another script. It's also easier to maintain because if you need to change the way you calculate area or perimeter later, you only need to modify the appropriate function.
+
+mistral - Instrução 1 com titulo:
+Here's one way to refactor the code:
+```python
+def calculate_temp(height, width):
+    temp1 = 2 * (height + width)
+    temp2 = height * width
+    return temp1, temp2
+
+# Example usage
+height, width = 5, 6
+temp1, temp2 = calculate_temp(height, width)
+print(f"temp1: {temp1}")
+print(f"temp2: {temp2}")
+```
+This code creates a function called `calculate_temp` that takes in two arguments (`height` and `width`) and calculates two temporary variables (`temp1` and `temp2`). The function returns both of these values. 
+
+In the example usage, we call `calculate_temp` with some sample values for height and width and print out the calculated temp1 and temp2 using f-strings.
+
+gemini-pro - Instrução 1 com titulo:
+There are a few ways to refactor the given code to enhance its readability, modularity, and maintainability. One approach is to extract the calculation of the two temporary values into separate functions:
+
+```python
+def calculate_perimeter(height, width):
+  return 2 * (height + width)
+
+def calculate_area(height, width):
+  return height * width
+
+height = 5
+width = 3
+perimeter = calculate_perimeter(height, width)
+area = calculate_area(height, width)
+
+print(perimeter)
+print(area)
+```
+
+This approach makes the code more readable and maintainable by separating the calculation of the perimeter and area into distinct functions. It also makes it easier to change the way the perimeter and area are calculated in the future.
+
+Another approach is to use a class to encapsulate the calculations:
+
+```python
+class Rectangle:
+  def __init__(self, height, width):
+    self.height = height
+    self.width = width
+
+  def calculate_perimeter(self):
+    return 2 * (self.height + self.width)
+
+  def calculate_area(self):
+    return self.height * self.width
+
+rectangle = Rectangle(5, 3)
+perimeter = rectangle.calculate_perimeter()
+area = rectangle.calculate_area()
+
+print(perimeter)
+print(area)
+```
+
+This approach is more object-oriented and makes it easier to add new methods to the class in the future. It also makes it easier to reuse the class to calculate the perimeter and area of other rectangles.
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+def calculate_perimeter(height, width):
+    perimeter = 2 * (height + width)
+    print(perimeter)
+
+def calculate_area(height, width):
+    area = height * width
+    print(area)
+
+gpt-4 - Instrução 1 com titulo:
+Refactored Code:
+
+def calculate_perimeter(height, width):
+    return 2 * (height + width)
+
+def calculate_area(height, width):
+    return height * width
+
+height = 10
+width = 5
+
+print(calculate_perimeter(height, width))
+print(calculate_area(height, width))
+
+mistral - Instrução 2 sem titulo:
+
+The given code calculates the area of a rectangle by multiplying its length and width twice. Here's how we can refactor it using object-oriented programming (OOP) principles:
+
+```python
+class Rectangle:
+    def __init__(self, height, width):
+        self.height = height
+        self.width = width
+    
+    def area(self):
+        return 2 * (self.height + self.width)
+    
+    def perimeter(self):
+        return 2 * (self.height + self.width)
+        
+rectangle = Rectangle(5, 6)
+print(rectangle.area())
+print(rectangle.perimeter())
+```
+
+In this refactored code, we've created a class `Rectangle` to encapsulate the height and width of a rectangle as attributes. We've also defined two methods `area()` and `perimeter()` to calculate the area and perimeter of a rectangle respectively. This makes the code more modular and reusable.
+
+In the original code, we were calculating the area of a rectangle by multiplying its length and width twice. In this refactored code, we've defined a method `area()` that calculates the area of a rectangle in the same way. However, since the perimeter of a rectangle is simply the sum of its length and width, we can define another method `perimeter()` to calculate it.
+
+We've created an instance of the `Rectangle` class with height 5 and width 6, and called its methods `area()` and `perimeter()` to print their values. Since both methods return the same result (2 * (height + width)), we could have easily defined a single method that does both calculations, but we've kept them separate for clarity and readability.
+
+In summary, we've refactored the given code by encapsulating it within a class `Rectangle`, which makes it more modular and reusable. We've also defined two methods to calculate the area and perimeter of a rectangle respectively, reducing duplication and simplifying the logic.
+
+gemini-pro - Instrução 2 sem titulo:
+**Refactored Code**
+
+```python
+# Define a function to calculate the perimeter of a rectangle
+def calculate_perimeter(height, width):
+    perimeter = 2 * (height + width)
+    return perimeter
+
+# Define a function to calculate the area of a rectangle
+def calculate_area(height, width):
+    area = height * width
+    return area
+
+# Get the height and width of the rectangle from the user
+height = int(input("Enter the height of the rectangle: "))
+width = int(input("Enter the width of the rectangle: "))
+
+# Calculate the perimeter and area of the rectangle
+perimeter = calculate_perimeter(height, width)
+area = calculate_area(height, width)
+
+# Print the perimeter and area of the rectangle
+print("Perimeter:", perimeter)
+print("Area:", area)
+```
+
+**Explanation**
+
+The original code is not very readable, modular, or maintainable. It calculates the perimeter and area of a rectangle in the same function, making it difficult to understand and modify. The refactored code addresses these issues by applying the following improvements:
+
+- **Function Decomposition**: The calculation of perimeter and area is separated into two distinct functions, `calculate_perimeter` and `calculate_area`. This makes the code more modular and easier to understand.
+- **Variable Scope**: The `temp` variable is replaced with local variables within the functions to avoid naming conflicts and improve code clarity.
+- **Input Handling**: The user is prompted to enter the height and width of the rectangle separately, making it easier to understand and avoid potential errors.
+- **Meaningful Variable Names**: The variable names are changed to more meaningful ones, such as `perimeter` and `area`.
+- **Consistent Formatting**: The code is formatted in a consistent style, making it easier to read and understand.
+
+These changes contribute to the following improvements:
+
+- **Readability**: The refactored code is much easier to read and understand, as the logic is simplified and organized into meaningful functions.
+- **Modularity**: The functions can be reused in other parts of the code, making it more flexible and maintainable.
+- **Maintainability**: The code is easier to modify and extend, as the functions can be updated independently.
+
+Overall, the refactored code adheres to the best practices of software development and provides a more robust and maintainable solution.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+```python
+class Rectangle:
+    def __init__(self, height, width):
+        self.height = height
+        self.width = width
+
+    def calculate_perimeter(self):
+        return 2 * (self.height + self.width)
+
+    def calculate_area(self):
+        return self.height * self.width
+
+rectangle1 = Rectangle(5, 8)
+print(rectangle1.calculate_perimeter())
+print(rectangle1.calculate_area())
+```
+
+Changes made:
+1. Created a `Rectangle` class to encapsulate the properties and operations related to a rectangle.
+2. Defined methods `calculate_perimeter` and `calculate_area` to calculate the perimeter and area of the rectangle, respectively.
+3. Removed the need for temporary variables and repetitive print statements. This improves readability and reduces code duplication.
+4. Made use of object-oriented programming principles to enhance modularity and maintainability.
+5. The refactored code is structured, organized, and adheres to best practices making it easier to understand, modify, and maintain.
+
+gpt-4 - Instrução 2 sem titulo:
+Refactored Code:
+
+```python
+def calculate_parameters(height, width):
+    perimeter = 2 * (height + width)
+    area = height * width
+    return perimeter, area
+
+def print_parameters(height, width):
+    perimeter, area = calculate_parameters(height, width)
+    print(f'The perimeter is {perimeter}')
+    print(f'The area is {area}')
+
+# Define your height and width
+height = 5
+width = 10
+
+print_parameters(height, width)
+```
+Explanation:
+
+The original code has been separated into two main functions for improved modularity and readability.
+
+1. `calculate_parameters()` function: This function calculates the area and perimeter of a rectangle given height and width. To improve maintainability, this function returns both the perimeter and area, thereby making it a reusable component for any other part of the program that may need to calculate area or perimeter.
+   
+2. `print_parameters()` function: This function calls the `calculate_parameters()` function, receives the perimeter and area, and prints them out. This separation lets us use the calculate_parameters function to compute the values, without forcing it to also print those values. Having less responsibilities for each function makes the code more maintainable and easier to understand.
+   
+By utilizing function definitions and parameters, code duplication is reduced as the same mathematical operations are not repeated elsewhere in the code. The variables `height` and `width` are now inputs, which means this code can be used to calculate the perimeter and area of any rectangle, not just one with hard-coded dimensions.
+
+Also, the function `print_parameters` uses f-string formatting to print the perimeter and area in a more human-readable way, making the printout more understandable for the end-user. F-strings are a feature in Python that allows for easier and more readable string formatting.
+
+Overall, this refactored code now adheres to some basic principles of clean code: functions have a single responsibility, calculations are abstracted away for reusability, and the code is more modular and readable.
+
+mistral - Instrução 2 com titulo:
+```python
+from functools import reduce
+
+def rectangle_area(height, width):
+    return reduce(lambda x, y: x+y, range(1, height+width+1))
+
+rectangle_area(5, 6)
+# Output: 30
+```
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+from typing import NamedTuple
+
+class Rectangle:
+    def __init__(self, height: int, width: int):
+        self.height = height
+        self.width = width
+
+    @property
+    def perimeter(self):
+        return 2 * (self.height + self.width)
+
+    @property
+    def area(self):
+        return self.height * self.width
+
+rectangle = Rectangle(5, 3)
+print("Perimeter:", rectangle.perimeter)
+print("Area:", rectangle.area)
+```
+
+**Changes Made:**
+
+* **Extract Temporary Variables:** Introduced named constants and variables to extract temporary computations, enhancing readability and reducing duplication.
+* **Encapsulation:** Created a `Rectangle` class to encapsulate rectangle-related logic, improving modularity and code organization.
+* **Object-Oriented Approach:** Utilized properties to calculate perimeter and area on demand, eliminating the need for temporary variables.
+
+**Benefits of Refactoring:**
+
+* **Enhanced Readability:** By extracting temporary variables and using descriptive variable names, the code has become easier to understand at a glance.
+* **Reduced Duplication:** The computation of perimeter and area is now performed in separate methods, eliminating code duplication and making it easier to maintain.
+* **Improved Modularity:** The `Rectangle` class allows for easy encapsulation of rectangle-related functionality, making it easier to add or modify behavior in the future.
+* **Simplified Logic:** By using object-oriented principles, the logic has been simplified, as the perimeter and area are now properties of the `Rectangle` object.
+* **Increased Maintainability:** The overall organization and adherence to best practices make the code more maintainable, as any future modifications can be easily accommodated without compromising functional integrity.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+The code can be refactored using the Extract Method design pattern to create separate methods for calculating the area and the perimeter of a rectangle. Additionally, we can use meaningful variable names to improve readability.
+
+Refactored code:
+
+```python
+class Rectangle:
+    def __init__(self, height, width):
+        self.height = height
+        self.width = width
+
+    def calculate_perimeter(self):
+        perimeter = 2 * (self.height + self.width)
+        return perimeter
+
+    def calculate_area(self):
+        area = self.height * self.width
+        return area
+
+rectangle = Rectangle(5, 4)
+print(rectangle.calculate_perimeter())
+print(rectangle.calculate_area())
+```
+
+Changes made:
+1. Created a Rectangle class to encapsulate the logic for calculating the perimeter and area of a rectangle.
+2. Used meaningful variable names (height, width) within the class to improve readability.
+3. Extracted the calculations into separate methods, calculate_perimeter() and calculate_area(), to improve modularity and maintainability.
+4. Instantiated a Rectangle object and called the calculate_perimeter() and calculate_area() methods to demonstrate the functionality.
+
+gpt-4 - Instrução 2 com titulo:
+Refactored code:
+
+```python
+def calculate_perimeter(height, width):
+    return 2 * (height + width)
+
+def calculate_area(height, width):
+    return height * width
+
+height, width = 5, 4 
+
+perimeter = calculate_perimeter(height, width)
+area = calculate_area(height, width)
+
+print(f'Perimeter: {perimeter}')
+print(f'Area: {area}')
+```
+
+Explanation:
+
+This is the refactored version of the original code. Several changes have been made aiming for achieving the abovementioned requirements:
+
+- Two separate functions namely `calculate_perimeter(height, width)` and `calculate_area(height, width)` have been defined in order to increase code modularity.
+  
+- This separation into multiple functions avoids the 'split temporary variable' and 'mistaken assignment' issues that could occur in the original code. It also makes it easier to understand what calculation each segment of code is performing.
+  
+- Use of the `f-string` in the `print` statements improves readability, as it allows for directly inserting the expression within the string, resulting in cleaner syntax.
+
+- Declaring 'height' and 'width' variables allows easy reusability and the possibility to change the dimensions in one place. This approach adheres to the DRY (Don't Repeat Yourself) principle, an essential best practice in software development.
+
+- Overall, the refactored code is more readable, maintainable and adaptable for future changes or additions than the original. And it better conforms to best practices of software development.
+

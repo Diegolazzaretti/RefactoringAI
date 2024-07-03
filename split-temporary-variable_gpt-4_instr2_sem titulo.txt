@@ -1,0 +1,34 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Refactored Code:
+
+```python
+def calculate_parameters(height, width):
+    perimeter = 2 * (height + width)
+    area = height * width
+    return perimeter, area
+
+def print_parameters(height, width):
+    perimeter, area = calculate_parameters(height, width)
+    print(f'The perimeter is {perimeter}')
+    print(f'The area is {area}')
+
+# Define your height and width
+height = 5
+width = 10
+
+print_parameters(height, width)
+```
+Explanation:
+
+The original code has been separated into two main functions for improved modularity and readability.
+
+1. `calculate_parameters()` function: This function calculates the area and perimeter of a rectangle given height and width. To improve maintainability, this function returns both the perimeter and area, thereby making it a reusable component for any other part of the program that may need to calculate area or perimeter.
+   
+2. `print_parameters()` function: This function calls the `calculate_parameters()` function, receives the perimeter and area, and prints them out. This separation lets us use the calculate_parameters function to compute the values, without forcing it to also print those values. Having less responsibilities for each function makes the code more maintainable and easier to understand.
+   
+By utilizing function definitions and parameters, code duplication is reduced as the same mathematical operations are not repeated elsewhere in the code. The variables `height` and `width` are now inputs, which means this code can be used to calculate the perimeter and area of any rectangle, not just one with hard-coded dimensions.
+
+Also, the function `print_parameters` uses f-string formatting to print the perimeter and area in a more human-readable way, making the printout more understandable for the end-user. F-strings are a feature in Python that allows for easier and more readable string formatting.
+
+Overall, this refactored code now adheres to some basic principles of clean code: functions have a single responsibility, calculations are abstracted away for reusability, and the code is more modular and readable.

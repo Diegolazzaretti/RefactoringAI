@@ -1,0 +1,24 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Here's a refactored version of the code:
+
+```python
+def calculate_discounted_price(quantity, item_price):
+    base_price = quantity * item_price
+    discount = 0.05 if base_price > 1000 else 0.02
+    return base_price * (1 - discount)
+```
+
+Changes Made: 
+
+- Renamed the function and added parameters to make it more readable and modular. By allowing parameters in the function, the function can easily be reused for different quantities or prices.
+
+- Used variables for the discount rate. This makes the code self-explanatory and easier to maintain or modify in future.
+
+- Combined the discount calculation into a single line using a ternary operation to simplify the logic and increase readability.
+
+The refactored code adheres to the DRY (Don't Repeat Yourself) principle, since it avoids repetition of the `base_price * ...` calculation. It also follows the principle of making code as modular and functional as possible, allowing the ability to just change the item quantity and price when necessary. 
+
+For easier unit testing, breaking down the logic into smaller pieces (like calculating the base price, discount and using those to get a final result) can be helpful. But since the existing logic is simple and straight forward, it's okay to keep it in one function. 
+
+Cryptic if-else branches are refactored into a readable single liner. This approach improves readability and makes the code cleaner.

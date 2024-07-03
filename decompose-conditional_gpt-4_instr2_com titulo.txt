@@ -1,0 +1,31 @@
+gpt-4 - Instrução 2 com titulo:
+
+The refactoring of the provided code involves breaking down the conditional logic into separate functions, each of which carries out a specific task. Refactoring is done to adhere to the Single Responsibility Principle (SRP), which states that a function or method should have only one reason to change. This helps clarify the code usage, improves readability and makes the code easier to work with in the future. Let's first refactor the code.
+
+Here is the refactored code:
+
+```python
+def is_summer(date):
+    return date.after(SUMMER_START) or date.before(SUMMER_END)
+
+def summer_charge(quantity, summerRate):
+    return quantity * summerRate
+
+def winter_charge(quantity, winterRate, winterServiceCharge):
+    return quantity * winterRate + winterServiceCharge
+
+if is_summer(date):
+    charge = summer_charge(quantity, summerRate)
+else:
+    charge = winter_charge(quantity, winterRate, winterServiceCharge)
+```
+
+In the refactored code:
+
+1. The condition within the if-statement has been encapsulated in a function called `is_summer`. This function improves readability by giving a name to the condition, indicating that it checks if the provided date is within the summer period.
+
+2. The calculation of the summer charge is done in the `summer_charge` function and the winter charge in the `winter_charge` function. By isolating these calculations, the code within the if-else statement becomes easier to understand, and these functions can also be tested independently.
+
+3. The conditional statement's logic is now more streamlined and much easier to grasp because it focuses only on the decision-making logic and delegates the actual work to the appropriate functions. This separation of responsibilities enhances the overall code quality, making it easier to modify or extend in the future.
+
+Overall, these changes make the code cleaner, more modular, easier to understand, and the logic for each concern has been isolated, making the code more maintainable.

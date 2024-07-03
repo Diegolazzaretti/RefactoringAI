@@ -1,0 +1,29 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Refactoring the printOwning function: 
+
+```python
+def printDetails(self, name, amount):
+    print("name:", name)
+    print("amount:", amount)
+
+def printBanner(self):
+    #print banner code here
+
+def printOwing(self):
+    self.printBanner()
+    outstanding = self.getOutstanding()
+    self.printDetails(self.name, outstanding)
+```
+
+In the refactored code, 
+
+1. The function printDetails() is introduced which takes name and amount as parameters to print them. This improves readability as its functionality is clear from its name. It can be modified independently without impacting other code, therefore enhancing modularity. If there's a change in format to print details or the platform for printing needs to be changed (like logging into a file, etc.) only this method will need to be changed.
+
+2. Similar things applies to printBanner() function. It enhances readability and modularity.
+
+3. In printOwing() function, getOutstanding() is moved to a separate line with its output being stored in a variable. This increases readability as it's clear that outstanding is fetched first and then it's being sent to print. 
+
+4. The printDetails() function is then called with the required parameters. This improves both maintainability and modularity since if either of them needs to change you only have to change one place in your code. Moreover, it may be used in other places of the code if the same logic is required elsewhere. 
+
+Henceforth, the code is more readable, modular and maintainable.

@@ -1,0 +1,62 @@
+mistral - Instrução 2 com titulo:
+
+The code provided can be refactored in several ways to improve its readability, modularity, and maintainability. Below is one possible way to refactor the code using the Observer pattern:
+```less
+interface TempRangeObserver {
+  onLow(double low);
+  onHigh(double high);
+}
+
+class DaysTempRange implements TempRangeObserver {
+  private double low;
+  private double high;
+
+  public void setLow(double low) {
+    this.low = low;
+    onLow(low);
+  }
+
+  public void setHigh(double high) {
+    this.high = high;
+    onHigh(high);
+  }
+
+  @Override
+  public void onLow(double low) {
+    // do something with the low temperature
+  }
+
+  @Override
+  public void onHigh(double high) {
+    // do something with the high temperature
+  }
+}
+
+class Plan implements TempRangeObserver {
+  private double low;
+  private double high;
+
+  public boolean withinRange(double low, double high) {
+    this.low = low;
+    this.high = high;
+    onLow(low);
+    onHigh(high);
+    return isWithinRange();
+  }
+
+  @Override
+  public void onLow(double low) {
+    // do something with the low temperature
+  }
+
+  @Override
+  public void onHigh(double high) {
+    // do something with the high temperature
+  }
+
+  private boolean isWithinRange() {
+    return low <= high;
+  }
+}
+```
+The refactored code separates the logic for handling temperature ranges from the logic for determining whether a plan is within the range. This improves modularity and reduces code duplication. Additionally, using an interface (TempRangeObserver) to define the behavior of classes that need to be notified when the temperature range changes makes the code more flexible and easier to modify in the future. The Observer pattern ensures that any class that implements TempRangeObserver will receive notifications when the temperature range changes, without having to know about each other's implementation details.

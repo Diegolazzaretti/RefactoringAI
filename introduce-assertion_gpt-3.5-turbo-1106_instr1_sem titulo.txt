@@ -1,0 +1,9 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def get_expense_limit(self):
+    # Should have an expense limit or
+    # a primary project.
+    if self.expenseLimit != NULL_EXPENSE:
+        return self.expenseLimit
+    else:
+        return self.primaryProject.get_member_expense_limit()

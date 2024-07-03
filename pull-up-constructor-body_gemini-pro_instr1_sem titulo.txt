@@ -1,0 +1,23 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+class Manager(Employee):
+    def __init__(self, name, id, grade):
+        super().__init__(name, id)
+        self.grade = grade
+
+
+# Example of usage:
+
+manager = Manager("John Smith", 12345, 9)
+```
+
+**Enhancements:**
+
+* **Encapsulation**: The `__init__` method of the `Manager` class now uses `super()` to invoke the `__init__` method of the base class `Employee`. This ensures that the common initialization logic is handled in one place, making the code more maintainable.
+
+* **Modularity**: The `grade` attribute is now initialized separately from the `name` and `id` attributes. This makes it easier to add or modify the initialization logic for the `grade` attribute in the future.
+
+* **Readability**: The code is now more readable and easier to understand, thanks to the use of clear and concise variable names and comments.
+
+* **Maintainability**: The use of `super()` and the modular initialization logic makes the code easier to maintain and extend in the future.

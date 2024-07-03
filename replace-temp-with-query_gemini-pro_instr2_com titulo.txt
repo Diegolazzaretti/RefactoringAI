@@ -1,0 +1,41 @@
+gemini-pro - Instrução 2 com titulo:
+
+**Refactored Code with Design Pattern and Improved Readability:**
+
+```python
+class DiscountCalculator:
+    def __init__(self, base_price, quantity, item_price):
+        self.base_price = base_price
+        self.quantity = quantity
+        self.item_price = item_price
+
+    def calculate_discounted_price(self):
+        self.calculate_base_price()
+        if self.base_price > 1000:
+            return self.base_price * 0.95
+        else:
+            return self.base_price * 0.98
+
+    def calculate_base_price(self):
+        self.base_price = self.quantity * self.item_price
+
+
+def calculate_total(quantity, item_price):
+    calculator = DiscountCalculator(0, quantity, item_price)
+    return calculator.calculate_discounted_price()
+```
+
+**Explanation of Changes:**
+
+* **Design Pattern:** Introduced the `DiscountCalculator` class to encapsulate the calculation logic and separate it from the client code.
+* **Modularity:** Created a distinct method (`calculate_base_price`) to handle the calculation of the base price. This allows for easier modification and avoids code duplication.
+* **Readability:** Improved the naming of variables and methods to enhance clarity.
+* **Maintainability:** By separating the calculation logic into a class, future modifications can be isolated and easily implemented.
+* **Functional Integrity:** The core functionality of the code remains unchanged, ensuring that the refactoring does not introduce any unintended behavior.
+
+**Benefits of Refactoring:**
+
+* **Improved Encapsulation:** The use of a class encapsulates the calculation logic, making it more reusable and easier to modify.
+* **Enhanced Separation of Concerns:** Separating the base price calculation into a separate method clarifies the code structure and reduces duplication.
+* **Increased Maintainability:** Refactoring into a class-based design makes it simpler to update the discount logic or add additional discounts in the future.
+* **Improved Readability:** The clear naming and modularization enhance the code's understandability for maintainers and reviewers.

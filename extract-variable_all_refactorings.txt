@@ -1,0 +1,395 @@
+Código Original (extract-variable):
+
+def renderBanner(self):
+    if (self.platform.toUpperCase().indexOf("MAC") > -1) and \
+       (self.browser.toUpperCase().indexOf("IE") > -1) and \
+       self.wasInitialized() and (self.resize > 0):
+        # do something
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+
+Firstly, the code can be made more modular by moving the conditionals into a separate function, which can then be called within `renderBanner`. This makes the code more readable as the logic for checking platform and browser is separated from the main rendering logic. 
+
+Secondly, it would be beneficial to rename some variables to make them more descriptive and self-explanatory. For example, instead of using `self.resize` to check if resizing should occur, a variable such as `shouldResize` can be used.
+
+Thirdly, it's good practice to add docstrings to functions and variables to explain their purpose and usage. 
+
+Here is the refactored code:
+```python
+def shouldRenderBanner(self):
+    """Check if banner should be rendered based on platform and browser."""
+    return (self.platform.toUpperCase().indexOf("MAC") > -1) and \
+           (self.browser.toUpperCase().indexOf("IE") > -1) and \
+           self.wasInitialized() and (self.resize > 0)
+    
+def renderBanner(self):
+    """Render the banner if necessary."""
+    if shouldRenderBanner(self):
+        # do something
+```
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+def render_banner(self):
+    """Renders a banner based on platform, browser, and initialization status."""
+
+    is_mac = "MAC" in self.platform.upper()
+    is_ie = "IE" in self.browser.upper()
+    is_initialized = self.was_initialized()
+    resize_count = self.resize
+
+    if is_mac and is_ie and is_initialized and resize_count > 0:
+        # do something
+```
+
+The refactored code is highly readable, modular, and maintainable due to the following enhancements:
+
+- **Readability:** The conditions are now stored in separate variables with descriptive names, making it easier to understand the logic.
+- **Modularity:** The boolean variables `is_mac`, `is_ie`, `is_initialized`, and `resize_count` can be reused in other parts of the code if needed.
+- **Maintainability:** The code is now more structured and easier to modify or extend in the future.
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+Updated refactor the given code:
+```python
+def render_banner(self):
+    mac_platform = "MAC"
+    ie_browser = "IE"
+    platform = self.platform
+    browser = self.browser
+    if (mac_platform in platform.upper()) and (ie_browser in browser.upper()) and self.was_initialized() and (self.resize > 0):
+        # do something
+```
+
+gpt-4 - Instrução 1 sem titulo:
+Here's the refactored Python code:
+
+```python
+def is_platform_mac(self):
+    return "MAC" in self.platform.upper()
+
+def is_browser_ie(self):
+    return "IE" in self.browser.upper()
+
+def render_banner(self):
+    if self.is_platform_mac() and self.is_browser_ie() and self.was_initialized() and self.resize > 0:
+        # do something
+```
+
+In this refactor, we've moved the checks for "Mac" and "IE" into their own methods (`is_platform_mac` and `is_browser_ie`), which makes it easier to decipher what those specific checks are doing. This also allows those functions to be tested separately and reused elsewhere in the code if needed.
+ 
+Additionally, Python has a built-in string method `in` which works well for checking if one string is in another, so we used that instead of `indexOf`. This method returns `True` if it finds a string within a string else `False`, making the code easier to read. 
+
+Also, to keep all functions pythonic, `renderBanner` should be in snake_case, which is to say, `render_banner`.
+
+mistral - Instrução 1 com titulo:
+```python
+def render_banner(platform, browser, was_initialized, resize):
+    if platform.toUpperCase().index("MAC") != -1 and \
+       browser.toUpperCase().index("IE") != -1 and \
+       was_initialized and resize > 0:
+        # do something
+```
+
+gemini-pro - Instrução 1 com titulo:
+```
+def renderBanner(self):
+    """Renders the banner."""
+    is_mac = self.platform.upper().find("MAC") > -1
+    is_ie = self.browser.upper().find("IE") > -1
+    is_initialized = self.wasInitialized()
+    is_resized = self.resize > 0
+
+    if is_mac and is_ie and is_initialized and is_resized:
+        # do something
+
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+Refactoring Solution:
+
+'''
+def isMacOSSelfAndInitialized(self):
+    is_mac, is_ie_browser = (
+        self.platform.toUpperCase().indexOf('MAC') > -1,
+        self.browser.toUpperCase().indexOf('IE') > -1
+    )
+
+    return is_mac and is_ie_browser and self.wasInitialized() and (self.resize > 0)
+
+def renderBanner(self):
+    if isMacOSSelfAndInitialized(self):
+        # do something
+'''
+
+gpt-4 - Instrução 1 com titulo:
+Sure, we can refactor the code as follows:
+
+```python
+def isPlatformMac(self):
+    return "MAC" in self.platform.upper()
+
+def isBrowserIE(self):
+    return "IE" in self.browser.upper()
+
+def isResized(self):
+    return self.resize > 0
+
+def renderBanner(self):
+    if self.isPlatformMac() and \
+       self.isBrowserIE() and \
+       self.wasInitialized() and \
+       self.isResized():
+        # do something
+```
+
+In this refactoring, we've introduced three helper methods to check if the platform is Mac, if the browser is IE, and if it's resized. Now, it's easier to understand what conditions lead to the "do something" part. Furthermore, if the conditions for those checks ever change, you'll only have to update those checks in one place (inside their relevant methods).
+
+mistral - Instrução 2 sem titulo:
+
+The given code is a small snippet that renders a banner, based on certain conditions. Here's the refactored version of this code, which follows the principles of object-oriented programming, modularity, and maintainability:
+```python
+class Banner:
+    def __init__(self, platform, browser, resize):
+        self.platform = platform
+        self.browser = browser
+        self.resize = resize
+    
+    def was_initialized(self):
+        # implementation for checking if the banner has been initialized
+        pass
+    
+    def render(self):
+        if self.was_initialized() and self.resize > 0:
+            if self.platform.toUpperCase().indexOf("MAC") > -1 and \
+               self.browser.toUpperCase().indexOf("IE") > -1:
+                # do something
+```
+The changes made to the code are as follows:
+
+1. We created a new class called `Banner`, which encapsulates all the functionality related to rendering the banner. This makes the code more modular and easier to read, since all the relevant details are in one place.
+2. We defined an `__init__` method for the `Banner` class, which initializes the object's attributes (platform, browser, resize).
+3. We created a separate method called `was_initialized` to check if the banner has been initialized or not. This makes the code more modular and maintainable by separating concerns.
+4. We defined a new method called `render`, which performs the actual rendering of the banner. The implementation details are moved here, making it easier to understand the logic and reducing the clutter in the main program.
+5. We made use of inheritance by creating an instance of the `Banner` class to render the banner. This makes the code more modular and reusable.
+6. We added comments for better understanding of the code.
+
+These changes make the code more modular, maintainable, and easier to understand. They also reduce the code duplication by separating concerns and making use of inheritance. Overall, these changes contribute to a more robust and scalable solution.
+
+gemini-pro - Instrução 2 sem titulo:
+**Refactored Code:**
+
+```
+class RenderService:
+
+    def __init__(self, platform, browser, resize):
+        self.platform = platform
+        self.browser = browser
+        self.resize = resize
+
+    def canRender(self):
+        return (self.platform.upper().find("MAC") > -1 and
+                self.browser.upper().find("IE") > -1 and
+                self.resize > 0)
+
+    def render(self):
+        if self.canRender():
+            # do something
+
+
+# Usage:
+service = RenderService("Mac", "IE", 10)
+if service.canRender():
+    service.render()
+```
+
+**Changes Made:**
+
+* **Encapsulation:** The rendering logic is encapsulated within the `RenderService` class, separating it from the view. This improves modularity and makes it easier to modify the rendering behavior in the future.
+* **Single Responsibility Principle (SRP):** The `RenderService` class has a single responsibility: rendering banners. This makes the code easier to reason about and maintain.
+* **Method Extraction:** The `canRender` method extracts the rendering logic into a separate method, which improves the readability of the `render` method.
+* **Conditional Invocation:** The rendering logic is now invoked conditionally based on the output of the `canRender` method. This avoids unnecessary code execution and makes the code more concise.
+* **Object-Oriented Approach:** The use of the `RenderService` class promotes an object-oriented approach, where the rendering logic is encapsulated in an object instance. This facilitates easier maintenance and modification.
+
+**Benefits of these Changes:**
+
+* **Improved Readability:** The refactored code is easier to read and understand due to the clear separation of concerns and the use of descriptive method names.
+* **Enhanced Modularity:** The modular design allows for easy modification of the rendering logic without affecting other parts of the code.
+* **Increased Maintainability:** The object-oriented approach and the SRP make it easier to maintain the code and add new features in the future.
+* **Reduced Code Duplication:** The extraction of the `canRender` method eliminates code duplication and improves the overall code organization.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+In the refactored code, we will use the Chain of Responsibility design pattern to simplify the conditional logic. We will target the rendering logic for each specific platform and browser. By reducing code duplication, the refactored implementation will achieve a higher level of readability, modularity, and maintainability.
+
+```python
+def isMAC(self):
+    return self.platform.upper().contains("MAC")
+
+def isIE(self):
+    return self.browser.upper().contains("IE")
+
+def render(self):
+    if isMAC() and isIE() and self.wasInitialized() and self.resize > 0:
+        # render specific behavior
+```
+
+Changes made:
+1. Created separate helper functions `isMAC` and `isIE` to check if the platform is Mac and browser is IE accordingly. This simplifies the conditional logic, making it easier to read and understand.
+2. Extracted the condition defined in the original `renderBanner` method and moved it to `render` method, which is in accordance with the single responsibility principle. If any changes need to be made in the conditions, it will be easier to locate and update this predicate logic inside the `render` method.
+3. Improved semantic intention of function names to make the logic more transparent.
+
+gpt-4 - Instrução 2 sem titulo:
+Refactored code:
+
+```python
+# We should create two helper functions to improve readability and maintainability
+
+def _isMacPlatform(self):
+    # case insensitive inclusion check for "MAC"
+    return "MAC" in self.platform.upper()
+
+def _isIEBrowser(self):
+    # case insensitive inclusion check for "IE"
+    return "IE" in self.browser.upper()
+
+def renderBanner(self):
+    isMacPlatform = self._isMacPlatform()
+    isIEBrowser = self._isIEBrowser()
+    
+    if isMacPlatform and isIEBrowser and self.wasInitialized() and self.resize > 0:
+        # do something
+        pass
+```
+
+Changes Explanation:
+
+1. Created two helper methods, `_isMacPlatform` and `_isIEBrowser`, to abstract the logic of evaluating the platform and browser used. Hiding the internals of these credential checks leads to enhanced readability and maintainability because if the logic of these checks were to change in the future (for instance, how we determine if a platform is a Mac or a browser is IE), we would only need to modify the dedicated functions, rather than tracing the intricate logic inside the main method. This modification respects the design principle of 'Single Responsibility' - individual functions should focus on a single task.
+
+2. Removed the usage of `str.indexOf("substr") > -1` to `"substr" in str` for string inclusion check. Python supports direct membership check for strings and this is more idiomatic and readable in Python.
+
+3. Stored the boolean values of `isMacPlatform` and `isIEBrowser` into variables before the main `if` condition. This results in increased readability as it minimizes the cognitive load required to understand the complex condition.
+
+4. Kept the main function's name `renderBanner` same to avoid any functional difference. Ensuring that the external interface remains unchanged is essential while refactoring as it contributes to preserving functional integrity.
+
+5. One potential future improvement would be if the checks become even more complex, we could consider using a strategy pattern. Each validation strategy could be a standalone function or object, further enhancing code organization, readability, and maintainability.
+
+
+mistral - Instrução 2 com titulo:
+
+The code provided is a simple if-else statement that checks for certain conditions to be true before executing a block of code. However, it is not very readable or modular as it duplicates several conditions that check for specific strings in the `self.platform` and `self.browser` variables.
+
+To refactor this code, we can create two separate functions that handle each condition and then call these functions within the main function to improve its readability and modularity. We can also extract the common part of the conditions that check for specific strings in the `self.platform` and `self.browser` variables into a separate variable or function, depending on the requirements.
+
+Here is one possible refactored version of the code:
+```scss
+def shouldRenderBanner(self):
+    if self.platform.toUpperCase().indexOf("MAC") > -1 and \
+       self.browser.toUpperCase().indexOf("IE") > -1:
+        return True
+    else:
+        return False
+
+def renderBanner(self):
+    if shouldRenderBanner(self) and self.wasInitialized() and self.resize > 0:
+        # do something
+```
+In this version, we have extracted the common part of the conditions that check for specific strings in the `self.platform` and `self.browser` variables into a separate function called `shouldRenderBanner`. We then call this function within the main function to determine if the banner should be rendered.
+
+We have also separated the common condition that checks if the platform is MAC and IE into a separate function called `shouldRenderBanner`. This makes the code more modular and easier to maintain as we can now make changes to one of these functions without affecting the other.
+
+Overall, this refactored version of the code adheres to best practices by promoting separation of concerns, reducing code duplication, and improving overall organization. It also provides a clearer and more modular structure that makes it easier to understand and modify in the future.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```
+def renderBanner(self):
+    # Extract platform and browser information into variables
+    platform = self.platform.toUpperCase()
+    browser = self.browser.toUpperCase()
+
+    # Refactor conditionals using logical operators
+    if platform.find("MAC") != -1 and browser.find("IE") != -1 and self.wasInitialized() and self.resize > 0:
+        # do something
+```
+
+**Changes and Improvements:**
+
+* **Variable Extraction:**
+    - Created variables (`platform` and `browser`) to hold platform and browser information, extracting them from the conditional expression.
+    - This enhances readability by separating the variable assignments from the conditional logic.
+
+* **Logical Operator Refactoring:**
+    - Replaced the multiple `indexOf()` calls with `find()` and logical operators (`and`, `!=`).
+    - This simplifies the conditionals, making them more concise and easier to understand.
+
+* **Improved Organization:**
+    - Moved the variable assignments to the beginning of the method, clearly separating them from the conditional logic.
+    - The conditional logic is now presented in a more structured and visually appealing manner.
+
+* **Maintainability:**
+    - The refactored code is more modular and maintainable. Future modifications to the conditionals can be made more easily without affecting other parts of the codebase.
+
+* **Functional Integrity:**
+    - The refactored code maintains the same functional integrity as the original code, ensuring that the banner rendering logic remains unchanged.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+Code refactored using an "extract method" design pattern:
+
+def renderBanner(self):
+    if self.isMacOs() and \
+       self.isInternetExplorer() and \
+       self.wasInitialized() and self.wasResized():
+        # do something
+
+def isMacOs(self):
+    return self.platform.toUpperCase().indexOf("MAC") > -1
+
+def isInternetExplorer(self):
+    return self.browser.toUpperCase().indexOf("IE") > -1
+
+def wasResized(self):
+    return self.resize > 0
+This refactored code enhances readability by breaking down `renderBanner` into smaller, descriptive methods. It also adheres to the Single Responsibility Principle since each method represents a single functionality. The `extract method` pattern is used to solve code duplication, simplify the logic, and improve overall organization. These changes significantly facilitate future modifications while maintaining functional integrity, making the code much easier to maintain.
+
+gpt-4 - Instrução 2 com titulo:
+Following is the refactored code:
+
+```python
+class Banner:
+
+    def _is_mac_platform(self):
+        PLATFORM_IDENTIFIER = "MAC"
+        return PLATFORM_IDENTIFIER in self.platform.upper()
+    
+    def _is_ie_browser(self):
+        BROWSER_IDENTIFIER = "IE"
+        return BROWSER_IDENTIFIER in self.browser.upper()
+    
+    def can_render(self):
+        return self._is_mac_platform() and self._is_ie_browser() and self.was_initialized() and (self.resize > 0)
+    
+    def render(self):
+        if self.can_render():
+            # do something
+            pass
+        else: 
+            # do something else
+            pass
+```
+
+In the refactored code, I made below considerations:
+
+1. Classes: First step of the refactoring process is to encapsulate the code inside a class (Banner). This allows for a more modular approach and helps in maintaining object oriented principles. 
+
+2. Function Naming: Renamed the main function `renderBanner` to `render` since we already know we are inside Banner class, `renderBanner` would be redundant. 
+
+3. Lower-Level Functions: Functions `_is_mac_platform()` and `_is_ie_browser()` have been added to break down the complex if condition from the initial code segment. This helps enhance the modularity and readability of the code, as the logic behind each of the browser type check is now separately located in self-explanatory named functions.
+
+4. Constants: Application of constants (`PLATFORM_IDENTIFIER` and `BROWSER_IDENTIFIER`) to enhance readability and simplifying future changes.
+
+5. Intermediary Function: `can_render` has been added as a higher level function cleaning up the condition from the main `render` method. This enhances the readability and understandability of the condition required for rendering the banner, making the main `render` method simpler.
+
+In general, code is now more modular, maintainable, easier to understand and expand, reinforcing the principles of clean code and single responsibility principle. The functional behavior of the code remains intact while increasing the versatility for future modifications.
+

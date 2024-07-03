@@ -1,0 +1,10 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def calculate_total_price(price):
+    return price * 0.95 if is_special_deal() else price * 0.98
+
+def send_notification():
+    send()
+
+total = calculate_total_price(price)
+send_notification()

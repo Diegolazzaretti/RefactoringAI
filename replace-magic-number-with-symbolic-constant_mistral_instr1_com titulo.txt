@@ -1,0 +1,16 @@
+mistral - Instrução 1 com titulo:
+
+
+To enhance the readability, modularity, and maintainability of the code, we can make use of symbolic constants to replace hardcoded values. Here's one way we could refactor the code:
+
+```python
+import math
+
+# Define a constant for acceleration due to gravity
+GRAVITY_ACCELERATION = 9.81
+
+def potentialEnergy(mass, height):
+    return mass * height * GRAVITY_ACCELERATION
+```
+
+In this refactored code, we've defined a constant `GRAVITY_ACCELERATION` and assigned it the value of `9.81`. This makes the code more modular and maintainable by separating concerns and encapsulating the constant in its own variable. The function `potentialEnergy()` can now be easily modified to use a different value for acceleration due to gravity without having to change multiple lines of code. Additionally, using symbolic constants improves the readability of the code by making it clear what the constant represents.

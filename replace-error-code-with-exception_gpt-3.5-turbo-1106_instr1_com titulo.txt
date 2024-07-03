@@ -1,0 +1,7 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+def withdraw(self, amount):
+    if amount > self.balance:
+        raise ValueError("Insufficient balance to withdraw")
+    self.balance -= amount
+    return 0

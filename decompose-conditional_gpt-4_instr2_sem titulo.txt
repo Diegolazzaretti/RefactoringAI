@@ -1,0 +1,32 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Here's the refactored code:
+
+```python
+def calculate_charge(quantity, rate, service_charge=0):
+    return quantity * rate + service_charge
+
+def determine_rate_and_charge(date, quantity):
+    is_summer = not date.before(SUMMER_START) and not date.after(SUMMER_END)
+
+    if is_summer:
+        return calculate_charge(quantity, summerRate)
+    else:
+        return calculate_charge(quantity, winterRate, winterServiceCharge)
+```
+
+Explanation:
+
+1. Encapsulation: The logic for calculating charge is encapsulated within a new function, `calculate_charge()`. This makes the code more modular, improves readability, and reduces redundancy.
+
+2. Single Responsibility Principle: By creating separate functions `calculate_charge()` and `determine_rate_and_charge()`, we ensure that each function has a single responsibility. As a result, the functions become easier to understand, test, and maintain.
+
+3. Descriptive variable and function names: The boolean variable `is_summer` and other function names are chosen to accurately describe what they represent/do, which enhances readability and understanding of the code.
+
+4. Use of constants: The `SUMMER_START` and `SUMMER_END` are assumed to be constants, and adhering to convention, are typed in all upper case. This clearly indicates that these values are constant and not to be modified.
+
+5. Pass additional parameters when necessary (`service_charge`): The need for a service charge is not universal to all charges. By making `service_charge` a default argument in `calculate_charge()`, we maintain the integrity of the code when called with two arguments, while allowing for the option to include the service charge when necessary.
+
+6. Improved Logic: The `is_summer` check is used instead of two separate checks in the original `if` condition, making it more obvious to understand what condition is being tested.
+
+7. Predictable return: `determine_rate_and_charge()` now returns the calculated charge directly, regardless of the time of year. This maintains a consistent return style for the function, which makes it easier to work with in the rest of the program.

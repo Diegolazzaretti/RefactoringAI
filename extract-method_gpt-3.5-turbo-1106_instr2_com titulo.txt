@@ -1,0 +1,11 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+def printOwing(self):
+    self.printBanner()
+    self.printDetails()
+
+def printDetails(self):
+    print("name:", self.name)
+    print("amount:", self.getOutstanding())
+
+

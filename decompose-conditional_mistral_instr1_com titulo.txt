@@ -1,0 +1,33 @@
+mistral - Instrução 1 com titulo:
+
+```python
+from datetime import timedelta, datetime
+
+def calculate_charge(quantity, date, winter_rate, summer_rate, winter_service_charge, summer_start, summer_end):
+    """
+    Calculate the charge based on the given quantity, date and rate charges.
+
+    :param quantity: int
+        The quantity to be charged
+    :param date: datetime
+        Date of the charge
+    :param winter_rate: float
+        Winter rate for charging
+    :param summer_rate: float
+        Summer rate for charging
+    :param winter_service_charge: float
+        Winter service charge
+    :param summer_start: datetime
+        Start date of summer season
+    :param summer_end: datetime
+        End date of summer season
+    :return: float
+        The calculated charge
+    """
+    if date < summer_start or date > summer_end:
+        charge = quantity * winter_rate + winter_service_charge
+    else:
+        charge = quantity * summer_rate
+
+    return charge
+```

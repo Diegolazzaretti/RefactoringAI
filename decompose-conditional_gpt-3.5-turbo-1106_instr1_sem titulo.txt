@@ -1,0 +1,23 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+function calculateCharge(quantity, date) {
+    const isSummerDate = isSummer(date);
+
+    if (isSummerDate) {
+        return calculateSummerCharge(quantity);
+    } else {
+        return calculateWinterCharge(quantity);
+    }
+}
+
+function isSummer(date) {
+    return date.before(SUMMER_START) || date.after(SUMMER_END);
+}
+
+function calculateSummerCharge(quantity) {
+    return quantity * summerRate;
+}
+
+function calculateWinterCharge(quantity) {
+    return quantity * winterRate + winterServiceCharge;
+}

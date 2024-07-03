@@ -1,0 +1,21 @@
+mistral - Instrução 1 com titulo:
+
+```python
+class Order:
+    def __init__(self, primary_base_price=0, secondary_base_price=0, tertiary_base_price=0):
+        self.primary_base_price = primary_base_price
+        self.secondary_base_price = secondary_base_price
+        self.tertiary_base_price = tertiary_base_price
+
+    def compute_price(self):
+        """
+        Computes the order price based on base prices and long computation.
+        :return: The computed order price.
+        """
+        primary_price = self.primary_base_price
+        secondary_price = self.secondary_base_price
+        tertiary_price = self.tertiary_base_price
+        # Perform long computation.
+        price = primary_price + secondary_price + tertiary_price
+        return price
+```

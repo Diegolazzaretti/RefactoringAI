@@ -1,0 +1,45 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+The original code can be refactored to use the Strategy design pattern to separate the logic for determining the discount from the logic for sending the total price. This increases readability, modularity, and maintainability of the code.
+
+First, create a strategy interface and two concrete strategy classes:
+
+```python
+from abc import ABC, abstractmethod
+
+class PricingStrategy(ABC):
+    @abstractmethod
+    def calculateTotal(self, price):
+        pass
+
+class SpecialDealStrategy(PricingStrategy):
+    def calculateTotal(self, price):
+        return price * 0.95
+
+class RegularDealStrategy(PricingStrategy):
+    def calculateTotal(self, price):
+        return price * 0.98
+```
+
+Next, modify the client code to use the strategy pattern:
+
+```python
+def calculateAndSendTotal(strategy, price):
+    total = strategy.calculateTotal(price)
+    send(total)
+
+if isSpecialDeal():
+    strategy = SpecialDealStrategy()
+else:
+    strategy = RegularDealStrategy()
+
+calculateAndSendTotal(strategy, price)
+```
+
+Explanation of changes made:
+
+1. Created a strategy interface (`PricingStrategy`) and two concrete strategy classes (`SpecialDealStrategy`, `RegularDealStrategy`) to separate the discount calculation logic from the sending logic. This adheres to the open/closed principle of the SOLID principles.
+
+2. Introduced a `calculateAndSendTotal` function to handle the process of calculating the total price and sending it. This increases modularity and readability by separating the logic into a single function.
+
+3. Updated the `isSpecialDeal` conditional to determine which strategy to use, and then called `calculateAndSendTotal` with the selected strategy. This simplifies the logic and improves organization, making it easy to understand the flow of the program.

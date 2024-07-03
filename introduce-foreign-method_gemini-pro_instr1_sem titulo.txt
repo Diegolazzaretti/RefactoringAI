@@ -1,0 +1,12 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+import datetime
+
+class Report:
+    # ...
+
+    def send_report(self):
+        next_day = self.previous_end + datetime.timedelta(days=1)
+        # ...
+```

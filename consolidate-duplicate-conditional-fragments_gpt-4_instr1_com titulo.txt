@@ -1,0 +1,13 @@
+gpt-4 - Instrução 1 com titulo:
+
+In the provided code, the "send()" function is repeated in both the if and else blocks. This repetition can be eliminated to improve the code's readability and maintainability. Here's the refactored version:
+
+def calculate_total(price, discount):
+    total = price * discount
+    send()
+    return total
+
+if isSpecialDeal():
+    calculate_total(price, 0.95)
+else:
+    calculate_total(price, 0.98)

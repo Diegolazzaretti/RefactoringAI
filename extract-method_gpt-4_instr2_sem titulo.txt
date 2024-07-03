@@ -1,0 +1,36 @@
+gpt-4 - Instrução 2 sem titulo:
+
+After Refactoring:
+
+class Customer:
+    def __init__(self, name, outstanding_amount):
+        self.name = name
+        self.outstanding_amount = outstanding_amount
+
+    @staticmethod 
+    def print_banner():
+        pass # method definition for print_banner
+
+    def print_details(self):
+        print(f"name: {self.name}")
+        print(f"amount: {self.outstanding_amount}")
+
+    def print_owing(self):
+        self.print_banner()
+        self.print_details()
+
+Explanation of the changes:
+
+1. Encapsulated the code into a class named `Customer`. This encapsulation provides a single place to maintain all the tasks of a customer's indebtedness, enhancing the organization of the code. In this way, the code adheres better to the principle of Single Responsibility in SOLID principles.
+
+2. Created an instance variables `name` and `outstanding_amount` with the __init__ method of the class. These variables capture and maintain the state of each customer object.
+
+3. Refactored `printBanner` and `printOwing` into separate methods, `print_banner` and `print_details`, within the class. This separation promotes better readability and maintainability since each method now has one specific task. 
+
+4. Renamed methods with Python's naming convention of lower case with underscores. This is preferred over CamelCase for function/variable names in Python.
+
+5. Used f-strings in `print_details` to interpolate variables directly into strings. This makes the code more readable.
+
+6. Handled `print_banner` as a static method because it is likely not altering or dependent on the state of the Customer object. It improves the design by not tightly binding the method to the instance.
+
+The resulting refactored code is modular, more readable, and maintainable, promoting easier future modifications. The functional integrity of the original code is maintained throughout.

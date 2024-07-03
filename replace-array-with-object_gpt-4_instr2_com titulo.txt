@@ -1,0 +1,24 @@
+gpt-4 - Instrução 2 com titulo:
+
+The given code only uses an array (or list in Python terminology) with two elements, representing a football club and some number associated with it, perhaps the points they've scored in a season. Here is a refactored version of the code:
+
+```python
+class FootballClub:
+    def __init__(self, name, points):
+        self.name = name
+        self.points = points
+        
+liverpool = FootballClub("Liverpool", 15)
+```
+
+Changes made in the code:
+
+1. Object-Oriented Programming (OOP): The code has been rewritten to include a `FootballClub` class. This class contains two instance variables: `name` and `points`. This OOP approach provides a clear structure to the data, and the code becomes much easier to understand.
+
+2. Readability: With the class `FootballClub`, it’s easy to understand that `name` represents the name of the football club and `points` represents the points scored by that club. This class can also be enhanced with additional methods, such as for comparing scores between clubs, thus encapsulating the logic within the relevant class and improving maintainability.
+
+3. Modularity: The class provides a modular design; each object represents a unique football club.
+
+4. Using object instead of array: An array was an inappropriate data structure for these two distinct pieces of data. By using a class, we can express the data in a manner that is aligned with the domain model, enhancing self-documentation. Instead of reading from arbitrary indices in the array, we stores these values as properties in an object and access them without having to remember their order.
+
+In summary, we applied OOP principles to make the code cleaner and more structured. Using a class improves readability, modularity, and maintainability.

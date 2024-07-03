@@ -1,0 +1,21 @@
+gpt-4 - Instrução 2 com titulo:
+
+Refactored Code:
+```
+def found_person(people):
+    sought_people = ["Don", "John", "Kent"]
+    found = [person for person in people if person in sought_people]
+    return found[0] if found else ""
+```
+
+Explanation:
+
+The initial code was sequentially checking if each person was "Don", "John", or "Kent". This method is not ideal for several reasons. For one, if the list of sought people expands, the number of condition checks would increase linearly. Additionally, the initial code isn't very Pythonic, using an index-based approach to iterate over the list as opposed to simply iterating over the values of the list.
+
+In the refactored code, we first define the list of sought people. This is easier to maintain and it's instantly clear what names are being sought.
+
+Next, we use a list comprehension to find any intersection between the list of people and the sought people. This is more efficient than the previous method as well as more readable. The list comprehension iterates over all people and creates a new list of people who are in the list of sought people.
+
+Finally, the function returns the first found person or an empty string should none be found. This uses Python's design pattern of allowing default values should a list be empty (`found[0]` would otherwise raise an error on an empty list). It guarantees that the function always returns a string value, maintaining the functional integrity of the original code.
+
+The new code is more modular as well. If we want to change the list of sought people, there is a clear place to do so at the start of the function. This couldn't be simpler with the original code. Furthermore, the code is ready for extension—should we wish to add additional logic, e.g., to handle multiple found people, the refactored code already separates concerns, making it easier to see where such logic should be inserted.

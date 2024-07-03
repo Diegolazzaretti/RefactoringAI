@@ -1,0 +1,9 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here's the refactor code. It enhances readability by using more descriptive variable names and directly assigning values to a list.
+
+```python
+team_data = ["Liverpool", "15"]
+```
+
+Using indices to assign values to a list is a bit more cumbersome in Python and not necessary in this context. It's easier and cleaner to directly assign the values to the list as shown above.

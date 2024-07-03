@@ -1,0 +1,21 @@
+mistral - Instrução 1 sem titulo:
+
+```python
+class Invoice:
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+    
+    # Print the invoice banner
+    def printBanner(self):
+        print("Invoice Banner")
+        print(f"Name: {self.name}")
+        print(f"Amount: {self.amount:.2f}")
+        
+    # Get and print the outstanding amount owed
+    def printOwing(self):
+        self.printBanner()
+        print("Name:", self.name)
+        print("Amount:", self.getOutstanding())
+```
+The refactored code above separates the invoice banner printing logic into its own method `printBanner`. The `printOwing` method now calls this method to print the banner, which improves modularity and readability by making it clear that the banner is a separate concern from the details of the outstanding amount. Additionally, the `amount` attribute is formatted with two decimal places using f-strings for better readability.

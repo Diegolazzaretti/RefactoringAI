@@ -1,0 +1,19 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+class Report:
+    # ...
+
+    def sendReport(self):
+        nextDay = self._get_next_day()
+
+    def _get_next_day(self):
+        return Date(self._get_next_year(), self._get_next_month(), self._get_next_date())
+
+    def _get_next_year(self):
+        return self.previousEnd.getYear()
+
+    def _get_next_month(self):
+        return self.previousEnd.getMonth()
+
+    def _get_next_date(self):
+        return self.previousEnd.getDate() + 1

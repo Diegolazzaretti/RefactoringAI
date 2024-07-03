@@ -1,0 +1,8 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+def check_within_plan(days_temp_range: DaysTempRange, plan: Plan) -> bool:
+    low = days_temp_range.low
+    high = days_temp_range.high
+    return plan.within_range(low, high)
+```

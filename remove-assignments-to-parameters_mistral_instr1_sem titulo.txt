@@ -1,0 +1,16 @@
+mistral - Instrução 1 sem titulo:
+
+```python
+def apply_discount(input_value, quantity):
+    """
+    Apply a discount to the input value based on the quantity.
+    
+    :param input_value: float or int, the value to apply the discount to
+    :param quantity: int, the number of items being purchased
+    :return: float or int, the discounted value
+    """
+    if quantity > 50:
+        input_value -= 2
+    return input_value
+```
+The function `apply_discount()` takes in two arguments, `input_value` and `quantity`, which represent the value to apply the discount to and the number of items being purchased respectively. The function then checks if the quantity is greater than 50, and if it is, it subtracts 2 from the input value. The final value is then returned. By defining a separate function for this task, we make the code more modular and easier to read and maintain. Additionally, we can add more discount rules or conditions in the future without changing the overall structure of the code.

@@ -1,0 +1,43 @@
+gemini-pro - Instrução 2 com titulo:
+
+**Refactored Code:**
+
+```python
+class Soldier:
+    def __init__(self, weapon):
+        self.weapon = weapon
+
+class Weapon:
+    def __init__(self, damage):
+        self.damage = damage
+
+    def attack(self):
+        return self.damage
+
+class Rifle(Weapon):
+    pass
+
+class Pistol(Weapon):
+    pass
+
+# Create a soldier with a rifle
+soldier = Soldier(Rifle(40))
+
+# Attack with the soldier's rifle
+damage = soldier.weapon.attack()
+```
+
+**Changes Made:**
+
+* **Extracted the weapon-related logic into a separate `Weapon` class:** This reduces code duplication and improves modularity by isolating weapon-specific functionality.
+* **Introduced a composition relationship between `Soldier` and `Weapon`:** The soldier now has a `weapon` attribute, which allows it to access weapon-related properties and methods.
+* **Created subclasses for different weapon types (e.g., `Rifle` and `Pistol`):** This enhances flexibility and extensibility, allowing for easy addition of new weapon types.
+* **Used composition instead of inheritance to model the weapon-soldier relationship:** This avoids the drawbacks of inheritance, such as the "fragile base class" problem.
+
+**Benefits:**
+
+* **Improved readability:** The code is now better organized and easier to understand.
+* **Increased modularity:** The separation of weapon-related logic into a separate class enhances code maintainability and reusability.
+* **Simplified logic:** The use of composition makes the `Soldier` and `Weapon` classes more cohesive and easier to modify.
+* **Improved extensibility:** The subclassing mechanism allows for the easy addition of new weapon types without modifying the core logic.
+* **Conformance to best practices:** The refactored code adheres to the principles of object-oriented design, encapsulation, and code reuse, resulting in a more robust and maintainable codebase.

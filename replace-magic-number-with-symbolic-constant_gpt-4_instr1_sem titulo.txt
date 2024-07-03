@@ -1,0 +1,24 @@
+gpt-4 - Instrução 1 sem titulo:
+
+The given code is already quite readable and modular. It defines a function to calculate the potential energy, a typical formula in Physics. The code is simple, and it does a single, clear task, and the variable names are clear and intuitive. Therefore, it does not require much refactoring. However, we could add docstrings to enhance the readability further:
+
+```python
+def potential_energy(mass: float, height: float) -> float:
+    """
+    This function calculates the potential energy of an object of a given mass and at a certain height.
+    
+    Parameters:
+    mass (float): The mass of the object in kilograms.
+    height (float): The height of the object in m.
+    
+    Returns:
+    float: The potential energy of an object in Joules.
+    """
+    GRAVITY = 9.81  # Acceleration due to gravity in m/s^2
+    return mass * height * GRAVITY
+```
+
+This refactoring includes:
+- Renaming the function and parameters to follow Python's PEP 8 naming conventions
+- Adding a docstring to explain what the function does, its parameters, and return value
+- Defining a constant for gravity to increase readability and maintainability

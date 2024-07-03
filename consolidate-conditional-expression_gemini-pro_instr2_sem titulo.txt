@@ -1,0 +1,76 @@
+gemini-pro - Instrução 2 sem titulo:
+
+To enhance the code's readability, modularity, and maintainability, several design patterns can be applied. The code can be restructured to follow the Factory Method pattern, which introduces an interface for creating objects, while allowing subclasses to alter the type of objects that will be created. Additionally, the code can be refactored to utilize the Strategy pattern, which defines a family of algorithms, encapsulates each one, and makes them interchangeable. This approach promotes loose coupling between clients and concrete strategies.
+
+```python
+class DisabilityCalculator:
+
+    def __init__(self, seniority, months_disabled, is_part_time):
+        self.seniority = seniority
+        self.months_disabled = months_disabled
+        self.is_part_time = is_part_time
+
+    def is_eligible(self):
+        return self.seniority >= 2 and self.months_disabled <= 12 and not self.is_part_time
+
+    def calculate_amount(self):
+        if not self.is_eligible():
+            return 0
+
+        # Compute the disability amount.
+        # ...
+
+
+# Factory method to create the appropriate calculator based on seniority.
+def create_calculator(seniority):
+    if seniority < 2:
+        return JuniorDisabilityCalculator()
+    elif seniority < 5:
+        return MidLevelDisabilityCalculator()
+    else:
+        return SeniorDisabilityCalculator()
+
+
+# Strategy pattern to encapsulate the calculation logic for each seniority level.
+class DisabilityCalculatorStrategy:
+
+    def calculate_amount(self, calculator):
+        pass
+
+
+class JuniorDisabilityCalculator(DisabilityCalculatorStrategy):
+
+    def calculate_amount(self, calculator):
+        # Calculation logic for junior employees.
+        # ...
+
+
+class MidLevelDisabilityCalculator(DisabilityCalculatorStrategy):
+
+    def calculate_amount(self, calculator):
+        # Calculation logic for mid-level employees.
+        # ...
+
+
+class SeniorDisabilityCalculator(DisabilityCalculatorStrategy):
+
+    def calculate_amount(self, calculator):
+        # Calculation logic for senior employees.
+        # ...
+
+
+# Usage example
+calculator = create_calculator(seniority)
+if calculator.is_eligible():
+    amount = calculator.calculate_amount()
+else:
+    amount = 0
+```
+
+**Changes Made:**
+
+* **Factory Method:** The `create_calculator` function acts as a factory method, abstracting the process of creating different calculators based on seniority.
+* **Strategy Pattern:** The `DisabilityCalculatorStrategy` interface and its concrete implementations (e.g., `JuniorDisabilityCalculator`) encapsulate the calculation logic for each seniority level.
+* **Separation of Concerns:** The `DisabilityCalculator` class handles eligibility checks, while the strategies focus solely on calculating the disability amount.
+* **Enhanced Modularity:** The factory method and strategy pattern allow for easy modification and extension of the calculation logic without affecting other parts of the code.
+* **Improved Readability:** The code is now structured in a way that makes it easier to understand the flow of logic and the purpose of each component.

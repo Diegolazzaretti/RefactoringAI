@@ -1,0 +1,18 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+class Account:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise ValueError("Insufficient funds")
+        self.balance -= amount
+```
+
+In this refactored code:
+
+1. We moved the balance initialization to the constructor (__init__ method) to separate initialization logic from account operations.
+2. We replaced the error code (-1) with a meaningful exception (ValueError) to provide better error handling and debugging information.
+3. We removed the unnecessary else block since the code after the if block is already executed if the condition is False.

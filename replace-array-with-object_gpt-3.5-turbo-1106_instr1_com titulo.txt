@@ -1,0 +1,8 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+```python
+# replace-array-with-object
+team = {}
+team["name"] = "Liverpool"
+team["points"] = 15
+```

@@ -1,0 +1,19 @@
+gpt-4 - Instrução 1 com titulo:
+
+Here is a refactored version of the printOwing method:
+
+```python
+def printOwing(self):
+    self._printBanner()
+    self._printDetails()
+
+def _printBanner(self):
+    print("----- Banner -----\n")
+
+def _printDetails(self):
+    print("Name:", self.name)
+    print("Amount:", self.getOutstanding())
+```
+
+In the new implementation, showing the banner and details are both decoupled into separate functions to enhance modularity and readability. Following this approach makes it easier to test and maintain each operation separately. The functions are also marked as private (by prefixing with an underscore) to indicate that they are not intended to be accessed directly from outside the object.
+Note: Python does not have true private methods. The conventional way to indicate a method should be treated as private is to prefix its name with an underscore.

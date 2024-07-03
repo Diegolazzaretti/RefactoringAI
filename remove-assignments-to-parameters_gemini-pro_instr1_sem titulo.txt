@@ -1,0 +1,19 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+def apply_discount(input_value, quantity):
+    """Applies a discount to the input value based on the quantity.
+
+    Args:
+        input_value (float): The input value to be discounted.
+        quantity (int): The quantity of items purchased.
+
+    Returns:
+        float: The discounted input value.
+    """
+
+    if quantity > 50:
+        return input_value - 2
+    else:
+        return input_value
+```

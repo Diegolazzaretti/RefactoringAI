@@ -1,0 +1,37 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here's the refactored code:
+
+```python
+class Product:
+
+    def __init__(self, quantity, itemPrice):
+        self.quantity = quantity
+        self.itemPrice = itemPrice
+
+    def calculate_basePrice(self):
+        return self.quantity * self.itemPrice
+
+    def calculate_finalPrice(self):
+        basePrice = self.calculate_basePrice()
+        seasonalDiscount = self.get_seasonalDiscount()
+        fees = self.get_fees()
+        return self.calculate_discountedPrice(basePrice, seasonalDiscount, fees)
+
+    def get_seasonalDiscount(self):
+        # code to get seasonal discount
+        pass
+
+    def get_fees(self):
+        # code to get fees
+        pass
+
+    def calculate_discountedPrice(self, basePrice, seasonalDiscount, fees):
+        # code to calculate discounted price 
+        pass
+```
+In this refactoring, code is divided into smaller meaningful methods to improve readability. It also makes sure that each function has a single responsibility which ensures the code is modular and maintainable.
+- I moved all the related code and data (quantity and itemPrice) into a Product class to encapsulate related data and behavior into a single object.
+- calculate_FinalPrice method orchestrates the calculation by calling the necessary methods in the right order. Making it more readable.
+- Other methods like calculate_basePrice, get_seasonalDiscount, get_fees and calculate_discountedPrice are specific to a single task. Thus the overall logic of the code is easier to understand.
+- If any changes are needed in the future, we only need to update the corresponding method. The rest of the code would not be affected which makes it more maintainable.

@@ -1,0 +1,11 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+Refactored code:
+def disabilityAmount():
+    if is_not_eligible_for_disability():
+        return 0
+    # Compute the disability amount.
+    # ...
+
+def is_not_eligible_for_disability():
+    return seniority < 2 or monthsDisabled > 12 or isPartTime

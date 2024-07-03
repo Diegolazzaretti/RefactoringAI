@@ -1,0 +1,19 @@
+mistral - Instrução 1 com titulo:
+
+```
+def found_person(people):
+    """
+    This function takes a list of people as input and returns the name of the first person 
+    in the list who matches any of the given names. If no match is found, it returns an empty string.
+    """
+    
+    for person in people:
+        if person == "Don":
+            return "Don"
+        elif person == "John":
+            return "John"
+        elif person == "Kent":
+            return "Kent"
+        
+    return ""  # Return an empty string if no match is found.
+```

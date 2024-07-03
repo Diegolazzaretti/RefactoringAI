@@ -1,0 +1,40 @@
+gpt-4 - Instrução 2 sem titulo:
+
+The refactored code:
+
+```python
+class BankAccount:
+    
+    INSUFFICIENT_FUNDS_CODE = -1
+    SUCCESS_CODE = 0
+
+    
+    def __init__(self, initial_balance=0):
+        self._balance = initial_balance
+
+    @property
+    def balance(self):
+        return self._balance
+
+    def withdraw(self, amount: float):
+        if not self._can_withdraw(amount):
+            return self.INSUFFICIENT_FUNDS_CODE
+        
+        self._balance -= amount
+        return self.SUCCESS_CODE
+
+    def _can_withdraw(self, amount: float) -> bool:
+        return amount <= self.balance
+```
+
+Explanation of the changes:
+
+1. Encapsulation: We Encapsulated the `balance` by making it a private variable `_balance`  allowing getting the value only through the public `balance` property. It helps protect this attribute from accidental modification.
+
+2. Constants: Instead of returning -1 and 0 as “magic numbers”, we defined these as `INSUFFICIENT_FUNDS_CODE` and `SUCCESS_CODE` class constants respectively. This enhances readability by providing more context about what these return values represent.
+
+3. Type hint: Provided type hints on the function `withdraw` and `_can_withdraw`. Type hinting makes it clear what type of values these functions expect, adding another layer of clarity and assisting in reducing possible bugs during development.
+
+4. `_can_withdraw` method: Extracted the logic checking if a withdraw operation is possible into a separate private method. It is a good practice to keep distinct pieces of logic in separate methods. This way, the `withdraw` method becomes easier to read and understand because it expresses its intention more transparently. It also simplifies future modifications, especially if the conditions under which the withdrawal can happen expand to be more complex. 
+
+5. Promoted the `withdraw` function into a method of a class named `BankAccount`, to provide more context for the `balance` variable and the `withdraw` method. In general, putting variables and methods that closely relate into a class provides a better organization of the code. This approach enhances modularity and each class can be reasoned about in isolation or tested individually. It enhances readability by providing more context for variables and methods and facilitates future modifications.

@@ -1,0 +1,7 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class PotentialEnergyCalculator:
+    GRAVITY = 9.81
+
+    def calculate(self, mass, height):
+        return mass * height * self.GRAVITY

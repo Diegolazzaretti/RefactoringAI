@@ -1,0 +1,10 @@
+mistral - Instrução 1 sem titulo:
+
+# Calculate the potential energy of an object
+def potential_energy(mass: float, height: float) -> float:
+    """Calculates the potential energy of an object given its mass and height."""
+    # Constants
+    GRAVITY_ACCELERATION = 9.81
+    
+    # Calculation
+    return mass * GRAVITY_ACCELERATION * height

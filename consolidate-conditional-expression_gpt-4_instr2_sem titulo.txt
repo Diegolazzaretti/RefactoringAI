@@ -1,0 +1,32 @@
+gpt-4 - Instrução 2 sem titulo:
+
+After Refactoring:
+
+```python
+class Employee:
+    def __init__(self, seniority, months_disabled, is_part_time):
+        self.seniority = seniority
+        self.months_disabled = months_disabled
+        self.is_part_time = is_part_time
+
+    def is_eligible_for_disability(self):
+        return self.seniority >= 2 and self.months_disabled <= 12 and not self.is_part_time
+
+    def disability_amount(self):
+        if self.is_eligible_for_disability():
+            # Compute the disability amount
+            # ...
+            pass
+        else:
+            return 0
+```
+
+Explanation of the changes:
+
+The refactored code removes global variables (`seniority`, `monthsDisabled`, and `isPartTime`) and incorporates them as instance variables in the `Employee` class. This improves modularity because each `Employee` object now manages its own state, which makes the code easier to understand and more maintainable because changes to one `Employee` do not affect others.
+
+The `disabilityAmount` function was refactored into two methods in the `Employee` class: `is_eligible_for_disability` and `disability_amount`.  
+
+The method `is_eligible_for_disability` determines whether the employee is eligible for disability. This method improves modularity by isolating the eligibility determination logic in its own method, enhances readability by giving a meaningful name to the conditions that determine eligibility, and increases maintainability by reducing the likelihood of introducing errors when modifying the eligibility conditions. This method follows the command-query separation principle of object-oriented design, which states that a method should either perform an action or answer a question, but not both.
+
+The method `disability_amount` computes the disability amount only if the employee is eligible. If the employee is not eligible, it returns 0. This method improves maintainability by clearly separating the computation of the disability amount from the eligibility determination, meeting the single responsibility principle of object-oriented design, and making the code easier to understand and modify. This method also applies the guard clause design pattern to return early when the employee is not eligible, reducing the indentation level and increasing the readability.

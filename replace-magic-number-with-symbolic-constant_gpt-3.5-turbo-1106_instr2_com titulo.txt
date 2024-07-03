@@ -1,0 +1,7 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+Replace magic number with symbolic constant
+GRAVITATIONAL_CONSTANT = 9.81
+
+def potential_energy(mass, height):
+    return mass * height * GRAVITATIONAL_CONSTANT

@@ -1,0 +1,498 @@
+Código Original (preserve-whole-object):
+
+low = daysTempRange.getLow()
+high = daysTempRange.getHigh()
+withinPlan = plan.withinRange(low, high)
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+To enhance the readability, modularity and maintainability of the given code, we can make use of variables to store the low and high temperatures, and then check if the withinPlan variable is within the range using a conditional statement. Here's one way to refactor the code:
+```
+low = daysTempRange.getLow()
+high = daysTempRange.getHigh()
+
+# Create a variable to store whether the temperature falls within the plan
+withinPlan = False
+
+if low <= plan.lowerBound and high >= plan.upperBound:
+    # If it does, set the variable to True
+    withinPlan = True
+else:
+    # If not, set the variable to False
+    withinPlan = False
+``` 
+This refactored code is more modular and maintainable as we have separated the logic of checking if the temperature falls within the plan from the original code. The variable `withinPlan` can be used in other parts of the program, making it easier to understand and modify. Additionally, this code is more readable as it uses descriptive variable names and clear conditional statements.
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+def check_within_plan(days_temp_range: DaysTempRange, plan: Plan) -> bool:
+    low = days_temp_range.low
+    high = days_temp_range.high
+    return plan.within_range(low, high)
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+low_temp = daysTempRange.getLow()
+high_temp = daysTempRange.getHigh()
+within_plan = plan.withinRange(low_temp, high_temp)
+
+gpt-4 - Instrução 1 sem titulo:
+Refactored code:
+
+```python
+def calculate_within_plan(days_temp_range, plan):
+    low_temperature = days_temp_range.getLow()
+    high_temperature = days_temp_range.getHigh()
+    return plan.withinRange(low_temperature, high_temperature)
+
+within_plan = calculate_within_plan(daysTempRange, plan)
+```
+
+This refactoring encapsulates the original action into a function, enhancing the code's readability and modularity. Additionally, it provides clearer naming to support maintainability. The function can be reused elsewhere, avoiding code duplication. Also, by naming the variables more descriptively, it becomes clear that they represent low and high temperatures.
+
+mistral - Instrução 1 com titulo:
+```python
+from typing import Tuple
+
+def within_plan_range(plan: "Plan", low: float, high: float) -> bool:
+    """Check if a given plan is within a specific temperature range."""
+    return plan.within_range(low, high)
+
+def preserve_whole_object(days_temp_range: Tuple[float, float], plan: "Plan") -> bool:
+    """Check if a given days temperature range preserves the whole object."""
+    low, high = days_temp_range
+    return within_plan_range(plan, low, high)
+```
+
+gemini-pro - Instrução 1 com titulo:
+**Enhanced Code:**
+
+**1. Introduce helper methods to extract values from the `daysTempRange` object:**
+
+```
+private int getLowTemp(DaysTempRange daysTempRange) {
+    return daysTempRange.getLow();
+}
+
+private int getHighTemp(DaysTempRange daysTempRange) {
+    return daysTempRange.getHigh();
+}
+```
+
+**2. Refactor the `withinPlan` check to utilize the helper methods:**
+
+```
+boolean withinPlan = plan.withinRange(getLowTemp(daysTempRange), getHighTemp(daysTempRange));
+```
+
+**3. Enhance readability by naming the variables according to their purpose:**
+
+```
+int lowTemp = getLowTemp(daysTempRange);
+int highTemp = getHighTemp(daysTempRange);
+boolean isWithinPlan = plan.withinRange(lowTemp, highTemp);
+```
+
+**Updated Code:**
+
+```
+private int getLowTemp(DaysTempRange daysTempRange) {
+    return daysTempRange.getLow();
+}
+
+private int getHighTemp(DaysTempRange daysTempRange) {
+    return daysTempRange.getHigh();
+}
+
+boolean isWithinPlan(DaysTempRange daysTempRange, Plan plan) {
+    int lowTemp = getLowTemp(daysTempRange);
+    int highTemp = getHighTemp(daysTempRange);
+    return plan.withinRange(lowTemp, highTemp);
+}
+```
+
+**Benefits of Refactoring:**
+
+* **Improved readability:** The code is now easier to understand and follow, thanks to the use of descriptive variable names and helper methods.
+* **Increased modularity:** The `getLowTemp` and `getHighTemp` methods can be reused in other parts of the code, promoting code reusability.
+* **Enhanced maintainability:** The separation of concerns between fetching temperature values and checking if a plan is within range makes it easier to modify or fix specific parts of the code without affecting the rest.
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+```python
+# preserve-whole-object
+
+# Get high and low temperature from daysTempRange
+def get_temperatures(daysTempRange):
+    low = daysTempRange.getLow()
+    high = daysTempRange.getHigh()
+    return low, high
+
+# Check if temperatures are within the plan range
+def within_plan(low, high, plan):
+    return plan.withinRange(low, high)
+
+# Example usage
+low, high = get_temperatures(daysTempRange)
+withinPlan = within_plan(low, high, plan)
+```
+
+gpt-4 - Instrução 1 com titulo:
+Refactored Code:
+
+```python
+def is_within_temperature_plan(days_temp_range, plan):
+    low_temp = days_temp_range.getLow()
+    high_temp = days_temp_range.getHigh()
+    within_plan = plan.withinRange(low_temp, high_temp)
+    
+    return within_plan
+```
+In the refactored code, the sequence of steps is encapsulated within a function, making the code more modular and easier to read and maintain. An appropriate function name `is_within_temperature_plan` and variable names `low_temp`, `high_temp` and `within_plan` add to the readability and understanding of the code. This function can also be easily re-used for different temperature ranges and plans.
+
+mistral - Instrução 2 sem titulo:
+
+To enhance the readability and maintainability of this code, we can apply a design pattern called the Template Method Pattern. This pattern allows us to define the skeleton of an algorithm in a method, and then provide specific implementations for certain steps within that algorithm. In this case, we will create a template method `checkPlanWithinRange` that takes in two parameters (`low` and `high`) and returns a boolean indicating whether or not the plan is within the given range. We will also create an implementation of this method called `CheckDaysTempRangePlan`, which will be responsible for checking if the days temperature plan is within the given range. 
+
+The refactored code would look like this:
+```java
+public abstract class Plan {
+    public abstract boolean withinRange(double low, double high);
+}
+
+public class CheckDaysTempRangePlan extends Plan {
+    @Override
+    public boolean withinRange(double low, double high) {
+        // Implementation for checking if days temperature plan is within range goes here
+    }
+}
+```
+We have created an abstract `Plan` class that defines the template method `withinRange`. This allows us to define other types of plans that can also implement this method. We have then created a concrete implementation of this method called `CheckDaysTempRangePlan`, which will be responsible for checking if the days temperature plan is within the given range. 
+
+By applying this design pattern, we have reduced code duplication by creating a template method that can be implemented by multiple types of plans. We have also simplified the logic by separating the algorithm for checking if a plan is within a range from the specific implementation of that algorithm for checking if the days temperature plan is within the range. This makes it easier to modify and maintain the code in the future, as we can simply create new implementations of the `Plan` class without having to change the template method.
+
+gemini-pro - Instrução 2 sem titulo:
+To enhance the readability, modularity, and maintainability of the provided code, we can apply the following design patterns and best practices:
+
+1. **Encapsulation**: We can encapsulate the temperature range check logic into a separate method to improve readability and reduce code duplication.
+
+   ```java
+   public class TemperatureRangeChecker {
+       public static boolean withinRange(TemperatureRange daysTempRange, TemperaturePlan plan) {
+           int low = daysTempRange.getLow();
+           int high = daysTempRange.getHigh();
+           return plan.withinRange(low, high);
+       }
+   }
+   ```
+
+2. **Single Responsibility Principle**: We can introduce a new class `TemperaturePlan` to handle the logic related to temperature planning. This will improve modularity and separation of concerns.
+
+   ```java
+   public class TemperaturePlan {
+       private int minTemp;
+       private int maxTemp;
+
+       public TemperaturePlan(int minTemp, int maxTemp) {
+           this.minTemp = minTemp;
+           this.maxTemp = maxTemp;
+       }
+
+       public boolean withinRange(int low, int high) {
+           return low >= minTemp && high <= maxTemp;
+       }
+   }
+   ```
+
+3. **Named Constants**: To improve the readability and maintainability of the temperature range, we can introduce named constants for the `low` and `high` values.
+
+   ```java
+   public class TemperatureRange {
+       private static final int LOW = 0;
+       private static final int HIGH = 1;
+
+       private int[] range;
+
+       public TemperatureRange(int low, int high) {
+           this.range = new int[] { low, high };
+       }
+
+       public int getLow() {
+           return range[LOW];
+       }
+
+       public int getHigh() {
+           return range[HIGH];
+       }
+   }
+   ```
+
+With these refactorings, the code becomes more readable, maintainable, and extensible. The use of named constants, encapsulation, and a dedicated class for temperature planning makes it easier to understand and modify the code in the future.
+
+**Refactored Code:**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        TemperatureRange daysTempRange = new TemperatureRange(50, 80);
+        TemperaturePlan plan = new TemperaturePlan(60, 75);
+
+        boolean withinPlan = TemperatureRangeChecker.withinRange(daysTempRange, plan);
+
+        System.out.println("Within plan: " + withinPlan);
+    }
+}
+```
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+# Refactored code using Strategy pattern
+
+class TemperatureRange:
+    def __init__(self, low, high):
+        self.low = low
+        self.high = high
+
+class Plan:
+    def withinRange(self, low, high):
+        pass
+
+class BasicPlan(Plan):
+    def withinRange(self, low, high):
+        return low >= 0 and high <= 40
+
+class PremiumPlan(Plan):
+    def withinRange(self, low, high):
+        return low >= -10 and high <= 45
+
+class TemperatureController:
+    def __init__(self, daysTempRange, plan):
+        self.daysTempRange = daysTempRange
+        self.plan = plan
+
+    def calculateWithinRange(self):
+        low = self.daysTempRange.low
+        high = self.daysTempRange.high
+        return self.plan.withinRange(low, high)
+
+# Usage
+daysTempRange = TemperatureRange(20, 30)
+basicPlan = BasicPlan()
+premiumPlan = PremiumPlan()
+
+basicController = TemperatureController(daysTempRange, basicPlan)
+premiumController = TemperatureController(daysTempRange, premiumPlan)
+
+print(basicController.calculateWithinRange())
+print(premiumController.calculateWithinRange())
+```
+
+In the refactored code, I used the Strategy pattern to decouple the temperature range checking logic from the plan implementation. This allows for easy extension if new plans need to be added in the future.
+
+I created a `TemperatureRange` class to encapsulate the low and high temperature values. Then, I defined an abstract `Plan` class with a `withinRange` method. Two concrete plan classes, `BasicPlan` and `PremiumPlan`, implement the `withinRange` method with their specific temperature range criteria.
+
+The `TemperatureController` class now takes `daysTempRange` and `plan` as parameters in its constructor, decoupling the temperature checking logic from the plan. It defines a method `calculateWithinRange()` to calculate whether the temperature range is within the plan's criteria.
+
+Overall, these changes enhance the readability, modularity, and maintainability of the code by separating concerns and allowing easy extension of the temperature range checking logic or plan criteria. Additionally, the use of appropriate design patterns reduces code duplication and simplifies the logic, contributing to overall organization and future modifications while maintaining functional integrity.
+
+gpt-4 - Instrução 2 sem titulo:
+Refactored Code:
+
+```python
+class TemperatureRange:
+    def __init__(self, low, high):
+        self.low = low
+        self.high = high
+
+class Plan:
+    def __init__(self, acceptableTemperatureRange):
+        self.acceptableTemperatureRange = acceptableTemperatureRange
+
+    def withinRange(self, temperatureRange):
+        return self.acceptableTemperatureRange.low <= temperatureRange.low and \
+               self.acceptableTemperatureRange.high >= temperatureRange.high
+
+temperatureRange = TemperatureRange(daysTempRange.getLow(), daysTempRange.getHigh())
+withinPlan = plan.withinRange(temperatureRange)
+```
+
+Explanation:
+
+1. Introduced two classes `TemperatureRange` and `Plan` to encapsulate the related data and methods. It enhances readability, modularity and maintainability as related data and code are grouped together.
+
+2. Instantiated `TemperatureRange` by passing `low` and `high` temperatures got from `daysTempRange`. Encapsulating `low` and `high` temperatures in a class instantiation contributes to the readability of the code.
+
+3. The `withinRange` method of `Plan` now takes a `TemperatureRange` object as its argument, making the function name and its purpose clearer. It also contributes to easier code maintainability as we can modify the temperature range object's properties and the method's logic independent of each other.
+
+4. All properties and methods are accessed via instances which adheres to Object-Oriented Programming practices. 
+
+All these changes keep the logic of the code intact while significantly improving its organization and clarity. The code is now better structured for easy understanding and for future modifications. It is also reduced to a smaller, more manageable size which keeps the code DRY (Don't Repeat Yourself), further ensuring easy maintainability.
+
+mistral - Instrução 2 com titulo:
+The code provided can be refactored in several ways to improve its readability, modularity, and maintainability. Below is one possible way to refactor the code using the Observer pattern:
+```less
+interface TempRangeObserver {
+  onLow(double low);
+  onHigh(double high);
+}
+
+class DaysTempRange implements TempRangeObserver {
+  private double low;
+  private double high;
+
+  public void setLow(double low) {
+    this.low = low;
+    onLow(low);
+  }
+
+  public void setHigh(double high) {
+    this.high = high;
+    onHigh(high);
+  }
+
+  @Override
+  public void onLow(double low) {
+    // do something with the low temperature
+  }
+
+  @Override
+  public void onHigh(double high) {
+    // do something with the high temperature
+  }
+}
+
+class Plan implements TempRangeObserver {
+  private double low;
+  private double high;
+
+  public boolean withinRange(double low, double high) {
+    this.low = low;
+    this.high = high;
+    onLow(low);
+    onHigh(high);
+    return isWithinRange();
+  }
+
+  @Override
+  public void onLow(double low) {
+    // do something with the low temperature
+  }
+
+  @Override
+  public void onHigh(double high) {
+    // do something with the high temperature
+  }
+
+  private boolean isWithinRange() {
+    return low <= high;
+  }
+}
+```
+The refactored code separates the logic for handling temperature ranges from the logic for determining whether a plan is within the range. This improves modularity and reduces code duplication. Additionally, using an interface (TempRangeObserver) to define the behavior of classes that need to be notified when the temperature range changes makes the code more flexible and easier to modify in the future. The Observer pattern ensures that any class that implements TempRangeObserver will receive notifications when the temperature range changes, without having to know about each other's implementation details.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```java
+public class TemperatureAnalyzer {
+
+    private TemperatureRange daysTempRange;
+    private TemperaturePlan plan;
+
+    public TemperatureAnalyzer(TemperatureRange daysTempRange, TemperaturePlan plan) {
+        this.daysTempRange = daysTempRange;
+        this.plan = plan;
+    }
+
+    public boolean isWithinPlan() {
+        return plan.isWithinRange(daysTempRange.getLow(), daysTempRange.getHigh());
+    }
+}
+```
+
+**Changes Made:**
+
+* **Extract TemperatureRange and TemperaturePlan classes:** This improves modularity by separating the temperature range and plan concepts into reusable classes.
+* **Introduce a TemperatureAnalyzer class:** This creates a central point of control for analyzing the temperature range against the plan.
+* **Extract a `withinRange` method from TemperaturePlan:** This eliminates code duplication by encapsulating the logic for checking if a temperature is within a range.
+* **Use constructor injection for TemperatureAnalyzer:** This provides a clear and consistent way to initialize the dependencies.
+* **Rename variables for clarity:** The `low` and `high` variables are renamed to `getLow()` and `getHigh()` to match the getters in the TemperatureRange class.
+* **Return a boolean from `isWithinPlan` method:** This provides a clearer indication of whether the temperature is within the plan.
+
+**Benefits of Refactoring:**
+
+* **Improved Readability:** The code is now more concise and organized, making it easier to understand and maintain.
+* **Enhanced Modularity:** The extraction of classes and methods reduces code duplication and improves reusability.
+* **Simplified Logic:** The `isWithinPlan` method now cleanly encapsulates the logic for checking the temperature range.
+* **Increased Maintainability:** The refactored code is easier to modify and extend in the future, as the responsibilities are clearly separated.
+* **Adherence to Best Practices:** The code follows best practices such as dependency injection and clear method naming, ensuring a high level of software quality.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+Refactored code:
+
+// Context class to represent temperature range
+class DaysTempRange {
+  constructor(low, high) {
+    this.low = low;
+    this.high = high;
+  }
+
+  getLow() {
+    return this.low;
+  }
+
+  getHigh() {
+    return this.high;
+  }
+}
+
+// Strategy class to represent plan
+class Plan {
+  withinRange(low, high) {
+    // implementation logic to check if the temperature range is within the plan
+  }
+}
+
+// Client code using the preserved whole object pattern
+const daysTempRange = new DaysTempRange(60, 80);
+const plan = new Plan();
+const withinPlan = plan.withinRange(daysTempRange.getLow(), daysTempRange.getHigh());
+
+Changes made:
+1. Created a separate class DaysTempRange to represent the temperature range with getLow() and getHigh() methods to encapsulate the low and high temperature values.
+2. Created a separate class Plan to represent the plan with a withinRange() method to encapsulate the logic for checking if the temperature range is within the plan.
+3. Refactored the client code to create instances of DaysTempRange and Plan classes and use the preserved whole object pattern to pass the entire DaysTempRange object to the withinRange() method instead of passing individual low and high temperature values. This improves modularity and readability of the code.
+
+gpt-4 - Instrução 2 com titulo:
+Refactored Code:
+```
+withinPlan = plan.withinRange(daysTempRange.getRange())
+```
+
+Changes Made:
+The original code first retrieves the high and low values from 'daysTempRange', and then passes these as separate arguments to the 'withinRange' method. This is an example of not preserving the whole object, where the object in question is the 'range' of 'daysTempRange'. 
+
+In the refactored code, instead of extracting individual values from 'daysTempRange', the whole 'range' object itself is passed to 'withinRange'. This change increases readability by reducing the number of lines and simplifying the logic, as there is no need to mention 'low' and 'high' separately. 
+
+Moreover, in terms of modularity and maintainability, this approach is advantageous because if the 'range' object is changed in the future to have more than just 'low' and 'high' values (for example, 'average', 'median' etc.), we would not need to change the 'withinRange' invocation - it would just continue to work with the new 'range' object. This is an example of the 'preserve whole object' design pattern, where instead of decomposing the object and passing its individual parts to a method, the entire object is passed.
+
+This refactoring also encourages stronger encapsulation because the details of how to extract the 'high' and 'low' from a 'range' object would now be enclosed within the 'withinRange' method, instead of being spread throughout the code.
+
+Note: This refactoring assumes that the 'withinRange' method and 'getRange' method have been appropriately updated to handle the 'range' object as their argument and return value respectively.
+
+If the 'getRange' function does not exist or similar function does not exist, it may need to be implemented like:
+
+```python
+class DaysTempRange:
+  def getRange(self):
+    return (self.low, self.high)
+```
+
+If the 'withinRange' method does not accept an object parameter, you may need to modify that method as well:
+
+```python
+class Plan:
+  def withinRange(self, range):
+    # Extract the values from range within the function
+    low, high = range
+```
+

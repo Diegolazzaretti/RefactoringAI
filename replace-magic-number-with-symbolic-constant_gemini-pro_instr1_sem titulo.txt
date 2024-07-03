@@ -1,0 +1,71 @@
+gemini-pro - Instrução 1 sem titulo:
+
+**Original code:**
+
+```python
+def potentialEnergy(mass, height):
+    return mass * height * 9.81
+```
+
+**Refactored code:**
+
+**1. Introducing a helper function for calculating the gravitational acceleration:**
+
+```python
+def gravitational_acceleration():
+    return 9.81
+```
+
+**2. Using the helper function in the `potentialEnergy` function:**
+
+```python
+def potentialEnergy(mass, height):
+    return mass * height * gravitational_acceleration()
+```
+
+**3. Explicitly naming the constants:**
+
+```python
+MASS_CONSTANT = 9.81
+
+def potentialEnergy(mass, height):
+    return mass * height * MASS_CONSTANT
+```
+
+**4. Adding type hints:**
+
+```python
+from typing import Union, Tuple
+
+MASS_CONSTANT = 9.81
+
+def potentialEnergy(mass: Union[int, float], height: Union[int, float]) -> Union[int, float]:
+    return mass * height * MASS_CONSTANT
+```
+
+**5. Adding a docstring:**
+
+```python
+from typing import Union, Tuple
+
+MASS_CONSTANT = 9.81
+
+def potentialEnergy(mass: Union[int, float], height: Union[int, float]) -> Union[int, float]:
+    """Calculates the potential energy of a body with mass `mass` and height `height`.
+
+    Args:
+        mass (Union[int, float]): Mass of the body (kg)
+        height (Union[int, float]): Height of the body (m)
+
+    Returns:
+        Union[int, float]: Potential energy (J)
+    """
+
+    return mass * height * MASS_CONSTANT
+```
+
+**Explanation:**
+
+* The original code was not modular, as it combined the calculation of gravitational acceleration with the calculation of potential energy. By introducing a helper function for gravitational acceleration, we make the code more modular and extensible.
+* Explicitly naming the constants and adding type hints enhances the readability and maintainability of the code.
+* Adding a docstring provides documentation for the function, making it easier for other developers to understand its usage.

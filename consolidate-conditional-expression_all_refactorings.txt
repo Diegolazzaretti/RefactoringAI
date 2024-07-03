@@ -1,0 +1,556 @@
+Código Original (consolidate-conditional-expression):
+
+def disabilityAmount():
+    if seniority < 2:
+        return 0
+    if monthsDisabled > 12:
+        return 0
+    if isPartTime:
+        return 0
+    # Compute the disability amount.
+    # ...
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```python
+def calculate_disability_amount(seniority, months_disabled, is_part_time):
+    """Calculates the disability amount based on the given inputs."""
+    
+    if seniority < 2:
+        return 0
+    elif months_disabled > 12:
+        return 0
+    else:
+        if is_part_time:
+            return 0
+        # Compute the disability amount.
+        # ...
+```
+
+gemini-pro - Instrução 1 sem titulo:
+**Refactored Code:**
+
+```python
+def calculate_disability_amount():
+    """Calculates the amount of disability compensation."""
+
+    # Check eligibility criteria
+    if not is_eligible():
+        return 0
+
+    # Compute the disability amount
+    # ...
+
+def is_eligible():
+    """Checks if an employee is eligible for disability compensation."""
+    return seniority >= 2 and monthsDisabled <= 12 and not isPartTime
+```
+
+**Explanation:**
+
+* **Modularity:** The calculation of the disability amount and the eligibility check are now separate functions, making the code more modular and easier to maintain.
+* **Readability:** The code is now more readable due to the use of descriptive function names and a clear separation of concerns.
+* **Maintainability:** The eligibility check is now a standalone function, making it easier to update or modify in the future without affecting the rest of the code.
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def calculateDisabilityAmount(seniority, monthsDisabled, isPartTime):
+    if seniority < 2:
+        return 0
+    if monthsDisabled > 12:
+        return 0
+    if isPartTime:
+        return 0
+    # Compute the disability amount.
+    # ...
+
+gpt-4 - Instrução 1 sem titulo:
+Here is a refactored version of the code. I extracted the condition checks into separate functions with descriptive names.
+
+```python
+def isEligibleForDisability(seniority, monthsDisabled, isPartTime):
+    return hasRequiredSeniority(seniority) and not isExcessivelyDisabled(monthsDisabled) and not isPartTimeWorker(isPartTime)
+
+def hasRequiredSeniority(seniority):
+    return seniority >= 2
+
+def isExcessivelyDisabled(monthsDisabled):
+    return monthsDisabled > 12
+
+def isPartTimeWorker(isPartTime):
+    return isPartTime
+
+def computeDisabilityAmount():
+    if isEligibleForDisability():
+        # Compute the disability amount.
+        # ...
+    else:
+        return 0
+``` 
+
+Please note, to successfully run this new refactored code, you'll need to properly pass the parameters (`seniority`, `monthsDisabled`, `isPartTime`) to the `isEligibleForDisability()` function call, and to the `computeDisabilityAmount()` function itself if needed based on the desired use in project.
+
+mistral - Instrução 1 com titulo:
+```python
+def disability_amount(seniority, months_disabled, is_part_time):
+    """Calculate the amount of disability benefits based on input parameters."""
+    
+    if seniority < 2:
+        return 0
+    
+    if months_disabled > 12:
+        return 0
+    
+    if is_part_time:
+        return 0
+    
+    # Compute the disability amount.
+    # ...
+```
+
+gemini-pro - Instrução 1 com titulo:
+**Improved Readability:**
+
+- Use descriptive variable names.
+- Use consistent indentation and spacing.
+
+**Refactored Code:**
+
+```
+def calculate_disability_amount(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> int:
+    """Calculates the disability amount based on given conditions.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        int: Disability amount.
+    """
+
+    # Check eligibility criteria
+    if seniority < 2 or months_disabled > 12 or is_part_time:
+        return 0
+
+    # Calculate disability amount
+    # ...
+```
+
+**Modularity:**
+
+- Extract the eligibility checks into a separate `_is_eligible` function.
+
+**Improved Modularity:**
+
+```
+def calculate_disability_amount(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> int:
+    """Calculates the disability amount based on given conditions.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        int: Disability amount.
+    """
+
+    if not _is_eligible(seniority, months_disabled, is_part_time):
+        return 0
+
+    # Calculate disability amount
+    # ...
+
+def _is_eligible(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> bool:
+    """Checks eligibility for disability benefits.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        bool: True if eligible, False otherwise.
+    """
+
+    return seniority >= 2 and months_disabled <= 12 and not is_part_time
+```
+
+**Maintainability:**
+
+- Provide a docstring for the function.
+- Use type hints for function arguments and return values.
+
+**Improved Maintainability:**
+
+```
+def calculate_disability_amount(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> int:
+    """Calculates the disability amount based on given conditions.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        int: Disability amount.
+    """
+
+    if not _is_eligible(seniority, months_disabled, is_part_time):
+        return 0
+
+    # Calculate disability amount
+    # ...
+
+def _is_eligible(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> bool:
+    """Checks eligibility for disability benefits.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        bool: True if eligible, False otherwise.
+    """
+
+    return seniority >= 2 and months_disabled <= 12 and not is_part_time
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+Refactored code:
+def disabilityAmount():
+    if is_not_eligible_for_disability():
+        return 0
+    # Compute the disability amount.
+    # ...
+
+def is_not_eligible_for_disability():
+    return seniority < 2 or monthsDisabled > 12 or isPartTime
+
+gpt-4 - Instrução 1 com titulo:
+You can combine the conditions using logical AND operator to make the code more concise and readable. Also, instead of writing the conditions directly in the function, you can isolate them into a separate function for better modularity and readability. Here is the refactored code:
+
+```python
+def eligibilityCriteria(seniority, monthsDisabled, isPartTime):
+    return seniority >= 2 and monthsDisabled <= 12 and not isPartTime
+
+def disabilityAmount(seniority, monthsDisabled, isPartTime):
+    if not eligibilityCriteria(seniority, monthsDisabled, isPartTime):
+        return 0
+    # Compute the disability amount.
+    # ...
+```
+
+In the refactored code, we have isolated the eligibility criteria into a separate function (`eligibilityCriteria`). This makes the code more modular (functions have a single responsibility) and enhances readability (easier to understand what each function does). It also enhances maintainability, as changes to the eligibility criteria only need to be made in one place.
+
+mistral - Instrução 2 sem titulo:
+One way to refactor this code is by introducing a DisabilityAmount class that encapsulates the logic for calculating the disability amount. Here's an example of how the refactored code could look like:
+```python
+class DisabilityAmount:
+    def __init__(self, seniority: int, months_disabled: int, is_part_time: bool):
+        self.seniority = seniority
+        self.months_disabled = months_disabled
+        self.is_part_time = is_part_time
+    
+    def calculate_amount(self) -> float:
+        if self.seniority < 2:
+            return 0
+        elif self.months_disabled > 12:
+            return 0
+        elif self.is_part_time:
+            return 0
+        else:
+            # Compute the disability amount using some formula or algorithm.
+            # ...
+            return some_result
+```
+In this refactored code, we have introduced a new class called DisabilityAmount that takes in three parameters - seniority, months\_disabled, and is\_part\_time - as its constructor. The calculate\_amount method of the class implements the logic for calculating the disability amount based on these parameters.
+
+We have also removed the conditional statements and moved them into the appropriate methods of the DisabilityAmount class. This makes the code more modular, readable, and maintainable.
+
+The use of classes and encapsulation helps to reduce code duplication and simplify the logic of the program. It also makes it easier to modify and extend the code in the future without affecting other parts of the program.
+
+gemini-pro - Instrução 2 sem titulo:
+To enhance the code's readability, modularity, and maintainability, several design patterns can be applied. The code can be restructured to follow the Factory Method pattern, which introduces an interface for creating objects, while allowing subclasses to alter the type of objects that will be created. Additionally, the code can be refactored to utilize the Strategy pattern, which defines a family of algorithms, encapsulates each one, and makes them interchangeable. This approach promotes loose coupling between clients and concrete strategies.
+
+```python
+class DisabilityCalculator:
+
+    def __init__(self, seniority, months_disabled, is_part_time):
+        self.seniority = seniority
+        self.months_disabled = months_disabled
+        self.is_part_time = is_part_time
+
+    def is_eligible(self):
+        return self.seniority >= 2 and self.months_disabled <= 12 and not self.is_part_time
+
+    def calculate_amount(self):
+        if not self.is_eligible():
+            return 0
+
+        # Compute the disability amount.
+        # ...
+
+
+# Factory method to create the appropriate calculator based on seniority.
+def create_calculator(seniority):
+    if seniority < 2:
+        return JuniorDisabilityCalculator()
+    elif seniority < 5:
+        return MidLevelDisabilityCalculator()
+    else:
+        return SeniorDisabilityCalculator()
+
+
+# Strategy pattern to encapsulate the calculation logic for each seniority level.
+class DisabilityCalculatorStrategy:
+
+    def calculate_amount(self, calculator):
+        pass
+
+
+class JuniorDisabilityCalculator(DisabilityCalculatorStrategy):
+
+    def calculate_amount(self, calculator):
+        # Calculation logic for junior employees.
+        # ...
+
+
+class MidLevelDisabilityCalculator(DisabilityCalculatorStrategy):
+
+    def calculate_amount(self, calculator):
+        # Calculation logic for mid-level employees.
+        # ...
+
+
+class SeniorDisabilityCalculator(DisabilityCalculatorStrategy):
+
+    def calculate_amount(self, calculator):
+        # Calculation logic for senior employees.
+        # ...
+
+
+# Usage example
+calculator = create_calculator(seniority)
+if calculator.is_eligible():
+    amount = calculator.calculate_amount()
+else:
+    amount = 0
+```
+
+**Changes Made:**
+
+* **Factory Method:** The `create_calculator` function acts as a factory method, abstracting the process of creating different calculators based on seniority.
+* **Strategy Pattern:** The `DisabilityCalculatorStrategy` interface and its concrete implementations (e.g., `JuniorDisabilityCalculator`) encapsulate the calculation logic for each seniority level.
+* **Separation of Concerns:** The `DisabilityCalculator` class handles eligibility checks, while the strategies focus solely on calculating the disability amount.
+* **Enhanced Modularity:** The factory method and strategy pattern allow for easy modification and extension of the calculation logic without affecting other parts of the code.
+* **Improved Readability:** The code is now structured in a way that makes it easier to understand the flow of logic and the purpose of each component.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+We make use of Function Refactoring to refactor the code and improve its readability, modularity, and maintainability. 
+
+```python
+def disabilityAmount():
+    if is_not_eligible_for_disability():
+        return 0
+
+    return compute_disability_amount()
+
+def is_not_eligible_for_disability():
+    return seniority < 2 or monthsDisabled > 12 or isPartTime
+
+def compute_disability_amount():
+    # Logic to compute the disability amount
+```
+
+In the refactored code, we have improved the readability by breaking down the `disabilityAmount` function into two separate functions - `is_not_eligible_for_disability` and `compute_disability_amount`. This helps in increasing modularity by separating out the different concerns. This also makes the code more maintainable as each function now has a single responsibility, is easier to test and can be modified independently.
+
+We have also introduced a guard clause method `is_not_eligible_for_disability` which checks if the person is eligible for disability based on `seniority`, `monthsDisabled` and `isPartTime`. This reduces code duplication by removing multiple if statements and simplifies the logic, making it easier to read and understand. This also allows for future modification of the eligibility criteria in a single place, thus maintaining the functional integrity of the code.
+
+gpt-4 - Instrução 2 sem titulo:
+After Refactoring:
+
+```python
+class Employee:
+    def __init__(self, seniority, months_disabled, is_part_time):
+        self.seniority = seniority
+        self.months_disabled = months_disabled
+        self.is_part_time = is_part_time
+
+    def is_eligible_for_disability(self):
+        return self.seniority >= 2 and self.months_disabled <= 12 and not self.is_part_time
+
+    def disability_amount(self):
+        if self.is_eligible_for_disability():
+            # Compute the disability amount
+            # ...
+            pass
+        else:
+            return 0
+```
+
+Explanation of the changes:
+
+The refactored code removes global variables (`seniority`, `monthsDisabled`, and `isPartTime`) and incorporates them as instance variables in the `Employee` class. This improves modularity because each `Employee` object now manages its own state, which makes the code easier to understand and more maintainable because changes to one `Employee` do not affect others.
+
+The `disabilityAmount` function was refactored into two methods in the `Employee` class: `is_eligible_for_disability` and `disability_amount`.  
+
+The method `is_eligible_for_disability` determines whether the employee is eligible for disability. This method improves modularity by isolating the eligibility determination logic in its own method, enhances readability by giving a meaningful name to the conditions that determine eligibility, and increases maintainability by reducing the likelihood of introducing errors when modifying the eligibility conditions. This method follows the command-query separation principle of object-oriented design, which states that a method should either perform an action or answer a question, but not both.
+
+The method `disability_amount` computes the disability amount only if the employee is eligible. If the employee is not eligible, it returns 0. This method improves maintainability by clearly separating the computation of the disability amount from the eligibility determination, meeting the single responsibility principle of object-oriented design, and making the code easier to understand and modify. This method also applies the guard clause design pattern to return early when the employee is not eligible, reducing the indentation level and increasing the readability.
+
+mistral - Instrução 2 com titulo:
+
+The code above can be refactored using several design patterns to improve its readability, modularity, and maintainability. Here's one possible way to refactor it using the "if-else" pattern:
+
+```python
+def disability_amount():
+    """Calculates the amount of disability benefits for an employee.
+    Args:
+        seniority (int): The number of years the employee has worked at the company.
+        monthsDisabled (int): The number of months the employee was disabled during their employment.
+        isPartTime (bool): Whether the employee was a part-time worker.
+    Returns:
+        float: The amount of disability benefits the employee is eligible for.
+    """
+    if seniority < 2:
+        return 0
+    elif monthsDisabled > 12:
+        return 0
+    elif isPartTime:
+        return 0
+    else:
+        # Compute the disability amount. 
+        # ...
+```
+
+The changes made to the code are as follows:
+
+1. The function name has been changed to `disability_amount()` to better reflect its purpose and make it more descriptive.
+2. The function now takes three arguments, which makes the code more modular and easier to read.
+3. The conditional expressions have been consolidated using the "if-else" pattern to eliminate duplication and simplify the logic. The first "if" checks if the employee has worked for less than two years, the second checks if they were disabled for more than a year, and the third checks if they were part-time workers.
+4. Each "if" statement has been replaced with an "elif" (else if) to maintain the order of evaluation in case none of them are true.
+5. The function now returns a float, which is more appropriate for financial calculations.
+6. The code within the last "elif" block (i.e., the "else" statement) has been moved inside the function to make it more modular and easier to read.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+def calculate_disability_amount():
+    if not is_eligible():
+        return 0
+
+    # Compute the disability amount.
+    # ...
+```
+
+**Explanation of Changes:**
+
+**1. Consolidation of Conditional Expressions:**
+
+* The original code contained multiple conditional expressions that checked for different conditions to determine eligibility for disability. These expressions have been consolidated into a single `is_eligible()` function.
+
+**2. Introduction of a Boolean Function:**
+
+* The `is_eligible()` function returns a boolean value indicating whether the employee is eligible for disability benefits. This simplifies the logic and makes it easier to understand the conditions for eligibility.
+
+**3. Improved Readability and Maintainability:**
+
+* The refactored code is more readable and maintainable because it uses clearer variable names and separates the eligibility check from the calculation of the disability amount. This makes it easier to modify the code in the future without introducing errors.
+
+**4. Enhanced Testability:**
+
+* By isolating the eligibility check into a separate function, it becomes easier to test the logic for determining eligibility independently from the calculation of the disability amount. This improves the overall testability of the code.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+It appears that the given code is written in Python. Refactored code will be as follows.
+
+Consolidate Conditional Expression:
+
+# We can use Martin Fowler's replace-conditional-logic-with-strategy-or-state design pattern to improve the readability, modularity, and maintainability of the code.
+# This design pattern allows us to remove the conditional logic that checks various flags and uses strategy or state objects instead.
+
+class DisabilityAmount():
+    def __init__(self, seniority, months_disabled, is_part_time):
+        self.seniority = seniority
+        self.months_disabled = months_disabled
+        self.is_part_time = is_part_time
+
+    def calculate(self):
+        if self.is_not_eligible():
+            return 0
+        # Compute the disability amount.
+        return self.calculate_disability_amount()
+
+    def is_not_eligible(self):
+        return (
+            self.seniority < 2
+            or self.months_disabled > 12
+            or self.is_part_time
+        )
+
+    def calculate_disability_amount(self):
+        # ... (Insert logic to calculate disability amount)
+        return 1000  # Example value, replace with actual calculation
+
+# USAGE
+# Create an instance of DisabilityAmount with appropriate values
+benefits = DisabilityAmount(2, 10, False)
+amount = benefits.calculate()
+print(amount)
+
+Refactoring Changes:
+1. Encapsulated the logic inside a class 'DisabilityAmount' to represent the disability benefits calculation.
+2. Created methods 'is_not_eligible' and 'calculate_disability_amount' to remove the conditional logic and provide more clarity and maintainability to the code.
+3. Applied the replace-conditional-logic-with-strategy-or-state design pattern for better code organization and modularity.
+4. Improved variable and method naming for better readability.
+5. Removed the duplicated logic for checking various conditions to allow for easier future maintenance and modifications. 
+
+gpt-4 - Instrução 2 com titulo:
+First, let's refactor the method disabilityAmount to a class named DisabilityCalculator, as it will improve modularity and makes more sense in an object-oriented context.
+
+Next, as per the DRY principle (Don't Repeat Yourself), three different if conditions share the same consequence, i.e., return 0. It will be much cleaner to consolidate these conditions using the logical OR operator. This refactoring technique is known as Consolidate Conditional Expression. It ensures that the code is cleaner and more explicit about its intent.
+
+Refactored code:
+
+```python
+class DisabilityCalculator:
+    def __init__(self, seniority, months_disabled, is_part_time):
+        self.seniority = seniority
+        self.months_disabled = months_disabled
+        self.is_part_time = is_part_time
+
+    def disability_amount(self):
+        if (self.seniority < 2) or (self.months_disabled > 12) or self.is_part_time:
+            return 0
+        else:
+            # Compute the disability amount.
+            # ...
+            pass
+```
+
+The proposed changes pulled out all the common functionality into single DisabilityCalculator class, making the code more readable and maintainable. Here’s how:
+
+- Refactoring the function into a class: Improves modularity and prepares the code for future extensions. For example, we can now easily add more methods related to "Disability" to the DisabilityCalculator class.
+  
+- Consolidating all the conditional statements into a single one: Enhances the readability of the code and prevents repetition, thereby making the code cleaner and compact. A single if statement also makes it easier to understand and modify in the future.
+   
+- The use of self in class: Ensures that we can use the variables in other methods within the class. This would aid in function calls and reduce the passing of parameters between functions.
+
+- Use of descriptive variable and method names: Makes the code self-explanatory. Thus, improving readability.
+
+This refactored code adheres to the best practices of software development and makes future modifications easier without compromising the functional integrity of the original code.
+

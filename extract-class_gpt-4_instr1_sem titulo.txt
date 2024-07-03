@@ -1,0 +1,52 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Refactored code:
+
+```python
+class Soldier:
+    """This class represents a Soldier with properties like health, damage and weapon status."""
+
+    def __init__(self, health=0, damage=0, weapon_status=0):
+        self.health = health
+        self.damage = damage
+        self.weapon_status = weapon_status
+
+    @property
+    def health(self):
+        return self._health
+
+    @health.setter
+    def health(self, value):
+        self._health = value
+
+    @property
+    def damage(self):
+        return self._damage
+
+    @damage.setter
+    def damage(self, value):
+        self._damage = value
+
+    @property
+    def weapon_status(self):
+        return self._weapon_status
+
+    @weapon_status.setter
+    def weapon_status(self, value):
+        self._weapon_status = value
+
+    def get_damage(self):
+        """Method to get the damage inflicted by the soldier."""
+        # ...
+
+    def attack(self):
+        """Method for the soldier to perform an attack."""
+        # ...
+```
+
+The above refactored code does the following:
+
+1. Defines a constructor to initialize the Soldier class attributes / member variables, which enhances modularity.
+2. Defines properties for health, damage and weapon status, which improves code readability by encapsulating the member variables. Property methods also add an extra layer of security by providing control over how these variables are accessed and modified.
+3. Renames the getDamage method to get_damage for consistency and to adhere to Python's naming conventions (PEP8 standard).
+4. Adds docstrings to describe what the class and its methods do, thereby improving readability and making it easier to understand the purpose of the class and its methods.

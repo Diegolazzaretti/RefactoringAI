@@ -1,0 +1,20 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class DiscountChecker:
+    @staticmethod
+    def has_discount(order):
+        base_price = order.base_price()
+        return base_price > 1000
+
+class Order:
+    def __init__(self, base_price):
+        self.base_price = base_price
+
+    def base_price(self):
+        return self.base_price
+
+# Comments:
+# I refactored the code by creating a class to handle the discount check logic and separated it from the Order class for better modularity and readability. 
+# I also updated the variable and method names to follow the snake_case naming convention, which is a best practice for Python. 
+# The DiscountChecker class now provides a single method, `has_discount`, to encapsulate the logic for checking whether an order has a discount based on its base price. 
+# Additionally, I added an Order class as an example to demonstrate how the `has_discount` method can be used with the base_price method to get order details.

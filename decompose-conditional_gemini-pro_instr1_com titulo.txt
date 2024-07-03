@@ -1,0 +1,47 @@
+gemini-pro - Instrução 1 com titulo:
+
+Here's the refactored code:
+
+```python
+SUMMER_START = datetime.date(2023, 6, 1)
+SUMMER_END = datetime.date(2023, 9, 30)
+WINTER_RATE = 0.1
+WINTER_SERVICE_CHARGE = 10
+SUMMER_RATE = 0.05
+
+
+def calculate_charge(date, quantity):
+  """Calculates the charge for a given date and quantity.
+
+  Args:
+    date: The date for the charge.
+    quantity: The quantity of the charge.
+
+  Returns:
+    The charge for the given date and quantity.
+  """
+
+  if is_summer(date):
+    return quantity * SUMMER_RATE
+  else:
+    return quantity * WINTER_RATE + WINTER_SERVICE_CHARGE
+
+
+def is_summer(date):
+  """Determines if the given date is in the summer season.
+
+  Args:
+    date: The date to check.
+
+  Returns:
+    True if the given date is in the summer season, False otherwise.
+  """
+
+  return SUMMER_START <= date <= SUMMER_END
+```
+
+The refactored code addresses the issues of readability, modularity, and maintainability as follows:
+
+- Readability: The code is now more readable due to the use of descriptive variable names and the separation of concerns into separate functions.
+- Modularity: The code is now more modular due to the use of separate functions for calculating the charge and determining if a date is in the summer season. This makes the code easier to maintain and extend.
+- Maintainability: The code is now more maintainable due to the use of descriptive variable names and the separation of concerns into separate functions. This makes it easier to understand and change the code in the future.

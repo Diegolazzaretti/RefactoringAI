@@ -1,0 +1,54 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Let's refactor the provided code as follows:
+
+```python
+class OutputHandler:
+    def __init__(self):
+        self.factories = {}
+
+    def register(self, type, factory):
+        self.factories[type] = factory
+
+    def get(self, type):
+        factory = self.factories.get(type)
+        if not factory:
+            raise ValueError(f"Unknown type: {type}")
+        return factory()
+
+class BannerOutput:
+    def output(self):
+        # Print the banner.
+        pass
+
+class InfoOutput:
+    def output(self):
+        # Print the info.
+        pass
+
+# initialize the handler and register the types
+output_handler = OutputHandler()
+output_handler.register("banner", BannerOutput)
+output_handler.register("info", InfoOutput)
+
+# use the output handler to get the correct output object and call output method
+output_handler.get("banner").output()
+output_handler.get("info").output()
+```
+
+Explanation:
+
+1. The original code needed serious work on readability and maintainability. There were no classes defined, and the output() function seemed to deal with different types of output in a single place, which violated the Single Responsibility Principle (SRP).
+
+2. I introduced classes to give each type of output its own class ('BannerOutput', 'InfoOutput'). These classes encapsulate the logic to print the specific outputs.
+
+3. I used a Factory pattern to manage the creation of these types of output in the OutputHandler class. Factory is widely used in Object-Oriented Programming when we have a superclass with multiple subclasses. To avoid the use of complex if-elif-else blocks and improve scalability when a new class is added, we can simply register it in our factory class. 
+
+4. The OutputHandler class contains a dictionary (factories) that maps type names to their respective classes. The 'register' method is used to map types to their factories, and the 'get' function is used to create and return an instance of the requested type.
+
+5. This design is more modular, extendable and maintainable. If new types of output are added in the future, they can be easily incorporated into this design by creating a new class for the type and registering it in the factory.
+
+6. By doing this, we made the code cleaner and made it easier for future developers to add new output types, improving overall code durability. 
+
+7. Moreover, the original method of using simple "if" statements isn't extendable or maintainable at all. As more output types are added, the method would grow long and unmanageable, making it harder to debug and maintain. It also violates the Open/Closed Principle since the method must be updated every time a new output type is added.
+

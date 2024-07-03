@@ -1,0 +1,36 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here is the refactored version of the code:
+
+```python
+def get_value_for_period(period_number, values):
+    """
+    Returns the value for a given period number from a list of values.
+    If the period number is out of the list's range, it will return 0.
+
+    :param period_number: The period number to get the value.
+    :type: int
+    :param values: List of values.
+    :type: list
+    :return: Value for the period number or 0 if it's out of range.
+    :rtype: int or float
+    """
+    if period_number < len(values):
+        return values[period_number]
+    else:
+        return 0
+```
+
+Explanation:
+
+1. We moved the `values` list as a parameter of the function. This improves modularity because the function doesn't rely on external variables anymore.
+
+2. We replaced `try/except` statement with an `if/else` statement. It is usually better to prevent exceptions rather than catching them. In this case, we can easily check if the index is out of bounds.
+
+3. We added a function docstring. This improves readability because it explains what the function is doing and what each parameter is.
+
+4. We renamed the function and its parameters to follow [PEP 8 style guidelines](https://www.python.org/dev/peps/pep-0008/#function-and-variable-names) (use of underscores instead of camelCase). Use one style and be consistent through your code. 
+
+5. We indicated the types of the parameters and the return type in the docstring, enhancing the readability and understanding of function usage.
+
+Note that catching `IndexError` as was done in the original function might be more suitable in certain situations, especially when dealing with multi-threading or when the list can be modified externally while the function is running. In these scenarios, it's impossible to prevent IndexError 100% of the time, so we need to catch it. However, in most common situations, it's better to make sure the index is within bounds beforehand, as we did in the refactored function.

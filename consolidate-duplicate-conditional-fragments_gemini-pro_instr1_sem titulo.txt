@@ -1,0 +1,27 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+def calculate_total(price: float) -> float:
+    """Calculates the total price based on whether it's a special deal or not.
+
+    :param price: The original price of the item.
+    :return: The total price after applying any discounts.
+    """
+    discount_rate = 0.05 if is_special_deal() else 0.02
+    return price * (1 - discount_rate)
+
+
+def is_special_deal() -> bool:
+    """Determines whether the current item is a special deal or not.
+
+    :return: True if it's a special deal, False otherwise.
+    """
+    # Logic to determine if the item is a special deal.
+
+def send(total: float):
+    """Sends the total price to the payment processor.
+
+    :param total: The total price to be sent.
+    """
+    # Logic to send the total price to the payment processor.
+```

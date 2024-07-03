@@ -1,0 +1,33 @@
+gpt-4 - Instrução 2 com titulo:
+
+Refactored Code:
+
+```python
+class Output:
+    @staticmethod
+    def banner():
+        # Print the banner.
+        # ...
+
+    @staticmethod
+    def info():
+        # Print the info.
+        # ...
+
+# To use these methods
+output = Output()
+output.banner()
+output.info()
+```
+
+Explanation:
+
+The given code snippet has been encapsulated under a class named `Output`. The method `output()` that initially took the parameter `type`, was split into two explicit methods: `banner()` and `info()`. This approach follows the OOP design principle of using methods to represent tasks, providing explicit method calls that correspond to distinct functionality. 
+
+This refactoring pattern is known as Replace Parameter with Explicit Methods. It addresses the issue of a method that changes its behavior based on a parameter, making the code less readable, maintainable, and error-prone, as future developers must know possible values of the parameter and how they affect the method's functionality. The code becomes easier to understand when one method corresponds to one type of behavior. 
+
+Creating explicit methods for each type of action significantly improves code readability, as the name of the method clearly signals its functionality. Modularity is increased as each method does one specific task - printing either the banner or the information - adhering to the single responsibility principle. Future modifications around the banner or the information will affect the respective method, ensuring functional integrity is maintained as only relevant parts of the system are altered in any modification.
+
+Also, the methods are made static since they do not depend on any instance variables. They only perform actions, so it is appropriate to make them static. 
+
+This way of organizing the code makes it easier to understand, therefore easing both future maintenance efforts and the integration of new functionalities. It also helps error tracing, as it is clear where exactly in the code each functionality is executed.

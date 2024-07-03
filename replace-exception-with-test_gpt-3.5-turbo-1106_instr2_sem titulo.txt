@@ -1,0 +1,28 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+The code can be enhanced by introducing a separate class to keep track of specific period values. The Singleton design pattern will be applied to ensure only one instance of the class is created. The refactored code follows:
+
+```python
+class PeriodValues:
+    _instance = None
+
+    def __init__(self):
+        if not PeriodValues._instance:
+            self.values = []
+
+    @classmethod
+    def get_instance(cls):
+        if not cls._instance:
+            cls._instance = PeriodValues()
+        return cls._instance
+
+    def get_value_for_period(self, period_number):
+        try:
+            return self.values[period_number]
+        except IndexError:
+            return 0
+```
+
+The refactored code adheres to best practices by separating the period values management into a designated class. The Singleton pattern ensures only one instance of the class exists, making it easy to maintain and safely accessible across the application.
+
+The refactored code enhances modularity and readability, improving the maintainability by encapsulating period value handling. Additionally, error handling is centralized in the `get_value_for_period` method, simplifying the logic and reducing code duplication. The overall organization is more structured, allowing for future modifications to be easily implemented with minimal impact on the remaining code.

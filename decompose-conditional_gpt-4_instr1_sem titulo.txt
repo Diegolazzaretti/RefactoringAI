@@ -1,0 +1,20 @@
+gpt-4 - Instrução 1 sem titulo:
+
+It is always good to break a complex if conditions into separately manageable functions. Here I would split it into its own function named `isWinterSeason`. This will make the code easier to read. Also having the charge calculation separately in a function would make the solution more cleaner.
+
+Here is the refactor code:
+
+```python
+def is_winter_season(date):
+    return date.before(SUMMER_START) or date.after(SUMMER_END)
+
+def calculate_charge(quantity, rate, service_charge=0):
+    return quantity * rate + service_charge
+
+if is_winter_season(date):
+    charge = calculate_charge(quantity, winterRate, winterServiceCharge)
+else:
+    charge = calculate_charge(quantity, summerRate)
+``` 
+
+By moving `quantity * rate + service_charge` to a function, we avoid duplication and make our intention clear. Also the new function `calculate_charge` is more flexible because we can specify a different `service_charge`, but have chosen to set a default of 0 for the cases where we don't have a `service_charge`. 

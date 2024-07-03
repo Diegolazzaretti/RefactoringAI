@@ -1,0 +1,33 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Refactored Code:
+
+```python
+class TemperatureRange:
+    def __init__(self, low, high):
+        self.low = low
+        self.high = high
+
+class Plan:
+    def __init__(self, acceptableTemperatureRange):
+        self.acceptableTemperatureRange = acceptableTemperatureRange
+
+    def withinRange(self, temperatureRange):
+        return self.acceptableTemperatureRange.low <= temperatureRange.low and \
+               self.acceptableTemperatureRange.high >= temperatureRange.high
+
+temperatureRange = TemperatureRange(daysTempRange.getLow(), daysTempRange.getHigh())
+withinPlan = plan.withinRange(temperatureRange)
+```
+
+Explanation:
+
+1. Introduced two classes `TemperatureRange` and `Plan` to encapsulate the related data and methods. It enhances readability, modularity and maintainability as related data and code are grouped together.
+
+2. Instantiated `TemperatureRange` by passing `low` and `high` temperatures got from `daysTempRange`. Encapsulating `low` and `high` temperatures in a class instantiation contributes to the readability of the code.
+
+3. The `withinRange` method of `Plan` now takes a `TemperatureRange` object as its argument, making the function name and its purpose clearer. It also contributes to easier code maintainability as we can modify the temperature range object's properties and the method's logic independent of each other.
+
+4. All properties and methods are accessed via instances which adheres to Object-Oriented Programming practices. 
+
+All these changes keep the logic of the code intact while significantly improving its organization and clarity. The code is now better structured for easy understanding and for future modifications. It is also reduced to a smaller, more manageable size which keeps the code DRY (Don't Repeat Yourself), further ensuring easy maintainability.

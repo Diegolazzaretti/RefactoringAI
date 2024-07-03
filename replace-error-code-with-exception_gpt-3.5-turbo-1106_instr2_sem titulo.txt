@@ -1,0 +1,15 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            return False
+        else:
+            self.balance -= amount
+        return True
+
+
+The code has been refactored to create a BankAccount class that handles the balance and withdrawals. The initial balance is set using the constructor, and the withdraw method returns a boolean value based on whether the withdrawal was successful. This refactored code improves readability, modularity, and maintainability by separating the concerns of managing the balance and handling withdrawal logic. It reduces code duplication and simplifies the logic by encapsulating it within a class. This makes it easier to understand the purpose of each method and modify the behavior in the future.

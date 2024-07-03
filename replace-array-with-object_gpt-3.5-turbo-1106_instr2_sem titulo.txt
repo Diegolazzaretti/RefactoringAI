@@ -1,0 +1,12 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+class FootballTeam:
+    def __init__(self, name, points):
+        self.name = name
+        self.points = points
+
+def create_team_row(name, points):
+    return FootballTeam(name, points)
+
+team_row = create_team_row("Liverpool", 15)
+print(team_row.name, team_row.points)

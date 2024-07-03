@@ -1,0 +1,28 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+public double calculateFinalPrice(int quantity, double itemPrice) {
+    double basePrice = calculateBasePrice(quantity, itemPrice);
+    double seasonalDiscount = getSeasonalDiscount();
+    double fees = getFees();
+    double finalPrice = discountedPrice(basePrice, seasonalDiscount, fees);
+    return finalPrice;
+}
+
+private double calculateBasePrice(int quantity, double itemPrice) {
+    return quantity * itemPrice;
+}
+
+private double getSeasonalDiscount() {
+    // logic to calculate seasonal discount
+    return 0.0; // placeholder value
+}
+
+private double getFees() {
+    // logic to calculate fees
+    return 0.0; // placeholder value
+}
+
+private double discountedPrice(double basePrice, double seasonalDiscount, double fees) {
+    // logic to calculate discounted price
+    return 0.0; // placeholder value
+}

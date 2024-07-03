@@ -1,0 +1,53 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+The following code can be refactored using the State design pattern. Here's the refactored code that shows how this can be achieved:
+
+class PayAmount:
+    def __init__(self):
+        self.state = None
+
+    def getState(self):
+        return self.state
+
+    def setState(self, state):
+        self.state = state
+
+    def getPayAmount(self):
+        return self.state.payAmount()
+
+
+class State:
+    def payAmount(self, context):
+        pass
+
+
+class DeadState(State):
+    def payAmount(self, context):
+        return deadAmount()
+
+
+class SeparatedState(State):
+    def payAmount(self, context):
+        return separatedAmount()
+
+
+class RetiredState(State):
+    def payAmount(self, context):
+        return retiredAmount()
+
+
+class NormalState(State):
+    def payAmount(self, context):
+        return normalPayAmount()
+
+
+pay = PayAmount()
+dead = DeadState()
+pay.setState(dead)
+pay.getPayAmount()
+
+The refactored code uses the State design pattern, which is suitable for situations where an object's behavior depends on its state and should change its behavior at runtime based on that state. This design pattern ensures that the code is more modular, maintainable, and readable by separating the logic for each state into its own class (e.g. DeadState, SeparatedState, etc.), which avoids the need for nested if-else statements in the original code. This also reduces duplicate code and simplifies the logic because each state encapsulates its own behavior.
+
+In the refactored code, the PayAmount class represents the context that can change its state and has a reference to the current state. The State class defines a common interface for all states, and each state (e.g. DeadState, SeparatedState, etc.) implements this interface for its specific behavior.
+
+By using the State design pattern, the refactored code adheres to best practices of software development by promoting code reusability, readability, maintainability, and separation of concerns, which makes it easier to add new states or modify the behavior of existing states without affecting the context or other states.

@@ -1,0 +1,37 @@
+gpt-4 - Instrução 2 com titulo:
+
+Updated Code
+
+```python
+class InsufficientBalanceException(Exception): pass
+
+class Account:
+    def __init__(self, balance):
+        self.set_balance(balance)
+
+    def get_balance(self):
+        return self._balance
+
+    def set_balance(self, balance):
+        if balance < 0:
+            raise ValueError("Balance cannot be negative.")
+        self._balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.get_balance():
+            raise InsufficientBalanceException("Insufficient balance in the account.")
+        else:
+            self.set_balance(self.get_balance() - amount)
+```
+
+Explanation:
+
+1. Introduction of classes: The original code functions assuming that balance is an attribute of the object. However, there is no definition of the class to which this object belongs. I have created an Account class to encapsulate balance details and operations performed on it.
+
+2. Creation of custom exception: Instead of returning an error code (`-1`), it is a better practice to raise a custom exception (`InsufficientBalanceException`) when the account does not have sufficient balance for the withdrawal. This aligns with the “Replace Error Code with Exception” refactoring method.
+
+3. Encapsulation: To ensure that the balance is always kept within valid limits (not going into negative), I've created getter (`get_balance()`) and setter (`set_balance()`) methods for balance. The setter method checks if the balance is negative and raises a ValueError if it is. This encapsulation enhances maintainability and robustness by preventing direct access to the balance attribute.
+
+4. Method refactoring: The `withdraw` method now uses the `get_balance` and `set_balance` methods to perform its operations which keeps the balance manipulation logic in one place and makes the code more modular. This, along with the replacement of error codes with exceptions, makes the flow of logic simpler to read and understand. 
+
+The refactored code is more modular, robust, and easy to understand, maintain and modify. The logic is centralized and various actions are grouped sensibly into classes/methods.

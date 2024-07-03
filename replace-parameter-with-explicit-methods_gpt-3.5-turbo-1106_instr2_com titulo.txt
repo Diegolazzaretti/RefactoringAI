@@ -1,0 +1,20 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+class Printer:
+    
+    def display_banner(self):
+        # Display the banner.
+        # ...
+
+    def display_info(self):
+        # Display the info.
+        # ...
+
+# Example usage
+printer = Printer()
+printer.display_banner() # prints the banner
+printer.display_info() # prints the info
+
+In the refactored code, a class named Printer is created to represent the functionality of outputting different types of text. The output method with the name parameter has been replaced by two explicit methods: display_banner and display_info. This change enhances maintainability and organization and adheres to the best practices of software development.
+
+By implementing the "replace-parameter-with-explicit-methods refactoring pattern, we avoid conditional logic in the output method and provide separate methods for each type of operation, resulting in a clearer design that is easier to understand and more modular to change over time.

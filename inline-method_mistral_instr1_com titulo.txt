@@ -1,0 +1,14 @@
+mistral - Instrução 1 com titulo:
+
+Here is a refactored version of the provided code:
+```python
+class PizzaDelivery:
+    # ...
+    
+    def get_rating(self):
+        return 2 if self._more_than_five_late_deliveries() else 1
+    
+    def _more_than_five_late_deliveries(self):
+        return self.number_of_late_deliveries > 5
+```
+The main change made in the refactored version is to extract the `_more_than_five_late_deliveries` method into a separate method called `__more_than_five_late_deliveries__`. This makes the code more modular and readable by separating out the logic for determining whether the number of late deliveries is greater than 5 from the main `get_rating` method. Additionally, adding an underscore before the name of the internal method follows Python's convention for naming private or hidden methods.

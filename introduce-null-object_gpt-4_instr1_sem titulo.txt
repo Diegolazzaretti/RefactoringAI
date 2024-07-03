@@ -1,0 +1,19 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Refactoring the code to improve readability, modularity and maintainability you should implement a function where you encapsulate the logic of getting the billing plan for a customer. Here's one way to do it:
+
+```python
+def get_customer_billing_plan(customer):
+    if customer is None:
+        return BillingPlan.basic()
+    else:
+        return customer.getPlan()
+```  
+
+And use it as:
+
+```python
+plan = get_customer_billing_plan(customer)
+```  
+
+This way, if the logic of getting a billing plan changes later it will be easier to maintain as changes will be required in only one place, i.e., inside the function.

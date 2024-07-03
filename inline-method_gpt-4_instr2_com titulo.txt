@@ -1,0 +1,24 @@
+gpt-4 - Instrução 2 com titulo:
+
+Here is the refactored code:
+
+```python
+class PizzaDelivery:
+    # ...
+    RATING_LOW = 1
+    RATING_HIGH = 2
+    LATE_DELIVERY_THRESHOLD = 5
+
+    def get_rating(self):
+        return self.RATING_HIGH if self.late_deliveries_exceed_threshold() else self.RATING_LOW
+  
+    def late_deliveries_exceed_threshold(self):
+        return self.number_of_late_deliveries > self.LATE_DELIVERY_THRESHOLD
+```
+
+Changes Made:
+1. Change camelCase convention to snake_case as per PEP-8 guidelines. Which improves readability and maintainability.
+2. Introduced constants (`RATING_LOW`, `RATING_HIGH`, `LATE_DELIVERY_THRESHOLD`) instead of hard-coded numbers, to make the code more self-explanatory and maintainable. Now, if the rating system or the late delivery threshold needs to be changed, we only need to modify the constants.
+3. Renamed the method `moreThanFiveLateDeliveries` to `late_deliveries_exceed_threshold()` to make what it does more explicit and make it easier to change the threshold without having the method name become misleading.
+
+The above changes significantly improve the readability, modularity, maintainability of the code, and reduce the likelihood of future code bugs.

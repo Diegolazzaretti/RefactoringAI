@@ -1,0 +1,34 @@
+gemini-pro - Instrução 2 com titulo:
+
+```python
+from typing import Optional
+
+class Member:
+    def __init__(self, expense_limit: Optional[int], primary_project: Optional['Project']):
+        self.expense_limit = expense_limit
+        self.primary_project = primary_project
+
+    def get_expense_limit(self) -> int:
+        """
+        Returns the expense limit for the member. If the member has an expense limit, it will be returned.
+        Otherwise, the expense limit of the member's primary project will be returned.
+        """
+        if self.expense_limit is not None:
+            return self.expense_limit
+        elif self.primary_project is not None:
+            return self.primary_project.get_member_expense_limit()
+        else:
+            raise ValueError("Member has no expense limit and no primary project")
+```
+
+Changes Made and their Benefits:
+
+- **Extract Method**: The `getExpenseLimit` method has been extracted to a new method called `get_expense_limit`. This improves readability and modularity by separating the logic for getting the expense limit from the rest of the class.
+
+- **Use Type Hints**: Type hints have been added to the method parameters and return value. This makes the code more self-documenting and helps catch errors early on.
+
+- **Guard Clauses**: Guard clauses have been used to handle the cases where the member has no expense limit or no primary project. This makes the code easier to read and understand, and helps avoid potential errors.
+
+- **Use Optional Types**: Optional types have been used for the `expense_limit` and `primary_project` attributes. This allows the member to have no expense limit or no primary project, which is more flexible and realistic.
+
+- **Rename Method**: The `getExpenseLimit` method has been renamed to `get_expense_limit` to follow the naming conventions of Python methods.

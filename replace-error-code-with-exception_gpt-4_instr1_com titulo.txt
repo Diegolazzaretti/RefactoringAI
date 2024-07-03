@@ -1,0 +1,25 @@
+gpt-4 - Instrução 1 com titulo:
+
+Let’s refactor the code using Python’s built-in exception handling. You can raise an exception if the balance is insufficient, instead of returning an error code. In this way, when you call this function and it raises an exception, you will immediately know that something went wrong due to insufficient balance.
+
+```python
+class InsufficientBalanceException(Exception):
+    pass
+
+def withdraw(self, amount):
+    if amount > self.balance:
+        raise InsufficientBalanceException("You have insufficient funds!")
+    self.balance -= amount
+```
+In the refactored code, I am defining a new exception class named `InsufficientBalanceException`. When the balance is insufficient, I raise this exception instead of returning an error code.
+
+Then, when you use this `withdraw` function in your code elsewhere, you can use a try-except block to call this function and handle the `InsufficientBalanceException` if it is raised.
+
+```python
+try:
+    account.withdraw(amount_to_withdraw)
+except InsufficientBalanceException as e:
+    print(str(e))
+```
+
+This new version of the code enhances its readability as it's now clear what kind of error might occur. It also boosts modularity, since we're isolating the error handling within its own defined Exception type. Finally, it improves maintainability as future updates and debugging will be easier with explicitly handled exceptions.

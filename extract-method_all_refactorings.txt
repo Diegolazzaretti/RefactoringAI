@@ -1,0 +1,447 @@
+Código Original (extract-method):
+
+def printOwing(self):
+    self.printBanner()
+
+    # print details
+    print("name:", self.name)
+    print("amount:", self.getOutstanding())
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```python
+class Invoice:
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+    
+    # Print the invoice banner
+    def printBanner(self):
+        print("Invoice Banner")
+        print(f"Name: {self.name}")
+        print(f"Amount: {self.amount:.2f}")
+        
+    # Get and print the outstanding amount owed
+    def printOwing(self):
+        self.printBanner()
+        print("Name:", self.name)
+        print("Amount:", self.getOutstanding())
+```
+The refactored code above separates the invoice banner printing logic into its own method `printBanner`. The `printOwing` method now calls this method to print the banner, which improves modularity and readability by making it clear that the banner is a separate concern from the details of the outstanding amount. Additionally, the `amount` attribute is formatted with two decimal places using f-strings for better readability.
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+class Customer:
+    def __init__(self, name, outstanding):
+        self.name = name
+        self.outstanding = outstanding
+
+    def print_owing(self):
+        self.print_banner()
+
+        # print details
+        print(f"name: {self.name}")
+        print(f"amount: {self.get_outstanding()}")
+
+    def print_banner(self):
+        print("**************************")
+        print("*** Customer Owes ****")
+        print("**************************")
+```
+
+**Improvements**:
+
+* **Readability**: Improved the readability of the code by using meaningful variable names, consistent indentation, and clear comments.
+* **Modularity**: Extracted the banner printing logic into a separate method `print_banner()`, making it reusable and easier to maintain.
+* **Maintainability**: Separated the data retrieval from the printing logic, making it easier to update or modify the data without affecting the formatting.
+* **Encapsulation**: Encapsulated the customer data within the `Customer` class, providing better data protection and control.
+* **Consistent Formatting**: Used f-strings for consistent formatting and readability.
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def print_owing(self):
+    self.print_banner()
+    self.print_details(self.name, self.get_outstanding())
+
+def print_details(self, name, amount):
+    print("name:", name)
+    print("amount:", amount)
+
+gpt-4 - Instrução 1 sem titulo:
+Refactoring the printOwning function: 
+
+```python
+def printDetails(self, name, amount):
+    print("name:", name)
+    print("amount:", amount)
+
+def printBanner(self):
+    #print banner code here
+
+def printOwing(self):
+    self.printBanner()
+    outstanding = self.getOutstanding()
+    self.printDetails(self.name, outstanding)
+```
+
+In the refactored code, 
+
+1. The function printDetails() is introduced which takes name and amount as parameters to print them. This improves readability as its functionality is clear from its name. It can be modified independently without impacting other code, therefore enhancing modularity. If there's a change in format to print details or the platform for printing needs to be changed (like logging into a file, etc.) only this method will need to be changed.
+
+2. Similar things applies to printBanner() function. It enhances readability and modularity.
+
+3. In printOwing() function, getOutstanding() is moved to a separate line with its output being stored in a variable. This increases readability as it's clear that outstanding is fetched first and then it's being sent to print. 
+
+4. The printDetails() function is then called with the required parameters. This improves both maintainability and modularity since if either of them needs to change you only have to change one place in your code. Moreover, it may be used in other places of the code if the same logic is required elsewhere. 
+
+Henceforth, the code is more readable, modular and maintainable.
+
+mistral - Instrução 1 com titulo:
+
+A possible refactored version of the code could be:
+```python
+class Bill:
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+    
+    def printBanner(self):
+        print("Name\tAmount")
+        
+    def getOutstanding(self):
+        return self.amount
+    
+    def printOwing(self):
+        self.printBanner()
+        print("name:", self.name)
+        print("amount:", self.getOutstanding())
+```
+
+gemini-pro - Instrução 1 com titulo:
+```python
+def print_owing(self):
+    self.print_banner()
+
+    # print details
+    print("name:", self.name)
+    print("amount:", self.get_outstanding())
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+def printOwing(self):
+    self.printBanner()
+    self.printDetails()
+
+def printDetails(self):
+    print("name:", self.name)
+    print("amount:", self.getOutstanding())
+
+gpt-4 - Instrução 1 com titulo:
+Here is a refactored version of the printOwing method:
+
+```python
+def printOwing(self):
+    self._printBanner()
+    self._printDetails()
+
+def _printBanner(self):
+    print("----- Banner -----\n")
+
+def _printDetails(self):
+    print("Name:", self.name)
+    print("Amount:", self.getOutstanding())
+```
+
+In the new implementation, showing the banner and details are both decoupled into separate functions to enhance modularity and readability. Following this approach makes it easier to test and maintain each operation separately. The functions are also marked as private (by prefixing with an underscore) to indicate that they are not intended to be accessed directly from outside the object.
+Note: Python does not have true private methods. The conventional way to indicate a method should be treated as private is to prefix its name with an underscore.
+
+mistral - Instrução 2 sem titulo:
+
+Before refactoring the code, it appears to be a simple method that prints out a banner and some information about an object. There are no obvious design patterns being used, but there is some potential for duplication since both the `printBanner()` and `getOutstanding()` methods are likely to be called elsewhere in the program.
+
+Here's one possible refactoring of the code using the Singleton pattern:
+```python
+class BillingStatement(metaclass=Singleton):
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+    
+    @staticmethod
+    def printOwing(self):
+        statement = Statement()  # create a new instance of the class
+        statement.printBanner()
+        
+        # print details
+        statement.printName()
+        statement.printAmount()
+    
+class Statement(metaclass=Singleton):
+    def __init__(self):
+        super().__init__("", 0)
+    
+    def setName(self, name):
+        self.name = name
+    
+    def setAmount(self, amount):
+        self.amount = amount
+    
+    def printBanner(self):
+        print("---------------")
+        print(f"Statement for {self.name}")
+        print("---------------")
+    
+    def printName(self):
+        print(f"Name: {self.name}")
+    
+    def printAmount(self):
+        print(f"Amount: ${self.amount}")
+```
+In this refactored code, the `BillingStatement` class is a Singleton, meaning that it can only have one instance per program. The `printOwing()` method creates a new instance of the class and then calls its methods to print out the banner and details.
+
+The `Statement` class is also a Singleton, but it's not used directly in the refactored code. Instead, it's used as an inner class to provide default initial values for the `name` and `amount` attributes of the `BillingStatement` class. The `setName()` and `setAmount()` methods allow you to set these attributes later on if needed.
+
+Using Singleton patterns can reduce code duplication by ensuring that there's only one instance of each class per program, and it can also make the code more modular by separating out concerns into separate classes. This can improve readability and maintainability by making it easier to understand how different parts of the code work together.
+
+gemini-pro - Instrução 2 sem titulo:
+**Refactored Code:**
+
+```python
+class CustomerAccount:
+    def __init__(self, name):
+        self.name = name
+        self.outstanding_amount = 0
+
+    def print_owing(self):
+        self.print_banner()
+        self.print_details()
+
+    def print_banner(self):
+        print("********************************")
+        print("**** Customer Invoice ****")
+        print("********************************")
+
+    def print_details(self):
+        print(f"Name: {self.name}")
+        print(f"Amount: {self.outstanding_amount}")
+```
+
+**Changes Made and Contributions to Improvements:**
+
+* **Modularity and Reusability:** The refactored code separates the printing of the banner and customer details into two distinct methods, `print_banner()` and `print_details()`. This promotes code reusability, enabling these methods to be used in other contexts where similar printing of information is required.
+
+* **Encapsulation:** The `outstanding_amount` is now a private attribute of the `CustomerAccount` class, accessible only through the `get_outstanding()` method. This encapsulation helps protect the internal state of the class, preventing direct manipulation of sensitive data.
+
+* **Data Hiding:** By making `outstanding_amount` private, we enforce information hiding, ensuring that client code cannot directly access or modify this attribute. This prevents potential misuse and errors, enhancing the stability and integrity of the code.
+
+* **Improved Readability:** The separation of banner printing and customer details into separate methods makes the code more organized and easier to read. It eliminates unnecessary repetition and allows for more logical flow.
+
+* **Increased Maintainability:** The refactored code follows the principles of encapsulation and data hiding, making it easier to maintain and modify in the future. Changes to specific aspects of the functionality can be isolated within their respective methods, reducing the risk of unintended consequences.
+
+* **Adherence to Best Practices:** The refactored code conforms to object-oriented design principles, leveraging encapsulation, data hiding, and modularity to promote code quality and maintainability. It also adheres to the DRY (Don't Repeat Yourself) principle by eliminating code duplication.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+class Payment:
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+
+    def print_owing(self):
+        self.print_banner()
+        self.print_details()
+
+    def print_banner(self):
+        # Print banner details
+        pass
+
+    def print_details(self):
+        # Print details
+        print("name:", self.name)
+        print("amount:", self.get_outstanding())
+
+    def get_outstanding(self):
+        # Calculate and return outstanding amount
+        return self.amount
+
+# Changes made:
+# 1. Created a Payment class with __init__ method to initialize the name and amount attributes.
+# 2. The print_owing method now calls print_banner and print_details methods for enhanced modularity and readability.
+# 3. Separated the logic for printing the banner and details into their respective methods to improve organization and maintainability.
+# 4. Created a get_outstanding method to calculate and return the outstanding amount, reducing code duplication and simplifying logic.
+
+gpt-4 - Instrução 2 sem titulo:
+After Refactoring:
+
+class Customer:
+    def __init__(self, name, outstanding_amount):
+        self.name = name
+        self.outstanding_amount = outstanding_amount
+
+    @staticmethod 
+    def print_banner():
+        pass # method definition for print_banner
+
+    def print_details(self):
+        print(f"name: {self.name}")
+        print(f"amount: {self.outstanding_amount}")
+
+    def print_owing(self):
+        self.print_banner()
+        self.print_details()
+
+Explanation of the changes:
+
+1. Encapsulated the code into a class named `Customer`. This encapsulation provides a single place to maintain all the tasks of a customer's indebtedness, enhancing the organization of the code. In this way, the code adheres better to the principle of Single Responsibility in SOLID principles.
+
+2. Created an instance variables `name` and `outstanding_amount` with the __init__ method of the class. These variables capture and maintain the state of each customer object.
+
+3. Refactored `printBanner` and `printOwing` into separate methods, `print_banner` and `print_details`, within the class. This separation promotes better readability and maintainability since each method now has one specific task. 
+
+4. Renamed methods with Python's naming convention of lower case with underscores. This is preferred over CamelCase for function/variable names in Python.
+
+5. Used f-strings in `print_details` to interpolate variables directly into strings. This makes the code more readable.
+
+6. Handled `print_banner` as a static method because it is likely not altering or dependent on the state of the Customer object. It improves the design by not tightly binding the method to the instance.
+
+The resulting refactored code is modular, more readable, and maintainable, promoting easier future modifications. The functional integrity of the original code is maintained throughout.
+
+mistral - Instrução 2 com titulo:
+6. abstract-class
+from abc import ABC, abstractmethod
+
+class PaymentOwing(ABC):
+    @abstractmethod
+    def getOutstanding(self):
+        pass
+
+    @abstractmethod
+    def printBanner(self):
+        pass
+
+    def printOwing(self):
+        self.printBanner()
+
+        # print details
+        print("name:", self.name)
+        print("amount:", self.getOutstanding())
+
+# usage
+class InvoicePayment(PaymentOwing):
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+
+    @property
+    def getOutstanding(self):
+        return self.amount - sum(self.payments)
+
+    @property
+    def payments(self):
+        return [p["payment_amount"] for p in self.payments]
+
+    def printBanner(self):
+        print("Invoice Payment")
+        print(f"Payment Details: name={self.name}, amount={self.amount}")
+
+# usage
+invoice = InvoicePayment("John", 100)
+invoice.printOwing()
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+def printOwing(self):
+    self._printHeader()
+    self._printDetails()
+
+def _printHeader(self):
+    self.printBanner()
+
+def _printDetails(self):
+    print("name:", self.name)
+    print("amount:", self.getOutstanding())
+```
+
+**Changes Made:**
+
+* **Extract Method:** The method `printOwing` has been refactored to use the Extract Method refactoring technique. This has resulted in the creation of two new private methods, `_printHeader` and `_printDetails`.
+* **Separation of Concerns:** The refactored code now follows the Separation of Concerns principle by dividing the responsibility of printing the invoice into two distinct methods: `_printHeader` prints the header information, while `_printDetails` prints the invoice details.
+* **Modularity:** The use of private methods has improved the modularity of the code, making it easier to maintain and extend in the future.
+* **Code Duplication Reduction:** The common banner printing logic has been moved to the `_printHeader` method, eliminating code duplication and improving the readability of the `printOwing` method.
+
+**Benefits:**
+
+The refactored code exhibits the following improvements:
+
+* **Enhanced Readability:** The clear separation of responsibilities between the `_printHeader` and `_printDetails` methods makes the code easier to understand and follow.
+* **Improved Modularity:** The use of private methods has introduced a level of modularity that facilitates future modifications and extensibility.
+* **Reduced Code Duplication:** By moving the common banner printing logic into a private method, the refactored code avoids unnecessary duplication and improves maintainability.
+* **Adherence to Best Practices:** The refactoring adheres to the principles of object-oriented design and software development best practices, ensuring maintainability, flexibility, and code reusability.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+class Printer:
+    def print_details(self, name, amount):
+        print("name:", name)
+        print("amount:", amount)
+
+    def print_banner(self):
+        pass
+
+class Invoice:
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+
+class Payment:
+    def __init__(self, invoices):
+        self.invoices = invoices
+
+    def print_owing(self):
+        printer = Printer()
+        printer.print_banner()
+        printer.print_details(self.invoices.name, self.invoices.amount)
+
+#  Extracted the print_details and print_banner functions into the Printer class to improve readability and modularity. The Invoice and Payment classes have been added to better organize the data. The logic for printing the details has been separated into its own function to enhance maintainability. The use of a separate Printer class adheres to best practices by encapsulating the logic for printing details. This makes the code more modular and reusable.
+
+gpt-4 - Instrução 2 com titulo:
+Refactored code:
+
+```python
+class Invoice:
+    def __init__(self, name, outstanding_amount):
+        self.name = name
+        self.outstanding_amount = outstanding_amount
+
+    def print_banner(self):
+        print("***************")
+        print("*** Invoice ***")
+        print("***************")
+
+    def print_details(self):
+        print("Name:", self.name)
+        print("Amount:", self.get_outstanding_amount())
+
+    def print_owing(self):
+        self.print_banner()
+        self.print_details()
+
+    def get_outstanding_amount(self):
+        return self.outstanding_amount
+```
+
+Explanation:
+
+Primarily, the problem with the existing code is that it seems to have come from a class (as we can infer from the 'self' keyword) but it's not presented within a class structure. Hence, I've conducted the refactoring assuming the code was originally part of a class.
+
+1. Class Creation: Created a class named 'Invoice'. This class accepts 'name' and 'outstanding_amount' as initialization parameters.
+
+2. Method Extraction: Moved everything related to printing into separate methods (print_banner and print_details) inside the class to make the code more modular. print_banner prints a decorative banner. print_details is responsible for printing the user name and outstanding amount. This contributes to the separation of concerns, enhances code readability, and helps reduce code duplication in case these pieces need to be invoked elsewhere in the program.
+
+3. Naming Conventions: Function names in Python should be snake_case as per Python's PEP8 style guide. So, changed 'printOwing' to 'print_owing' and 'printBanner' to 'print_banner'.
+
+4. Encapsulation: Encapsulated data by making name and outstanding_amount properties of instances of the class. Made a method 'get_outstanding_amount' to ensure that our outstanding_amount is accessed in a consistent manner. It enhances code maintainability, simplifies modification in case computations are added to get outstanding_amount.
+
+5. printOwing Method: The print_owing method now calls the print_banner and print_details methods. This improves the readability of the code and centralizes the control of the 'print' operations in one method.
+
+Remember that this refactoring assumes that the original code was part of a class definition. If it wasn't, the context would be different and the refactored code would look drastically different from this.
+

@@ -1,0 +1,28 @@
+gpt-4 - Instrução 1 com titulo:
+
+Here is the refactored code:
+
+```python
+class PizzaDelivery:
+    FIVE_LATE_DELIVERIES = 5
+    HIGH_RATING = 2
+    LOW_RATING = 1
+
+    # ...
+
+    def get_rating(self):
+        if self.more_than_five_late_deliveries():
+            return self.HIGH_RATING
+        else:
+            return self.LOW_RATING
+  
+    def more_than_five_late_deliveries(self):
+        return self.numberOfLateDeliveries > self.FIVE_LATE_DELIVERIES
+```
+
+Changes made:
+
+1. Renamed the methods from camelCase to snake_case for consistency with Python's naming conventions.
+2. Replaced magic numbers with descriptive constant variables to improve readability.
+3. Improved the `get_rating` function to make it more readable by replacing the ternary operator with a full if-else statement. This comes down to personal preference though: some people may prefer the conciseness of the ternary operator.
+4. Inserted a placeholder comment (`# ...`) where other class methods would go to indicate that other methods might be present in the actual class.

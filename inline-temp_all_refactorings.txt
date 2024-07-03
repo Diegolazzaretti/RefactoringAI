@@ -1,0 +1,312 @@
+Código Original (inline-temp):
+
+def hasDiscount(order):
+    basePrice = order.basePrice()
+    return basePrice > 1000
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```python
+def has_discount(order):
+    # Calculate the base price of the order
+    base_price = order.base_price()
+    
+    # Return True if the base price is greater than 1000, otherwise return False
+    return base_price > 1000
+```
+
+gemini-pro - Instrução 1 sem titulo:
+**Enhanced Code:**
+
+```python
+from typing import Dict
+
+CUSTOMER_DISCOUNT_THRESHOLD = 1000
+
+def get_base_price(order: Dict) -> float:
+    """Returns the base price of the order."""
+    return order["base_price"]
+
+def has_discount(order: Dict) -> bool:
+    """Determines if the order has a discount based on base price.
+
+    Args:
+        order (Dict): The order information.
+
+    Returns:
+        bool: True if there is a discount, False otherwise.
+    """
+    base_price = get_base_price(order)
+    return base_price > CUSTOMER_DISCOUNT_THRESHOLD
+```
+
+**Refactoring Details:**
+
+* **Use meaningful variables:** Renamed `basePrice` to `base_price` for clarity.
+* **Use constants:** Introduced a constant `CUSTOMER_DISCOUNT_THRESHOLD` to define the discount threshold.
+* **Modularize base price calculation:** Created a separate function `get_base_price` to extract the base price calculation logic from the main function.
+* **Add type hints:** Annotated the function parameters and return values with type hints for improved code readability and self-documentation.
+* **Improve naming:** Renamed the main function to `has_discount` to better reflect its purpose.
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def has_discount(order):
+    base_price = order.base_price()
+    return base_price > 1000
+
+gpt-4 - Instrução 1 sem titulo:
+Here's how it can be refactored to increase its readability, modularity and maintainability:
+
+```python
+def is_eligible_for_discount(order):
+    MINIMUM_PRICE_FOR_DISCOUNT = 1000
+    base_price = order.get_base_price()
+    
+    return base_price > MINIMUM_PRICE_FOR_DISCOUNT
+```
+
+- The function name `is_eligible_for_discount` clearly indicates the purpose of the function.
+- The constant `MINIMUM_PRICE_FOR_DISCOUNT` is properly named and shows its intent.
+- Modularity is enhanced by having the order's base price calculation in a separate method (assuming `get_base_price` does that), which can also increase maintainability.
+- Constants, such as the minimum price to get a discount, are easy to update as they are defined at the top of the function.
+
+mistral - Instrução 1 com titulo:
+
+First, let's create a new function called `getBasePrice` to handle the calculation of the base price:
+```python
+8. inline-temp
+def getBasePrice(order):
+    return order.basePrice()
+
+def hasDiscount(order):
+    basePrice = getBasePrice(order)
+    return basePrice > 1000
+```
+This makes the code more modular and easier to read, as we're separating out the logic for calculating the base price into its own function. We've also made it clearer that `hasDiscount` depends on `getBasePrice`.
+
+gemini-pro - Instrução 1 com titulo:
+**Extracted Variable**
+
+```python
+def hasDiscount(order):
+    base_price = order.basePrice()
+    return base_price > 1000
+```
+
+**Renamed Function**
+
+```python
+def order_has_discount(order):
+    return order.basePrice() > 1000
+```
+
+**Inlined Method Call**
+
+```python
+def hasDiscount(order):
+    return order.basePrice > 1000
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+def has_discount(order):
+    return order.base_price() > 1000
+
+gpt-4 - Instrução 1 com titulo:
+You can refactor the code removing the redundant temporary variable ("basePrice"). Here is the refactored code:
+
+def hasDiscount(order):
+    return order.basePrice() > 1000
+
+This is beneficial because it removes an unnecessary line of code, saving memory, and makes the purpose of the function clearer. Also, the function is more cohesive because it only does one thing.
+
+mistral - Instrução 2 sem titulo:
+
+Here are some ways that this code could be refactored for improved readability, modularity, and maintainability:
+
+Option 1 - Minimizing code duplication and simplifying logic using a ternary operator:
+
+```python
+def hasDiscount(order):
+    basePrice = order.basePrice()
+    return basePrice > 1000 if order.discount else None
+```
+
+Explanation: The ternary operator is used to check if the `discount` attribute of the `order` object is set, and returns `None` otherwise. This reduces code duplication by combining two separate checks into one line of code. 
+
+Option 2 - Using a separate function for base price calculation and separating logic into multiple methods:
+
+```python
+def hasDiscount(order):
+    def calculateBasePrice(order):
+        return order.basePrice()
+    
+    def checkDiscount(order):
+        basePrice = calculateBasePrice(order)
+        discount = order.discount()
+        if discount:
+            basePrice -= discount
+        return basePrice > 1000
+    
+    return checkDiscount(order)
+```
+
+Explanation: The logic is separated into two separate methods - `calculateBasePrice` and `checkDiscount`. This makes the code more modular and easier to understand. The `calculateBasePrice` method calculates the base price of an order, while the `checkDiscount` method applies any discount to the base price before checking if it's above a certain threshold. This approach also allows for easy modification or addition of different discount types in the future without having to change the `hasDiscount` function itself.
+
+gemini-pro - Instrução 2 sem titulo:
+**Refactored Code:**
+
+```python
+from abc import ABC, abstractmethod
+
+class DiscountPolicy(ABC):
+
+    @abstractmethod
+    def is_applicable(self, order) -> bool:
+        pass
+
+class BasePriceDiscountPolicy(DiscountPolicy):
+
+    def __init__(self, minimum_base_price):
+        self.minimum_base_price = minimum_base_price
+
+    def is_applicable(self, order) -> bool:
+        base_price = order.base_price()
+        return base_price > self.minimum_base_price
+
+def apply_discounts(order):
+    discount_policies = [
+        BasePriceDiscountPolicy(minimum_base_price=1000),
+    ]
+
+    for policy in discount_policies:
+        if policy.is_applicable(order):
+            return True
+
+    return False
+```
+
+**Changes Made:**
+
+* **Introduced Abstraction:** Created an abstract base class `DiscountPolicy` to define the contract for discount policies.
+* **Modularity with Strategy Pattern:** Implemented a specific discount policy, `BasePriceDiscountPolicy`, which checks if the order's base price exceeds a threshold.
+* **Centralized Discount Policies:** Moved the definition of discount policies to a separate function, `apply_discounts`, for centralized management.
+* **Simplified Logic:** Refactored the discount logic into smaller, reusable methods that can be easily modified.
+* **Encapsulation:** Encapsulated the logic for determining if a discount is applicable within the `DiscountPolicy` class.
+
+**Benefits of the Refactoring:**
+
+* **Improved Readability:** The refactored code is more organized and easier to understand.
+* **Modularity:** Discount policies can be added or removed without affecting the core logic.
+* **Maintainability:** The centralized management of discount policies simplifies future modifications.
+* **Extensibility:** The Strategy pattern allows for easy addition of new discount policies in the future.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+class DiscountChecker:
+    @staticmethod
+    def has_discount(order):
+        base_price = order.base_price()
+        return base_price > 1000
+
+class Order:
+    def __init__(self, base_price):
+        self.base_price = base_price
+
+    def base_price(self):
+        return self.base_price
+
+# Comments:
+# I refactored the code by creating a class to handle the discount check logic and separated it from the Order class for better modularity and readability. 
+# I also updated the variable and method names to follow the snake_case naming convention, which is a best practice for Python. 
+# The DiscountChecker class now provides a single method, `has_discount`, to encapsulate the logic for checking whether an order has a discount based on its base price. 
+# Additionally, I added an Order class as an example to demonstrate how the `has_discount` method can be used with the base_price method to get order details.
+
+gpt-4 - Instrução 2 sem titulo:
+The original function is quite simple, but let's assume we are working on a larger project where we want to maintain good practices for readability, modularity, and maintainability. Here's how this function could look after refactoring:
+
+```python
+class Order:
+    def __init__(self, base_price):
+        self.base_price = base_price
+
+    def has_discount(self):
+        return self._is_base_price_over_threshold(1000)
+
+    def _is_base_price_over_threshold(self, threshold):
+        return self.base_price > threshold
+```
+
+Explanations:
+
+1. Encapsulating specific Information (base price of order) into a Class:
+  - The Order class was created to encapsulate the base price of the order. Now, the information about an order is stored within an instance of the Order class, promoting high cohesion.
+  - We've also prefixed the function with an underscore (_) to indicate that this method is intended to be private or protected and shouldn't be accessed directly outside the class.
+
+2. Maintenance of the Base Price Threshold:
+  - Instead of hardcoding the threshold value of "1000" for the base price to decide the availability of discount, a new method called "_is_base_price_over_threshold" is provided that accepts a threshold parameter. This fosters code reuse as different modules requiring different thresholds can use this method directly instead of replicating its logic.
+
+3. Naming conventions:
+  - For python language, PEP 8 style guide is the key resource for styling your code. As per its recommendations,
+    - Variables and function names should be lower case with words separated by underscores as necessary to improve readability (snake_case).
+    - Function names should be lowercase, with words separated by underscores as necessary to improve readability.
+    - There shouldn't be any space around function argument assignment.
+So, `order.basePrice() --> order.base_price` and `hasDiscount() --> has_discount`
+
+Additional mods can be made as per project requirements. For example, if we are dealing with multiple such thresholds (like one for discounts, one for tax slabs etc.), we can introduce a class `Thresholds` and store them over there, thus centralizing all thresholds to one place. In case any change is required, it will need to be made at one place, thus reducing maintenance cost.
+
+mistral - Instrução 2 com titulo:
+
+The given code checks whether a given order has a discount or not by checking if the base price of the order is greater than 1000. This check can be made more modular and maintainable by extracting it into a separate function, as shown below:
+
+def hasDiscount(order):
+    return order.basePrice() > 1000
+
+This code adheres to the single responsibility principle (SRP), which states that each class or function should have only one reason to change. By extracting this functionality into a separate function, we can avoid duplicating this check in other parts of our code and make it easier to modify in the future if needed. Additionally, by using an appropriate design pattern such as encapsulation, we can hide the implementation details of the `order.basePrice()` method and only expose a public interface for interacting with it.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+def hasDiscount(order):
+    return order.basePrice() > 1000
+```
+
+**Changes and Improvements:**
+
+1. **Inline Temporary Variable:** The variable `basePrice` is only used once, so it can be eliminated by inlining it. This reduces clutter and improves readability.
+
+2. **Simplified Logic:** The if-else statement is unnecessary since the calculation directly returns the desired result.
+
+**Benefits of Refactoring:**
+
+* **Enhanced Readability:** The code is now more concise and easier to understand.
+* **Reduced Code Duplication:** The temporary variable is no longer defined twice.
+* **Simplified Logic:** The if-else statement is eliminated, making the code more straightforward.
+* **Improved Maintainability:** The refactored code is easier to modify in the future, as there are fewer lines of code to change.
+* **Adherence to Best Practices:** The refactored code follows the "Inline Temporary Variable" refactoring technique, which is a common practice in software development to enhance code quality.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+const isBasePriceGreaterThanDiscountThreshold = (order) => {
+    const basePrice = order.getBasePrice();
+    return basePrice > 1000;
+}
+
+gpt-4 - Instrução 2 com titulo:
+After refactoring
+
+```python
+class Order:
+    def __init__(self, base_price):
+        self.base_price = base_price
+
+    def hase_discount(self):
+        return self.base_price > 1000
+```
+
+Explanation
+
+1. Encapsulation: Instead of having a standalone function to determine if an order has discount, I have created a class called `Order` which encapsulates the properties (base_price) and behaviors (has_discount) of an order. This makes the code more maintainable and readable since the relevant properties and behaviors are categorized under this class.
+
+2. Readability: The spelling of the function `has_discount` is changed from camel case to snake case, which is more Pythonic and widely accepted as per PEP8 style guide.
+
+3. Summary: The refactored code moves the has_discount method inside an Order class which would be more appropriate and preserves the context of order, contributing towards improved readability. Also, all the attributes related to the order are kept under one roof (under class Order) leading towards better organization of code. Also, should there be other attributes or methods for an Order, they can all be placed within this Order class, thereby increasing the modularity of the code. This leads to better and easier maintenance of the code in the long run, as changes to any aspect of Order only needs to be made in one place.
+

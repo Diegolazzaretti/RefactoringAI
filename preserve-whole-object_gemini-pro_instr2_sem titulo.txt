@@ -1,0 +1,73 @@
+gemini-pro - Instrução 2 sem titulo:
+
+To enhance the readability, modularity, and maintainability of the provided code, we can apply the following design patterns and best practices:
+
+1. **Encapsulation**: We can encapsulate the temperature range check logic into a separate method to improve readability and reduce code duplication.
+
+   ```java
+   public class TemperatureRangeChecker {
+       public static boolean withinRange(TemperatureRange daysTempRange, TemperaturePlan plan) {
+           int low = daysTempRange.getLow();
+           int high = daysTempRange.getHigh();
+           return plan.withinRange(low, high);
+       }
+   }
+   ```
+
+2. **Single Responsibility Principle**: We can introduce a new class `TemperaturePlan` to handle the logic related to temperature planning. This will improve modularity and separation of concerns.
+
+   ```java
+   public class TemperaturePlan {
+       private int minTemp;
+       private int maxTemp;
+
+       public TemperaturePlan(int minTemp, int maxTemp) {
+           this.minTemp = minTemp;
+           this.maxTemp = maxTemp;
+       }
+
+       public boolean withinRange(int low, int high) {
+           return low >= minTemp && high <= maxTemp;
+       }
+   }
+   ```
+
+3. **Named Constants**: To improve the readability and maintainability of the temperature range, we can introduce named constants for the `low` and `high` values.
+
+   ```java
+   public class TemperatureRange {
+       private static final int LOW = 0;
+       private static final int HIGH = 1;
+
+       private int[] range;
+
+       public TemperatureRange(int low, int high) {
+           this.range = new int[] { low, high };
+       }
+
+       public int getLow() {
+           return range[LOW];
+       }
+
+       public int getHigh() {
+           return range[HIGH];
+       }
+   }
+   ```
+
+With these refactorings, the code becomes more readable, maintainable, and extensible. The use of named constants, encapsulation, and a dedicated class for temperature planning makes it easier to understand and modify the code in the future.
+
+**Refactored Code:**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        TemperatureRange daysTempRange = new TemperatureRange(50, 80);
+        TemperaturePlan plan = new TemperaturePlan(60, 75);
+
+        boolean withinPlan = TemperatureRangeChecker.withinRange(daysTempRange, plan);
+
+        System.out.println("Within plan: " + withinPlan);
+    }
+}
+```

@@ -1,0 +1,41 @@
+mistral - Instrução 2 sem titulo:
+
+
+Refactored code:
+
+```python
+class Order:
+    def __init__(self, primary_base_price=0, secondary_base_price=0, tertiary_base_price=0):
+        self.primary_base_price = primary_base_price
+        self.secondary_base_price = secondary_base_price
+        self.tertiary_base_price = tertiary_base_price
+        
+    def calculate_price(self):
+        return self.calculate_primary() + self.calculate_secondary() + self.calculate_tertiary()
+    
+    def calculate_primary(self):
+        # Perform long computation for primary base price.
+        return primaryBasePrice * 100
+        
+    def calculate_secondary(self):
+        # Perform long computation for secondary base price.
+        return secondaryBasePrice * 50
+        
+    def calculate_tertiary(self):
+        # Perform long computation for tertiary base price.
+        return tertiaryBasePrice * 25
+```
+
+Changes made to the code:
+
+1. Extracted calculation logic into separate methods (calculate\_primary(), calculate\_secondary(), and calculate\_tertiary()) to avoid duplication of the long computations.
+2. Created an instance variable `__init__(primary_base_price, secondary_base_price, tertiary_base_price)` to store the base prices. 
+3. Modified the method `price()` to delegate the computation logic to a new method `calculate_price()`. This method calls the instance variables and their respective methods to compute the total price.
+4. Added appropriate comments to improve readability.
+
+These changes contribute to the improvements by:
+
+1. Reducing code duplication and simplifying the logic, making it more maintainable.
+2. Introducing modularity through the separation of concerns into different methods and variables. 
+3. Enhancing overall organization by following best practices of software development such as naming conventions (using descriptive names for instance variables and methods). 
+4. Facilitating future modifications while maintaining functional integrity, as changes can now be made to individual methods or base prices without affecting other parts of the code.

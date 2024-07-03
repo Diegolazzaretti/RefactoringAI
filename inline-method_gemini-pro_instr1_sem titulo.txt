@@ -1,0 +1,28 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+class PizzaDelivery:
+    """
+    Class representing a pizza delivery service.
+    """
+
+    def __init__(self):
+        self._late_deliveries = 0
+
+    def track_delivery(self, is_late):
+        """
+        Tracks a delivery and updates the number of late deliveries accordingly.
+
+        :param is_late: True if the delivery was late, False otherwise.
+        """
+        if is_late:
+            self._late_deliveries += 1
+
+    def get_rating(self):
+        """
+        Calculates the rating of the pizza delivery service based on the number of late deliveries.
+
+        :return: 1 if the number of late deliveries is less than or equal to 5, 2 otherwise.
+        """
+        return 1 if self._late_deliveries <= 5 else 2
+```

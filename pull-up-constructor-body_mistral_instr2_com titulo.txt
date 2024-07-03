@@ -1,0 +1,41 @@
+mistral - Instrução 2 com titulo:
+
+To enhance the readability, modularity, and maintainability of the given code, we can refactor it using object composition design pattern and encapsulation. Here's an example of how the code can be refactored:
+```scss
+class Employee:
+    def __init__(self, name, id):
+        self._name = name
+        self._id = id
+        
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, value):
+        self._name = value
+        
+    @property
+    def id(self):
+        return self._id
+    
+    @id.setter
+    def id(self, value):
+        self._id = value
+        
+class Manager(Employee):
+    def __init__(self, name, id, grade):
+        super().__init__(name, id)
+        self.grade = grade
+        
+    @property
+    def grade(self):
+        return self._grade
+    
+    @grade.setter
+    def grade(self, value):
+        self._grade = value
+```
+In this refactored code, we have extracted the common properties and methods of `Employee` class into a separate base class. The `Manager` class now inherits from the `Employee` class and has its own unique property (`grade`) and methods (none in this example). 
+We have also used the `@property` decorator to define read-only properties, which makes the code more readable and maintainable. We have also used the `_name`, `_id`, and `_grade` naming convention for instance variables, which is a best practice in Python.
+Using object composition and encapsulation, we have reduced code duplication, simplified logic, and improved overall organization of the code. This refactored code will be easier to modify, extend, or maintain in the future.

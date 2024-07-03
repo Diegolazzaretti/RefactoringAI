@@ -1,0 +1,37 @@
+gemini-pro - Instrução 2 sem titulo:
+
+```python
+class Sale:
+    def __init__(self, quantity, item_price, seasonal_discount, fees):
+        self.quantity = quantity
+        self.item_price = item_price
+        self.seasonal_discount = seasonal_discount
+        self.fees = fees
+
+    def calculate_base_price(self):
+        return self.quantity * self.item_price
+
+    def calculate_final_price(self):
+        base_price = self.calculate_base_price()
+        discounted_price = self.apply_seasonal_discount(base_price)
+        final_price = self.add_fees(discounted_price)
+        return final_price
+
+    def apply_seasonal_discount(self, base_price):
+        return base_price * (1 - self.seasonal_discount)
+
+    def add_fees(self, discounted_price):
+        return discounted_price + self.fees
+```
+
+**Explanation of Changes:**
+
+1. **Modularization**: We have separated the calculation of base price, seasonal discount, and final price into separate methods. This makes the code more modular and easier to understand.
+
+2. **Encapsulation**: We have encapsulated the data and logic related to the sale within a class. This allows us to create multiple sales objects and manipulate them independently.
+
+3. **Design Patterns**: The code uses the **Strategy Pattern** for applying seasonal discounts. By defining a separate `apply_seasonal_discount` method, we can easily change the discount strategy in the future without affecting the rest of the code.
+
+4. **Improved Readability**: The refactored code is more structured and organized, making it easier to read and understand the flow of execution.
+
+5. **Maintanability**: The separation of concerns and encapsulation make the code more maintainable. Changes to one part of the code (e.g., the discount strategy) will not affect the rest of the application.

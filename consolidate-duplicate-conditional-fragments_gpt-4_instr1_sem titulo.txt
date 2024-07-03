@@ -1,0 +1,24 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Refactored code:
+
+```python
+def calculate_total(price, discount):
+    return price * discount
+
+def process_deal(price, is_special):
+    discount = 0.95 if is_special else 0.98
+    total = calculate_total(price, discount)
+    send()
+    return total
+
+total = process_deal(price, isSpecialDeal())
+``` 
+
+This refactoring breaks down the original logic into two functions `calculate_total` and `process_deal`.
+
+The calculation of the total is isolated in the `calculate_total` function, making the arithmetic operation more readable and easier to unit test if necessary.
+
+The decision on which discount to apply is done in `process_deal` which then calls `calculate_total` to get the total price. This function also calls `send`.
+
+This refactoring makes the code more maintainable, each function has a single purpose and it is easier to test and understand what each part of the code does. In the end, the value of `total` is obtained by calling `process_deal`.

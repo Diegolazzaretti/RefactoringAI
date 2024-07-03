@@ -1,0 +1,25 @@
+mistral - Instrução 2 sem titulo:
+
+The code provided checks if the deal is special and calculates the total accordingly. If the deal is special, the total is calculated by multiplying the price by 0.95. Otherwise, the total is calculated by multiplying the price by 0.98. Finally, the `send()` function is called with the calculated total as its argument.
+
+To refactor this code and improve its readability, modularity, and maintainability, we can do the following:
+
+1. Create a separate function for calculating the total based on whether the deal is special or not. This will reduce code duplication and make the logic more modular and organized. We can name this function `calculateTotal()`.
+2. Pass the `price` variable as an argument to the `calculateTotal()` function, along with a boolean flag indicating whether the deal is special or not.
+3. Inside the `calculateTotal()` function, we can use an if-else statement to calculate the total based on the value of the boolean flag.
+4. Finally, call the `send()` function with the calculated total as its argument.
+
+Here's how the refactored code would look like:
+```python
+def calculateTotal(price, isSpecialDeal):
+    if isSpecialDeal:
+        total = price * 0.95
+    else:
+        total = price * 0.98
+    return total
+
+def send(total):
+    # implementation of the send() function goes here
+    pass
+```
+This refactored code is more modular, organized, and easier to maintain. It also adheres to best practices of software development by separating concerns and reducing code duplication.

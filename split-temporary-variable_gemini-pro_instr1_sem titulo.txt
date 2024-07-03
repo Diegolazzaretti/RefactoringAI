@@ -1,0 +1,41 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+def calculate_perimeter(height, width):
+    """
+    Calculates the perimeter of a rectangle given its height and width.
+
+    Args:
+        height (int): The height of the rectangle.
+        width (int): The width of the rectangle.
+
+    Returns:
+        int: The perimeter of the rectangle.
+    """
+    return 2 * (height + width)
+
+
+def calculate_area(height, width):
+    """
+    Calculates the area of a rectangle given its height and width.
+
+    Args:
+        height (int): The height of the rectangle.
+        width (int): The width of the rectangle.
+
+    Returns:
+        int: The area of the rectangle.
+    """
+    return height * width
+
+
+if __name__ == "__main__":
+    height = int(input("Enter the height of the rectangle: "))
+    width = int(input("Enter the width of the rectangle: "))
+
+    perimeter = calculate_perimeter(height, width)
+    print(f"The perimeter of the rectangle is: {perimeter}")
+
+    area = calculate_area(height, width)
+    print(f"The area of the rectangle is: {area}")
+```

@@ -1,0 +1,15 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def output(self, message_type):
+    if message_type == "banner":
+        print_banner()
+    if message_type == "info":
+        print_info()
+
+def print_banner():
+    # Print the banner.
+    # ...
+
+def print_info():
+    # Print the info.
+    # ...

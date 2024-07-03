@@ -1,0 +1,30 @@
+gemini-pro - Instrução 2 sem titulo:
+
+**Refactored Code:**
+
+```python
+class Employee:
+    def __init__(self, name, id, grade):
+        self._name = name
+        self._id = id
+        self._grade = grade
+
+class Manager(Employee):
+    def __init__(self, name, id, grade, department):
+        super().__init__(name, id, grade)
+        self._department = department
+```
+
+**Changes Made:**
+
+* **Encapsulated Employee Attributes:** The employee attributes (`name`, `id`, and `grade`) are now private by making them start with an underscore (`_`). This enhances data security and prevents direct access to critical employee details.
+* **Introduced Subclassing for Managers:** Managers now inherit from the `Employee` base class using the `super()` function. This approach follows the Inheritance design pattern, providing a clear hierarchy and facilitating code reuse.
+* **Added Department Attribute for Managers:** Managers have an additional `_department` attribute that can be set during initialization. This simplifies the logic and makes it easier to manage department-specific information for managers.
+* **Removed Redundant Code:** The duplication of employee attributes initialization in the `Manager` class has been eliminated by utilizing the `super()` function.
+
+**Benefits:**
+
+* **Improved Readability:** The refactored code is more organized and easier to understand.
+* **Enhanced Modularity:** The use of subclasses for managers and encapsulation of employee attributes promotes modularity by separating concerns and promoting code reuse.
+* **Increased Maintainability:** The improved structure and reduced code duplication simplify future modifications and ensure maintainability.
+* **Adherence to Best Practices:** The refactored code adheres to the principles of object-oriented programming and data encapsulation, making it more secure and reliable.

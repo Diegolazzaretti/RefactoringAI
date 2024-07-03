@@ -1,0 +1,6 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+def introduceAssertion(self):
+    # Checks for the presence of an expense limit, then returns it
+    return self.expenseLimit if self.expenseLimit != NULL_EXPENSE else \
+        self.primaryProject.getMemberExpenseLimit()

@@ -1,0 +1,27 @@
+gpt-4 - Instrução 1 sem titulo:
+
+Here is the refactored code. The main changes I made are as follows:
+
+- The properties name, id and grade are likely to be common between different types of employees, so I've moved them to the Employee base class.
+- With these being common properties, it is also likely that we will want to initialize them for each type of Employee, so I've placed them in the constructor for the Employee class.
+- This allows us to make the Manager class cleaner, as we've abstracted away some of the details that were cluttering it. Now, when we create a Manager, we just pass the name, id, and grade to the superclass to be dealt with.
+
+Refactored code:
+
+```python
+class Employee:
+    def __init__(self, name, id, grade):
+        self.name = name
+        self.id = id
+        self.grade = grade
+    
+    # Additional details common to all employees (not shown)
+
+class Manager(Employee):
+    def __init__(self, name, id, grade):
+        super().__init__(name, id, grade)
+    
+    # Additional details specific to managers (not shown)
+```
+
+This structure makes it clear that a Manager is a specific type of Employee, and exposes a clear interface for interacting with managers. It also makes it easy to add more types of employees in the future: each new employee type just needs to subclass Employee and pass its specific details up to the superclass.

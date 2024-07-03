@@ -1,0 +1,26 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+The refactored code is presented below:
+
+class PersonFinder:
+    def __init__(self, people):
+        self.people = people
+
+    def find_person(self, name):
+        if name in self.people:
+            return name
+        return ""
+
+# Example usage
+people = ["Don", "John", "Kent"]
+finder = PersonFinder(people)
+print(finder.find_person("Don"))
+print(finder.find_person("John"))
+print(finder.find_person("Kent"))
+print(finder.find_person("Mike"))
+
+The refactored code creates a PersonFinder class with a method find_person that takes a name and searches for it in the list of people. The code is more modular and maintainable, as the search logic is encapsulated in a separate class. It adheres to the single responsibility principle and makes the code more organized.
+
+The refactored code also uses the in operator to check if the name is in the list of people, avoiding the need for a loop and simplifying the logic. This reduces code duplication and makes the code more readable and concise.
+
+Additionally, the example usage demonstrates how the PersonFinder class can be used to find different people in the list, contributing to the overall readability and understanding of the code.

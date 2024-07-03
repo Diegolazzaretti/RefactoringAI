@@ -1,0 +1,15 @@
+gpt-4 - Instrução 1 com titulo:
+
+Here's the refactored code:
+
+```python
+def output_banner(self):   
+    # Print the banner.
+    # ...
+
+def output_info(self):
+    # Print the info.
+    # ...
+```
+
+In the refactored code, methods are explicitly defined for banner and info. This improves readability because now the function names themselves tell what they are doing. Maintainability is improved as each function does exactly one thing, so if there's a bug or need for modification in banner handling, we can directly go to the 'output_banner()' method. The code is now more modular and each method can be tested independently. The single responsibility principle is also followed.

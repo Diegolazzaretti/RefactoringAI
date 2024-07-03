@@ -1,0 +1,15 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+Introduce a Null Object:
+
+class NullCustomer:
+    def getPlan(self):
+        return BillingPlan.basic()
+
+# Usage
+customer = getCustomerDetails()
+plan = customer.getPlan()
+
+- Created a separate class called NullCustomer to introduce a null object pattern. This null object can be used when the customer is None, eliminating the need for an if-else condition.
+- Removed the if-else condition and replaced it with a call to the customer's getPlan method directly. This simplifies the logic and improves code readability by encapsulating the logic of handling a null customer inside the NullCustomer class.
+- Created a method getCustomerDetails to get customer details, and the plan is retrieved directly using the null object pattern. This approach separates concerns and allows for easier future modifications and extensions to the code.

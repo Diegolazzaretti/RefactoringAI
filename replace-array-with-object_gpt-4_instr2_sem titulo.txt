@@ -1,0 +1,30 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Refactored Code:
+
+```python
+class FootballTeam:
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+```
+
+Construct an instance of FootballTeam:
+
+```python
+team = FootballTeam("Liverpool", 15)
+```
+
+Explanation:
+
+The given code can be interpreted as having two properties that might belong to a certain entity, in this case, a football team (e.g., Liverpool with a score of 15).
+
+1. Encapsulation: Encapsulating these properties within a class (FootballTeam) contributes to code readability, modularity, and maintainability. It allows us to treat "Liverpool" and "15" as properties (name and score) of a team, rather than just elements of an array.
+
+2. Use of Constructor: The constructor `__init__` in the class is used to initialize the properties (name and score) of the class. This is way more organized and easier to interpret as compared to individually assigning values to an array.
+
+3. Object Instantiation: We create an instance of the FootballTeam class and initialize it with the name "Liverpool" and score "15". This reduces duplication if we were to create and manage properties for more football teams.
+
+4. Coding Best Practices: Also, this refactored code now adheres to the best practices for Python, such as use of classes for better organization of data and behaviors.
+
+Future modifications like adding new attributes or behaviors to this team would be much easier, as we would simply add properties or methods to the class.

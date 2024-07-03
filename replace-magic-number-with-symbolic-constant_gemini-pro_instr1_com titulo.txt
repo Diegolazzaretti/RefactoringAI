@@ -1,0 +1,18 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+import constants
+
+def potential_energy(mass: float, height: float) -> float:
+    """
+    Calculates the potential energy of an object given its mass and height.
+
+    Args:
+        mass: The mass of the object in kilograms.
+        height: The height of the object above the ground in meters.
+
+    Returns:
+        The potential energy of the object in joules.
+    """
+    return mass * height * constants.GRAVITATIONAL_CONSTANT
+```

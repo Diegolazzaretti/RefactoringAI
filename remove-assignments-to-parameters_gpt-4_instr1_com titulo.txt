@@ -1,0 +1,13 @@
+gpt-4 - Instrução 1 com titulo:
+
+Refactoring the code:
+
+```python
+def calculate_discount(input_val, quantity):
+    return input_val - 2 if is_quantity_greater_than_50(quantity) else input_val
+
+def is_quantity_greater_than_50(quantity):
+    return quantity > 50
+```
+
+Here, the code was refactored to make it more readable by creating clear function names: `calculate_discount` and `is_quantity_greater_than_50`. This way, it's more clear what each function is doing and hence make it more maintainable. Also, instead of modifying the input parameter `input_val` directly, we return a new value based on the condition. This provides better modularity and readability to the code.

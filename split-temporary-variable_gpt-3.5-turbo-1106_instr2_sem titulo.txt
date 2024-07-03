@@ -1,0 +1,25 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+```python
+class Rectangle:
+    def __init__(self, height, width):
+        self.height = height
+        self.width = width
+
+    def calculate_perimeter(self):
+        return 2 * (self.height + self.width)
+
+    def calculate_area(self):
+        return self.height * self.width
+
+rectangle1 = Rectangle(5, 8)
+print(rectangle1.calculate_perimeter())
+print(rectangle1.calculate_area())
+```
+
+Changes made:
+1. Created a `Rectangle` class to encapsulate the properties and operations related to a rectangle.
+2. Defined methods `calculate_perimeter` and `calculate_area` to calculate the perimeter and area of the rectangle, respectively.
+3. Removed the need for temporary variables and repetitive print statements. This improves readability and reduces code duplication.
+4. Made use of object-oriented programming principles to enhance modularity and maintainability.
+5. The refactored code is structured, organized, and adheres to best practices making it easier to understand, modify, and maintain.

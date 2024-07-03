@@ -1,0 +1,36 @@
+gemini-pro - Instrução 2 sem titulo:
+
+**Refactored Code:**
+
+```python
+import enum
+
+class OutputType(enum.Enum):
+    BANNER = "banner"
+    INFO = "info"
+
+def output(self, output_type: OutputType):
+    match output_type:
+        case OutputType.BANNER:
+            # Print the banner.
+            # ...
+        case OutputType.INFO:
+            # Print the info.
+            # ...
+```
+
+**Changes:**
+
+* **Enum for Output Types:** Created an `OutputType` enum to represent the possible output types (banner, info). This replaces the lengthy `if` statements, making the code more concise and readable.
+* **Match-Case Pattern:** Used the match-case pattern to simplify the output logic. This eliminates the need for multiple `if` statements, making the control flow more evident.
+* **Modular Design:** Introduced a separate function for output, encapsulating the output logic. This enhances modularity, allowing the output handling to be managed independently.
+* **Improved Readability:** The code is now structured in a clear and intuitive manner, making it easier to understand and maintain.
+* **Enhanced Maintainability:** By using an enum and a centralized output function, the code becomes more flexible and adaptable to future changes or additions of output types.
+
+**Benefits:**
+
+* **Reduced Code Duplication:** Removed the repeated `if` statements, simplifying the logic and reducing the potential for errors.
+* **Improved Code Organization:** Separated the output handling into a dedicated function, fostering a more structured and manageable codebase.
+* **Simplified Logic:** The match-case pattern provides a concise and readable way to handle different output types, making the code easier to comprehend and modify.
+* **Enhanced Testability:** The modularized output function facilitates unit testing, allowing independent verification of the output behavior.
+* **Adherence to Best Practices:** The refactored code adheres to the principles of software design, promoting maintainability, extensibility, and readability.

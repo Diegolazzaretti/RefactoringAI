@@ -1,0 +1,29 @@
+gemini-pro - Instrução 2 com titulo:
+
+```python
+import math
+
+def potential_energy(mass: float, height: float) -> float:
+    """
+    Calculates the potential energy of an object given its mass and height.
+
+    Args:
+        mass (float): Mass of the object in kilograms.
+        height (float): Height of the object above a reference point in meters.
+
+    Returns:
+        float: Potential energy in Joules.
+    """
+
+    # Gravitational acceleration (m/s^2)
+    GRAVITATIONAL_ACCELERATION = 9.81
+
+    return mass * height * GRAVITATIONAL_ACCELERATION
+```
+
+**Refactoring Summary:**
+
+* **Refactored the code to use a symbolic constant for the gravitational acceleration.** This eliminates the "magic number" 9.81 and makes the code more readable and maintainable.
+* **Modularized the calculation by creating a separate function.** This makes it easier to reuse the potential energy calculation in other parts of the codebase.
+* **Added type annotations to the function arguments and return value.** This helps improve code readability and facilitate static type checking.
+* **Updated the function docstring to better describe its purpose and inputs/outputs.** This provides more information to the user and improves the code's documentation.

@@ -1,0 +1,6 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+POTENTIAL_ENERGY_CONSTANT = 9.81
+
+def potential_energy(mass, height):
+    return mass * height * POTENTIAL_ENERGY_CONSTANT

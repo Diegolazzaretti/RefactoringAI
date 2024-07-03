@@ -1,0 +1,24 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Here is the refactored code:
+
+```python
+def found_person(people):
+    names = ["Don", "John", "Kent"]
+    for person in people:
+        if person in names:
+            return person
+    return ""
+```
+
+Let's now discuss the improvement made.
+
+1. **Enhancement of Readability and Modularity:** The original code repetitively applies the same logical structure to the check for the names 'Don', 'John', and 'Kent'. This is both difficult to read and not modular. To address this, we consolidated these names into a single list `names`. In this refactored version, we simply iterate through `people` and check if `person` is in `names`. This removes code duplication and significantly improves readability. 
+
+2. **Naming Convention:** The function name `foundPerson` is renamed to `found_person` to adhere to Python's PEP 8 style guide, which prefers lowercase with words separated by underscores instead of camelCase. 
+
+3. **Iterating Through Sequences:** Instead of using range(len(people)) to iterate over the list of people, we directly iterate over objects in the list, which is more pythonic and efficient. 
+
+4. **Future Modification Facilitation:** If we want to include more names to search for, we just need to add those names to the list `names`. This provides a clear, single location to modify for expanding or reducing the list of target names, which makes the code more maintainable and expandable. 
+
+This results in less complex, more flexible and readable code that adheres well to Python's best practices by utilizing native Python idioms and following naming conventions. It preserves the functional integrity of the code by maintaining the same return results.

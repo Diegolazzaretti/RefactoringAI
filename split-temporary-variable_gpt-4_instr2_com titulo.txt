@@ -1,0 +1,33 @@
+gpt-4 - Instrução 2 com titulo:
+
+Refactored code:
+
+```python
+def calculate_perimeter(height, width):
+    return 2 * (height + width)
+
+def calculate_area(height, width):
+    return height * width
+
+height, width = 5, 4 
+
+perimeter = calculate_perimeter(height, width)
+area = calculate_area(height, width)
+
+print(f'Perimeter: {perimeter}')
+print(f'Area: {area}')
+```
+
+Explanation:
+
+This is the refactored version of the original code. Several changes have been made aiming for achieving the abovementioned requirements:
+
+- Two separate functions namely `calculate_perimeter(height, width)` and `calculate_area(height, width)` have been defined in order to increase code modularity.
+  
+- This separation into multiple functions avoids the 'split temporary variable' and 'mistaken assignment' issues that could occur in the original code. It also makes it easier to understand what calculation each segment of code is performing.
+  
+- Use of the `f-string` in the `print` statements improves readability, as it allows for directly inserting the expression within the string, resulting in cleaner syntax.
+
+- Declaring 'height' and 'width' variables allows easy reusability and the possibility to change the dimensions in one place. This approach adheres to the DRY (Don't Repeat Yourself) principle, an essential best practice in software development.
+
+- Overall, the refactored code is more readable, maintainable and adaptable for future changes or additions than the original. And it better conforms to best practices of software development.

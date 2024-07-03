@@ -1,0 +1,25 @@
+gemini-pro - Instrução 1 sem titulo:
+
+**Refactored Code:**
+
+```python
+def calculate_disability_amount():
+    """Calculates the amount of disability compensation."""
+
+    # Check eligibility criteria
+    if not is_eligible():
+        return 0
+
+    # Compute the disability amount
+    # ...
+
+def is_eligible():
+    """Checks if an employee is eligible for disability compensation."""
+    return seniority >= 2 and monthsDisabled <= 12 and not isPartTime
+```
+
+**Explanation:**
+
+* **Modularity:** The calculation of the disability amount and the eligibility check are now separate functions, making the code more modular and easier to maintain.
+* **Readability:** The code is now more readable due to the use of descriptive function names and a clear separation of concerns.
+* **Maintainability:** The eligibility check is now a standalone function, making it easier to update or modify in the future without affecting the rest of the code.

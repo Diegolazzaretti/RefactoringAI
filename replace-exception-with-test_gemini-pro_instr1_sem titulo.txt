@@ -1,0 +1,21 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+def get_value_for_period(period_number):
+    """
+    Retrieve the value for the specified period number.
+
+    If the period number is invalid, returns 0.
+
+    Args:
+        period_number (int): The period number for which to retrieve the value.
+
+    Returns:
+        int: The value for the specified period number, or 0 if the period number is invalid.
+    """
+
+    try:
+        return values[period_number]
+    except IndexError:
+        return 0
+```

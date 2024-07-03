@@ -1,0 +1,34 @@
+gpt-4 - Instrução 2 com titulo:
+
+The refactored code following the best software development practices, reducing code duplication, improving readability, modularity, and maintainability is:
+
+```python
+class Employee:
+    def __init__(self, expenseLimit, primaryProject):
+        self.expenseLimit = expenseLimit
+        self.primaryProject = primaryProject
+
+    def getExpenseLimit(self):
+        # Seal the conditions into a method 
+        if self.hasExpenseLimit():
+            return self.expenseLimit
+        else:
+            return self.getPrimaryProjectLimit()
+
+    def hasExpenseLimit(self):
+        # Single Responsibility Principle: checking and returning a boolean for expense limit existence
+        NULL_EXPENSE = 0 # or other value representing NULL_EXPENSE
+        return self.expenseLimit != NULL_EXPENSE
+
+    def getPrimaryProjectLimit(self):
+        # Single Responsibility Principle: as method name suggests 
+        return self.primaryProject.getMemberExpenseLimit()
+```
+
+In the refactored code, the complexity of the logic has been reduced for the `getExpenseLimit()` method by adding a new method `hasExpenseLimit()`. This method is responsible for checking if the expense limit exists. Also, if an expense limit doesn't exist, a new method `getPrimaryProjectLimit()` is there to handle the situation, keeping the code more readable and maintainable.
+
+The `Single Responsibility Principle` has been applied, which means each function should do one thing and do it well. This not only makes the code easier to understand and test, but also keeps it more maintainable, as changes in one part of the code require minimal modifications to the rest of the code.
+
+Further, the refactored code also ensures that the primary project is only accessed when necessary, conforming to the `principle of least knowledge`, a principle of OOP that reduces tightly coupled code, making the overall code more modular.
+
+Lastly, the use of magic values (0) in code makes it hard to maintain and understand. In the refactored code, this has been replaced with a constant variable `NULL_EXPENSE`, which would make it easier to understand the code and maintain it in future.

@@ -1,0 +1,98 @@
+gemini-pro - Instrução 1 sem titulo:
+
+**1. Extract Constant Values:**
+
+Extract constant values like `deadAmount`, `separatedAmount`, `retiredAmount`, and `normalPayAmount` to improve readability:
+
+```python
+DEAD_AMOUNT = deadAmount()
+SEPARATED_AMOUNT = separatedAmount()
+RETIRED_AMOUNT = retiredAmount()
+NORMAL_PAY_AMOUNT = normalPayAmount()
+```
+
+**2. Use Ternary Operators:**
+
+Simplify the nested if-else conditions using ternary operators to enhance readability and reduce indentation:
+
+```python
+def getPayAmount(self):
+    return (
+        DEAD_AMOUNT if self.isDead
+        else (SEPARATED_AMOUNT if self.isSeparated
+                else (RETIRED_AMOUNT if self.isRetired
+                    else NORMAL_PAY_AMOUNT))
+    )
+```
+
+**3. Move Calculations Outside the Method:**
+
+Move the calculation of constant values outside the method to improve code modularity and maintenance:
+
+```python
+def calculateDeadAmount():
+    return deadAmount()
+
+def calculateSeparatedAmount():
+    return separatedAmount()
+
+def calculateRetiredAmount():
+    return retiredAmount()
+
+def calculateNormalPayAmount():
+    return normalPayAmount()
+
+def getPayAmount(self):
+    DEAD_AMOUNT = calculateDeadAmount()
+    SEPARATED_AMOUNT = calculateSeparatedAmount()
+    RETIRED_AMOUNT = calculateRetiredAmount()
+    NORMAL_PAY_AMOUNT = calculateNormalPayAmount()
+
+    return (
+        DEAD_AMOUNT if self.isDead
+        else (SEPARATED_AMOUNT if self.isSeparated
+                else (RETIRED_AMOUNT if self.isRetired
+                    else NORMAL_PAY_AMOUNT))
+    )
+```
+
+**4. Use a Factory Method:**
+
+Create a factory method to simplify the creation of different pay amounts based on the employee's circumstances:
+
+```python
+class Employee:
+    def getPayAmount(self):
+        pay_type = self.determinePayType()
+        return pay_type.calculate_amount()
+
+    def determinePayType(self):
+        if self.isDead:
+            return DeadPay()
+        elif self.isSeparated:
+            return SeparatedPay()
+        elif self.isRetired:
+            return RetiredPay()
+        else:
+            return NormalPay()
+
+class PayType:
+    def calculate_amount(self):
+        raise NotImplementedError()
+
+class DeadPay(PayType):
+    def calculate_amount(self):
+        return DEAD_AMOUNT
+
+class SeparatedPay(PayType):
+    def calculate_amount(self):
+        return SEPARATED_AMOUNT
+
+class RetiredPay(PayType):
+    def calculate_amount(self):
+        return RETIRED_AMOUNT
+
+class NormalPay(PayType):
+    def calculate_amount(self):
+        return NORMAL_PAY_AMOUNT
+```

@@ -1,0 +1,9 @@
+mistral - Instrução 1 com titulo:
+
+```python
+def render_banner(platform, browser, was_initialized, resize):
+    if platform.toUpperCase().index("MAC") != -1 and \
+       browser.toUpperCase().index("IE") != -1 and \
+       was_initialized and resize > 0:
+        # do something
+```

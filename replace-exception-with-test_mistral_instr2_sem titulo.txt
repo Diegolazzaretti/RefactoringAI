@@ -1,0 +1,25 @@
+mistral - Instrução 2 sem titulo:
+
+
+The above code retrieves a value for a given period number from a dictionary named 'values'. If the period number is not present in the dictionary, it returns 0. However, this code lacks modularity and has limited maintainability as the values are hard-coded in the function itself. Below is the refactored version of the code that utilizes a Singleton design pattern to improve its readability and maintainability.
+
+class ValueStore:
+    def __init__(self):
+        self.values = {}
+
+    @staticmethod
+    def getInstance():
+        if not hasattr(ValueStore, 'instance'):
+            ValueStore.instance = ValueStore()
+        return ValueStore.instance
+
+    def addValue(self, periodNumber, value):
+        self.values[periodNumber] = value
+
+    def getValueForPeriod(self, periodNumber):
+        try:
+            return self.values[periodNumber]
+        except IndexError:
+            return 0
+
+With the above refactored code, we can create a single instance of ValueStore and access its methods throughout the application without having to worry about creating new instances every time we need to use it. The addValue method allows us to add new values to the dictionary without modifying the getValueForPeriod method directly, which enhances the maintainability of the code. Additionally, using a Singleton design pattern ensures that only one instance of ValueStore exists throughout the application's lifetime, reducing resource usage and preventing potential race conditions that could arise from multiple instances accessing the same shared state concurrently.

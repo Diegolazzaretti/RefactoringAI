@@ -1,0 +1,33 @@
+gpt-4 - Instrução 2 com titulo:
+
+Firstly, having a long complex method inside a class is detrimental for multiple reasons. The main issue is it breaks Single Responsibility Principle (SRP), making it harder to maintain and test. Also, with multiple tasks done by the same method, it often fetches unnecessary data causing performance issues.
+
+We can refactor this by using the Replace Method with Method Object design pattern. We create a new class `PriceCalculator` that handles the computation part which eases the testing and debugging.
+
+```python
+class Order:
+    # ...
+
+    def price(self):
+        return PriceCalculator().compute()
+
+
+class PriceCalculator:
+    def __init__(self):
+        self.primaryBasePrice = 0
+        self.secondaryBasePrice = 0
+        self.tertiaryBasePrice = 0
+
+    def compute(self):
+        # Perform long computation.
+        total_price = self.primaryBasePrice + self.secondaryBasePrice + self.tertiaryBasePrice
+        return total_price
+```
+
+In this refactored code:
+- The `Order` class now follows the Single Responsibility Principle since it just holds order related operations and delegates price calculation to `PriceCalculator`.
+- `PriceCalculator` is specifically designed to calculate the price, reducing the complexity. This specialized class makes the code easier to understand and maintain.
+- As complex price computation logic is moved to `PriceCalculator`, testing this logic becomes more straightforward enabling developers to write robust tests around it.
+- If the price computation logic changes, we know exactly where to look, leading to faster and safer changes.
+
+These changes make the code cleaner, easier to understand & maintain, and more flexible for future modifications.

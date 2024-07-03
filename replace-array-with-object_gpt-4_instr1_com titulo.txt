@@ -1,0 +1,14 @@
+gpt-4 - Instrução 1 com titulo:
+
+Here is the refactored code:
+
+```python
+class Team:
+    def __init__(self, name, position):
+        self.name = name
+        self.position = position
+
+row = Team("Liverpool", "15")
+```
+
+In this refactored code, instead of using an array, I've introduced a simple `Team` class with `name` and `position` attributes. This greatly improves the readability, as it's now very clear what each position in the 'row' represents - the team's name and the team's position. The refactored code is more modular and maintainable too, if you ever need to add more attributes to the `Team` class, you can do it in one place.

@@ -1,0 +1,23 @@
+gemini-pro - Instrução 1 com titulo:
+
+**Extracted Variable**
+
+```python
+def hasDiscount(order):
+    base_price = order.basePrice()
+    return base_price > 1000
+```
+
+**Renamed Function**
+
+```python
+def order_has_discount(order):
+    return order.basePrice() > 1000
+```
+
+**Inlined Method Call**
+
+```python
+def hasDiscount(order):
+    return order.basePrice > 1000
+```

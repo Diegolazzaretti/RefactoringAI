@@ -1,0 +1,42 @@
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+
+from abc import ABC, abstractmethod
+
+class DiscountStrategy(ABC):
+    def discount(self, inputVal):
+        pass
+
+class QuantityDiscount(DiscountStrategy):
+    def discount(self, inputVal):
+        return inputVal - 2
+
+class NoDiscount(DiscountStrategy):
+    def discount(self, inputVal):
+        return inputVal
+
+class Order:
+    def __init__(self, inputVal, quantity):
+        self.inputVal = inputVal
+        self.quantity = quantity
+        self.discount_strategy = self._get_discount_strategy()
+
+    def _get_discount_strategy(self):
+        if self.quantity > 50:
+            return QuantityDiscount()
+        else:
+            return NoDiscount()
+
+    def apply_discount(self):
+        return self.discount_strategy.discount(self.inputVal)
+
+order = Order(100, 30)
+print(order.apply_discount())
+order = Order(100, 60)
+print(order.apply_discount())
+```
+
+1. The original code used the if-else statement to determine if a discount should be applied based on the quantity. In the refactored code, the use of the Strategy design pattern decouples the discount logic from the context (Order), which allows for easier modification or expansion in the future.
+2. By creating the DiscountStrategy abstract class and implementing specific discount strategies (QuantityDiscount, NoDiscount), the code readability has improved and the discount logic has been modularized.
+3. The Order class now selects the appropriate discount strategy based on the quantity, improving maintainability and making it easier to add new types of discounts in the future.
+4. The apply_discount method in the Order class now delegates the discount calculation to the selected discount strategy, simplifying the logic and adhering to the single responsibility principle.
+5. Creating a separate file for each class would further enhance modularity and organization, aligning with best practices for software development.

@@ -1,0 +1,27 @@
+mistral - Instrução 1 sem titulo:
+
+# Refactored code
+
+class BaseOrder:
+    def __init__(self, primary_base_price=None, secondary_base_price=None, tertiary_base_price=None):
+        self.primary_base_price = primary_base_price
+        self.secondary_base_price = secondary_base_price
+        self.tertiary_base_price = tertiary_base_price
+
+    def price(self):
+        if self.primary_base_price:
+            return self.primary_base_price
+        elif self.secondary_base_price:
+            return self.secondary_base_price
+        elif self.tertiary_base_price:
+            return self.tertiary_base_price
+        else:
+            # Perform long computation.
+            pass
+
+class Order(BaseOrder):
+    pass
+
+# Example usage:
+order = Order(primary_base_price=10, secondary_base_price=20)
+print(order.price())  # Output: 20

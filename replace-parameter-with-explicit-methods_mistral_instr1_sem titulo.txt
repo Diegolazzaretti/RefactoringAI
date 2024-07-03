@@ -1,0 +1,15 @@
+mistral - Instrução 1 sem titulo:
+
+```python
+class Output:
+    def __init__(self, type):
+        self.type = type
+    
+    def render(self):
+        if self.type == "banner":
+            # Print the banner
+            pass
+        elif self.type == "info":
+            # Print the info
+            pass
+```

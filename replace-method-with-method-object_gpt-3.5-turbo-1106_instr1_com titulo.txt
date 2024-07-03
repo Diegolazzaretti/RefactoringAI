@@ -1,0 +1,16 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+class Order:
+    # ...
+    def price(self):
+        return PriceCalculator().compute()
+
+class PriceCalculator:
+    def __init__(self):
+        self.primaryBasePrice = 0
+        self.secondaryBasePrice = 0
+        self.tertiaryBasePrice = 0
+    
+    def compute(self):
+        # Perform long computation.
+        return result

@@ -1,0 +1,21 @@
+mistral - Instrução 1 com titulo:
+
+
+A possible refactored version of the code could be:
+```python
+class Bill:
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+    
+    def printBanner(self):
+        print("Name\tAmount")
+        
+    def getOutstanding(self):
+        return self.amount
+    
+    def printOwing(self):
+        self.printBanner()
+        print("name:", self.name)
+        print("amount:", self.getOutstanding())
+```

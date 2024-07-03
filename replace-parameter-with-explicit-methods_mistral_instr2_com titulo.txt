@@ -1,0 +1,46 @@
+mistral - Instrução 2 com titulo:
+
+
+After refactoring the code, we can now observe that it adheres to the following best practices:
+
+1. Single Responsibility Principle (SRP): Each function or class should have only one reason to change. In this case, each function is responsible for printing a specific type of message (banner or info). This enhances modularity and makes the code more maintainable.
+2. Explicit Interface: Functions and classes should be designed to interact with each other through well-defined interfaces, rather than through hardcoded implementations. In this case, we can define an abstract class with a print method that takes the message type as an argument. This makes it easier to add new types of messages in the future.
+3. Liskov Substitution Principle (LSP): Derived classes should be able to function correctly in place of their base classes. In this case, we can create a subclass for each message type that inherits from the abstract class and overrides its print method to provide the specific implementation for each type. This ensures that any derived class can function correctly in place of its base class.
+4. Dependency Inversion Principle (DIP): High-level modules should not depend on low-level modules, but both should depend on abstractions. In this case, we can define an abstract class with a print method and create concrete classes that implement this interface. This makes it easier to replace or modify the implementation of the print method in the future without affecting the high-level modules.
+5. Code Reuse: By defining an abstract class and creating concrete classes that implement this interface, we can reuse the same code for printing messages across different types. This reduces code duplication and improves overall organization.
+
+Here's the refactored code that adheres to these best practices:
+
+Abstract Message Class
+=====================
+
+from abc import ABC, abstractmethod
+
+class AbstractMessage(ABC):
+    @abstractmethod
+    def print_message(self, message_type):
+        pass
+
+Concrete Message Classes
+=====================
+
+class BannerMessage(AbstractMessage):
+    def print_message(self, message_type):
+        # Print the banner.
+        # ...
+
+class InfoMessage(AbstractMessage):
+    def print_message(self, message_type):
+        # Print the info.
+        # ...
+
+Output Function
+===============
+
+def output(message_type):
+    abstract_message = AbstractMessage()
+    if message_type == "banner":
+        abstract_message = BannerMessage()
+    elif message_type == "info":
+        abstract_message = InfoMessage()
+    abstract_message.print_message(message_type)

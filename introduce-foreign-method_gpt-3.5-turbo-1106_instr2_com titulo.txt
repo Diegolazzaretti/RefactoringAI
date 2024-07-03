@@ -1,0 +1,23 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+'''
+Introduce Foreign Method Refactored Code:
+'''
+class Report:
+
+    def sendReport(self):
+        nextDay = self.calculateNextDay()
+        # ...
+
+    def calculateNextDay(self):
+        nextDay = Date(self.previousEnd.getYear(),
+                       self.previousEnd.getMonth(), self.previousEnd.getDate() + 1)
+        return nextDay
+
+
+# The original code is refactored by introducing a new method named calculateNextDay().
+# The method is responsible for the logic to calculate the next day from the current date.
+# This improves the readability, modularity, and maintainability of the code.
+# The introduce foreign method design pattern is applied to create a new method that encapsulates the foreign logic.
+# This helps in reducing code duplication, simplifying the overall logic, and improving the organization of functionality.
+# It also adheres to the best practices of software development, making the code more maintainable and facilitating future modifications while maintaining functional integrity.

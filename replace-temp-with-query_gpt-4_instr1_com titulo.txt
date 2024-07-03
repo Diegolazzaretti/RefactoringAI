@@ -1,0 +1,28 @@
+gpt-4 - Instrução 1 com titulo:
+
+Refactoring the code can be done by breaking down the calculations into separate methods. This not only enhances readability and maintainability but also aids debugging and testing.
+
+```python
+
+class Item:
+    def __init__(self, quantity, itemPrice): 
+        self.quantity = quantity
+        self.itemPrice = itemPrice
+
+    def calculate_base_price(self):
+        """Calculate base price."""
+        return self.quantity * self.itemPrice
+
+    def get_discount_rate(self):
+        """Get discount rate based on base price."""
+        basePrice = self.calculate_base_price()
+        return 0.95 if basePrice > 1000 else 0.98
+
+    def calculate_total(self):
+        """Calculate total after applying discount."""
+        return self.calculate_base_price() * self.get_discount_rate()
+```
+
+In this refactored code, firstly, the "Item" class is created with a constructor method that sets the quantity and item price. Other methods are defined for calculating the base price, getting the discount rate, and then calculating the total after applying the discount.
+
+This makes the code more readable and maintainable. Now, you can easily modify or test individual parts of the calculation without affecting or needing to understand other parts.

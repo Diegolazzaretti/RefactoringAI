@@ -1,0 +1,47 @@
+mistral - Instrução 2 sem titulo:
+
+
+Before refactoring the code, it appears to be a simple method that prints out a banner and some information about an object. There are no obvious design patterns being used, but there is some potential for duplication since both the `printBanner()` and `getOutstanding()` methods are likely to be called elsewhere in the program.
+
+Here's one possible refactoring of the code using the Singleton pattern:
+```python
+class BillingStatement(metaclass=Singleton):
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+    
+    @staticmethod
+    def printOwing(self):
+        statement = Statement()  # create a new instance of the class
+        statement.printBanner()
+        
+        # print details
+        statement.printName()
+        statement.printAmount()
+    
+class Statement(metaclass=Singleton):
+    def __init__(self):
+        super().__init__("", 0)
+    
+    def setName(self, name):
+        self.name = name
+    
+    def setAmount(self, amount):
+        self.amount = amount
+    
+    def printBanner(self):
+        print("---------------")
+        print(f"Statement for {self.name}")
+        print("---------------")
+    
+    def printName(self):
+        print(f"Name: {self.name}")
+    
+    def printAmount(self):
+        print(f"Amount: ${self.amount}")
+```
+In this refactored code, the `BillingStatement` class is a Singleton, meaning that it can only have one instance per program. The `printOwing()` method creates a new instance of the class and then calls its methods to print out the banner and details.
+
+The `Statement` class is also a Singleton, but it's not used directly in the refactored code. Instead, it's used as an inner class to provide default initial values for the `name` and `amount` attributes of the `BillingStatement` class. The `setName()` and `setAmount()` methods allow you to set these attributes later on if needed.
+
+Using Singleton patterns can reduce code duplication by ensuring that there's only one instance of each class per program, and it can also make the code more modular by separating out concerns into separate classes. This can improve readability and maintainability by making it easier to understand how different parts of the code work together.

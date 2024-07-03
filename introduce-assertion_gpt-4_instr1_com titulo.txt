@@ -1,0 +1,20 @@
+gpt-4 - Instrução 1 com titulo:
+
+Refactoring the above code would involve the removal of the ternary operator and replacing it with an 'if else' statement to improve the readability of the code. Modularization could be improved by creating a separate method to retrieve the member expense limit from the primary project. Here’s the refactored code:
+
+```python
+def getExpenseLimit(self):
+    # Should have either expense limit or
+    # a primary project.
+    if self.expenseLimit != NULL_EXPENSE:
+        return self.expenseLimit
+    else:
+        return self.getPrimaryProjectMemberExpenseLimit()
+
+def getPrimaryProjectMemberExpenseLimit(self):
+    return self.primaryProject.getMemberExpenseLimit()
+```
+
+The `getPrimaryProjectMemberExpenseLimit()` method enhances modularity by partitioning the logic related to getting the expense limit from the primary project. This means if the logic to retrieve the expense limit from the primary project changes in future, only a single method (getPrimaryProjectMemberExpenseLimit) would require modifications. This enhances maintainability as well.
+
+Additionally, replacing the ternary operator with an 'if else' statement makes the logic more explicit and therefore improves readability. It's now clear that the code follows this logic: if there is an expense limit, return that limit; otherwise, return the member expense limit from the primary project.

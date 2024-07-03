@@ -1,0 +1,15 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+The refactored code utilizes the if-else conditional statement to check for the presence of the periodNumber in the values array and return the value or 0 accordingly.
+
+def getValueForPeriod(periodNumber):
+    if periodNumber < len(values):
+        return values[periodNumber]
+    else:
+        return 0
+
+Refactoring Changes:
+1. Replaced the try-except block with an if-else conditional statement to check for the existence of the periodNumber within the values array.
+2. By using an if-else statement, we eliminate the need for an exception to handle a missing index, making the logic more explicit and easier to understand.
+3. The refactored code improves readability and maintainability by clearly stating the logic for handling missing index values.
+4. The refactored code allows for easier future modifications by simplifying the exception handling logic, making it less error-prone and more reusable in different scenarios.

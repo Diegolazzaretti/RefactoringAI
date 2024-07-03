@@ -1,0 +1,17 @@
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+
+Refactoring Solution:
+
+'''
+def isMacOSSelfAndInitialized(self):
+    is_mac, is_ie_browser = (
+        self.platform.toUpperCase().indexOf('MAC') > -1,
+        self.browser.toUpperCase().indexOf('IE') > -1
+    )
+
+    return is_mac and is_ie_browser and self.wasInitialized() and (self.resize > 0)
+
+def renderBanner(self):
+    if isMacOSSelfAndInitialized(self):
+        # do something
+'''

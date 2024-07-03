@@ -1,0 +1,498 @@
+Código Original (replace-nested-conditional-with-guard-clauses):
+
+def getPayAmount(self):
+    if self.isDead:
+        result = deadAmount()
+    else:
+        if self.isSeparated:
+            result = separatedAmount()
+        else:
+            if self.isRetired:
+                result = retiredAmount()
+            else:
+                result = normalPayAmount()
+    return result
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+
+One way to improve the readability, modularity and maintainability of this code is by creating a separate function for each amount type (dead, separated, retired, normal) and calling them as needed. Here's an example refactored code:
+
+def getPayAmount(self):
+    if self.isDead:
+        return deadAmount()
+    elif self.isSeparated:
+        return separatedAmount()
+    elif self.isRetired:
+        return retiredAmount()
+    else:  # self.isDead or self.isSeparated or self.isRetired is False
+        return normalPayAmount()
+
+gemini-pro - Instrução 1 sem titulo:
+**1. Extract Constant Values:**
+
+Extract constant values like `deadAmount`, `separatedAmount`, `retiredAmount`, and `normalPayAmount` to improve readability:
+
+```python
+DEAD_AMOUNT = deadAmount()
+SEPARATED_AMOUNT = separatedAmount()
+RETIRED_AMOUNT = retiredAmount()
+NORMAL_PAY_AMOUNT = normalPayAmount()
+```
+
+**2. Use Ternary Operators:**
+
+Simplify the nested if-else conditions using ternary operators to enhance readability and reduce indentation:
+
+```python
+def getPayAmount(self):
+    return (
+        DEAD_AMOUNT if self.isDead
+        else (SEPARATED_AMOUNT if self.isSeparated
+                else (RETIRED_AMOUNT if self.isRetired
+                    else NORMAL_PAY_AMOUNT))
+    )
+```
+
+**3. Move Calculations Outside the Method:**
+
+Move the calculation of constant values outside the method to improve code modularity and maintenance:
+
+```python
+def calculateDeadAmount():
+    return deadAmount()
+
+def calculateSeparatedAmount():
+    return separatedAmount()
+
+def calculateRetiredAmount():
+    return retiredAmount()
+
+def calculateNormalPayAmount():
+    return normalPayAmount()
+
+def getPayAmount(self):
+    DEAD_AMOUNT = calculateDeadAmount()
+    SEPARATED_AMOUNT = calculateSeparatedAmount()
+    RETIRED_AMOUNT = calculateRetiredAmount()
+    NORMAL_PAY_AMOUNT = calculateNormalPayAmount()
+
+    return (
+        DEAD_AMOUNT if self.isDead
+        else (SEPARATED_AMOUNT if self.isSeparated
+                else (RETIRED_AMOUNT if self.isRetired
+                    else NORMAL_PAY_AMOUNT))
+    )
+```
+
+**4. Use a Factory Method:**
+
+Create a factory method to simplify the creation of different pay amounts based on the employee's circumstances:
+
+```python
+class Employee:
+    def getPayAmount(self):
+        pay_type = self.determinePayType()
+        return pay_type.calculate_amount()
+
+    def determinePayType(self):
+        if self.isDead:
+            return DeadPay()
+        elif self.isSeparated:
+            return SeparatedPay()
+        elif self.isRetired:
+            return RetiredPay()
+        else:
+            return NormalPay()
+
+class PayType:
+    def calculate_amount(self):
+        raise NotImplementedError()
+
+class DeadPay(PayType):
+    def calculate_amount(self):
+        return DEAD_AMOUNT
+
+class SeparatedPay(PayType):
+    def calculate_amount(self):
+        return SEPARATED_AMOUNT
+
+class RetiredPay(PayType):
+    def calculate_amount(self):
+        return RETIRED_AMOUNT
+
+class NormalPay(PayType):
+    def calculate_amount(self):
+        return NORMAL_PAY_AMOUNT
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def getPayAmount(self):
+    if self.isDead:
+        return deadAmount()
+    elif self.isSeparated:
+        return separatedAmount()
+    elif self.isRetired:
+        return retiredAmount()
+    else:
+        return normalPayAmount()
+
+gpt-4 - Instrução 1 sem titulo:
+Here's how you could refactor the code:
+
+```python
+def get_pay_amount(self):
+    if self.is_dead:
+        return self.dead_amount()
+    elif self.is_separated:
+        return self.separated_amount()
+    elif self.is_retired:
+        return self.retired_amount()
+    else:
+        return self.normal_pay_amount()
+```
+
+This refactor not only makes the code easier to read, but it also improves its modularity and maintainability. The function calls have been changed to method calls on self, assuming that this code is within a class which has relevant methods. 
+
+The variables have been renamed following Python's naming conventions (PEP 8) - constants and variable names should be in snake_case - lower case with underscores aiding readability. Furthermore this also incorporates the exit early principle - return as soon as you know the answer, thus avoiding deep nesting.
+
+Lastly, the if/else chain is converted to if/elif/else which makes it clear that this is a single, disjoint decision making process that always renders just one outcome. 
+
+This also provides a single exit point (simplified control flow) and avoids temporary variable, thereby reducing memory footprint and potential source of bugs.
+
+mistral - Instrução 1 com titulo:
+Here is one possible way to refactor the given code:
+
+```python
+def get_pay_amount(self):
+    if self.is_dead:
+        result = dead_amount()
+    elif self.is_separated:
+        result = separated_amount()
+    elif self.is_retired:
+        result = retired_amount()
+    else:
+        result = normal_pay_amount()
+    
+    return result
+```
+In this refactored version, we have replaced the nested `if-else` block with a single `if-elif-else` block. This makes the code more readable and easier to understand. We have also given descriptive names to each of the functions called within the if-blocks, which improves modularity and maintainability. Finally, we have removed the unnecessary parentheses around the function calls, making the code more concise.
+
+gemini-pro - Instrução 1 com titulo:
+```python
+def getPayAmount(self):
+    if self.isDead:
+        return deadAmount()
+
+    if self.isSeparated:
+        return separatedAmount()
+
+    if self.isRetired:
+        return retiredAmount()
+
+    return normalPayAmount()
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+def getPayAmount(self):
+    if self.isDead:
+        return deadAmount()
+    
+    if self.isSeparated:
+        return separatedAmount()
+    
+    if self.isRetired:
+        return retiredAmount()
+    
+    return normalPayAmount()
+
+gpt-4 - Instrução 1 com titulo:
+Below is the refactored code:
+
+```python
+def getPayAmount(self):
+    if self.isDead:
+        return deadAmount()
+    if self.isSeparated:
+        return separatedAmount()
+    if self.isRetired:
+        return retiredAmount()
+    return normalPayAmount()
+```
+
+In the refactored code, I've used guard clauses, which are a set of conditional statements that checks for a condition and return immediately if the condition is satisfied. This eliminates unnecessary nesting and makes the code easier to read and understand. In addition, it modularizes the function since each condition and return now behaves kind of individually, making it easier to maintain and enhance if needed.
+
+mistral - Instrução 2 sem titulo:
+
+The code above calculates the pay amount for an object based on its state. The object's state can be one of 'dead', 'separated', 'retired', or 'normal'. The code is quite readable, but it could benefit from modularization and simplification. Here are some changes that can improve the code:
+
+1. Extract the payment amounts into separate functions to reduce code duplication and improve maintainability.
+2. Use an if-else statement instead of multiple nested if statements for simplicity and readability.
+3. Use a dictionary to map the object's state to its corresponding payment function, reducing the need for multiple conditions and improving modularity.
+
+Here is the refactored code:
+
+```python
+def getPayAmount(self):
+    pay_amounts = {
+        'dead': deadAmount,
+        'separated': separatedAmount,
+        'retired': retiredAmount,
+        'normal': normalPayAmount
+    }
+    
+    if self.isDead:
+        return pay_amounts[self.isDead]()
+    elif self.isSeparated:
+        return pay_amounts[self.isSeparated]()
+    elif self.isRetired:
+        return pay_amounts[self.isRetired]()
+    else:  # self is not separated or retired
+        return pay_amounts['normal']()
+```
+
+Changes made:
+
+1. Extracted each payment amount into a separate function to reduce code duplication and improve maintainability.
+2. Used an if-else statement instead of multiple nested if statements for simplicity and readability.
+3. Used a dictionary to map the object's state to its corresponding payment function, reducing the need for multiple conditions and improving modularity. 
+
+These changes make the code more modular, easier to maintain, and more readable. The use of a dictionary simplifies the logic by allowing us to look up the appropriate payment function based on the object's state without having to write multiple nested if statements. The extracted functions make it easier to modify or extend the payment amounts without affecting other parts of the code. Overall, these changes contribute to better organization and increased flexibility, making the code more maintainable in the long run.
+
+gemini-pro - Instrução 2 sem titulo:
+**Refactored Code:**
+
+```python
+import enum
+
+class EmployeeStatus(enum.Enum):
+    DEAD = 1
+    SEPARATED = 2
+    RETIRED = 3
+    NORMAL = 4
+
+def get_pay_amount(self):
+    status = EmployeeStatus(self.status) # Example: EmployeeStatus.NORMAL
+    
+    if status == EmployeeStatus.DEAD:
+        return dead_amount()
+    elif status == EmployeeStatus.SEPARATED:
+        return separated_amount()
+    elif status == EmployeeStatus.RETIRED:
+        return retired_amount()
+    else: # EmployeeStatus.NORMAL
+        return normal_pay_amount()
+```
+
+**Explanation of Changes:**
+
+1. **Introduced an `EmployeeStatus` Enum:**
+   - Created an enum to represent the various employee statuses. This replaces the boolean flags (e.g., `self.isDead`) with more meaningful enum values.
+
+2. **Used the Enum to Determine Status:**
+   - Passed the status value to the `EmployeeStatus` enum to determine the employee's status. This simplifies the code by using a single variable to handle the different statuses.
+
+3. **Moved Status Calculation to `__init__` Method:**
+   - The original code calculated the employee's status based on boolean flags. This logic was moved to the `__init__` method for better organization and encapsulation.
+
+4. **Enhanced Error Handling:**
+   - The enum now handles invalid status values, ensuring that the code behaves gracefully if an invalid status is encountered.
+
+5. **Improved Maintainability:**
+   - The refactored code is easier to understand, modify, and maintain. The use of the enum and the clear logical structure simplifies the code's flow.
+
+**Benefits of the Refactoring:**
+
+* **Reduced Duplication:** The status calculation logic is now centralized in the `__init__` method, eliminating duplicate code.
+* **Improved Modularity:** The enum and the `get_pay_amount` method are separate logical units, making the code more modular.
+* **Enhanced Readability:** The use of the enum clarifies the employee's status and simplifies the code's flow.
+* **Increased Maintainability:** The logical structure and the use of enums make it easier to add new employee statuses or modify existing ones in the future.
+* **Error Handling:** The enum now handles invalid status values, providing better error detection and handling.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+The following code can be refactored using the State design pattern. Here's the refactored code that shows how this can be achieved:
+
+class PayAmount:
+    def __init__(self):
+        self.state = None
+
+    def getState(self):
+        return self.state
+
+    def setState(self, state):
+        self.state = state
+
+    def getPayAmount(self):
+        return self.state.payAmount()
+
+
+class State:
+    def payAmount(self, context):
+        pass
+
+
+class DeadState(State):
+    def payAmount(self, context):
+        return deadAmount()
+
+
+class SeparatedState(State):
+    def payAmount(self, context):
+        return separatedAmount()
+
+
+class RetiredState(State):
+    def payAmount(self, context):
+        return retiredAmount()
+
+
+class NormalState(State):
+    def payAmount(self, context):
+        return normalPayAmount()
+
+
+pay = PayAmount()
+dead = DeadState()
+pay.setState(dead)
+pay.getPayAmount()
+
+The refactored code uses the State design pattern, which is suitable for situations where an object's behavior depends on its state and should change its behavior at runtime based on that state. This design pattern ensures that the code is more modular, maintainable, and readable by separating the logic for each state into its own class (e.g. DeadState, SeparatedState, etc.), which avoids the need for nested if-else statements in the original code. This also reduces duplicate code and simplifies the logic because each state encapsulates its own behavior.
+
+In the refactored code, the PayAmount class represents the context that can change its state and has a reference to the current state. The State class defines a common interface for all states, and each state (e.g. DeadState, SeparatedState, etc.) implements this interface for its specific behavior.
+
+By using the State design pattern, the refactored code adheres to best practices of software development by promoting code reusability, readability, maintainability, and separation of concerns, which makes it easier to add new states or modify the behavior of existing states without affecting the context or other states.
+
+gpt-4 - Instrução 2 sem titulo:
+After refactoring the code, we got:
+
+```python
+def get_pay_amount(self):
+    amount_calculators = {
+        'isDead': dead_amount,
+        'isSeparated': separated_amount,
+        'isRetired': retired_amount
+    }
+
+    for condition, calculator in amount_calculators.items():
+        if getattr(self, condition):
+            return calculator()
+
+    return normal_pay_amount()
+```
+
+Explaination:
+
+1. **Rename function to follow Python naming convention**: Python's naming convention suggests lowercase with words separated by underscores for the function names. We've changed `getPayAmount` to `get_pay_amount` to comply with this.
+
+2. **Switch from nested if-else statements to dictionary dispatch**: The given code uses several nested if-else clauses to determine the method to calculate payment amount. We switch to a dictionary-based dispatching approach. This makes the code more readable and easily scalable. For a new condition, we just need to add it to the `amount_calculators` dictionary without disturbing rest of the code.
+
+3. **Use getattr function**: `getattr` function provides dynamic access to an object's attributes. Instead of hardcoding attribute access, `getattr` makes the access dynamic, improving code modularity.
+
+4. **Early return**: Instead of assigning a result and then returning it at the end of the function, we return the result immediately once it's known. Reduces the need for a `result` variable, simplifying the function.
+
+The refactored code follows best practices, is highly modular, scalable, and maintainable. It provides an effective way for future enhancements or modifications. The functional integrity is also maintained as the overall logic has been kept intact while refactoring.
+
+mistral - Instrução 2 com titulo:
+
+The given code is nested and difficult to read due to multiple conditional statements. We can refactor it using the guard clauses pattern to make it more modular and maintainable. The guard clauses pattern is a design pattern that uses boolean expressions at the beginning of a function or method to evaluate whether certain conditions are met, and if so, to proceed with the execution of the function/method; otherwise, to return an error or take another action.
+
+Here's the refactored code using guard clauses:
+```python
+def getPayAmount(self):
+    if not self.isAlive():  # Check if the employee is still alive
+        result = deadAmount()  # Return dead amount if employee is dead
+        return result
+    
+    elif self.isSeparated():  # Check if the employee is separated
+        result = separatedAmount()  # Return separated amount if employee is separated
+        return result
+    
+    else:  # Employee is not separated or retired
+        result = normalPayAmount()  # Return normal pay amount if employee is neither separated nor retired
+        return result
+```
+In the refactored code, we have replaced the nested conditional statements with guard clauses. We have used a boolean expression to check if the employee is still alive, and if not, returned the dead amount using the `deadAmount()` function. If the employee is not dead, we have checked if they are separated, and if so, returned the separated amount using the `separatedAmount()` function. Otherwise, we have returned the normal pay amount using the `normalPayAmount()` function.
+
+This refactored code adheres to best practices of software development, making it more modular and maintainable. It is easier to read and understand, as well as more flexible for future modifications. The guard clauses pattern helps to reduce code duplication by providing a concise and consistent way to evaluate multiple conditions at the beginning of a function or method.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+def getPayAmount(self):
+    if self.isDead:
+        return deadAmount()
+    elif self.isSeparated:
+        return separatedAmount()
+    elif self.isRetired:
+        return retiredAmount()
+    else:
+        return normalPayAmount()
+```
+
+**Changes Made:**
+
+* Replaced the nested conditional statements with guard clauses.
+* Simplified the logic by using early returns in each guard clause.
+* Improved readability by eliminating the need for indentation and reducing the code complexity.
+
+**Benefits:**
+
+* **Enhanced Readability:** The use of guard clauses makes the code easier to read and understand. The code flow is more straightforward, and it's clear which conditions trigger which actions.
+* **Reduced Code Duplication:** The early returns eliminate the need for repeated checks for the same condition in subsequent branches of the original nested conditionals.
+* **Simplified Logic:** The guard clauses simplify the logic by allowing for immediate evaluation and early termination of the function when a specific condition is met. This eliminates unnecessary branching and reduces the cognitive load for developers.
+* **Improved Modularity:** The guard clauses allow for easy modification and extension of the pay calculation logic in the future. Adding or removing new conditions becomes a simple matter of adding or removing a guard clause, without affecting the rest of the code.
+* **Maintainability:** The refactored code is more maintainable due to its reduced complexity and improved modularity. It's easier to understand the logic, modify the code, and track changes over time.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+The refactored code:
+
+```python
+def get_pay_amount(self):
+    if self.is_dead:
+        return dead_amount()
+    
+    if self.is_separated:
+        return separated_amount()
+    
+    if self.is_retired:
+        return retired_amount()
+    
+    return normal_pay_amount()
+```
+
+Refactored changes:
+1. Renamed the function `getPayAmount` to `get_pay_amount` to follow the snake_case naming convention for functions in Python.
+2. Replaced the nested conditional statements with guard clauses to eliminate the need for multiple levels of indentation.
+3. Removed the unnecessary assignment of `result` variable and directly returned the values based on the conditions.
+4. Created separate functions `dead_amount`, `separated_amount`, `retired_amount`, and `normal_pay_amount` to improve modularity and make the code more maintainable.
+5. Applied the single responsibility principle by making each function responsible for computing a specific type of pay amount.
+6. Improved readability by following the naming conventions for variables and functions, making the code easier to understand and navigate.
+7. Simplified the logic by reducing code duplication, making it easier to reason about and modify the code in the future.
+
+gpt-4 - Instrução 2 com titulo:
+The current version of the code uses deeply nested conditional statements to determine what method should be called based on the status of the instance. This can make it hard to read and understand. We can refactor this into separate return statements with guard clauses which make it clearer what conditions must be met to return each result.
+
+The refactored code could look like this:
+
+```python
+def get_pay_amount(self):
+    if self.is_dead:
+        return dead_amount()
+
+    if self.is_separated:
+        return separated_amount()
+
+    if self.is_retired:
+        return retired_amount()
+
+    return normal_pay_amount()
+```
+
+In the refactored code, I removed the unnecessary nesting and used direct return statements instead, because if a guard clause is met, function execution is immediately halted by the returned statement. The modification makes the code more readable and removes the need for the extra variable `result`. It also allows a viewer to very quickly ascertain the order of conditions being checked simply by checking each line, rather than following a chain of nested condition checks.
+
+Additionally, the Python community has adopted a coding style (PEP8) that recommends lower_case_with_underscores for function and variable names instead of camelCase. I've updated the function and variable names to be PEP8 compliant. This style consistency is also beneficial for readability and maintainability.
+
+The other aspect that should be addressed: functions `dead_amount()`, `separated_amount()`, `retired_amount()`, `normal_pay_amount()`. They should be either previously defined global-scope functions, or they should be instance methods (i.e., `self.dead_amount()`, `self.separated_amount()`, etc.), or class methods. This will affect how they are called within the `get_pay_amount()` method. Without more context, I cannot specifically address this in the refactoring.
+

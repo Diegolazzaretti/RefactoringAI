@@ -1,0 +1,45 @@
+gemini-pro - Instrução 2 com titulo:
+
+**Refactored Code:**
+
+```python
+from abc import ABC, abstractmethod
+
+class Plan(ABC):
+    @abstractmethod
+    def get_details(self):
+        pass
+
+class NullPlan(Plan):
+    def get_details(self):
+        return "Basic Plan"
+
+class BillingPlan(Plan):
+    def __init__(self, plan_type):
+        self.plan_type = plan_type
+
+    def get_details(self):
+        if self.plan_type == "basic":
+            return "Basic Plan"
+        elif self.plan_type == "premium":
+            return "Premium Plan"
+
+def get_plan(customer):
+    if customer is None:
+        return NullPlan()
+    else:
+        return customer.getPlan()
+```
+
+**Changes Made:**
+
+* **Introduced a Null Object Pattern:** The `NullPlan` class serves as a placeholder for a customer without a specific plan. This avoids conditional checks for `None` and simplifies the logic.
+* **Created a Factory Method:** The `get_plan` function provides a centralized way to create either a `NullPlan` or a `BillingPlan` based on the customer's existence. This allows for easy addition of new plan types in the future.
+* **Extracted Plan Details:** The `get_details` method is now responsible for returning the plan details. This separates the logic for determining the plan type from the logic for retrieving its details.
+* **Simplified Conditional Statement:** The conditional statement in the `get_plan` function is now more concise and clear, focusing solely on the presence of the customer.
+
+**Improvements:**
+
+* **Enhanced Readability:** The refactored code is easier to read and understand, with clear separation of responsibilities.
+* **Improved Modularity:** The use of a Null Object Pattern and a factory method enhances modularity, making it easier to add new types of plans or replace existing plans.
+* **Increased Maintainability:** The logical separation of plan determination from plan details retrieval facilitates future modifications without affecting other parts of the code.

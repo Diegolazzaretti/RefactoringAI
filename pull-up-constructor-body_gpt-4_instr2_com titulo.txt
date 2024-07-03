@@ -1,0 +1,35 @@
+gpt-4 - Instrução 2 com titulo:
+
+Refactored Code:
+
+```python
+class Employee:
+    def __init__(self, name, id):
+        self.name = name
+        self.id = id
+
+
+class Manager(Employee):
+    def __init__(self, name, id, grade):
+        super().__init__(name, id)
+        self.grade = grade
+    # ...   
+```
+
+Explanation of changes made:
+
+1. We created a base class `Employee` which contains common attributes for `Manager` and potential future classes for other roles like `Engineer`, `Salesperson`, ...
+  
+2. The `__init__` method in the `Employee` class will handle initialization of `name` and `id` attributes.
+  
+3. In the `Manager` class, we now call the `super().__init__(name, id)` within its `__init__` method to initialize the `name` and `id` attributes. This is the "pull-up constructor body" refactoring scenario where we move the common part of constructor to the base class and call the base class's constructor from the subclass.
+   
+4. The attribute `grade` which is specific to the `Manager` class remains in this class.
+
+Advantages of this refactoring:
+
+1. Improved readability & modularity: The base `Employee` class clearly defines attributes related to generic employee details. Specific employee roles like `Manager` are classes that inherit from `Employee` class, which makes it clear that they are specific types of employees with additional attributes or behaviors.
+
+2. Reduced code duplication: If there are any other subclasses of `Employee` that also have `name` and `id` attributes, we won't need to duplicate their initialization in those subclasses.
+
+3. Easier maintenance & extension: If we need to add, change or remove attributes of `Employee`, we have a single location to make that change and it will automatically be inherited by all subclasses. If we have new roles to add in future, it can be easily done by adding new classes that inherit from `Employee` class.

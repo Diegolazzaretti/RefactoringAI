@@ -1,0 +1,28 @@
+gpt-4 - Instrução 2 com titulo:
+
+Refactored code:
+
+```Python
+GRAVITY_CONSTANT = 9.81
+
+def calculate_potential_energy(mass: float, height: float) -> float:
+    """
+    Calculate the potential energy of an object given its mass and height
+    :param mass: Mass of the object in kg
+    :param height: Height of the object in m
+    :return: Potential energy of the object in Joules
+    """
+    return mass * height * GRAVITY_CONSTANT
+```
+
+Explanation of Changes:
+
+1. Replaced the magic number (9.81) with a symbolic constant (GRAVITY_CONSTANT) – This makes the code more understandable and maintainable because the constant's name gives the context. If this particular constant is used in multiple places, updating its value becomes easier.
+
+2. Changed the function's name from potentialEnergy to calculate_potential_energy to conform to Python's naming convention, that is, lowercase with words separated by underscores. Descriptive function names add to the readability of the code.
+
+3. Adopted Python's type hinting for the function parameters mass and height, making the expected data types explicit. The function's return type is also made explicit. This enhances code readability and is helpful in large codebases for maintaining type integrity.
+
+4. Added a docstring to describe the function's purpose, parameters, and return value for enhanced documentation. This makes the code more understandable for other developers or even your future self when they try to figure out what the method is supposed to do.
+
+By following these small but significant steps, we can significantly improve code maintainability, readability, and reduce potential bugs in the future. For example, when another developer steps in to work on this code, they would be immediately aware of the purpose of the function, what parameters it needs, the type of those parameters, and what it returns. So, we are promoting a less error-prone environment.

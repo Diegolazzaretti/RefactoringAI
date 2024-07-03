@@ -1,0 +1,8 @@
+gpt-4 - Instrução 1 com titulo:
+
+You can refactor the code removing the redundant temporary variable ("basePrice"). Here is the refactored code:
+
+def hasDiscount(order):
+    return order.basePrice() > 1000
+
+This is beneficial because it removes an unnecessary line of code, saving memory, and makes the purpose of the function clearer. Also, the function is more cohesive because it only does one thing.

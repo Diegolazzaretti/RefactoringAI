@@ -1,0 +1,29 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Here is the refactored code:
+
+```python
+def calculate_total(price, discount):
+    return price * discount
+
+def send():
+    pass  # Implementation of 'send' function
+
+def process_price(price):
+    discount = 0.95 if isSpecialDeal() else 0.98
+    total = calculate_total(price, discount)
+    send()
+    return total
+```
+
+Explanation:
+
+1. I defined a function `calculate_total` which calculates the total after applying a discount. It takes two parameters, the original price and the discount rate. This function improves modularization and readability by giving a name and clear responsibilities to a piece of code.
+
+2. I removed the direct calls to `send` in the conditional blocks and moved it to the `process_price` function to eliminate code duplication. This makes the code cleaner and easier to maintain.
+
+3. I condensed the if-else statement into a single line using Python's ternary operator. The corresponding discount is assigned to `discount` based on the condition `isSpecialDeal()`. This makes the code simpler and easier to read.
+
+4. I encapsulated the actual logic in a separate function `process_price`. This function calculates the total using the `calculate_total` function, then call `send` and finally return the total. Encapsulating the logic in a function allows it to be easily used in multiple places without duplicating code, and it makes the code easier to understand, test, and maintain. 
+
+By restructuring the code in this way, we enhance its modularity and readability, reduce code duplication, ease future modifications, and maintain functional integrity. It's easier to update the logic for calculating the total or sending the data, and changes to one part of the code are less likely to unintentionally affect other parts of the code. The code is also easier to understand, making it more maintainable in the long run.

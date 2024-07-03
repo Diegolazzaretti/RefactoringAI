@@ -1,0 +1,21 @@
+gpt-4 - Instrução 1 com titulo:
+
+Refactored Code:
+
+class Employee:
+    def __init__(self, name, id):
+        self.name = name
+        self.id = id
+
+
+class Manager(Employee):
+    def __init__(self, name, id, grade):
+        super().__init__(name, id)
+        self.grade = grade
+    # ... 
+
+Explanation:
+
+The refactored version promotes reusability and makes the code more organized. 
+Instead of having similar attribute initialization in Employee and Manager, we've pulled up the common attributes (name and id) to the Employee class's constructor and utilized inheritance by calling the parent's constructor in the child class (Manager).
+This approach increases maintainability, as updating the common attributes would only necessitate changes in one place (Employee class), not all child classes. It also increases readability by reducing redundancy and promoting clear, hierarchical organization.

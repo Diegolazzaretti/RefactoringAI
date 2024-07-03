@@ -1,0 +1,440 @@
+Código Original (consolidate-duplicate-conditional-fragments):
+
+if isSpecialDeal():
+    total = price * 0.95
+    send()
+else:
+    total = price * 0.98
+    send()
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```python
+def send():
+    # code to send email or perform some other action
+    pass
+
+def isSpecialDeal():
+    # check if the deal is special, returns True if it is
+    pass
+
+price = 100.00
+if isSpecialDeal():
+    total = price * 0.95
+else:
+    total = price * 0.98
+
+# send email with total amount
+send(total)
+```
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+def calculate_total(price: float) -> float:
+    """Calculates the total price based on whether it's a special deal or not.
+
+    :param price: The original price of the item.
+    :return: The total price after applying any discounts.
+    """
+    discount_rate = 0.05 if is_special_deal() else 0.02
+    return price * (1 - discount_rate)
+
+
+def is_special_deal() -> bool:
+    """Determines whether the current item is a special deal or not.
+
+    :return: True if it's a special deal, False otherwise.
+    """
+    # Logic to determine if the item is a special deal.
+
+def send(total: float):
+    """Sends the total price to the payment processor.
+
+    :param total: The total price to be sent.
+    """
+    # Logic to send the total price to the payment processor.
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def calculate_total_price(price):
+    return price * 0.95 if is_special_deal() else price * 0.98
+
+def send_notification():
+    send()
+
+total = calculate_total_price(price)
+send_notification()
+
+gpt-4 - Instrução 1 sem titulo:
+Refactored code:
+
+```python
+def calculate_total(price, discount):
+    return price * discount
+
+def process_deal(price, is_special):
+    discount = 0.95 if is_special else 0.98
+    total = calculate_total(price, discount)
+    send()
+    return total
+
+total = process_deal(price, isSpecialDeal())
+``` 
+
+This refactoring breaks down the original logic into two functions `calculate_total` and `process_deal`.
+
+The calculation of the total is isolated in the `calculate_total` function, making the arithmetic operation more readable and easier to unit test if necessary.
+
+The decision on which discount to apply is done in `process_deal` which then calls `calculate_total` to get the total price. This function also calls `send`.
+
+This refactoring makes the code more maintainable, each function has a single purpose and it is easier to test and understand what each part of the code does. In the end, the value of `total` is obtained by calling `process_deal`.
+
+mistral - Instrução 1 com titulo:
+```
+# Consolidate duplicate conditional fragments
+if isSpecialDeal():
+    total = calculateTotal(price, 0.95)
+else:
+    total = calculateTotal(price, 0.98)
+
+send(total)
+
+def calculateTotal(price, discount):
+    return price * (1 - discount)
+```
+
+gemini-pro - Instrução 1 com titulo:
+```python
+def calculate_total(price: float, is_special_deal: bool) -> float:
+    """Calculates the total price of an item based on whether it is a special deal or not.
+
+    Args:
+        price (float): The original price of the item.
+        is_special_deal (bool): True if the item is a special deal, False otherwise.
+
+    Returns:
+        float: The total price of the item.
+    """
+
+    discount_rate = 0.05 if is_special_deal else 0.02
+    return price * (1 - discount_rate)
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+if isSpecialDeal():
+    total = calculateSpecialDealPrice()
+else:
+    total = calculateRegularPrice()
+send()
+
+def calculateSpecialDealPrice():
+    return price * 0.95
+
+def calculateRegularPrice():
+    return price * 0.98
+
+gpt-4 - Instrução 1 com titulo:
+In the provided code, the "send()" function is repeated in both the if and else blocks. This repetition can be eliminated to improve the code's readability and maintainability. Here's the refactored version:
+
+def calculate_total(price, discount):
+    total = price * discount
+    send()
+    return total
+
+if isSpecialDeal():
+    calculate_total(price, 0.95)
+else:
+    calculate_total(price, 0.98)
+
+mistral - Instrução 2 sem titulo:
+The code provided checks if the deal is special and calculates the total accordingly. If the deal is special, the total is calculated by multiplying the price by 0.95. Otherwise, the total is calculated by multiplying the price by 0.98. Finally, the `send()` function is called with the calculated total as its argument.
+
+To refactor this code and improve its readability, modularity, and maintainability, we can do the following:
+
+1. Create a separate function for calculating the total based on whether the deal is special or not. This will reduce code duplication and make the logic more modular and organized. We can name this function `calculateTotal()`.
+2. Pass the `price` variable as an argument to the `calculateTotal()` function, along with a boolean flag indicating whether the deal is special or not.
+3. Inside the `calculateTotal()` function, we can use an if-else statement to calculate the total based on the value of the boolean flag.
+4. Finally, call the `send()` function with the calculated total as its argument.
+
+Here's how the refactored code would look like:
+```python
+def calculateTotal(price, isSpecialDeal):
+    if isSpecialDeal:
+        total = price * 0.95
+    else:
+        total = price * 0.98
+    return total
+
+def send(total):
+    # implementation of the send() function goes here
+    pass
+```
+This refactored code is more modular, organized, and easier to maintain. It also adheres to best practices of software development by separating concerns and reducing code duplication.
+
+gemini-pro - Instrução 2 sem titulo:
+```python
+from abc import ABC, abstractmethod
+
+class Discount(ABC):
+    @abstractmethod
+    def apply(self, price):
+        pass
+
+class SpecialDeal(Discount):
+    def apply(self, price):
+        return price * 0.95
+
+class RegularDeal(Discount):
+    def apply(self, price):
+        return price * 0.98
+
+def calculate_total(price, discount):
+    return discount.apply(price)
+
+def send_email(price):
+    print(f"Sending email with updated price: {price}")
+
+def main():
+    if isSpecialDeal():
+        discount = SpecialDeal()
+    else:
+        discount = RegularDeal()
+
+    total = calculate_total(price, discount)
+    send_email(total)
+
+if __name__ == "__main__":
+    main()
+```
+
+**Refactoring Explanation:**
+
+- **Modularized Discount Logic:** Created abstract `Discount` class and two concrete subclasses `SpecialDeal` and `RegularDeal` to handle different discount scenarios, making the code more extensible and maintainable.
+- **Simplified Main Logic:** Moved the discount selection logic from `main()` to a separate function `calculate_total`, reducing the complexity of the main function.
+- **Introduced Dependency Injection:** Injected the `Discount` object into `calculate_total` function, making it easy to switch between different discount strategies.
+- **Improved Readability and Reusability:** Extracted the email sending logic into a separate `send_email` function, making the code more readable and promoting code reuse.
+- **Applied Strategy Pattern:** Implemented the Strategy pattern by using the `Discount` class as a strategy interface, allowing for flexible and dynamic selection of discount strategies. This makes it easy to add or modify discount calculations in the future.
+- **Enhanced Testability:** By separating the discount logic into separate classes, testing becomes easier as each discount strategy can be tested independently.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+The original code can be refactored to use the Strategy design pattern to separate the logic for determining the discount from the logic for sending the total price. This increases readability, modularity, and maintainability of the code.
+
+First, create a strategy interface and two concrete strategy classes:
+
+```python
+from abc import ABC, abstractmethod
+
+class PricingStrategy(ABC):
+    @abstractmethod
+    def calculateTotal(self, price):
+        pass
+
+class SpecialDealStrategy(PricingStrategy):
+    def calculateTotal(self, price):
+        return price * 0.95
+
+class RegularDealStrategy(PricingStrategy):
+    def calculateTotal(self, price):
+        return price * 0.98
+```
+
+Next, modify the client code to use the strategy pattern:
+
+```python
+def calculateAndSendTotal(strategy, price):
+    total = strategy.calculateTotal(price)
+    send(total)
+
+if isSpecialDeal():
+    strategy = SpecialDealStrategy()
+else:
+    strategy = RegularDealStrategy()
+
+calculateAndSendTotal(strategy, price)
+```
+
+Explanation of changes made:
+
+1. Created a strategy interface (`PricingStrategy`) and two concrete strategy classes (`SpecialDealStrategy`, `RegularDealStrategy`) to separate the discount calculation logic from the sending logic. This adheres to the open/closed principle of the SOLID principles.
+
+2. Introduced a `calculateAndSendTotal` function to handle the process of calculating the total price and sending it. This increases modularity and readability by separating the logic into a single function.
+
+3. Updated the `isSpecialDeal` conditional to determine which strategy to use, and then called `calculateAndSendTotal` with the selected strategy. This simplifies the logic and improves organization, making it easy to understand the flow of the program.
+
+gpt-4 - Instrução 2 sem titulo:
+Here is the refactored code:
+
+```python
+def calculate_total(price, discount):
+    return price * discount
+
+def send():
+    pass  # Implementation of 'send' function
+
+def process_price(price):
+    discount = 0.95 if isSpecialDeal() else 0.98
+    total = calculate_total(price, discount)
+    send()
+    return total
+```
+
+Explanation:
+
+1. I defined a function `calculate_total` which calculates the total after applying a discount. It takes two parameters, the original price and the discount rate. This function improves modularization and readability by giving a name and clear responsibilities to a piece of code.
+
+2. I removed the direct calls to `send` in the conditional blocks and moved it to the `process_price` function to eliminate code duplication. This makes the code cleaner and easier to maintain.
+
+3. I condensed the if-else statement into a single line using Python's ternary operator. The corresponding discount is assigned to `discount` based on the condition `isSpecialDeal()`. This makes the code simpler and easier to read.
+
+4. I encapsulated the actual logic in a separate function `process_price`. This function calculates the total using the `calculate_total` function, then call `send` and finally return the total. Encapsulating the logic in a function allows it to be easily used in multiple places without duplicating code, and it makes the code easier to understand, test, and maintain. 
+
+By restructuring the code in this way, we enhance its modularity and readability, reduce code duplication, ease future modifications, and maintain functional integrity. It's easier to update the logic for calculating the total or sending the data, and changes to one part of the code are less likely to unintentionally affect other parts of the code. The code is also easier to understand, making it more maintainable in the long run.
+
+mistral - Instrução 2 com titulo:
+
+Refactored Code:
+```
+from abc import ABC, abstractmethod
+class DiscountStrategy(ABC):
+    @abstractmethod
+    def get_discount(self, price):
+        pass
+
+class SpecialDealDiscountStrategy(DiscountStrategy):
+    def get_discount(self, price):
+        return price * 0.95
+
+class RegularDealDiscountStrategy(DiscountStrategy):
+    def get_discount(self, price):
+        return price * 0.98
+
+class DiscountService:
+    @staticmethod
+    def apply_discount(price, discount_strategy):
+        total = price * discount_strategy.get_discount()
+        send()
+        
+if __name__ == '__main__':
+    isSpecialDeal = True  # Replace with some logic to determine if special deal applies
+    discount_strategy = DiscountStrategy() if isSpecialDeal else DiscountStrategy()
+    DiscountService.apply_discount(price, discount_strategy)
+```
+Explanation of changes made:
+
+1. Abstract Base Class (ABC): We have created an ABC to encapsulate the common behavior of all discount strategies. This allows us to define a consistent interface for all implementations and enables us to easily add new types of discounts in the future.
+
+2. DiscountStrategy: This is an abstract class that defines the method `get_discount`. We create two concrete classes, `SpecialDealDiscountStrategy` and `RegularDealDiscountStrategy`, that inherit from this abstract class and provide their own implementation of `get_discount`.
+
+3. DiscountService: This is a simple class that contains a static method `apply_discount`. It takes in the price and discount strategy as arguments, calculates the total using the discount strategy's `get_discount` method, and calls the `send()` function (which we assume handles sending notifications).
+
+4. Conditional Logic: Instead of duplicating the conditional logic to determine whether a special deal applies, we pass it as an argument to the DiscountService class and use it to decide which discount strategy to apply. This makes our code more modular, maintainable, and extensible.
+
+By implementing these changes, we have improved the readability, modularity, and maintainability of the code. We've reduced code duplication by using abstract classes and encapsulating common behavior. Additionally, we've simplified the logic by moving the conditional check into a separate class, making it easier to modify in the future.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+def calculate_total(price, is_special_deal):
+    multiplier = 0.95 if is_special_deal else 0.98
+    total = price * multiplier
+    return total
+
+def send_total(total):
+    send(total)
+
+def main():
+    price = get_price()
+    is_special_deal = check_special_deal()
+    total = calculate_total(price, is_special_deal)
+    send_total(total)
+
+if __name__ == "__main__":
+    main()
+```
+
+**Enhancements:**
+
+**1. Separation of Concerns:**
+
+* The `main()` function is now responsible for orchestrating the flow of the program, while the `calculate_total()` and `send_total()` functions are dedicated to their specific tasks.
+
+**2. Modularity:**
+
+* The `calculate_total()` function can be easily reused in other parts of the program where total calculation is needed.
+
+**3. Reduced Code Duplication:**
+
+* The conditional fragments for calculating `total` are consolidated into a single function, eliminating duplication.
+
+**4. Improved Readability:**
+
+* The code is now organized into logical blocks, with each function performing a well-defined task. This makes it easier to understand the program flow.
+
+**5. Maintainability:**
+
+* Any future changes to the discount rates or the logic for calculating the total can be made in the `calculate_total()` function, without affecting the rest of the program.
+
+**Explanation of Changes:**
+
+* The `if-else` statement for calculating `total` is moved to a separate function `calculate_total()`, which takes `price` and `is_special_deal` as arguments.
+* A new function `send_total()` is created to send the calculated `total`.
+* The `main()` function is introduced to orchestrate the program flow, calling the `calculate_total()` and `send_total()` functions.
+* The program is wrapped in a conditional to ensure it only runs as a standalone script (not as an imported module).
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+Refactored code:
+
+```
+def calculate_total_price(price):
+    if isSpecialDeal():
+        return apply_special_deal_discount(price)
+    else:
+        return apply_regular_discount(price)
+
+def apply_special_deal_discount(price):
+    return price * 0.95
+
+def apply_regular_discount(price):
+    return price * 0.98
+
+def send():
+    # send logic here
+
+total = calculate_total_price(price)
+send()
+```
+
+Changes made:
+1. Created separate functions for applying special deal discount and regular discount to improve readability and modularity.
+2. Moved the send logic to a separate function to improve organization and reduce code duplication.
+3. Created a main function `calculate_total_price` to handle conditionals and return the total price, improving maintainability and code structure.
+4. Removed duplicate code for sending the final price, which reduces redundancy and simplifies the logic. 
+5. Used descriptive function and variable names to enhance readability and maintainability.
+
+gpt-4 - Instrução 2 com titulo:
+Before I refactor the code, I'll explain what issues are present in the above code: 
+
+1. The 'send()' method is duplicated in the 'if' and 'else'. Duplicate code is one of the primary elements of poor quality code, it's harder to modify the program because you'd have to make each fix, enhancement, or addition in many places.
+
+Here is the refactored code:
+
+```python
+discount = 0.95 if isSpecialDeal() else 0.98
+total = price * discount
+send()
+```
+
+During the refactoring following changes were made:
+
+1. The `send()` function is moved out of the conditional block as it was repeated in both `if` and `else` statements.
+
+2. Code duplication was removed by adding a specific value to `discount` based on the value of `isSpecialDeal()`. This helps to better organize the code, as it separates the logic for calculating the discount and the action to be performed afterward. Moreover, it simplifies the code's logic and reduces the number of lines.
+
+3. A ternary statement is used for the `discount` calculation. This reduces several lines of code into one and makes the code simpler and easier to read.
+
+This refactoring improves the maintainability of the code because it separates the logic for the discount calculation and the sending process. It's considered good practice to follow the Single Responsibility Principle, where a block of code should have only a single responsibility. This refactoring is a step towards that, as we have now separated the responsibilities into different parts of the code.
+
+This refactoring also improves the readability of the code. The code is much more understandable because the logic for deciding the discount is clearly separated from the action of sending. Any changes to the way the discount is calculated can now be made in a single line, without having to modify the `send()` part.
+

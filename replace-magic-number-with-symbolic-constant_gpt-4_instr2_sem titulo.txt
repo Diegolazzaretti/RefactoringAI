@@ -1,0 +1,41 @@
+gpt-4 - Instrução 2 sem titulo:
+
+The provided code is actually quite simple and does not present any significant issues that would need refactoring. It already adheres to the basic principles of software development - simplicity, readability, and maintainability.
+
+However, we can still make a few refinements, one of which could be the introduction of named constants, especially if these are values that have a specific meaning and won't change throughout the application:
+
+```python
+GRAVITY = 9.81
+
+def potential_energy(mass, height):
+    return mass * height * GRAVITY
+```
+
+Changes Made:
+
+1. Created a constant GRAVITY and replaced the magic number 9.81 with it. This makes it easier to understand and follow what the code is doing.
+
+2. Renamed `potentialEnergy` to `potential_energy` following the Python's naming conventions. Python follows snake case (_lowercase_with_underscores_) naming conventions for function names.
+
+3. Added a docstring for the function to provide a high-level understanding of the function’s purpose, its arguments, and return type. 
+
+Here's how the final code could look like:
+
+```python
+"""Module for calculating physical quantities."""
+
+GRAVITY = 9.81
+
+def potential_energy(mass: float, height: float) -> float:
+    """Calculate the potential energy of an object.
+
+    Args:
+        mass: mass of the object in kilograms.
+        height: height of the object in meters from the ground level.
+
+    Returns:
+        The potential energy of the object in joules.
+    """
+    return mass * height * GRAVITY
+
+```

@@ -1,0 +1,17 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+def calculate_total(quantity: int, item_price: float) -> float:
+    """Calculates the total price of a given quantity of items.
+    
+    Args:
+        quantity: The number of items purchased.
+        item_price: The price of a single item.
+
+    Returns:
+        The total price of the items.
+    """
+    base_price = quantity * item_price
+    discount_rate = 0.95 if base_price > 1000 else 0.98
+    return base_price * discount_rate
+```

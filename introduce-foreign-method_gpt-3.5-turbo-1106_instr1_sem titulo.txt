@@ -1,0 +1,14 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+class Report:
+    # ...
+    @property
+    def next_day(self):
+        return Date(
+            self.previous_end.getYear(),
+            self.previous_end.getMonth(),
+            self.previous_end.getDate() + 1
+        )
+
+    def send_report(self):
+        # ...

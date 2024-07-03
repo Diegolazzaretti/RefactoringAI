@@ -1,0 +1,590 @@
+Código Original (replace-parameter-with-method-call):
+
+basePrice = quantity * itemPrice
+seasonalDiscount = self.getSeasonalDiscount()
+fees = self.getFees()
+finalPrice = discountedPrice(basePrice, seasonalDiscount, fees)
+
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```python
+def calculate_price():
+    base_price = get_item_price() * get_quantity()
+    seasonal_discount = get_seasonal_discount()
+    fees = get_fees()
+    final_price = discounted_price(base_price, seasonal_discount, fees)
+    return final_price
+
+def get_item_price():
+    # code to get item price from database or API
+    pass
+
+def get_quantity():
+    # code to get quantity from user input
+    pass
+
+def get_seasonal_discount():
+    # code to calculate seasonal discount
+    pass
+
+def get_fees():
+    # code to get fees from database or API
+    pass
+
+def discounted_price(base_price, seasonal_discount, fees):
+    # code to calculate discounted price with fees
+    pass
+```
+
+gemini-pro - Instrução 1 sem titulo:
+```python
+from typing import Tuple
+
+def calculate_final_price(quantity: int, item_price: float) -> float:
+    
+    base_price = quantity * item_price
+    seasonal_discount = get_seasonal_discount()
+    fees = get_fees()
+    return final_price(base_price, seasonal_discount, fees)
+
+def get_seasonal_discount() -> float:
+    return 0.1
+
+def get_fees() -> Tuple[float]:
+    return 0.0, 0.0
+
+def final_price(base_price: float, seasonal_discount: float, fees: Tuple[float]) -> float:
+    discounted_price = base_price * (1 - seasonal_discount)
+    return discounted_price + fees[0] - fees[1]
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+class PriceCalculator:
+    def __init__(self, quantity, itemPrice):
+        self.quantity = quantity
+        self.itemPrice = itemPrice
+
+    def calculate_base_price(self):
+        return self.quantity * self.itemPrice
+
+    def get_seasonal_discount(self):
+        # implementation to get seasonal discount
+        return seasonal_discount
+
+    def get_fees(self):
+        # implementation to get fees
+        return fees
+
+    def calculate_final_price(self):
+        base_price = self.calculate_base_price()
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        return self.discounted_price(base_price, seasonal_discount, fees)
+
+    def discounted_price(self, base_price, seasonal_discount, fees):
+        # implementation to calculate final price
+        return final_price
+price_calculator = PriceCalculator(quantity, itemPrice)
+final_price = price_calculator.calculate_final_price()
+
+gpt-4 - Instrução 1 sem titulo:
+Here's the refactored code:
+
+```python
+class Product:
+
+    def __init__(self, quantity, itemPrice):
+        self.quantity = quantity
+        self.itemPrice = itemPrice
+
+    def calculate_basePrice(self):
+        return self.quantity * self.itemPrice
+
+    def calculate_finalPrice(self):
+        basePrice = self.calculate_basePrice()
+        seasonalDiscount = self.get_seasonalDiscount()
+        fees = self.get_fees()
+        return self.calculate_discountedPrice(basePrice, seasonalDiscount, fees)
+
+    def get_seasonalDiscount(self):
+        # code to get seasonal discount
+        pass
+
+    def get_fees(self):
+        # code to get fees
+        pass
+
+    def calculate_discountedPrice(self, basePrice, seasonalDiscount, fees):
+        # code to calculate discounted price 
+        pass
+```
+In this refactoring, code is divided into smaller meaningful methods to improve readability. It also makes sure that each function has a single responsibility which ensures the code is modular and maintainable.
+- I moved all the related code and data (quantity and itemPrice) into a Product class to encapsulate related data and behavior into a single object.
+- calculate_FinalPrice method orchestrates the calculation by calling the necessary methods in the right order. Making it more readable.
+- Other methods like calculate_basePrice, get_seasonalDiscount, get_fees and calculate_discountedPrice are specific to a single task. Thus the overall logic of the code is easier to understand.
+- If any changes are needed in the future, we only need to update the corresponding method. The rest of the code would not be affected which makes it more maintainable.
+
+mistral - Instrução 1 com titulo:
+```python
+class DiscountCalculator:
+    def __init__(self):
+        self.fees = None
+    
+    def calculate_price(self, base_price, item_price, discount=None):
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        final_price = 0
+        
+        if discount:
+            final_price = base_price * (1 - discount)
+        else:
+            final_price = base_price - seasonal_discount + fees
+            
+        return final_price
+```
+Usage:
+```python
+dc = DiscountCalculator()
+dc.fees = 50
+dc.calculate_price(10, 20)  # returns final price with discounts and fees included
+```
+
+gemini-pro - Instrução 1 com titulo:
+To enhance the readability, modularity, and maintainability of the provided code, we can refactor it as follows:
+
+```
+class Item:
+    def __init__(self, quantity, item_price):
+        self.quantity = quantity
+        self.item_price = item_price
+
+    def get_base_price(self):
+        return self.quantity * self.item_price
+
+    def get_seasonal_discount(self):
+        pass
+
+    def get_fees(self):
+        pass
+
+    def get_final_price(self):
+        base_price = self.get_base_price()
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        return discounted_price(base_price, seasonal_discount, fees)
+
+def discounted_price(base_price, seasonal_discount, fees):
+    return base_price - seasonal_discount + fees
+```
+
+This refactoring introduces the following improvements:
+
+1. **Class-based Approach**: The code is encapsulated within a class named `Item`, which better represents the real-world entity it models.
+
+2. **Method-based Calculation**: Instead of ad-hoc calculations, the `get_base_price`, `get_seasonal_discount`, and `get_fees` methods are defined within the `Item` class to calculate the respective values.
+
+3. **Modular Design**: The calculation of the final price is moved to a separate `get_final_price` method, making the code more modular and easier to update if the pricing rules change.
+
+4. **Clearer Function Signature**: The `discounted_price` function now has a clear signature that specifies its input parameters.
+
+5. **Separation of Concerns**: The code is separated into distinct concerns: `Item` handles item-related calculations, while `discounted_price` handles price calculations.
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+public double calculateFinalPrice(int quantity, double itemPrice) {
+    double basePrice = calculateBasePrice(quantity, itemPrice);
+    double seasonalDiscount = getSeasonalDiscount();
+    double fees = getFees();
+    double finalPrice = discountedPrice(basePrice, seasonalDiscount, fees);
+    return finalPrice;
+}
+
+private double calculateBasePrice(int quantity, double itemPrice) {
+    return quantity * itemPrice;
+}
+
+private double getSeasonalDiscount() {
+    // logic to calculate seasonal discount
+    return 0.0; // placeholder value
+}
+
+private double getFees() {
+    // logic to calculate fees
+    return 0.0; // placeholder value
+}
+
+private double discountedPrice(double basePrice, double seasonalDiscount, double fees) {
+    // logic to calculate discounted price
+    return 0.0; // placeholder value
+}
+
+gpt-4 - Instrução 1 com titulo:
+Refactored Code:
+
+```
+def calculate_base_price(quantity, item_price):
+    return quantity * item_price
+
+def calculate_final_price(quantity, item_price):
+    base_price = calculate_base_price(quantity, item_price)
+    seasonal_discount = self.get_seasonal_discount()
+    fees = self.get_fees()
+
+    return discounted_price(base_price, seasonal_discount, fees)
+```
+As mentioned, we improved the readability and modularity by breaking down the code into small, more manageable methods. We also added method names that clearly indicate what each method does, which in turn makes code maintenance easier.
+
+mistral - Instrução 2 sem titulo:
+The code above calculates the final price of an item based on its base price, any seasonal discount, and additional fees. It can be refactored to enhance readability, modularity, and maintainability by separating the logic into smaller, more manageable functions that can be easily modified or extended in the future.
+
+One possible refactoring approach is to create a `DiscountCalculator` class with a public method `calculate_discounted_price` that takes the base price, seasonal discount, and fees as input parameters and returns the final price after applying any discount or fees. The `DiscountCalculator` class can also have private methods to calculate individual components like seasonal discounts and fees.
+
+Here's an example implementation:
+
+```python
+class DiscountCalculator:
+    def __init__(self):
+        self._seasonal_discount = None
+        self._fees = None
+
+    def set_seasonal_discount(self, discount):
+        self._seasonal_discount = discount
+
+    def get_seasonal_discount(self):
+        return self._seasonal_discount or 0.0
+
+    def set_fees(self, fees):
+        self._fees = fees
+
+    def get_fees(self):
+        return self._fees or 0.0
+
+    def calculate_discounted_price(self, base_price, discount=None, fees=None):
+        if discount is not None:
+            base_price *= (1 - discount)
+        if fees is not None:
+            base_price += fees
+        return base_price
+```
+
+In this implementation, the `DiscountCalculator` class has private methods `set_seasonal_discount` and `get_seasonal_discount` that allow setting and retrieving seasonal discounts. Similarly, it has private methods `set_fees` and `get_fees` that allow setting and retrieving additional fees. The public method `calculate_discounted_price` takes the base price as input and optionally applies a discount or fees based on their respective values.
+
+To use this refactored code, we can create an instance of the `DiscountCalculator` class and call its methods:
+
+```python
+item = "Widget"
+quantity = 5
+price = 10.99
+
+discount_calculator = DiscountCalculator()
+discount_calculator.set_seasonal_discount(0.2)
+discount_calculator.set_fees(3.49)
+final_price = discount_calculator.calculate_discounted_price(quantity * price)
+
+print("Final price of", item, "for", quantity, "units is $", final_price)
+```
+
+This code sets the seasonal discount to 20% and additional fees to $3.49, calculates the final price of `Widget` for 5 units, and prints the result to the console.
+
+The changes made to the original code include:
+
+1. Separating the logic into smaller functions that can be easily modified or extended in the future.
+2. Using encapsulation by defining private methods and attributes to hide implementation details and ensure data integrity.
+3. Removing duplication by using inheritance and composition patterns, where necessary.
+4. Adding comments to explain the purpose of each method and attribute, making the code more readable and maintainable.
+
+gemini-pro - Instrução 2 sem titulo:
+```python
+class Sale:
+    def __init__(self, quantity, item_price, seasonal_discount, fees):
+        self.quantity = quantity
+        self.item_price = item_price
+        self.seasonal_discount = seasonal_discount
+        self.fees = fees
+
+    def calculate_base_price(self):
+        return self.quantity * self.item_price
+
+    def calculate_final_price(self):
+        base_price = self.calculate_base_price()
+        discounted_price = self.apply_seasonal_discount(base_price)
+        final_price = self.add_fees(discounted_price)
+        return final_price
+
+    def apply_seasonal_discount(self, base_price):
+        return base_price * (1 - self.seasonal_discount)
+
+    def add_fees(self, discounted_price):
+        return discounted_price + self.fees
+```
+
+**Explanation of Changes:**
+
+1. **Modularization**: We have separated the calculation of base price, seasonal discount, and final price into separate methods. This makes the code more modular and easier to understand.
+
+2. **Encapsulation**: We have encapsulated the data and logic related to the sale within a class. This allows us to create multiple sales objects and manipulate them independently.
+
+3. **Design Patterns**: The code uses the **Strategy Pattern** for applying seasonal discounts. By defining a separate `apply_seasonal_discount` method, we can easily change the discount strategy in the future without affecting the rest of the code.
+
+4. **Improved Readability**: The refactored code is more structured and organized, making it easier to read and understand the flow of execution.
+
+5. **Maintanability**: The separation of concerns and encapsulation make the code more maintainable. Changes to one part of the code (e.g., the discount strategy) will not affect the rest of the application.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+class PriceCalculator:
+    def __init__(self, quantity, itemPrice):
+        self.quantity = quantity
+        self.itemPrice = itemPrice
+
+    def calculateBasePrice(self):
+        return self.quantity * self.itemPrice
+
+    def getSeasonalDiscount(self):
+        # implementation of seasonal discount logic
+        pass
+
+    def getFees(self):
+        # implementation of fees logic
+        pass
+
+    def discountedPrice(self, basePrice, seasonalDiscount, fees):
+        # implementation of discounted price logic
+        pass
+
+    def calculateFinalPrice(self):
+        basePrice = self.calculateBasePrice()
+        seasonalDiscount = self.getSeasonalDiscount()
+        fees = self.getFees()
+        finalPrice = self.discountedPrice(basePrice, seasonalDiscount, fees)
+        return finalPrice
+        
+
+Explanation of changes:
+- Created a class called PriceCalculator to encapsulate all the price calculation related logic and methods.
+- Moved the logic for calculating the base price into a separate method called calculateBasePrice() to improve modularity and maintainability.
+- Similarly, moved the logic for getting seasonal discount and fees into separate methods getSeasonalDiscount() and getFees() respectively.
+- Created a method called discountedPrice() to encapsulate the logic for calculating the final discounted price based on the base price, seasonal discount, and fees.
+- Moved the main logic for calculating the final price into a method called calculateFinalPrice(), which orchestrates the calculation process by calling the other methods and returning the final price.
+- This refactoring improves readability, modularity, and maintainability by separating the different aspects of price calculation into separate methods and encapsulating them within a class. It also reduces code duplication and simplifies the logic, making it easier to understand and modify in the future.
+
+gpt-4 - Instrução 2 sem titulo:
+Refactored Code:
+
+```python
+class PriceCalculator:
+    def __init__(self, quantity, item_price):
+        self.quantity = quantity
+        self.item_price = item_price
+
+    def calculate_base_price(self):
+        return self.quantity * self.item_price
+
+    def get_seasonal_discount(self):
+        # Define or get the seasonal discount here
+        pass
+
+    def get_fees(self):
+        # Define or get the fees here
+        pass
+
+    def calculate_final_price(self):
+        base_price = self.calculate_base_price()
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        return base_price - seasonal_discount + fees
+
+```
+
+Explanation of Changes:
+
+1. Encapsulation: I have wrapped the original code into a class named `PriceCalculator`. This encapsulates the related data and functionalities into a single unit, improving readability and maintainability. The original values are passed through the class constructor and stored as instance variables. This way, the class can be reused easily by objects with different parameters.
+
+2. Extraction of Methods: Each operation (like calculating the base price, getting seasonal discount, and fees) has been put into separate methods. This enhances the modularity of the code, each method having its single responsibility, and any changes in the future will only affect that particular operation.
+
+3. Final Price Calculation: The final price calculation is handled via a separate method `calculate_final_price()`. This method calls the previously defined three methods to calculate and return the final price. This separation removes the need for variables like `basePrice`, `seasonalDiscount`, and `fees` to be declared in a larger scope than necessary, preventing potential bugs in larger codebases.
+
+4. Verification: There is no direct verification in the original code, so the refactored one also doesn't add any.
+
+Ensure that you replace the `pass` positions in `get_seasonal_discount` and `get_fees` functions with your own implementation. 
+
+These changes contribute to the modularity, maintainability, readability, and overall organization of the code by applying the principles of object-oriented programming, single-responsibility principle, and variable scoping best practices.
+
+mistral - Instrução 2 com titulo:
+```python
+class ShoppingCart:
+    def __init__(self, items):
+        self.items = items
+    
+    def calculate_total_price(self):
+        base_price = sum([item["quantity"] * item["price"] for item in self.items])
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        final_price = discounted_price(base_price, seasonal_discount, fees)
+        return final_price
+    
+    def get_seasonal_discount(self):
+        # implementation of getting seasonal discount here
+        pass
+    
+    def get_fees(self):
+        # implementation of getting fees here
+        pass
+    
+def discounted_price(base_price, seasonal_discount, fees):
+    """Calculates the final price after applying discount and fees."""
+    discount = base_price * seasonal_discount
+    final_price = discount - fees
+    return final_price
+```
+The code above implements a `ShoppingCart` class that takes in a list of items, calculates the total price based on base price, seasonal discount, and fees, and returns the final price. We refactored the original code to create a more modular and maintainable design.
+
+We created a separate class for `ShoppingCart` that contains methods to calculate the total price, get seasonal discount and fees. The `calculate_total_price()` method of this class calculates the base price by iterating through all items in the shopping cart and multiplying their quantity with their price. It then calls two separate methods `get_seasonal_discount()` and `get_fees()` to get seasonal discount and fees respectively, which are implemented elsewhere.
+
+We also created a separate function `discounted_price()` that takes in the base price, seasonal discount, and fees as arguments and calculates the final price after applying discount and fees. This function is called from within the `calculate_total_price()` method of the `ShoppingCart` class to calculate the final price.
+
+By creating a separate class for `ShoppingCart`, we have encapsulated all the methods related to calculating the total price into one place, making it more modular and maintainable. We have also separated out the calculation of discount and fees from the calculation of base price, making the code more readable. The use of design patterns such as inheritance and encapsulation have reduced code duplication and improved overall organization.
+
+gemini-pro - Instrução 2 com titulo:
+The provided code can be refactored into a more modular and reusable form by using the Strategy design pattern to encapsulate the calculation of the discounted price. This pattern allows for easy addition of new pricing strategies in the future without modifying the existing code.
+
+Here is the refactored code:
+
+```python
+class Order:
+  def __init__(self, quantity, itemPrice):
+    self.quantity = quantity
+    self.itemPrice = itemPrice
+
+  def getBasePrice(self):
+    return self.quantity * self.itemPrice
+
+  def getDiscountStrategy(self):
+    # Seasonal discounts can be implemented here
+    return SeasonalDiscountStrategy()
+
+  def getFees(self):
+    # Calculation of fees can be implemented here
+    return 10
+
+  def getFinalPrice(self):
+    basePrice = self.getBasePrice()
+    discountStrategy = self.getDiscountStrategy()
+    seasonalDiscount = discountStrategy.calculateDiscount(basePrice)
+    fees = self.getFees()
+    return discountedPrice(basePrice, seasonalDiscount, fees)
+
+
+class DiscountStrategy:
+  def calculateDiscount(self, basePrice):
+    raise NotImplementedError()
+
+
+class SeasonalDiscountStrategy(DiscountStrategy):
+  def calculateDiscount(self, basePrice):
+    return basePrice * 0.1
+
+def discountedPrice(basePrice, seasonalDiscount, fees):
+  return basePrice - seasonalDiscount + fees
+
+order = Order(10, 10)
+finalPrice = order.getFinalPrice()
+print(finalPrice)
+```
+
+The changes from the original code to the refactored code are:
+
+1. The `seasonalDiscount` and `fees` calculations are moved to separate methods, `getDiscountStrategy()` and `getFees()`, respectively.
+
+2. The `finalPrice` calculation is moved to a separate function, `discountedPrice()`, which takes the `basePrice`, `seasonalDiscount`, and `fees` as arguments.
+
+3. The `getDiscountStrategy()` method is made abstract by raising a `NotImplementedError`, and a concrete implementation, `SeasonalDiscountStrategy`, is provided.
+
+4. The `discountedPrice()` function is made generic so that it can be reused for different pricing strategies.
+
+These changes improve the readability, modularity, and maintainability of the code by:
+
+- Separating the concerns of pricing strategy and order calculation.
+- Encapsulating the pricing strategy into a separate class, allowing for easy addition of new strategies.
+- Making the `discountedPrice()` function generic, allowing for reuse in different contexts.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+class PricingCalculator:
+    def __init__(self, quantity, itemPrice):
+        self.quantity = quantity
+        self.itemPrice = itemPrice
+
+    def calculateTotalPrice(self):
+        basePrice = self.calculateBasePrice()
+        seasonalDiscount = self.getSeasonalDiscount()
+        fees = self.getFees()
+        finalPrice = self.discountedPrice(basePrice, seasonalDiscount, fees)
+        return finalPrice
+
+    def calculateBasePrice(self):
+        return self.quantity * self.itemPrice
+
+    def getSeasonalDiscount(self):
+        # logic to calculate and return seasonal discount
+        pass
+
+    def getFees(self):
+        # logic to calculate and return fees
+        pass
+
+    def discountedPrice(self, basePrice, seasonalDiscount, fees):
+        # logic to calculate and return discounted price
+        pass
+
+# Explanation of Changes:
+1. Created a PricingCalculator class to encapsulate the pricing logic and calculations.
+2. Moved the calculation of basePrice into a separate method calculateBasePrice to improve modularity and readability.
+3. Encapsulated the seasonal discount and fees logic into separate methods getSeasonalDiscount and getFees for better organization.
+4. Combined the logic for calculating the final price into a single method calculateTotalPrice, simplifying the overall calculation process.
+5. Applied a more descriptive method name discountedPrice instead of using a generic function name.
+6. Created a class instance to handle the pricing calculations, allowing for easier access to the methods and encapsulating the data and operations related to pricing.
+
+gpt-4 - Instrução 2 com titulo:
+Here's how I whould refactor the given code:
+
+```python
+class PriceCalculator:
+    def __init__(self, quantity, item_price):
+        self.quantity = quantity
+        self.item_price = item_price
+        
+    def discounted_price(self):
+        base_price = self.quantity * self.item_price
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        return base_price - seasonal_discount + fees
+        
+    def get_seasonal_discount(self):
+        # Calculate seasonal discount
+        pass
+
+    def get_fees(self):
+        # Calculate fees
+        pass
+
+
+calculator = PriceCalculator(5, 20)
+final_price = calculator.discounted_price()
+```
+
+Refactoring explanation:
+
+1. Wrapped the code within a class: Encapsulating related code in a class improves modularity. It provides a structured way of organizing relevant code which makes it easier to understand and maintain.
+
+2. Replaced the global methods with class methods: This improves encapsulation by binding related functions as methods to a class.
+
+3. Created an initialization method (`__init__`): This sets up the initial state for each instance of the class, taking in the necessary input parameters. This offers flexibility in handling different data for calculation.
+
+4. Converted `base_price`, `seasonal_discount` and `fees` into local variables within the `discounted_price` method: These variables are only relevant in the local context, so moving them inside the method helps clean up the global namespace. This also assists in reducing memory footprint and improve program efficiency.
+
+5. `get_seasonal_discount` and `get_fees` methods: These are placeholder methods for adding the computations for the seasonal discount and fees, respectively. This aligns with the principle of single responsibility. Each method should have a well-defined task, making the software easier to understand, debug and maintain.
+
+6. Set `discounted_price` as a method rather than a standalone function: This enhances readability. It's more apparent that the final price depends on instance specific values and functions.
+
+7. Created instance of `PriceCalculator` and calculated final price: By creating an instance of the `PriceCalculator` class, each instance now has the ability to hold its own instance variables and methods, which can be different from each other. This is beneficial in terms of software design, as it makes it possible to manage different incidents separately and hence improves the scalability of the code.
+

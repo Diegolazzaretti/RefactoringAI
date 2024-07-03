@@ -1,0 +1,20 @@
+mistral - Instrução 1 sem titulo:
+
+```python
+def send():
+    # code to send email or perform some other action
+    pass
+
+def isSpecialDeal():
+    # check if the deal is special, returns True if it is
+    pass
+
+price = 100.00
+if isSpecialDeal():
+    total = price * 0.95
+else:
+    total = price * 0.98
+
+# send email with total amount
+send(total)
+```

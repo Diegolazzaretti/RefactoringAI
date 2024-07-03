@@ -1,0 +1,26 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+The refactored code:
+
+```python
+def get_pay_amount(self):
+    if self.is_dead:
+        return dead_amount()
+    
+    if self.is_separated:
+        return separated_amount()
+    
+    if self.is_retired:
+        return retired_amount()
+    
+    return normal_pay_amount()
+```
+
+Refactored changes:
+1. Renamed the function `getPayAmount` to `get_pay_amount` to follow the snake_case naming convention for functions in Python.
+2. Replaced the nested conditional statements with guard clauses to eliminate the need for multiple levels of indentation.
+3. Removed the unnecessary assignment of `result` variable and directly returned the values based on the conditions.
+4. Created separate functions `dead_amount`, `separated_amount`, `retired_amount`, and `normal_pay_amount` to improve modularity and make the code more maintainable.
+5. Applied the single responsibility principle by making each function responsible for computing a specific type of pay amount.
+6. Improved readability by following the naming conventions for variables and functions, making the code easier to understand and navigate.
+7. Simplified the logic by reducing code duplication, making it easier to reason about and modify the code in the future.

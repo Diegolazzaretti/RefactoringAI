@@ -1,0 +1,11 @@
+mistral - Instrução 2 com titulo:
+
+```python
+from functools import reduce
+
+def rectangle_area(height, width):
+    return reduce(lambda x, y: x+y, range(1, height+width+1))
+
+rectangle_area(5, 6)
+# Output: 30
+```

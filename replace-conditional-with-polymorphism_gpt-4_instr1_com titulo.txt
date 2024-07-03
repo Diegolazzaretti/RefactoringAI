@@ -1,0 +1,39 @@
+gpt-4 - Instrução 1 com titulo:
+
+A better design of this is using classes and inheritance to tackle the issue.
+
+```
+class Bird:
+    def __init__(self):
+        self.baseSpeed = None
+
+    def getSpeed(self):
+        return self.baseSpeed
+
+class European(Bird):
+    def getSpeed(self):
+        return self.baseSpeed
+
+class African(Bird):
+    def __init__(self, numberOfCoconuts):
+        super().__init__()
+        self.numberOfCoconuts = numberOfCoconuts
+
+    def getSpeed(self):
+        return self.baseSpeed - self.getLoadFactor() * self.numberOfCoconuts
+
+class NorwegianBlue(Bird):
+    def __init__(self, isNailed, voltage):
+        super().__init__()
+        self.isNailed = isNailed
+        self.voltage = voltage
+
+    def getSpeed(self):
+        return 0 if self.isNailed else self.getBaseSpeed(self.voltage)
+```
+
+This refactored design enhances readability and maintainability of the code by segregating the behaviour of each bird type into their respective classes. Also, it improves modularity as new types of birds can be added easily by extending the Bird class. 
+
+Note: You would have to provide definitions for the getBaseSpeed() and getLoadFactor() methods as well in the appropriate classes according to their use in your original design.
+
+This design also sticks to the Open-Closed Principle (OCP) which states that the software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification. By applying polymorphism, we saw that we did not have to modify the Bird class -- we just extended it. We didn’t have to touch the getSpeed method. All the messy if-else switches were completely avoided in this design.

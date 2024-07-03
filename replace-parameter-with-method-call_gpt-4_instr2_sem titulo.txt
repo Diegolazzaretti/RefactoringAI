@@ -1,0 +1,42 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Refactored Code:
+
+```python
+class PriceCalculator:
+    def __init__(self, quantity, item_price):
+        self.quantity = quantity
+        self.item_price = item_price
+
+    def calculate_base_price(self):
+        return self.quantity * self.item_price
+
+    def get_seasonal_discount(self):
+        # Define or get the seasonal discount here
+        pass
+
+    def get_fees(self):
+        # Define or get the fees here
+        pass
+
+    def calculate_final_price(self):
+        base_price = self.calculate_base_price()
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        return base_price - seasonal_discount + fees
+
+```
+
+Explanation of Changes:
+
+1. Encapsulation: I have wrapped the original code into a class named `PriceCalculator`. This encapsulates the related data and functionalities into a single unit, improving readability and maintainability. The original values are passed through the class constructor and stored as instance variables. This way, the class can be reused easily by objects with different parameters.
+
+2. Extraction of Methods: Each operation (like calculating the base price, getting seasonal discount, and fees) has been put into separate methods. This enhances the modularity of the code, each method having its single responsibility, and any changes in the future will only affect that particular operation.
+
+3. Final Price Calculation: The final price calculation is handled via a separate method `calculate_final_price()`. This method calls the previously defined three methods to calculate and return the final price. This separation removes the need for variables like `basePrice`, `seasonalDiscount`, and `fees` to be declared in a larger scope than necessary, preventing potential bugs in larger codebases.
+
+4. Verification: There is no direct verification in the original code, so the refactored one also doesn't add any.
+
+Ensure that you replace the `pass` positions in `get_seasonal_discount` and `get_fees` functions with your own implementation. 
+
+These changes contribute to the modularity, maintainability, readability, and overall organization of the code by applying the principles of object-oriented programming, single-responsibility principle, and variable scoping best practices.

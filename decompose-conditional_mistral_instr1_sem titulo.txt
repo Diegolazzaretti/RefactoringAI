@@ -1,0 +1,19 @@
+mistral - Instrução 1 sem titulo:
+
+```python
+from datetime import timedelta
+
+def calculate_charge(date, quantity, winter_rate, summer_rate, winter_service_charge, summer_start, summer_end):
+    if date < summer_start or date > summer_end:
+        charge = quantity * winter_rate + winter_service_charge
+    else:
+        charge = quantity * summer_rate
+    
+    return charge
+```
+Here's how the refactored code works:
+- We define a function called `calculate_charge` that takes in six arguments: the date, quantity, winter rate, summer rate, winter service charge, and the start and end of summer.
+- Inside the function, we use an if-else statement to check if the date is before or after the summer start/end dates.
+- If the date is before or after the summer start/end dates, then we calculate the charge as the quantity multiplied by the winter rate plus the winter service charge. 
+- Otherwise, if the date is within the summer period, we calculate the charge as the quantity multiplied by the summer rate.
+- Finally, the function returns the calculated charge.

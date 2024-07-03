@@ -1,0 +1,120 @@
+gemini-pro - Instrução 1 com titulo:
+
+**Improved Readability:**
+
+- Use descriptive variable names.
+- Use consistent indentation and spacing.
+
+**Refactored Code:**
+
+```
+def calculate_disability_amount(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> int:
+    """Calculates the disability amount based on given conditions.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        int: Disability amount.
+    """
+
+    # Check eligibility criteria
+    if seniority < 2 or months_disabled > 12 or is_part_time:
+        return 0
+
+    # Calculate disability amount
+    # ...
+```
+
+**Modularity:**
+
+- Extract the eligibility checks into a separate `_is_eligible` function.
+
+**Improved Modularity:**
+
+```
+def calculate_disability_amount(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> int:
+    """Calculates the disability amount based on given conditions.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        int: Disability amount.
+    """
+
+    if not _is_eligible(seniority, months_disabled, is_part_time):
+        return 0
+
+    # Calculate disability amount
+    # ...
+
+def _is_eligible(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> bool:
+    """Checks eligibility for disability benefits.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        bool: True if eligible, False otherwise.
+    """
+
+    return seniority >= 2 and months_disabled <= 12 and not is_part_time
+```
+
+**Maintainability:**
+
+- Provide a docstring for the function.
+- Use type hints for function arguments and return values.
+
+**Improved Maintainability:**
+
+```
+def calculate_disability_amount(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> int:
+    """Calculates the disability amount based on given conditions.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        int: Disability amount.
+    """
+
+    if not _is_eligible(seniority, months_disabled, is_part_time):
+        return 0
+
+    # Calculate disability amount
+    # ...
+
+def _is_eligible(
+    seniority: int, months_disabled: int, is_part_time: bool
+) -> bool:
+    """Checks eligibility for disability benefits.
+
+    Args:
+        seniority (int): Number of years of employment.
+        months_disabled (int): Number of months employee has been disabled.
+        is_part_time (bool): Whether the employee is part-time.
+
+    Returns:
+        bool: True if eligible, False otherwise.
+    """
+
+    return seniority >= 2 and months_disabled <= 12 and not is_part_time
+```

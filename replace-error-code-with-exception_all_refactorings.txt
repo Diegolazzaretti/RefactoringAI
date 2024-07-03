@@ -1,0 +1,414 @@
+Código Original (replace-error-code-with-exception):
+
+def withdraw(self, amount):
+    if amount > self.balance:
+        return -1
+    else:
+        self.balance -= amount
+    return 0
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+
+One way to refactor this code is to extract the checking of the balance into a separate function and pass it as an argument to the `withdraw` function. This will make the code more modular, readable, and maintainable. Here's an example:
+```scss
+def check_balance(self, amount):
+    if amount > self.balance:
+        return -1
+    else:
+        return 0
+
+def withdraw(self, amount):
+    balance = check_balance(amount)
+    if balance == -1:
+        return -1
+    else:
+        self.balance -= amount
+    return 0
+```
+
+gemini-pro - Instrução 1 sem titulo:
+Sure, here is the refactored code with improved readability, modularity, and maintainability:
+
+```python
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            return -1  # Insufficient funds
+
+        self.balance -= amount
+        return 0  # Withdrawal successful
+
+```
+
+**Enhancements:**
+
+* **Modular approach:** The `withdraw` method is now a standalone function within the `BankAccount` class. This improves modularity and makes it easier to maintain and reuse the code.
+* **Descriptive variable names:** The `balance` variable is now named more descriptively, indicating its purpose.
+* **Error handling:** The `withdraw` method now returns a negative value (-1) if the withdrawal amount exceeds the account balance, indicating an error. This provides better error handling and consistency.
+* **Clear and concise:** The code is now more concise and easier to understand.
+
+**Usage:**
+
+To use the refactored code, you can create a `BankAccount` object and call the `withdraw` method like this:
+
+```python
+account = BankAccount(1000)
+result = account.withdraw(500)
+
+if result == -1:
+    print("Insufficient funds")
+else:
+    print("Withdrawal successful")
+```
+
+This refactored code is more readable, maintainable, and reusable, making it a better solution for managing bank account transactions in your application.
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def withdraw(self, amount):
+    if amount > self.balance:
+        return -1
+    else:
+        self._decrease_balance(amount)
+    return 0
+
+def _decrease_balance(self, amount):
+    self.balance -= amount
+
+gpt-4 - Instrução 1 sem titulo:
+Refactored Code:
+
+```python
+def withdraw(self, amount):
+    if self.has_sufficient_funds(amount):
+        self.subtract_from_balance(amount)
+        return 0
+    else:
+        return -1
+
+def has_sufficient_funds(self, amount):
+    return amount <= self.balance
+
+def subtract_from_balance(self, amount):
+    self.balance -= amount
+```
+
+Here's what I have done:
+
+- I introduced the `has_sufficient_funds` method for checking if the account balance is sufficient. This can be used elsewhere and it makes the intent of the check much clearer.
+- The operation to subtract the amount from `self.balance` is extracted to `subtract_from_balance` method. If needed elsewhere, reusability and remodelation become efficient. 
+- It's not directly related to modularity, but also note that I used `<=` in the conditional. This way, if the withdrawal amount is exactly equal to the balance, it's still considered to be sufficient. Based on your need, If the withdrawal amount should be strictly less than the balance, you could use `<` instead.
+- Having these separations increase maintainability where each method does a single responsibility and makes the code easier to understand and maintain.
+
+mistral - Instrução 1 com titulo:
+
+18. extract-amount-validation-logic
+def validate_amount(amount):
+    if amount > 0:
+        return True
+    else:
+        raise ValueError("Amount must be positive")
+
+
+19. separate-withdrawal-and-amount-validation-logic
+def withdraw(self, amount):
+    validated_amount = validate_amount(amount)
+    if validated_amount > self.balance:
+        return -1
+    else:
+        self.balance -= amount
+    return 0
+
+gemini-pro - Instrução 1 com titulo:
+```python
+class Account:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise ValueError("Insufficient funds")
+        self.balance -= amount
+```
+
+In this refactored code:
+
+1. We moved the balance initialization to the constructor (__init__ method) to separate initialization logic from account operations.
+2. We replaced the error code (-1) with a meaningful exception (ValueError) to provide better error handling and debugging information.
+3. We removed the unnecessary else block since the code after the if block is already executed if the condition is False.
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+def withdraw(self, amount):
+    if amount > self.balance:
+        raise ValueError("Insufficient balance to withdraw")
+    self.balance -= amount
+    return 0
+
+gpt-4 - Instrução 1 com titulo:
+Let’s refactor the code using Python’s built-in exception handling. You can raise an exception if the balance is insufficient, instead of returning an error code. In this way, when you call this function and it raises an exception, you will immediately know that something went wrong due to insufficient balance.
+
+```python
+class InsufficientBalanceException(Exception):
+    pass
+
+def withdraw(self, amount):
+    if amount > self.balance:
+        raise InsufficientBalanceException("You have insufficient funds!")
+    self.balance -= amount
+```
+In the refactored code, I am defining a new exception class named `InsufficientBalanceException`. When the balance is insufficient, I raise this exception instead of returning an error code.
+
+Then, when you use this `withdraw` function in your code elsewhere, you can use a try-except block to call this function and handle the `InsufficientBalanceException` if it is raised.
+
+```python
+try:
+    account.withdraw(amount_to_withdraw)
+except InsufficientBalanceException as e:
+    print(str(e))
+```
+
+This new version of the code enhances its readability as it's now clear what kind of error might occur. It also boosts modularity, since we're isolating the error handling within its own defined Exception type. Finally, it improves maintainability as future updates and debugging will be easier with explicitly handled exceptions.
+
+mistral - Instrução 2 sem titulo:
+
+# Extract the validation logic into a separate function
+def validate_withdrawal(amount):
+    if amount > balance:
+        return -1
+    else:
+        return 0
+
+# Extract the update logic into a separate function
+def update_balance(amount):
+    balance -= amount
+
+# Use a lambda function to apply the validation and update logic in a single line of code
+def withdraw(self, amount):
+    result = validate_withdrawal(amount)
+    if result != 0:
+        return result
+    else:
+        update_balance(amount)
+        return 0
+
+# Initialize the balance to zero
+balance = 0
+
+# Perform a withdrawal of $50
+result = withdraw(balance, 50)
+print(result) # should output -1
+
+gemini-pro - Instrução 2 sem titulo:
+**Refactored Code:**
+
+```python
+from abc import ABC, abstractmethod
+
+class Account(ABC):
+    @abstractmethod
+    def __init__(self, balance):
+        pass
+
+    @abstractmethod
+    def withdraw(self, amount):
+        pass
+
+    @classmethod
+    def create_account(cls, balance):
+        return cls(balance)
+
+class CheckingAccount(Account):
+    def __init__(self, balance):
+        super().__init__(balance)
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            return -1
+        self.balance -= amount
+        return 0
+```
+
+**Explanation of Changes:**
+
+* **Design Pattern:** Encapsulation (getter and setter methods are introduced).
+* **Modularity:** The `withdraw` method is moved to a separate class (`CheckingAccount`) to enhance modularity and maintainability.
+* **Readability:** The code is restructured for better readability, with clear separation of responsibilities.
+* **Code Duplication:** The `create_account` method is introduced as a class method to reduce code duplication and simplify account creation.
+
+**Benefits of Refactoring:**
+
+* **Improved Readability:** The refactored code is more organized and easier to understand due to the clear separation of concerns.
+* **Enhanced Modularity:** The division of the code into separate classes and methods promotes modularity, making it easier to maintain and extend.
+* **Reduced Code Duplication:** The use of the `create_account` method eliminates code duplication and centralizes account creation logic.
+* **Facilitated Future Modifications:** The refactored code is structured in a way that facilitates future modifications and enhancements due to its modularity and reduced code duplication.
+* **Adherence to Best Practices:** The refactoring adheres to software development best practices by encapsulating data (balance) and providing a consistent interface for account creation.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+class BankAccount:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            return False
+        else:
+            self.balance -= amount
+        return True
+
+
+The code has been refactored to create a BankAccount class that handles the balance and withdrawals. The initial balance is set using the constructor, and the withdraw method returns a boolean value based on whether the withdrawal was successful. This refactored code improves readability, modularity, and maintainability by separating the concerns of managing the balance and handling withdrawal logic. It reduces code duplication and simplifies the logic by encapsulating it within a class. This makes it easier to understand the purpose of each method and modify the behavior in the future.
+
+gpt-4 - Instrução 2 sem titulo:
+The refactored code:
+
+```python
+class BankAccount:
+    
+    INSUFFICIENT_FUNDS_CODE = -1
+    SUCCESS_CODE = 0
+
+    
+    def __init__(self, initial_balance=0):
+        self._balance = initial_balance
+
+    @property
+    def balance(self):
+        return self._balance
+
+    def withdraw(self, amount: float):
+        if not self._can_withdraw(amount):
+            return self.INSUFFICIENT_FUNDS_CODE
+        
+        self._balance -= amount
+        return self.SUCCESS_CODE
+
+    def _can_withdraw(self, amount: float) -> bool:
+        return amount <= self.balance
+```
+
+Explanation of the changes:
+
+1. Encapsulation: We Encapsulated the `balance` by making it a private variable `_balance`  allowing getting the value only through the public `balance` property. It helps protect this attribute from accidental modification.
+
+2. Constants: Instead of returning -1 and 0 as “magic numbers”, we defined these as `INSUFFICIENT_FUNDS_CODE` and `SUCCESS_CODE` class constants respectively. This enhances readability by providing more context about what these return values represent.
+
+3. Type hint: Provided type hints on the function `withdraw` and `_can_withdraw`. Type hinting makes it clear what type of values these functions expect, adding another layer of clarity and assisting in reducing possible bugs during development.
+
+4. `_can_withdraw` method: Extracted the logic checking if a withdraw operation is possible into a separate private method. It is a good practice to keep distinct pieces of logic in separate methods. This way, the `withdraw` method becomes easier to read and understand because it expresses its intention more transparently. It also simplifies future modifications, especially if the conditions under which the withdrawal can happen expand to be more complex. 
+
+5. Promoted the `withdraw` function into a method of a class named `BankAccount`, to provide more context for the `balance` variable and the `withdraw` method. In general, putting variables and methods that closely relate into a class provides a better organization of the code. This approach enhances modularity and each class can be reasoned about in isolation or tested individually. It enhances readability by providing more context for variables and methods and facilitates future modifications.
+
+mistral - Instrução 2 com titulo:
+
+Here's a refactored version of the code that follows best practices of software development to improve readability, modularity, and maintainability:
+```python
+class BankAccount:
+    def __init__(self, balance=0):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise ValueError("Insufficient funds")
+        else:
+            self.balance -= amount
+        return 0
+```
+In this refactored code, we've created a class `BankAccount` that encapsulates the balance and the logic for withdrawing money. The `withdraw()` method now raises a `ValueError` exception if there are insufficient funds, instead of returning -1. This makes the code more readable and expressive, as it clearly communicates what went wrong in case of an error.
+
+We've also removed the duplication of logic that checked if the amount to withdraw was greater than the balance, since this check is now encapsulated within the `BankAccount` class. This makes the code more modular and easier to maintain, as any changes to the logic or behavior of the class can be made in one place.
+
+Overall, this refactored code adheres to best practices by following the Single Responsibility Principle (SRP) and encapsulating related functionality within a single class. This makes it easier to understand and modify the code in the future.
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```python
+class InsufficientFundsError(Exception):
+    pass
+
+class Account:
+    def __init__(self, balance):
+        self.balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise InsufficientFundsError("Insufficient funds")
+        else:
+            self.balance -= amount
+        return 0
+```
+
+**Changes Made:**
+
+1. **Exceptions for Error Handling:** Replaced the error code `-1` with a custom exception `InsufficientFundsError`. This approach makes it clearer that the issue is insufficient funds and allows for more robust error handling.
+
+2. **Separation of Concerns:** Extracted the account initialization logic into the constructor, improving readability and modularity.
+
+3. **Single Responsibility Principle:** Refactored the `withdraw` method to focus solely on withdrawal logic. Error handling is now handled by the exception.
+
+4. **Exception Hierarchy:** Placed `InsufficientFundsError` in a custom exception hierarchy to provide a clear and structured error handling mechanism.
+
+**Benefits of Refactoring:**
+
+* **Improved Readability:** The refactored code is more concise and easier to understand.
+* **Enhanced Modularity:** The separation of concerns and use of exceptions increases the flexibility and maintainability of the code.
+* **Reduced Code Duplication:** The use of a custom exception eliminates the need for multiple error-checking conditions and error code handling.
+* **Simplified Logic:** Exception handling simplifies the `withdraw` method logic, making it easier to follow and modify.
+* **Adherence to Best Practices:** The refactored code adheres to best practices by using appropriate design patterns, such as exceptions for error handling and the separation of concerns, ensuring future maintainability and scalability.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+class Account:
+    def __init__(self, balance):
+        self.balance = balance
+    
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise ValueError("Insufficient funds")
+        self.balance -= amount
+        return 0
+
+# Refactored code makes use of a class to encapsulate the account functionalities, promoting better organization and reusability of the code. 
+# It uses the __init__ method as a constructor to set the initial balance and raises a ValueError if the withdrawal amount exceeds the available balance.
+# The refactored code also removes the need for error codes by using exceptions to handle the insufficient funds scenario, improving the overall readability and maintainability of the code.
+
+gpt-4 - Instrução 2 com titulo:
+Updated Code
+
+```python
+class InsufficientBalanceException(Exception): pass
+
+class Account:
+    def __init__(self, balance):
+        self.set_balance(balance)
+
+    def get_balance(self):
+        return self._balance
+
+    def set_balance(self, balance):
+        if balance < 0:
+            raise ValueError("Balance cannot be negative.")
+        self._balance = balance
+
+    def withdraw(self, amount):
+        if amount > self.get_balance():
+            raise InsufficientBalanceException("Insufficient balance in the account.")
+        else:
+            self.set_balance(self.get_balance() - amount)
+```
+
+Explanation:
+
+1. Introduction of classes: The original code functions assuming that balance is an attribute of the object. However, there is no definition of the class to which this object belongs. I have created an Account class to encapsulate balance details and operations performed on it.
+
+2. Creation of custom exception: Instead of returning an error code (`-1`), it is a better practice to raise a custom exception (`InsufficientBalanceException`) when the account does not have sufficient balance for the withdrawal. This aligns with the “Replace Error Code with Exception” refactoring method.
+
+3. Encapsulation: To ensure that the balance is always kept within valid limits (not going into negative), I've created getter (`get_balance()`) and setter (`set_balance()`) methods for balance. The setter method checks if the balance is negative and raises a ValueError if it is. This encapsulation enhances maintainability and robustness by preventing direct access to the balance attribute.
+
+4. Method refactoring: The `withdraw` method now uses the `get_balance` and `set_balance` methods to perform its operations which keeps the balance manipulation logic in one place and makes the code more modular. This, along with the replacement of error codes with exceptions, makes the flow of logic simpler to read and understand. 
+
+The refactored code is more modular, robust, and easy to understand, maintain and modify. The logic is centralized and various actions are grouped sensibly into classes/methods.
+

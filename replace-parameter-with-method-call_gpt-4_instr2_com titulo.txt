@@ -1,0 +1,44 @@
+gpt-4 - Instrução 2 com titulo:
+
+Here's how I whould refactor the given code:
+
+```python
+class PriceCalculator:
+    def __init__(self, quantity, item_price):
+        self.quantity = quantity
+        self.item_price = item_price
+        
+    def discounted_price(self):
+        base_price = self.quantity * self.item_price
+        seasonal_discount = self.get_seasonal_discount()
+        fees = self.get_fees()
+        return base_price - seasonal_discount + fees
+        
+    def get_seasonal_discount(self):
+        # Calculate seasonal discount
+        pass
+
+    def get_fees(self):
+        # Calculate fees
+        pass
+
+
+calculator = PriceCalculator(5, 20)
+final_price = calculator.discounted_price()
+```
+
+Refactoring explanation:
+
+1. Wrapped the code within a class: Encapsulating related code in a class improves modularity. It provides a structured way of organizing relevant code which makes it easier to understand and maintain.
+
+2. Replaced the global methods with class methods: This improves encapsulation by binding related functions as methods to a class.
+
+3. Created an initialization method (`__init__`): This sets up the initial state for each instance of the class, taking in the necessary input parameters. This offers flexibility in handling different data for calculation.
+
+4. Converted `base_price`, `seasonal_discount` and `fees` into local variables within the `discounted_price` method: These variables are only relevant in the local context, so moving them inside the method helps clean up the global namespace. This also assists in reducing memory footprint and improve program efficiency.
+
+5. `get_seasonal_discount` and `get_fees` methods: These are placeholder methods for adding the computations for the seasonal discount and fees, respectively. This aligns with the principle of single responsibility. Each method should have a well-defined task, making the software easier to understand, debug and maintain.
+
+6. Set `discounted_price` as a method rather than a standalone function: This enhances readability. It's more apparent that the final price depends on instance specific values and functions.
+
+7. Created instance of `PriceCalculator` and calculated final price: By creating an instance of the `PriceCalculator` class, each instance now has the ability to hold its own instance variables and methods, which can be different from each other. This is beneficial in terms of software design, as it makes it possible to manage different incidents separately and hence improves the scalability of the code.

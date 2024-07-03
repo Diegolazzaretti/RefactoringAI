@@ -1,0 +1,17 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+class Bird:
+    def getSpeed(self):
+        return self.getBaseSpeed()
+
+class EuropeanBird(Bird):
+    def getSpeed(self):
+        return self.getBaseSpeed()
+
+class AfricanBird(Bird):
+    def getSpeed(self):
+        return self.getBaseSpeed() - self.getLoadFactor() * self.numberOfCoconuts
+
+class NorwegianBlueBird(Bird):
+    def getSpeed(self):
+        return 0 if self.isNailed else self.getBaseSpeed(self.voltage)

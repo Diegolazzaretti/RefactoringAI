@@ -1,0 +1,441 @@
+Código Original (replace-parameter-with-explicit-methods):
+
+def output(self, type):
+    if name == "banner"
+        # Print the banner.
+        # ...
+    if name == "info"
+        # Print the info.
+        # ...
+
+Refatorações:
+
+mistral - Instrução 1 sem titulo:
+```python
+class Output:
+    def __init__(self, type):
+        self.type = type
+    
+    def render(self):
+        if self.type == "banner":
+            # Print the banner
+            pass
+        elif self.type == "info":
+            # Print the info
+            pass
+```
+
+gemini-pro - Instrução 1 sem titulo:
+To enhance the readability, modularity, and maintainability of the provided code, it's beneficial to refactor it as follows:
+
+```
+def output(self, type):
+    output_functions = {
+        "banner": self._print_banner,
+        "info": self._print_info,
+    }
+    if type in output_functions:
+        output_functions[type]()
+    else:
+        raise ValueError("Invalid output type: {}".format(type))
+
+def _print_banner(self):
+    # Print the banner.
+    # ...
+
+def _print_info(self):
+    # Print the info.
+    # ...
+```
+
+In this refactored code:
+
+1. We define a dictionary called `output_functions` that maps output types to their corresponding functions (`_print_banner` and `_print_info`).
+
+2. We check if the given `type` is a valid key in the `output_functions` dictionary. If it is, we call the corresponding function.
+
+3. If the `type` is not a valid key, we raise a `ValueError` with a clear error message.
+
+4. The actual printing logic is moved to separate private functions (`_print_banner` and `_print_info`) for increased modularity and encapsulation.
+
+With these changes, the code becomes more organized, easier to read and understand, and easier to maintain and extend in the future.
+
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+def output(self, message_type):
+    if message_type == "banner":
+        print_banner()
+    if message_type == "info":
+        print_info()
+
+def print_banner():
+    # Print the banner.
+    # ...
+
+def print_info():
+    # Print the info.
+    # ...
+
+gpt-4 - Instrução 1 sem titulo:
+The provided code has some minor issues. The "type" parameter is not used while "name" variable is not declared. Comparisons in "if" statements lack equality operator "==".
+
+The refactored version of the provided code could look something like this:
+
+```python
+def print_banner(self):
+    # Print the banner
+    # ...
+
+def print_info(self):
+    # Print the info
+    # ...
+
+def output(self, type):
+    if type == "banner":
+        self.print_banner()
+    elif type == "info":
+        self.print_info()
+    else:
+        print("Invalid type")
+```
+The refactored code:
+
+- Fixes the bug with the "type" variable that wasn't used.
+- Adds the "Invalid type" message to handle cases when type doesn't match "banner" or "info".
+- Extracts the code for printing banner and info into separate methods to enhance modularity, readability and maintainability.
+
+This not only improves the readability, but also makes the code more maintainable, because if anything needs to be changed about how the banner or info is printed, you only need to modify these separate methods.
+
+mistral - Instrução 1 com titulo:
+```python
+class Output:
+    def __init__(self, name):
+        self.name = name
+    
+    def print_banner(self):
+        # Print the banner.
+        pass
+    
+    def print_info(self):
+        # Print the info.
+        pass
+    
+    def output(self, type):
+        if self.name == "banner":
+            self.print_banner()
+        elif self.name == "info":
+            self.print_info()
+        else:
+            raise ValueError("Invalid output type")
+```
+
+gemini-pro - Instrução 1 com titulo:
+```python
+def print_banner(self):
+    # Print the banner.
+
+def print_info(self):
+    # Print the info.
+
+def output(self, type):
+    if type == "banner":
+        self.print_banner()
+    elif type == "info":
+        self.print_info()
+```
+
+gpt-3.5-turbo-1106 - Instrução 1 com titulo:
+def print_banner(self):
+    # Print the banner.
+    pass
+
+def print_info(self):
+    # Print the info.
+    pass
+
+gpt-4 - Instrução 1 com titulo:
+Here's the refactored code:
+
+```python
+def output_banner(self):   
+    # Print the banner.
+    # ...
+
+def output_info(self):
+    # Print the info.
+    # ...
+```
+
+In the refactored code, methods are explicitly defined for banner and info. This improves readability because now the function names themselves tell what they are doing. Maintainability is improved as each function does exactly one thing, so if there's a bug or need for modification in banner handling, we can directly go to the 'output_banner()' method. The code is now more modular and each method can be tested independently. The single responsibility principle is also followed.
+
+mistral - Instrução 2 sem titulo:
+```python
+class Outputter:
+    def __init__(self, type: str):
+        self.type = type
+    
+    def execute(self):
+        if self.type == "banner":
+            print("Banner")
+        elif self.type == "info":
+            print("Info")
+```
+
+The code was refactored into a class called `Outputter` which takes in an argument of type `str` during initialization, and has an `execute()` method that checks for the provided type and prints the appropriate message. This design pattern follows the Single Responsibility Principle (SRP), where each class is responsible for one task or functionality, and makes it more modular and easier to maintain.
+
+The code also adheres to Best Practices by having proper indentation, spacing, and consistent naming conventions. The `if-elif` statement was moved inside a method for better readability and reusability.
+
+In the original code, there was no clear separation of concerns or modularity, which made it harder to understand and modify the logic. By refactoring it into an object-oriented design pattern, we were able to improve its overall organization and readability.
+
+gemini-pro - Instrução 2 sem titulo:
+**Refactored Code:**
+
+```python
+import enum
+
+class OutputType(enum.Enum):
+    BANNER = "banner"
+    INFO = "info"
+
+def output(self, output_type: OutputType):
+    match output_type:
+        case OutputType.BANNER:
+            # Print the banner.
+            # ...
+        case OutputType.INFO:
+            # Print the info.
+            # ...
+```
+
+**Changes:**
+
+* **Enum for Output Types:** Created an `OutputType` enum to represent the possible output types (banner, info). This replaces the lengthy `if` statements, making the code more concise and readable.
+* **Match-Case Pattern:** Used the match-case pattern to simplify the output logic. This eliminates the need for multiple `if` statements, making the control flow more evident.
+* **Modular Design:** Introduced a separate function for output, encapsulating the output logic. This enhances modularity, allowing the output handling to be managed independently.
+* **Improved Readability:** The code is now structured in a clear and intuitive manner, making it easier to understand and maintain.
+* **Enhanced Maintainability:** By using an enum and a centralized output function, the code becomes more flexible and adaptable to future changes or additions of output types.
+
+**Benefits:**
+
+* **Reduced Code Duplication:** Removed the repeated `if` statements, simplifying the logic and reducing the potential for errors.
+* **Improved Code Organization:** Separated the output handling into a dedicated function, fostering a more structured and manageable codebase.
+* **Simplified Logic:** The match-case pattern provides a concise and readable way to handle different output types, making the code easier to comprehend and modify.
+* **Enhanced Testability:** The modularized output function facilitates unit testing, allowing independent verification of the output behavior.
+* **Adherence to Best Practices:** The refactored code adheres to the principles of software design, promoting maintainability, extensibility, and readability.
+
+gpt-3.5-turbo-1106 - Instrução 2 sem titulo:
+class Output:
+    def __init__(self, output_type):
+        self.output_type = output_type
+
+    def print_output(self):
+        if self.output_type == "banner":
+            self.print_banner()
+        elif self.output_type == "info":
+            self.print_info()
+        else:
+            print("Invalid output type")
+
+    def print_banner(self):
+        # Print the banner.
+        # ...
+
+    def print_info(self):
+        # Print the info.
+        # ...
+
+output = Output("banner")
+output.print_output() 
+output = Output("info")
+output.print_output() 
+
+
+In the refactored code, a class `Output` is defined with methods for printing banner and info. The code uses the concept of encapsulation by using classes and methods to logically group and separate different components of the code. This serves to increase modularity and maintainability, as it helps to organize and structure the code. It also simplifies logic as well as reduces code duplication by facilitating reuse of the methods. It also makes use of appropriate naming conventions and removing conditional checks which improve the readability of the code. The functionality of the code is preserved to maintain its functional integrity.
+
+gpt-4 - Instrução 2 sem titulo:
+Let's refactor the provided code as follows:
+
+```python
+class OutputHandler:
+    def __init__(self):
+        self.factories = {}
+
+    def register(self, type, factory):
+        self.factories[type] = factory
+
+    def get(self, type):
+        factory = self.factories.get(type)
+        if not factory:
+            raise ValueError(f"Unknown type: {type}")
+        return factory()
+
+class BannerOutput:
+    def output(self):
+        # Print the banner.
+        pass
+
+class InfoOutput:
+    def output(self):
+        # Print the info.
+        pass
+
+# initialize the handler and register the types
+output_handler = OutputHandler()
+output_handler.register("banner", BannerOutput)
+output_handler.register("info", InfoOutput)
+
+# use the output handler to get the correct output object and call output method
+output_handler.get("banner").output()
+output_handler.get("info").output()
+```
+
+Explanation:
+
+1. The original code needed serious work on readability and maintainability. There were no classes defined, and the output() function seemed to deal with different types of output in a single place, which violated the Single Responsibility Principle (SRP).
+
+2. I introduced classes to give each type of output its own class ('BannerOutput', 'InfoOutput'). These classes encapsulate the logic to print the specific outputs.
+
+3. I used a Factory pattern to manage the creation of these types of output in the OutputHandler class. Factory is widely used in Object-Oriented Programming when we have a superclass with multiple subclasses. To avoid the use of complex if-elif-else blocks and improve scalability when a new class is added, we can simply register it in our factory class. 
+
+4. The OutputHandler class contains a dictionary (factories) that maps type names to their respective classes. The 'register' method is used to map types to their factories, and the 'get' function is used to create and return an instance of the requested type.
+
+5. This design is more modular, extendable and maintainable. If new types of output are added in the future, they can be easily incorporated into this design by creating a new class for the type and registering it in the factory.
+
+6. By doing this, we made the code cleaner and made it easier for future developers to add new output types, improving overall code durability. 
+
+7. Moreover, the original method of using simple "if" statements isn't extendable or maintainable at all. As more output types are added, the method would grow long and unmanageable, making it harder to debug and maintain. It also violates the Open/Closed Principle since the method must be updated every time a new output type is added.
+
+
+mistral - Instrução 2 com titulo:
+
+After refactoring the code, we can now observe that it adheres to the following best practices:
+
+1. Single Responsibility Principle (SRP): Each function or class should have only one reason to change. In this case, each function is responsible for printing a specific type of message (banner or info). This enhances modularity and makes the code more maintainable.
+2. Explicit Interface: Functions and classes should be designed to interact with each other through well-defined interfaces, rather than through hardcoded implementations. In this case, we can define an abstract class with a print method that takes the message type as an argument. This makes it easier to add new types of messages in the future.
+3. Liskov Substitution Principle (LSP): Derived classes should be able to function correctly in place of their base classes. In this case, we can create a subclass for each message type that inherits from the abstract class and overrides its print method to provide the specific implementation for each type. This ensures that any derived class can function correctly in place of its base class.
+4. Dependency Inversion Principle (DIP): High-level modules should not depend on low-level modules, but both should depend on abstractions. In this case, we can define an abstract class with a print method and create concrete classes that implement this interface. This makes it easier to replace or modify the implementation of the print method in the future without affecting the high-level modules.
+5. Code Reuse: By defining an abstract class and creating concrete classes that implement this interface, we can reuse the same code for printing messages across different types. This reduces code duplication and improves overall organization.
+
+Here's the refactored code that adheres to these best practices:
+
+Abstract Message Class
+=====================
+
+from abc import ABC, abstractmethod
+
+class AbstractMessage(ABC):
+    @abstractmethod
+    def print_message(self, message_type):
+        pass
+
+Concrete Message Classes
+=====================
+
+class BannerMessage(AbstractMessage):
+    def print_message(self, message_type):
+        # Print the banner.
+        # ...
+
+class InfoMessage(AbstractMessage):
+    def print_message(self, message_type):
+        # Print the info.
+        # ...
+
+Output Function
+===============
+
+def output(message_type):
+    abstract_message = AbstractMessage()
+    if message_type == "banner":
+        abstract_message = BannerMessage()
+    elif message_type == "info":
+        abstract_message = InfoMessage()
+    abstract_message.print_message(message_type)
+
+gemini-pro - Instrução 2 com titulo:
+**Refactored Code:**
+
+```
+class OutputManager:
+
+    def __init__(self):
+        self.type = None
+
+    def set_type(self, type):
+        self.type = type
+
+    def output(self):
+        if self.type == "banner":
+            # Print the banner.
+            # ...
+        elif self.type == "info":
+            # Print the info.
+            # ...
+
+```
+
+**Changes Made:**
+
+* **Encapsulated Functionality:** Created an `OutputManager` class to encapsulate the output functionality. This improves modularity and makes it easier to maintain changes related to output.
+* **Explicit Method Names:** Introduced explicit methods (`set_type` and `output`) instead of conditional statements in the `output` method. This enhances readability and clarifies the intent of each section of code.
+* **Eliminated Code Duplication:** Removed the repeated if-else block by using the `set_type` method to store the output type. This reduces code duplication and makes it easier to modify the output logic.
+
+**Benefits of Refactoring:**
+
+* **Improved Readability:** The refactored code is more readable due to the use of explicit method names and the separation of output logic into different methods.
+* **Enhanced Modularity:** The creation of the `OutputManager` class promotes modularity by allowing the output functionality to be easily extended or modified without affecting the rest of the code.
+* **Reduced Code Duplication:** The removal of the duplicate if-else block simplifies the code and makes it easier to maintain.
+* **Increased Maintainability:** The improved structure and organization of the code facilitate future modifications, ensuring the code remains maintainable and adaptable to changing requirements.
+
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+class Printer:
+    
+    def display_banner(self):
+        # Display the banner.
+        # ...
+
+    def display_info(self):
+        # Display the info.
+        # ...
+
+# Example usage
+printer = Printer()
+printer.display_banner() # prints the banner
+printer.display_info() # prints the info
+
+In the refactored code, a class named Printer is created to represent the functionality of outputting different types of text. The output method with the name parameter has been replaced by two explicit methods: display_banner and display_info. This change enhances maintainability and organization and adheres to the best practices of software development.
+
+By implementing the "replace-parameter-with-explicit-methods refactoring pattern, we avoid conditional logic in the output method and provide separate methods for each type of operation, resulting in a clearer design that is easier to understand and more modular to change over time.
+
+gpt-4 - Instrução 2 com titulo:
+Refactored Code:
+
+```python
+class Output:
+    @staticmethod
+    def banner():
+        # Print the banner.
+        # ...
+
+    @staticmethod
+    def info():
+        # Print the info.
+        # ...
+
+# To use these methods
+output = Output()
+output.banner()
+output.info()
+```
+
+Explanation:
+
+The given code snippet has been encapsulated under a class named `Output`. The method `output()` that initially took the parameter `type`, was split into two explicit methods: `banner()` and `info()`. This approach follows the OOP design principle of using methods to represent tasks, providing explicit method calls that correspond to distinct functionality. 
+
+This refactoring pattern is known as Replace Parameter with Explicit Methods. It addresses the issue of a method that changes its behavior based on a parameter, making the code less readable, maintainable, and error-prone, as future developers must know possible values of the parameter and how they affect the method's functionality. The code becomes easier to understand when one method corresponds to one type of behavior. 
+
+Creating explicit methods for each type of action significantly improves code readability, as the name of the method clearly signals its functionality. Modularity is increased as each method does one specific task - printing either the banner or the information - adhering to the single responsibility principle. Future modifications around the banner or the information will affect the respective method, ensuring functional integrity is maintained as only relevant parts of the system are altered in any modification.
+
+Also, the methods are made static since they do not depend on any instance variables. They only perform actions, so it is appropriate to make them static. 
+
+This way of organizing the code makes it easier to understand, therefore easing both future maintenance efforts and the integration of new functionalities. It also helps error tracing, as it is clear where exactly in the code each functionality is executed.
+

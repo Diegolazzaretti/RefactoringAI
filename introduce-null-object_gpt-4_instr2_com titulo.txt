@@ -1,0 +1,36 @@
+gpt-4 - Instrução 2 com titulo:
+
+The Null Object design pattern could greatly enhance the code. We can use it to represent the absence of an object by providing surrogate that will perform nothing. Therefore, instead of using a condition to check for "None" object, the None checking code can be moved into the NullObject class.
+
+The refactored code might look like this:
+
+```python
+class NullCustomer:
+    def get_plan(self):
+        return BillingPlan.basic()
+
+class Customer:
+    def get_plan(self):
+        # return the plan for the customer.
+        pass
+
+class CustomerFactory:
+    @staticmethod
+    def create(value):
+        if value is None:
+            return NullCustomer()
+        else:
+            return Customer(value)
+
+customer = CustomerFactory.create(customer)
+plan = customer.get_plan()
+```
+
+Explaining the changes made:
+
+- A `NullCustomer` class is created, which is a null object class. The `get_plan()` method of this class returns the basic plan, thus 'hiding' the handling of None customers inside this class.
+- The `Customer` class represents a regular customer and it's `get_plan()` method should return the actual customer's plan.
+- The `CustomerFactory` class is responsible for creating customers. If the input value is None, it creates a `NullCustomer`, otherwise, it creates a `Customer`.
+- Lastly, we create a customer using the factory class and ask the customer to get the plan. Here, we don't need to worry if the customer is None or not. The customer itself handles this logic now, making our main code cleaner and more readable.
+
+Overall, by implementing the Null Object pattern, our code is not only more readable, but also more maintainable, because it adheres to the Single Responsibility Principle: each class does only one thing. Future modifications can be done by just tweaking respective classes, without touching the main code using it.

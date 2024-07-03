@@ -1,0 +1,15 @@
+gpt-4 - Instrução 1 com titulo:
+
+Refactored Code:
+
+def calculate_perimeter(height, width):
+    return 2 * (height + width)
+
+def calculate_area(height, width):
+    return height * width
+
+height = 10
+width = 5
+
+print(calculate_perimeter(height, width))
+print(calculate_area(height, width))

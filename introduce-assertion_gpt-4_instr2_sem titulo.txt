@@ -1,0 +1,49 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Refactored Code:
+
+```python
+class Employee:
+    
+    def __init__(self, expense_limit=None, primary_project=None):
+        self.expense_limit = expense_limit
+        self.primary_project = primary_project
+
+    def get_expense_limit(self):
+        if not self.expense_limit:
+            return self._get_project_expense_limit()
+        return self.expense_limit
+
+    def _get_project_expense_limit(self):
+        if not self.primary_project:
+            raise Exception("No primary project assigned")
+        return self.primary_project.get_member_expense_limit()
+```
+
+Description of Changes:
+
+1. Created Employee class: 
+
+The original code seemed to be part of a class (as indicated by the `self` parameter) but was not clubbed under it. So, I made an Employee class with the same functionality.
+
+2. Renamed the method: 
+
+The original method name, getExpenseLimit, was changed to get_expense_limit to follow Python's naming conventions. The same practice was followed across other attributes and methods.
+
+3. Added explicit exceptions:
+
+I've added an explicit exception to handle cases where the primary_project attribute has not been assigned, which was not present in the original code.
+
+4. Split the method into two: 
+
+The refactored code splits get_expense_limit into two separate methods to improve readability and maintainability. The method _get_project_expense_limit is created to handle the logic of getting the expense limit from the primary project.
+
+5. Used `None` instead of `NULL_EXPENSE`:
+
+I've used Python's built-in `None` to represent no expense limit. Python uses `None` unlike other languages that may use NULL.
+
+6. Added constructor for class:
+
+The `__init__` method is created to initialize the `expense_limit` and `primary_project` attributes, enhancing modularity.  
+
+The refactored code is much cleaner and easier to maintain, as each method does one specific job. It is easier to test and debugging would also become easier as the code is more structured and follows better practices.

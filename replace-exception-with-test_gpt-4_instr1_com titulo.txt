@@ -1,0 +1,12 @@
+gpt-4 - Instrução 1 com titulo:
+
+Refactoring code:
+
+```python
+def get_value_for_period(period_number, values):
+    """Returns the value for a given period number."""
+    if period_number >= len(values):
+        return 0
+    return values[period_number]
+```
+This refactored code is more modular as it now takes value array as an input argument and therefore can be used with any list. It is also more maintainable as it avoids using exceptions to control flow of the program. It enhances readability by replacing CamelCase with snake_case which is the recommended python coding style, and providing a docstring to explain what the function does.

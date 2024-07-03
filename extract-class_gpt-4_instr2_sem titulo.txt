@@ -1,0 +1,41 @@
+gpt-4 - Instrução 2 sem titulo:
+
+After Refactoring:
+
+```python
+class Soldier:
+    def __init__(self, health=0, damage=0, weapon_status=0):
+        self.health = health
+        self.damage = damage
+        self.weapon_status = weapon_status
+
+    @property
+    def damage(self):
+        return self._damage
+
+    @damage.setter
+    def damage(self, value):
+        self._damage = max(0, value)
+
+    def attack(self, other_soldier):
+        if not isinstance(other_soldier, Soldier):
+            raise TypeError('other_soldier must be an instance of Soldier')
+        if other_soldier.health <= 0 :
+            raise ValueError('Cannot attack a dead soldier')
+        other_soldier.receive_damage(self.damage)
+
+    def receive_damage(self, damage):
+        self.health = max(0, self.health - damage)
+```
+
+Explanation of changes:
+
+1. Moved the attributes initialization into the `__init__` method, which is the standard place for that.
+
+2. Turned `damage` into a property to validate its setting and avoid negative values.
+
+3. Added the `attack` method to handle an attack to another Soldier. We check that the target is of the correct type (type-checking) and ensure that it is still alive (business logic). Then, we implement the attack in terms of the target receiving damage, reducing the communication and dependencies between objects to a minimum.
+
+4. Added the `receive_damage` method encapsulating the logic of receiving damage, again avoiding negative values.
+
+The resulting code is more modular, as each class and method has a single, well-defined responsibility, facilitating future modifications. It is also more maintainable, as it has built-in guards against invalid state changes (i.e., negative `damage`), making it more robust. The reading and comprehension of the code are facilitated by its clear structure and naming convention- another improvement over the original. Making these changes not only increases the readability of the code but also ensures that future modifications can be made more easily. Thus, adhering to the best practices of software development is beneficial in the long run.

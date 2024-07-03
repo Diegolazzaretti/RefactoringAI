@@ -1,0 +1,15 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+class Account:
+    def __init__(self, balance):
+        self.balance = balance
+    
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise ValueError("Insufficient funds")
+        self.balance -= amount
+        return 0
+
+# Refactored code makes use of a class to encapsulate the account functionalities, promoting better organization and reusability of the code. 
+# It uses the __init__ method as a constructor to set the initial balance and raises a ValueError if the withdrawal amount exceeds the available balance.
+# The refactored code also removes the need for error codes by using exceptions to handle the insufficient funds scenario, improving the overall readability and maintainability of the code.

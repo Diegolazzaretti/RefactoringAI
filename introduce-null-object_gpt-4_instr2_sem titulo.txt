@@ -1,0 +1,18 @@
+gpt-4 - Instrução 2 sem titulo:
+
+Refactoring the code may not significantly change how it looks in this scenario, but it will introduce more clarity and facilitate future modifications without major upheavals in the code structure. Here's how I'd refactor the provided code:
+
+```python
+def get_billing_plan(customer=None):
+    return BillingPlan.basic() if customer is None else customer.getPlan()
+```
+
+Changes made and their benefits:
+
+1. Enclosed the logic inside a function: Increase the modularity of your code by adopting a functional paradigm. This promotes reusability and keeps the code organized.
+
+2. Used the ternary operator: This simplifies the logic and enhances the code readability. It's a more concise way to handle simple condition checks like this one.
+
+3. Introduced a default parameter into the function: Setting `customer` as an optional argument allows the function to be called with or without input parameters, making the function more flexible for use in various situations.
+
+This refactored code is concise, unambiguous, and hence, easier to read and understand, effectively reducing the complexity and improving the maintainability of the code.

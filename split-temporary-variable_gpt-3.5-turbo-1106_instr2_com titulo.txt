@@ -1,0 +1,30 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+The code can be refactored using the Extract Method design pattern to create separate methods for calculating the area and the perimeter of a rectangle. Additionally, we can use meaningful variable names to improve readability.
+
+Refactored code:
+
+```python
+class Rectangle:
+    def __init__(self, height, width):
+        self.height = height
+        self.width = width
+
+    def calculate_perimeter(self):
+        perimeter = 2 * (self.height + self.width)
+        return perimeter
+
+    def calculate_area(self):
+        area = self.height * self.width
+        return area
+
+rectangle = Rectangle(5, 4)
+print(rectangle.calculate_perimeter())
+print(rectangle.calculate_area())
+```
+
+Changes made:
+1. Created a Rectangle class to encapsulate the logic for calculating the perimeter and area of a rectangle.
+2. Used meaningful variable names (height, width) within the class to improve readability.
+3. Extracted the calculations into separate methods, calculate_perimeter() and calculate_area(), to improve modularity and maintainability.
+4. Instantiated a Rectangle object and called the calculate_perimeter() and calculate_area() methods to demonstrate the functionality.

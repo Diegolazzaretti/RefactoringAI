@@ -1,0 +1,22 @@
+mistral - Instrução 2 com titulo:
+
+Here's a possible refactoring of the given code:
+```python
+class Row:
+    def __init__(self):
+        self.data = {}
+
+    def add(self, key, value):
+        self.data[key] = value
+
+    def get(self, key):
+        return self.data.get(key)
+
+row = Row()
+row.add("Liverpool", "15")
+```
+Changes made:
+- The code is organized into a class `Row`, which encapsulates the state and behavior of a row in a more modular and reusable way.
+- Instead of using a list to store data, we use a dictionary. This allows us to access values by their keys more easily, and also avoids the need for array indexing.
+- The methods `add` and `get` are used to add and retrieve data from the row object. They provide a simple interface that can be extended or modified as needed.
+- We create an instance of the class using the default constructor and then use the methods to set and get the values of the row.

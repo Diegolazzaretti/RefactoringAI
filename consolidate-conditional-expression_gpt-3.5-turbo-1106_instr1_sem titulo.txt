@@ -1,0 +1,11 @@
+gpt-3.5-turbo-1106 - Instrução 1 sem titulo:
+
+def calculateDisabilityAmount(seniority, monthsDisabled, isPartTime):
+    if seniority < 2:
+        return 0
+    if monthsDisabled > 12:
+        return 0
+    if isPartTime:
+        return 0
+    # Compute the disability amount.
+    # ...

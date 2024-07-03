@@ -1,0 +1,13 @@
+gemini-pro - Instrução 1 com titulo:
+
+```python
+class Order:
+    # ...
+
+    def price(self):
+        primary_base_price = 0
+        secondary_base_price = 0
+        tertiary_base_price = 0
+
+        # Perform long computation.
+```

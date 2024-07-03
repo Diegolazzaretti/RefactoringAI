@@ -1,0 +1,30 @@
+gpt-3.5-turbo-1106 - Instrução 2 com titulo:
+
+Refactored code:
+
+```
+def calculate_total_price(price):
+    if isSpecialDeal():
+        return apply_special_deal_discount(price)
+    else:
+        return apply_regular_discount(price)
+
+def apply_special_deal_discount(price):
+    return price * 0.95
+
+def apply_regular_discount(price):
+    return price * 0.98
+
+def send():
+    # send logic here
+
+total = calculate_total_price(price)
+send()
+```
+
+Changes made:
+1. Created separate functions for applying special deal discount and regular discount to improve readability and modularity.
+2. Moved the send logic to a separate function to improve organization and reduce code duplication.
+3. Created a main function `calculate_total_price` to handle conditionals and return the total price, improving maintainability and code structure.
+4. Removed duplicate code for sending the final price, which reduces redundancy and simplifies the logic. 
+5. Used descriptive function and variable names to enhance readability and maintainability.

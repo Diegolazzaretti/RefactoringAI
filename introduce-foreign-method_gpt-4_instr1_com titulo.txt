@@ -1,0 +1,19 @@
+gpt-4 - Instrução 1 com titulo:
+
+Refactored code:
+
+```
+class Report:
+    # ...
+
+    def getNextDay(self):
+        return Date(self.previousEnd.getYear(),
+                    self.previousEnd.getMonth(), 
+                    self.previousEnd.getDate() + 1)
+
+    def sendReport(self):
+        nextDay = self.getNextDay()
+        # ...
+```
+
+In the above refactored code, I have introduced a new method `getNextDay()` to encapsulate the logic of calculating the next day. This enhances readability and modularity since any future changes related to the calculation of the next day need to be done in only one place. It also enhances maintainability since it would be easier to identify and fix any issues related to the calculation of the next day.

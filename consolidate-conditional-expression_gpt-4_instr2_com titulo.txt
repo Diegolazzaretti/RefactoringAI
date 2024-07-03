@@ -1,0 +1,35 @@
+gpt-4 - Instrução 2 com titulo:
+
+First, let's refactor the method disabilityAmount to a class named DisabilityCalculator, as it will improve modularity and makes more sense in an object-oriented context.
+
+Next, as per the DRY principle (Don't Repeat Yourself), three different if conditions share the same consequence, i.e., return 0. It will be much cleaner to consolidate these conditions using the logical OR operator. This refactoring technique is known as Consolidate Conditional Expression. It ensures that the code is cleaner and more explicit about its intent.
+
+Refactored code:
+
+```python
+class DisabilityCalculator:
+    def __init__(self, seniority, months_disabled, is_part_time):
+        self.seniority = seniority
+        self.months_disabled = months_disabled
+        self.is_part_time = is_part_time
+
+    def disability_amount(self):
+        if (self.seniority < 2) or (self.months_disabled > 12) or self.is_part_time:
+            return 0
+        else:
+            # Compute the disability amount.
+            # ...
+            pass
+```
+
+The proposed changes pulled out all the common functionality into single DisabilityCalculator class, making the code more readable and maintainable. Here’s how:
+
+- Refactoring the function into a class: Improves modularity and prepares the code for future extensions. For example, we can now easily add more methods related to "Disability" to the DisabilityCalculator class.
+  
+- Consolidating all the conditional statements into a single one: Enhances the readability of the code and prevents repetition, thereby making the code cleaner and compact. A single if statement also makes it easier to understand and modify in the future.
+   
+- The use of self in class: Ensures that we can use the variables in other methods within the class. This would aid in function calls and reduce the passing of parameters between functions.
+
+- Use of descriptive variable and method names: Makes the code self-explanatory. Thus, improving readability.
+
+This refactored code adheres to the best practices of software development and makes future modifications easier without compromising the functional integrity of the original code.

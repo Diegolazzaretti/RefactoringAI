@@ -1,0 +1,19 @@
+mistral - Instrução 1 sem titulo:
+
+
+One way to refactor this code is to extract the checking of the balance into a separate function and pass it as an argument to the `withdraw` function. This will make the code more modular, readable, and maintainable. Here's an example:
+```scss
+def check_balance(self, amount):
+    if amount > self.balance:
+        return -1
+    else:
+        return 0
+
+def withdraw(self, amount):
+    balance = check_balance(amount)
+    if balance == -1:
+        return -1
+    else:
+        self.balance -= amount
+    return 0
+```

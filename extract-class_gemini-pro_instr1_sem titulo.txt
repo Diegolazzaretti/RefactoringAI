@@ -1,0 +1,15 @@
+gemini-pro - Instrução 1 sem titulo:
+
+```python
+class Soldier:
+    def __init__(self, health, damage, weapon_status):
+        self.health = health
+        self.damage = damage
+        self.weapon_status = weapon_status
+
+    def get_damage(self):
+        # Implementation
+
+    def attack(self):
+        # Implementation
+```

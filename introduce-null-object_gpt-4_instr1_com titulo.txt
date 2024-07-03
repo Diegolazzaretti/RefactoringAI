@@ -1,0 +1,9 @@
+gpt-4 - Instrução 1 com titulo:
+
+```python
+def get_customer_plan(customer):
+    return BillingPlan.basic() if customer is None else customer.getPlan()
+    
+plan = get_customer_plan(customer)
+```
+In this refactored code, I introduced a function that encapsulates the logic of getting a customer's plan. This improves the readability and modularity of the code because the logic on determining the plan is now separated from the rest of the code. It's now more maintainable because if there's a change on how to get a customer's plan, we just need to update the function and it will be reflected everywhere it's used.

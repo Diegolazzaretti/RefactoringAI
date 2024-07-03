@@ -1,0 +1,19 @@
+mistral - Instrução 2 sem titulo:
+
+```python
+class Outputter:
+    def __init__(self, type: str):
+        self.type = type
+    
+    def execute(self):
+        if self.type == "banner":
+            print("Banner")
+        elif self.type == "info":
+            print("Info")
+```
+
+The code was refactored into a class called `Outputter` which takes in an argument of type `str` during initialization, and has an `execute()` method that checks for the provided type and prints the appropriate message. This design pattern follows the Single Responsibility Principle (SRP), where each class is responsible for one task or functionality, and makes it more modular and easier to maintain.
+
+The code also adheres to Best Practices by having proper indentation, spacing, and consistent naming conventions. The `if-elif` statement was moved inside a method for better readability and reusability.
+
+In the original code, there was no clear separation of concerns or modularity, which made it harder to understand and modify the logic. By refactoring it into an object-oriented design pattern, we were able to improve its overall organization and readability.

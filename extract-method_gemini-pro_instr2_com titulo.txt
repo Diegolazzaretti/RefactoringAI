@@ -1,0 +1,32 @@
+gemini-pro - Instrução 2 com titulo:
+
+**Refactored Code:**
+
+```python
+def printOwing(self):
+    self._printHeader()
+    self._printDetails()
+
+def _printHeader(self):
+    self.printBanner()
+
+def _printDetails(self):
+    print("name:", self.name)
+    print("amount:", self.getOutstanding())
+```
+
+**Changes Made:**
+
+* **Extract Method:** The method `printOwing` has been refactored to use the Extract Method refactoring technique. This has resulted in the creation of two new private methods, `_printHeader` and `_printDetails`.
+* **Separation of Concerns:** The refactored code now follows the Separation of Concerns principle by dividing the responsibility of printing the invoice into two distinct methods: `_printHeader` prints the header information, while `_printDetails` prints the invoice details.
+* **Modularity:** The use of private methods has improved the modularity of the code, making it easier to maintain and extend in the future.
+* **Code Duplication Reduction:** The common banner printing logic has been moved to the `_printHeader` method, eliminating code duplication and improving the readability of the `printOwing` method.
+
+**Benefits:**
+
+The refactored code exhibits the following improvements:
+
+* **Enhanced Readability:** The clear separation of responsibilities between the `_printHeader` and `_printDetails` methods makes the code easier to understand and follow.
+* **Improved Modularity:** The use of private methods has introduced a level of modularity that facilitates future modifications and extensibility.
+* **Reduced Code Duplication:** By moving the common banner printing logic into a private method, the refactored code avoids unnecessary duplication and improves maintainability.
+* **Adherence to Best Practices:** The refactoring adheres to the principles of object-oriented design and software development best practices, ensuring maintainability, flexibility, and code reusability.

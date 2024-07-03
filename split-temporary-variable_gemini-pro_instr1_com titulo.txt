@@ -1,0 +1,45 @@
+gemini-pro - Instrução 1 com titulo:
+
+There are a few ways to refactor the given code to enhance its readability, modularity, and maintainability. One approach is to extract the calculation of the two temporary values into separate functions:
+
+```python
+def calculate_perimeter(height, width):
+  return 2 * (height + width)
+
+def calculate_area(height, width):
+  return height * width
+
+height = 5
+width = 3
+perimeter = calculate_perimeter(height, width)
+area = calculate_area(height, width)
+
+print(perimeter)
+print(area)
+```
+
+This approach makes the code more readable and maintainable by separating the calculation of the perimeter and area into distinct functions. It also makes it easier to change the way the perimeter and area are calculated in the future.
+
+Another approach is to use a class to encapsulate the calculations:
+
+```python
+class Rectangle:
+  def __init__(self, height, width):
+    self.height = height
+    self.width = width
+
+  def calculate_perimeter(self):
+    return 2 * (self.height + self.width)
+
+  def calculate_area(self):
+    return self.height * self.width
+
+rectangle = Rectangle(5, 3)
+perimeter = rectangle.calculate_perimeter()
+area = rectangle.calculate_area()
+
+print(perimeter)
+print(area)
+```
+
+This approach is more object-oriented and makes it easier to add new methods to the class in the future. It also makes it easier to reuse the class to calculate the perimeter and area of other rectangles.
