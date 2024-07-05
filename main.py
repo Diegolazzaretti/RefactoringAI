@@ -7,8 +7,8 @@ import tracemalloc
 import time
 from openpyxl import Workbook
 
-genai.configure(api_key="AIzaSyBaZKWQWYuLMQuiOC9e7glPLrHvPV28ZQ4")
-OPENAI_API_KEY="sk-proj-eFWFghwy15L2yuyRmD34T3BlbkFJpoqtg4E7pQQkr55Pl0qi"
+genai.configure(api_key="API-KEY")
+OPENAI_API_KEY="API-KEY"
 
 def preparar_conteudo_para_refatoracao(diretorio):
     arquivos_conteudo = []
